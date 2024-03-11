@@ -14,7 +14,12 @@ theme = 'hugo-book'
     # 纳入目录的最大标题级别，默认为2
     startLevel = 2
 
-
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      wrapStandAloneImageWithinParagraph = false
+      [markup.goldmark.parser.attribute]
+        block = true
+        
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
