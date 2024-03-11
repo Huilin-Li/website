@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="In Windows10, build personal website via Hugo-book and Github Actions#This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.
-Prerequisites#Git Windows 10 VScode Install Hugo#In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey.">
+Prerequisites#Git Windows 10 VScode Github account Install Hugo#In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="HugoBook&#43;GithubAction" />
 <meta property="og:description" content="In Windows10, build personal website via Hugo-book and Github Actions#This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.
-Prerequisites#Git Windows 10 VScode Install Hugo#In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey." />
+Prerequisites#Git Windows 10 VScode Github account Install Hugo#In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/docs/blogs/hugobookgithubaction/" /><meta property="article:section" content="docs" />
 
@@ -21,7 +21,7 @@ Prerequisites#Git Windows 10 VScode Install Hugo#In Windows10, right click W
 <link rel="canonical" href="http://localhost:1313/docs/blogs/hugobookgithubaction/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.65a9e552320d2007ddf922b7d20c1c119475f19ffa9de68bdb6fa53dd682473d.js" integrity="sha256-ZanlUjINIAfd&#43;SK30gwcEZR18Z/6neaL22&#43;lPdaCRz0=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.db7be9b95997c62c28c5f171a998e1dd9c527b1328b214f067753e701176d717.js" integrity="sha256-23vpuVmXxiwoxfFxqZjh3ZxSexMoshTwZ3U&#43;cBF21xc=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -93,7 +93,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/blogs/" class="">Blog</a>
+    <span>Blog</span>
   
 
           
@@ -127,18 +127,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-
-
-  
-<ul>
-  
-  <li>
-    <a href="/posts/"  >
-        Blog
-      </a>
-  </li>
-  
-</ul>
 
 
 
@@ -184,6 +172,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#prerequisites">Prerequisites</a></li>
     <li><a href="#install-hugo">Install Hugo</a></li>
     <li><a href="#create-the-website-using-hugo-themes">Create the website using Hugo themes</a></li>
+    <li><a href="#deploy-on-github-by-action">Deploy on Github by Action</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -203,7 +192,7 @@ https://github.com/alex-shpak/hugo-book
 </h1>
 <p>This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.</p>
 <p>
-  <img src="snails.png" alt="Baked snailes" /></p>
+  <img src="/imgs/hugobookgithubaction/snails.png" alt="Baked snailes" /></p>
 <h2 id="prerequisites">
   Prerequisites
   <a class="anchor" href="#prerequisites">#</a>
@@ -212,6 +201,7 @@ https://github.com/alex-shpak/hugo-book
 <li>Git</li>
 <li>Windows 10</li>
 <li>VScode</li>
+<li>Github account</li>
 </ol>
 <h2 id="install-hugo">
   Install Hugo
@@ -241,19 +231,53 @@ https://github.com/alex-shpak/hugo-book
 <li>Create the website by</li>
 </ol>
 <pre tabindex="0"><code>hugo new site Blogs
-</code></pre><p><em>Blogs</em> will be in your github website link, like this <em>
-  <a href="https://huilin-li.github.io/Blogs/">https://huilin-li.github.io/Blogs/</a></em>
-3. <code>cd Blogs</code> <br>
-4. <code>git init</code> <br>
-5. Refer to 
-  <a href="https://themes.gohugo.io/themes/hugo-book/">Hugo Book Theme</a> to use hugo-book theme by</p>
+</code></pre><ol start="3">
+<li><code>cd Blogs</code> \</li>
+<li><code>git init</code> \</li>
+<li>Refer to 
+  <a href="https://themes.gohugo.io/themes/hugo-book/">Hugo Book Theme</a> to use hugo-book theme by</li>
+</ol>
 <pre tabindex="0"><code>git submodule add https://github.com/alex-shpak/hugo-book themes/hugo-book
 </code></pre><ol start="6">
 <li>Till now, if we run <code>hugo server</code>, we will get a plain website locally.</li>
 </ol>
 <p>In <strong>VS code</strong>, open <code>Blogs</code> folder.</p>
 <ol start="7">
-<li></li>
+<li>In <code>C:/myweb/Blogs/themes/hugo-book/exampleSite/content.en/</code>, copy <code>docs</code> folder, <code>posts</code> folder and <code>_index.md</code> file to <code>C:/myweb/Blogs/content/</code>.</li>
+</ol>
+<blockquote>
+<p>Why I don&rsquo;t copy the <code>menu</code> folder?<br>
+Because I found <code>menu</code> folder doesn&rsquo;t work when I modified the website as I needed.
+We can customize the order of menus in leftbar by adding weight in the blog.md file.</p>
+</blockquote>
+<ol start="8">
+<li>Run <code>hugo server</code> again, we will see a more well-done website.</li>
+</ol>
+<h2 id="deploy-on-github-by-action">
+  Deploy on Github by Action
+  <a class="anchor" href="#deploy-on-github-by-action">#</a>
+</h2>
+<ol>
+<li>Create a <strong>public</strong> Github repository.</li>
+</ol>
+<blockquote>
+<p>For example, if this repository&rsquo;s name is <strong>Blogs</strong>, your website link will be like this <em>
+  <a href="https://huilin-li.github.io/Blogs/">https://huilin-li.github.io/Blogs/</a></em></p>
+</blockquote>
+<ol start="2">
+<li>Still in <strong>Windows Powershell</strong>, push your local work to this repository by</li>
+</ol>
+<pre tabindex="0"><code>cd C:/myweb/Blogs
+git add .
+git commit -m &#34;update&#34;
+git branch -M main
+git remote add origin https://github.com/Huilin-Li/Blogs.git
+git push -u origin main
+</code></pre><ol start="3">
+<li>Visit your GitHub repository. From the main menu choose <strong>Settings</strong> &gt; <strong>Pages</strong>. In the center of your screen you will see this:
+<figure><img src="/imgs/hugobookgithubaction/deploy1.PNG" width="400"/>
+</figure>
+</li>
 </ol>
 <h2 id="references">
   References
@@ -324,6 +348,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#prerequisites">Prerequisites</a></li>
     <li><a href="#install-hugo">Install Hugo</a></li>
     <li><a href="#create-the-website-using-hugo-themes">Create the website using Hugo themes</a></li>
+    <li><a href="#deploy-on-github-by-action">Deploy on Github by Action</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>

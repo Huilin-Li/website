@@ -7,12 +7,13 @@ bookToc: true
 
 This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.
 
-![Baked snailes](snails.png)
+![Baked snailes](/imgs/hugobookgithubaction/snails.png)
 
 ## Prerequisites
 1. Git
 2. Windows 10
 3. VScode
+4. Github account
 
 ## Install Hugo
 1. In Windows10, right click **Windows Powershell** and click **run as administrator**.
@@ -38,7 +39,6 @@ For example, I want to locally work on my website in `C:\myweb` folder. Still in
 ```
 hugo new site Blogs
 ```
-*Blogs* will be in your github website link, like this *https://huilin-li.github.io/Blogs/*
 3. `cd Blogs` \
 4. `git init` \
 5. Refer to [Hugo Book Theme](https://themes.gohugo.io/themes/hugo-book/) to use hugo-book theme by
@@ -49,10 +49,27 @@ git submodule add https://github.com/alex-shpak/hugo-book themes/hugo-book
 
 In **VS code**, open `Blogs` folder.
 
-7. 
+7. In `C:/myweb/Blogs/themes/hugo-book/exampleSite/content.en/`, copy `docs` folder, `posts` folder and `_index.md` file to `C:/myweb/Blogs/content/`.
+> Why I don't copy the `menu` folder?\
+> Because I found `menu` folder doesn't work when I modified the website as I needed.
+> We can customize the order of menus in leftbar by adding weight in the blog.md file. 
 
+8. Run `hugo server` again, we will see a more well-done website.
 
-
+## Deploy on Github by Action
+1. Create a **public** Github repository.
+> For example, if this repository's name is **Blogs**, your website link will be like this *https://huilin-li.github.io/Blogs/*
+2. Still in **Windows Powershell**, push your local work to this repository by
+```
+cd C:/myweb/Blogs
+git add .
+git commit -m "update"
+git branch -M main
+git remote add origin https://github.com/Huilin-Li/Blogs.git
+git push -u origin main
+```
+3. Visit your GitHub repository. From the main menu choose **Settings** > **Pages**. In the center of your screen you will see this:
+{{< figure src="/imgs/hugobookgithubaction/deploy1.PNG" width="400" alt="" >}}
 
 ## References
 1. [How to install chocolatey in Windows](https://www.youtube.com/watch?v=-5WLKu_J_AE)
