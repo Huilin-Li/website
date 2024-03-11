@@ -7,7 +7,7 @@ bookToc: true
 
 This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.
 
-![Baked snailes](/snails.png)
+![Baked snailes](./snails.png)
 
 ## Prerequisites
 1. Git
