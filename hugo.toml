@@ -4,6 +4,17 @@ title = 'Huilin惠琳 Li李'
 theme = 'hugo-book'
 
 
+
+[markup]
+  [markup.tableOfContents]
+    # 纳入目录的最小标题级别，默认为3
+    endLevel = 3
+    # 是否排序，其实就是是否在目录的前面添加序号“1. ”、"2. "等等
+    ordered = false
+    # 纳入目录的最大标题级别，默认为2
+    startLevel = 2
+
+
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
@@ -16,7 +27,7 @@ theme = 'hugo-book'
 
   # (Optional, default favicon.png) Set the path to a favicon file.
   # If the favicon is /static/favicon.png then the path would be favicon.png
-  # BookFavicon = 'favicon.png'
+  BookFavicon = 'logo.png'
 
   # (Optional, default none) Set the path to a logo for the book.
   # If the logo is /static/logo.png then the path would be logo.png
