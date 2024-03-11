@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="How to use Hugo-book theme#How to insert images and resize images?#The file tree is like
+├─content│ │ _index.md│ ││ └─docs│ ├─blogs│ │ │ hugo.md│ │ │ _index.md│ │ ││ │ └─images│ │ Nice.png In hugo.md file, we add Nice.png and scale it by
+{{&lt; figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34; &gt;}} How to add emoji?#Directly copy emoji icon 👋 and paste to .">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Hugo" />
+<meta property="og:description" content="How to use Hugo-book theme#How to insert images and resize images?#The file tree is like
+├─content│ │ _index.md│ ││ └─docs│ ├─blogs│ │ │ hugo.md│ │ │ _index.md│ │ ││ │ └─images│ │ Nice.png In hugo.md file, we add Nice.png and scale it by
+{{&lt; figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34; &gt;}} How to add emoji?#Directly copy emoji icon 👋 and paste to ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/docs/blogs/hugo/" /><meta property="article:section" content="docs" />
+
+
+
+<title>Hugo | Huilin惠琳 Li李</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/docs/blogs/hugo/">
+<link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.2c8bf9eb79c8a4066ace8e3ef60b7a91db6124932ad721a7715fe21a0dffce4e.js" integrity="sha256-LIv563nIpAZqzo4&#43;9gt6kdthJJMq1yGncV/iGg3/zk4=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Huilin惠琳 Li李</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/me/" class="">Me</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Blog</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugobookgithubaction/" class="">HugoBook&#43;GithubAction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/" class="active">Hugo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Hugo</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-to-insert-images-and-resize-images">How to insert images and resize images?</a></li>
+    <li><a href="#how-to-add-emoji">How to add emoji?</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="how-to-use-hugo-book-theme">
+  How to use Hugo-book theme
+  <a class="anchor" href="#how-to-use-hugo-book-theme">#</a>
+</h1>
+<h2 id="how-to-insert-images-and-resize-images">
+  How to insert images and resize images?
+  <a class="anchor" href="#how-to-insert-images-and-resize-images">#</a>
+</h2>
+<p>The file tree is like</p>
+<pre tabindex="0"><code>    ├─content
+    │  │  _index.md
+    │  │
+    │  └─docs
+    │      ├─blogs
+    │      │  │  hugo.md
+    │      │  │  _index.md
+    │      │  │
+    │      │  └─images
+    │      │          Nice.png
+</code></pre><p>In <code>hugo.md</code> file, we add Nice.png and scale it by</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span>
+</span></span></code></pre></div><figure><img src="../images/Nice.png"
+         alt=" " width="400"/>
+</figure>
+
+<h2 id="how-to-add-emoji">
+  How to add emoji?
+  <a class="anchor" href="#how-to-add-emoji">#</a>
+</h2>
+<p>Directly copy emoji icon 👋 and paste to <code>.md</code> file, instead of using <code>:wave:</code>.</p>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ol>
+<li>
+  <a href="https://hugo-book-demo.netlify.app/docs/shortcodes/hints/">hugo book demo</a></li>
+<li>
+  <a href="https://hongmao.run/blog/post/010-hugo-book/">【Hugo】hugo-book主题使用</a></li>
+<li>
+  <a href="https://lysandert.github.io/posts/blog/blog_insert_pic/">hugo博客 文内插入图片</a></li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/docs/blogs/hugo.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-to-insert-images-and-resize-images">How to insert images and resize images?</a></li>
+    <li><a href="#how-to-add-emoji">How to add emoji?</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
