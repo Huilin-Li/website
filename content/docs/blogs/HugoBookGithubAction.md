@@ -7,7 +7,7 @@ bookToc: true
 
 This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.
 
-![Baked snailes](/imgs/hugobookgithubaction/snails.png)
+![Baked snailes](/Blogs/assets/imgs/snails.png)
 
 ## Prerequisites
 1. Git
@@ -69,7 +69,7 @@ git remote add origin https://github.com/Huilin-Li/Blogs.git
 git push -u origin main
 ```
 3. Visit your GitHub repository. From the main menu choose **Settings** > **Pages**. In the center of your screen you will see this:
-{{< figure src="/imgs/hugobookgithubaction/deploy1.PNG" width="400" alt="" >}}
+{{< figure src="/imgs/hugobookgithubaction/deploy1.png" width="400" alt="" >}}
 
 ## References
 1. [How to install chocolatey in Windows](https://www.youtube.com/watch?v=-5WLKu_J_AE)
