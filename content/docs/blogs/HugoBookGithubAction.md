@@ -11,11 +11,13 @@ This is blog is about how to use Hugo to create the local website, and then depl
 ![Baked snailes](../snails.png)
 
 
+
 ## Prerequisites
 1. Git
 2. Windows 10
 3. VScode
 4. Github account
+
 
 ## Install Hugo
 1. In Windows10, right click **Windows Powershell** and click **run as administrator**.
@@ -72,15 +74,14 @@ git push -u origin main
 ```
 3. Visit your GitHub repository. From the main menu choose **Settings** > **Pages**. In the center of your screen you will see this:
 
-{{< figure src="/imgs/hugobookgithubaction/deploy1.png" width="400" alt="" >}}
-![ ](../deploy1.png)
+{{< figure src="/imgs/hugobookgithubaction/deploy1.png" width="400" alt="deploy1" >}}
+
 4. Change the Source to `GitHub Actions`.
 5. Click `Configure` as the highlight in this picture:
 
-{{< figure src="../deploy2.png" width="400" alt="" >}}
+{{< figure src="../deploy2.png" width="400" alt="deploy2" >}}
 
-
-<img src="../deploy2.png" width="10%" >
+<img src="../deploy2.png" width="10%" />
 
 6. Go to [Host on GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), copy the `yaml` file in `step 6` to `Blogs/.github/workflows/hugo.yaml`, and commit changes.
 7. As **Step8**, **Step9**, **Step10** in [Host on GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), the deloyment is done. 🎉
