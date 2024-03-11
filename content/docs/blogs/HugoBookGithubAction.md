@@ -7,7 +7,7 @@ bookToc: true
 
 This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.
 
-![Baked snailes](/snails.png)
+![Baked snailes](snails.png)
 
 ## Prerequisites
 1. Git
@@ -45,7 +45,11 @@ hugo new site Blogs
 ```
 git submodule add https://github.com/alex-shpak/hugo-book themes/hugo-book
 ```
-6. 
+6. Till now, if we run `hugo server`, we will get a plain website locally.
+
+In **VS code**, open `Blogs` folder.
+
+7. 
 
 
 
