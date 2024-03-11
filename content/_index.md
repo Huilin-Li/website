@@ -11,7 +11,7 @@ type: docs
 Est inpiter regia iram vocatur nurus. Omnes ut
 olivae sensit **arma sorori** deducit, inesset **crudus**, ego vetuere aliis,
 modo arsit? Utinam rapta fiducia valuere litora _adicit cursu_, ad facies
-![image info](/logo.png)
+![image info](./logo.png)
 
 
 <--->
