@@ -74,7 +74,7 @@ git push -u origin main
 ```
 3. Visit your GitHub repository. From the main menu choose **Settings** > **Pages**. In the center of your screen you will see this:
 
-{{< figure src="/imgs/hugobookgithubaction/deploy1.png" width="400" alt="deploy1" >}}
+{{< figure src="../deploy1.png" width="400" alt="deploy1" >}}
 
 4. Change the Source to `GitHub Actions`.
 5. Click `Configure` as the highlight in this picture:

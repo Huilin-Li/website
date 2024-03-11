@@ -20,9 +20,6 @@ theme = 'hugo-book'
       [markup.goldmark.parser.attribute]
         block = true
 
-[[module.mounts]]
-source = 'static'
-target = 'assets'
 
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.
