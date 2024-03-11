@@ -21,7 +21,7 @@ Prerequisites#Git Windows 10 VScode Github account Install Hugo#In Windows10
 <link rel="canonical" href="http://localhost:1313/docs/blogs/hugobookgithubaction/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.84d428d850b449f778421b3f77a0705980c6bbba6407138ae15d32453f3d1c11.js" integrity="sha256-hNQo2FC0Sfd4Qhs/d6BwWYDGu7pkBxOK4V0yRT89HBE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.b6a4ad2b03742e46052e152419a0eb090d2236abf7c2dda6dc909f2e57c97707.js" integrity="sha256-tqStKwN0LkYFLhUkGaDrCQ0iNqv3wt2m3JCfLlfJdwc=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -193,7 +193,8 @@ https://github.com/alex-shpak/hugo-book
 </h1>
 <p>This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.</p>
 <p>
-  <img src="./imgs/hugobookgithubaction/snails.png" alt="Baked snailes" /></p>
+  <img src="/snails.png" alt="Baked snailes" /></p>
+<!-- raw HTML omitted -->
 <h2 id="prerequisites">
   Prerequisites
   <a class="anchor" href="#prerequisites">#</a>
@@ -275,29 +276,23 @@ git branch -M main
 git remote add origin https://github.com/Huilin-Li/Blogs.git
 git push -u origin main
 </code></pre><ol start="3">
-<li>
-<p>Visit your GitHub repository. From the main menu choose <strong>Settings</strong> &gt; <strong>Pages</strong>. In the center of your screen you will see this:
+<li>Visit your GitHub repository. From the main menu choose <strong>Settings</strong> &gt; <strong>Pages</strong>. In the center of your screen you will see this:</li>
+</ol>
 <figure><img src="/imgs/hugobookgithubaction/deploy1.png" width="400"/>
 </figure>
-</p>
-</li>
-<li>
-<p>Change the Source to <code>GitHub Actions</code>.</p>
-</li>
-<li>
-<p>Click <code>Configure</code> as the highlight in this picture:
+
+<ol start="4">
+<li>Change the Source to <code>GitHub Actions</code>.</li>
+<li>Click <code>Configure</code> as the highlight in this picture:</li>
+</ol>
 <figure><img src="/imgs/hugobookgithubaction/deploy2.png" width="400"/>
 </figure>
-</p>
-</li>
-<li>
-<p>Go to 
-  <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">Host on GitHub Pages</a>, copy the <code>yaml</code> file in <code>step 6</code> to <code>Blogs/.github/workflows/hugo.yaml</code>, and commit changes.</p>
-</li>
-<li>
-<p>As <strong>Step8</strong>, <strong>Step9</strong>, <strong>Step10</strong> in 
-  <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">Host on GitHub Pages</a>, the deloyment is done. 🎉</p>
-</li>
+
+<ol start="6">
+<li>Go to 
+  <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">Host on GitHub Pages</a>, copy the <code>yaml</code> file in <code>step 6</code> to <code>Blogs/.github/workflows/hugo.yaml</code>, and commit changes.</li>
+<li>As <strong>Step8</strong>, <strong>Step9</strong>, <strong>Step10</strong> in 
+  <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">Host on GitHub Pages</a>, the deloyment is done. 🎉</li>
 </ol>
 <h2 id="update-website">
   Update website

@@ -8,7 +8,9 @@ weight: 1
 
 This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.
 
-![Baked snailes](./imgs/hugobookgithubaction/snails.png)
+![Baked snailes](/snails.png)
+
+<img src="/assets/imgs/snails.png" alt="MarineGEO circle logo" style="height: 100px; width:100px;"/>
 
 ## Prerequisites
 1. Git
@@ -70,11 +72,14 @@ git remote add origin https://github.com/Huilin-Li/Blogs.git
 git push -u origin main
 ```
 3. Visit your GitHub repository. From the main menu choose **Settings** > **Pages**. In the center of your screen you will see this:
+
 {{< figure src="/imgs/hugobookgithubaction/deploy1.png" width="400" alt="" >}}
 
 4. Change the Source to `GitHub Actions`.
 5. Click `Configure` as the highlight in this picture:
+
 {{< figure src="/imgs/hugobookgithubaction/deploy2.png" width="400" alt="" >}}
+
 6. Go to [Host on GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), copy the `yaml` file in `step 6` to `Blogs/.github/workflows/hugo.yaml`, and commit changes.
 7. As **Step8**, **Step9**, **Step10** in [Host on GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), the deloyment is done. 🎉
 
