@@ -21,7 +21,7 @@ Prerequisites#Git Windows 10 VScode Github account Install Hugo#In Windows10
 <link rel="canonical" href="http://localhost:1313/docs/blogs/hugobookgithubaction/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.db7be9b95997c62c28c5f171a998e1dd9c527b1328b214f067753e701176d717.js" integrity="sha256-23vpuVmXxiwoxfFxqZjh3ZxSexMoshTwZ3U&#43;cBF21xc=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.84d428d850b449f778421b3f77a0705980c6bbba6407138ae15d32453f3d1c11.js" integrity="sha256-hNQo2FC0Sfd4Qhs/d6BwWYDGu7pkBxOK4V0yRT89HBE=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -173,6 +173,7 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#install-hugo">Install Hugo</a></li>
     <li><a href="#create-the-website-using-hugo-themes">Create the website using Hugo themes</a></li>
     <li><a href="#deploy-on-github-by-action">Deploy on Github by Action</a></li>
+    <li><a href="#update-website">Update website</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -232,8 +233,8 @@ https://github.com/alex-shpak/hugo-book
 </ol>
 <pre tabindex="0"><code>hugo new site Blogs
 </code></pre><ol start="3">
-<li><code>cd Blogs</code> \</li>
-<li><code>git init</code> \</li>
+<li><code>cd Blogs</code></li>
+<li><code>git init</code></li>
 <li>Refer to 
   <a href="https://themes.gohugo.io/themes/hugo-book/">Hugo Book Theme</a> to use hugo-book theme by</li>
 </ol>
@@ -274,11 +275,35 @@ git branch -M main
 git remote add origin https://github.com/Huilin-Li/Blogs.git
 git push -u origin main
 </code></pre><ol start="3">
-<li>Visit your GitHub repository. From the main menu choose <strong>Settings</strong> &gt; <strong>Pages</strong>. In the center of your screen you will see this:
+<li>
+<p>Visit your GitHub repository. From the main menu choose <strong>Settings</strong> &gt; <strong>Pages</strong>. In the center of your screen you will see this:
 <figure><img src="/imgs/hugobookgithubaction/deploy1.png" width="400"/>
 </figure>
+</p>
+</li>
+<li>
+<p>Change the Source to <code>GitHub Actions</code>.</p>
+</li>
+<li>
+<p>Click <code>Configure</code> as the highlight in this picture:
+<figure><img src="/imgs/hugobookgithubaction/deploy2.png" width="400"/>
+</figure>
+</p>
+</li>
+<li>
+<p>Go to 
+  <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">Host on GitHub Pages</a>, copy the <code>yaml</code> file in <code>step 6</code> to <code>Blogs/.github/workflows/hugo.yaml</code>, and commit changes.</p>
+</li>
+<li>
+<p>As <strong>Step8</strong>, <strong>Step9</strong>, <strong>Step10</strong> in 
+  <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">Host on GitHub Pages</a>, the deloyment is done. 🎉</p>
 </li>
 </ol>
+<h2 id="update-website">
+  Update website
+  <a class="anchor" href="#update-website">#</a>
+</h2>
+<p>Add more contents in <code>C:/myweb/Blogs/content/</code> folder, and then <code>git push</code> to Github repository. <code>Github Action</code> will automaticaly update new contents in <code>https://huilin-li.github.io/Blogs/</code>.</p>
 <h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
@@ -349,6 +374,7 @@ git push -u origin main
     <li><a href="#install-hugo">Install Hugo</a></li>
     <li><a href="#create-the-website-using-hugo-themes">Create the website using Hugo themes</a></li>
     <li><a href="#deploy-on-github-by-action">Deploy on Github by Action</a></li>
+    <li><a href="#update-website">Update website</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>

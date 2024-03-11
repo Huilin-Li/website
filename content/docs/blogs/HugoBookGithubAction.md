@@ -1,6 +1,7 @@
 ---
 title: HugoBook+GithubAction
 bookToc: true
+weight: 1
 ---
 
 # In Windows10, build personal website via Hugo-book and Github Actions
@@ -39,8 +40,8 @@ For example, I want to locally work on my website in `C:\myweb` folder. Still in
 ```
 hugo new site Blogs
 ```
-3. `cd Blogs` \
-4. `git init` \
+3. `cd Blogs` 
+4. `git init` 
 5. Refer to [Hugo Book Theme](https://themes.gohugo.io/themes/hugo-book/) to use hugo-book theme by
 ```
 git submodule add https://github.com/alex-shpak/hugo-book themes/hugo-book
@@ -70,6 +71,18 @@ git push -u origin main
 ```
 3. Visit your GitHub repository. From the main menu choose **Settings** > **Pages**. In the center of your screen you will see this:
 {{< figure src="/imgs/hugobookgithubaction/deploy1.png" width="400" alt="" >}}
+
+4. Change the Source to `GitHub Actions`.
+5. Click `Configure` as the highlight in this picture:
+{{< figure src="/imgs/hugobookgithubaction/deploy2.png" width="400" alt="" >}}
+6. Go to [Host on GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), copy the `yaml` file in `step 6` to `Blogs/.github/workflows/hugo.yaml`, and commit changes.
+7. As **Step8**, **Step9**, **Step10** in [Host on GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), the deloyment is done. 🎉
+
+## Update website
+Add more contents in `C:/myweb/Blogs/content/` folder, and then `git push` to Github repository. `Github Action` will automaticaly update new contents in `https://huilin-li.github.io/Blogs/`.
+
+
+
 
 ## References
 1. [How to install chocolatey in Windows](https://www.youtube.com/watch?v=-5WLKu_J_AE)
