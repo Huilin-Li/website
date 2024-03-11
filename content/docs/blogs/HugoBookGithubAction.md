@@ -81,7 +81,6 @@ git push -u origin main
 
 {{< figure src="../deploy2.png" width="400" alt="deploy2" >}}
 
-<img src="../deploy2.png" width="10%" />
 
 6. Go to [Host on GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), copy the `yaml` file in `step 6` to `Blogs/.github/workflows/hugo.yaml`, and commit changes.
 7. As **Step8**, **Step9**, **Step10** in [Host on GitHub Pages](https://gohugo.io/hosting-and-deployment/hosting-on-github/), the deloyment is done. 🎉
