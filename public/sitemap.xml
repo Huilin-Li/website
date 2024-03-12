@@ -6,9 +6,11 @@
   </url><url>
     <loc>http://localhost:1313/docs/me/</loc>
   </url><url>
+    <loc>http://localhost:1313/docs/blogs/</loc>
+  </url><url>
     <loc>http://localhost:1313/docs/blogs/hugo/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/</loc>
+    <loc>http://localhost:1313/docs/travel/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>

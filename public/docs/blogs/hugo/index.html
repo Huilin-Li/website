@@ -23,7 +23,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/blogs/hugo/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.2c8bf9eb79c8a4066ace8e3ef60b7a91db6124932ad721a7715fe21a0dffce4e.js" integrity="sha256-LIv563nIpAZqzo4&#43;9gt6kdthJJMq1yGncV/iGg3/zk4=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.55811c187e2b4cca9242683b1981ef1dc6d87ac35a815552cf19a4c9f1d52568.js" integrity="sha256-VYEcGH4rTMqSQmg7GYHvHcbYesNagVVSzxmkyfHVJWg=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -132,6 +132,24 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/travel/" class="">World</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
   </ul>
 
 
@@ -186,6 +204,8 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#how-to-insert-images-and-resize-images">How to insert images and resize images?</a></li>
     <li><a href="#how-to-add-emoji">How to add emoji?</a></li>
+    <li><a href="#how-to-add-a-travel-map-in-hugo">How to add a travel map in Hugo?</a></li>
+    <li><a href="#why-my-local-website-doesnt-update-after-i-update-my-markdown-files">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -229,6 +249,25 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#how-to-add-emoji">#</a>
 </h2>
 <p>Directly copy emoji icon 👋 and paste to <code>.md</code> file, instead of using <code>:wave:</code>.</p>
+<h2 id="how-to-add-a-travel-map-in-hugo">
+  How to add a travel map in Hugo?
+  <a class="anchor" href="#how-to-add-a-travel-map-in-hugo">#</a>
+</h2>
+<p>Refer to 
+  <a href="https://www.thecoffeemachine.net/writing/adding-maps-to-hugo-blogs-with-osm/">this article</a></p>
+<blockquote>
+<p><strong><em>NOTE:</em></strong><br>
+In <code>{{&lt; openstreetmap mapName=&quot;&lt;your map name&gt;&quot; &gt;}}</code>, the <code>&lt;your map name&gt;</code> is not the name you give to your map, but the name in the website link of your map. For example, I created a map whose name is <strong>Travel</strong>, I need to use <strong>travel_1036974</strong> in the hugo shortcode.
+<figure><img src="../images/map.jpeg"
+         alt="umap" width="400"/>
+</figure>
+</p>
+</blockquote>
+<h2 id="why-my-local-website-doesnt-update-after-i-update-my-markdown-files">
+  Why my local website doesn&rsquo;t update after I update my markdown files?
+  <a class="anchor" href="#why-my-local-website-doesnt-update-after-i-update-my-markdown-files">#</a>
+</h2>
+<p>Good question. I also find my local website does not update although I have save my changes. I am not clear the excat reason, but It works well if I <code>Pree Ctrl+C to stop</code> the local host, and <code>hugo server</code> again, I can see the updated website in <code>http://localhost:1313/</code>.</p>
 <h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
@@ -291,6 +330,8 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#how-to-insert-images-and-resize-images">How to insert images and resize images?</a></li>
     <li><a href="#how-to-add-emoji">How to add emoji?</a></li>
+    <li><a href="#how-to-add-a-travel-map-in-hugo">How to add a travel map in Hugo?</a></li>
+    <li><a href="#why-my-local-website-doesnt-update-after-i-update-my-markdown-files">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
