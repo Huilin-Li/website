@@ -10,14 +10,26 @@
   </url><url>
     <loc>http://localhost:1313/docs/blogs/hugo/</loc>
   </url><url>
+    <loc>http://localhost:1313/docs/blogs/shell/</loc>
+  </url><url>
     <loc>http://localhost:1313/docs/travel/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
+    <loc>http://localhost:1313/categories/comedy/</loc>
+  </url><url>
     <loc>http://localhost:1313/docs/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/english/</loc>
   </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/</loc>
+  </url><url>
     <loc>http://localhost:1313/tags/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/goisforlovers/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/thriller/</loc>
   </url>
 </urlset>

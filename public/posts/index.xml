@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on Huilin惠琳 Li李</title>
+    <title>Movie on Huilin惠琳 Li李</title>
     <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Blog on Huilin惠琳 Li李</description>
+    <description>Recent content in Movie on Huilin惠琳 Li李</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>In Windows10, build personal website via Hugo-book and Github Actions</title>
-      <link>http://localhost:1313/posts/hugobookgithubaction/</link>
-      <pubDate>Mon, 11 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hugobookgithubaction/</guid>
-      <description>This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.&#xA;Prerequisites&#xD;#&#xD;Git Windows 10 VScode Install Hugo&#xD;#&#xD;In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey. Refer to Install Hugo on Windows. to install Hugo by choco install hugo-extended Make sure Hugo works well by hugo version and we will get the following</description>
+      <title>The Wrong Guy</title>
+      <link>http://localhost:1313/posts/goisforlovers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/goisforlovers/</guid>
+      <description>After his boss is murdered, Nelson is on the run for fear of prosecution. He hides out in a small town to avoid the police, which should be easy because they know he didn&amp;rsquo;t do it and they aren&amp;rsquo;t looking for him. IMDb </description>
     </item>
   </channel>
 </rss>
