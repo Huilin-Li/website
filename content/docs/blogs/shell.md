@@ -7,12 +7,6 @@ weight: 8
 # Shell Commands
 
 
-fgsho;dfj
-pevoimskpcgm
-[sek
-
-
-fjiaxhn;lcjv';gnjdf'obb
-
-
-opjisuvn
+## How to discard changes in VScode?
+Navigate to reporsitory (has `.github` folder) with changes. Then, `git restore <file>`
+{{< figure src="../images/discard.png" alt=" ">}}
