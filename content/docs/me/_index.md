@@ -1,8 +1,8 @@
 ---
 weight: 1
 bookFlatSection: true
-title: "Me"
+title: "Keep Things Simple"
 ---
 
-# Me
+# Keep Things Simple
 
