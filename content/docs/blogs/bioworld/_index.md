@@ -2,6 +2,7 @@
 title: "Biology World"
 weight: 1
 bookToc: false
+bookCollapseSection: false
 ---
 
 # Biology World
