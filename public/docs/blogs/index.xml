@@ -8,11 +8,11 @@
     <language>en-us</language>
     <atom:link href="http://localhost:1313/docs/blogs/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>HugoBook&#43;GithubAction</title>
-      <link>http://localhost:1313/docs/blogs/hugobookgithubaction/</link>
+      <title>Shell Commands</title>
+      <link>http://localhost:1313/docs/blogs/shell/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/blogs/hugobookgithubaction/</guid>
-      <description>In Windows10, build personal website via Hugo-book and Github Actions&#xD;#&#xD;This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.&#xA;Prerequisites&#xD;#&#xD;Git Windows 10 VScode Github account Install Hugo&#xD;#&#xD;In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey.</description>
+      <guid>http://localhost:1313/docs/blogs/shell/</guid>
+      <description>&#xD;Shell Commands&#xD;#&#xD;</description>
     </item>
     <item>
       <title>Hugo</title>
@@ -22,11 +22,11 @@
       <description>How to use Hugo-book theme&#xD;#&#xD;How to insert images and resize images?&#xD;#&#xD;The file tree is like&#xA;├─content&#xD;│ │ _index.md&#xD;│ │&#xD;│ └─docs&#xD;│ ├─blogs&#xD;│ │ │ hugo.md&#xD;│ │ │ _index.md&#xD;│ │ │&#xD;│ │ └─images&#xD;│ │ Nice.png In hugo.md file, we add Nice.png and scale it by&#xA;{{&amp;lt; figure src=&amp;#34;../images/Nice.png&amp;#34; width=&amp;#34;400&amp;#34; alt=&amp;#34; &amp;#34; &amp;gt;}} How to add emoji?&#xD;#&#xD;Directly copy emoji icon 👋 and paste to .</description>
     </item>
     <item>
-      <title>Shell Commands</title>
-      <link>http://localhost:1313/docs/blogs/shell/</link>
+      <title>HugoBook&#43;GithubAction</title>
+      <link>http://localhost:1313/docs/blogs/hugobookgithubaction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/blogs/shell/</guid>
-      <description>&#xD;Shell Commands&#xD;#&#xD;</description>
+      <guid>http://localhost:1313/docs/blogs/hugobookgithubaction/</guid>
+      <description>In Windows10, build personal website via Hugo-book and Github Actions&#xD;#&#xD;This is blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.&#xA;Prerequisites&#xD;#&#xD;Git Windows 10 VScode Github account Install Hugo&#xD;#&#xD;In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey.</description>
     </item>
   </channel>
 </rss>

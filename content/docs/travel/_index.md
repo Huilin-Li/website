@@ -2,6 +2,7 @@
 weight: 3
 bookFlatSection: true
 title: "World"
+bookToc: false
 ---
 # World
 

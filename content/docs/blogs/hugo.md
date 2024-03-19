@@ -1,7 +1,7 @@
 ---
 title: Hugo
 bookToc: true
-weight: 2
+weight: 9
 ---
 
 # How to use Hugo-book theme

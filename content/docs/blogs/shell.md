@@ -1,7 +1,7 @@
 ---
 title: Shell Commands
 bookToc: true
-weight: 3
+weight: 8
 ---
 
 # Shell Commands

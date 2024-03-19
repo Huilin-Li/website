@@ -1,7 +1,7 @@
 ---
 title: HugoBook+GithubAction
 bookToc: true
-weight: 1
+weight: 10
 ---
 
 # In Windows10, build personal website via Hugo-book and Github Actions
