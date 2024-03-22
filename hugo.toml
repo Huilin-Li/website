@@ -21,6 +21,15 @@ theme = ['osm', 'hugo-book']
         block = true
 
 
+[menu]
+# [[menu.before]]
+[[menu.after]]
+  name = "Github"
+  url = "https://github.com/Huilin-Li"
+  weight = 10
+
+
+
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences

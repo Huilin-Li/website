@@ -20,20 +20,10 @@
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/comedy/</loc>
-  </url><url>
     <loc>http://localhost:1313/docs/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/english/</loc>
   </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-  </url><url>
     <loc>http://localhost:1313/tags/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/wrongguy/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/thriller/</loc>
   </url>
 </urlset>
