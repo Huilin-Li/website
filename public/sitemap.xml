@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/docs/blogs/bioworld/binderdesign/</loc>
+  </url><url>
     <loc>http://localhost:1313/docs/blogs/bioworld/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/me/</loc>
-  </url><url>
-    <loc>http://localhost:1313/docs/blogs/bioworld/with-toc/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/blogs/</loc>
   </url><url>
