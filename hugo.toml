@@ -1,6 +1,6 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
-title = 'Huilin惠琳 Li李'
+title = 'Huilin Li'
 theme = ['osm', 'hugo-book']
 
 
