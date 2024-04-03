@@ -2,30 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/docs/blogs/bioworld/</loc>
+    <loc>http://localhost:60971/docs/blogs/bioworld/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/me/</loc>
+    <loc>http://localhost:60971/docs/blogs/hugo/hugobookgithubaction/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/bioworld/binderdesign/</loc>
+    <loc>http://localhost:60971/docs/me/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/bioworld/proteinstruture/</loc>
+    <loc>http://localhost:60971/docs/blogs/bioworld/binderdesign/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/</loc>
+    <loc>http://localhost:60971/docs/blogs/bioworld/proteinstruture/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/travel/</loc>
+    <loc>http://localhost:60971/docs/blogs/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/shell/</loc>
+    <loc>http://localhost:60971/docs/blogs/hugo/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/hugo/</loc>
+    <loc>http://localhost:60971/docs/blogs/hugo/hugo/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/hugobookgithubaction/</loc>
+    <loc>http://localhost:60971/docs/travel/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://localhost:60971/docs/blogs/shell/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/</loc>
+    <loc>http://localhost:60971/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://localhost:60971/docs/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>http://localhost:60971/</loc>
+  </url><url>
+    <loc>http://localhost:60971/tags/</loc>
   </url>
 </urlset>
