@@ -61,12 +61,63 @@ In `now.md` file, add commands:
 ```
 
 
+## I want to add a comment section (via Cactus Comments).{#comment}
+1. Register a Matrix account via https://app.element.io/#/login. 
+2. Login.
+3. `register huilinBlog` by
+{{< figure src="../images/comment1.PNG" width="500" alt=" ">}}
+{{< figure src="../images/comment2.PNG" width="500" alt=" ">}}
+{{< figure src="../images/comment3.PNG" width="500" alt=" ">}}
+The name we will use to add comment section is **huilinBlog**.
+4. Create and add `chat.html`. In my case, my root directory is `Blogs/` and `chat.html` is added to `Blogs/layouts/shortcodes/` in which `shortcodes` folder is also created by yourself. 
+```
+├─.github
+├─layouts
+│  └─shortcodes
+└─themes
+    ├─hugo-book
+    │  ├─.github
+    │  ├─layouts
+    │  │  ├─shortcodes
+```
+> **NOTE:** 
+> Do not add `chat.html` to `themes/layouts/shortcodes/`, because we are not authorized to modify the the theme github via git push and so on.
+5. Copy the following and paste to `chat.html`, and replace `<YOUR-SITE-NAME>` with `huilinBlog`, like `siteName: "huilinBlog",`
+```
+<script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+<link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+<div id="comment-section"></div>
+<script>
+initComments({
+  node: document.getElementById("comment-section"),
+  defaultHomeserverUrl: "https://matrix.cactus.chat:8448",
+  serverName: "cactus.chat",
+  siteName: "<YOUR-SITE-NAME>",
+  commentSectionId: "{{ index .Params 0 }}"
+})
+</script>
+```
+6. Add the chat comment section to post. 
+```
+{{</* chat cactus-comments */>}}
+```
+The **cactus-comments** is the name that will be shown in your cactus chat website. For example, my case `{{</* chat huilinBlog-room */>}}`, so my cactus chat website is like
+{{< figure src="../images/comment4.PNG" width="400" alt=" ">}}
+7. Let us test!
+ {{<chat huilinBlog-room>}}
+
+
+
+
+
 ## References
 1. [hugo book demo](https://hugo-book-demo.netlify.app/docs/shortcodes/hints/)
 2. [【Hugo】hugo-book主题使用](https://hongmao.run/blog/post/010-hugo-book/)
 3. [hugo博客 文内插入图片](https://lysandert.github.io/posts/blog/blog_insert_pic/) 
 4. [How to render markdown url with .md to correct link](https://discourse.gohugo.io/t/how-to-render-markdown-url-with-md-to-correct-link/26372)
 5. [Linking pages in Hugo/markdown](https://stackoverflow.com/questions/33225067/linking-pages-in-hugo-markdown)
+6. [Added Cactus Comments to Hugo](https://novores.github.io/en/post/cactus-comment/)
+7. [Cactus Comments](https://cactus.chat/docs/getting-started/quick-start/)
 
  ## Thanks!
  Really appreciate your time for reading my blog, and bless you enjoy your day! If you have any suggestions or comments, please leave them below! (You don't need to login to post😉, feel free to add posts.)
