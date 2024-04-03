@@ -102,7 +102,7 @@ initComments({
 {{</* chat cactus-comments */>}}
 ```
 The **cactus-comments** is the name that will be shown in your cactus chat website. For example, my case `{{</* chat test */>}}`, so my cactus chat website is like
-{{< figure src="../images/comment4.PNG" width="400" alt=" ">}}
+
 7. Let us test! 
  {{<chat test>}}
 
