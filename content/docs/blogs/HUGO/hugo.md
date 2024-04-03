@@ -101,10 +101,10 @@ initComments({
 ```
 {{</* chat cactus-comments */>}}
 ```
-The **cactus-comments** is the name that will be shown in your cactus chat website. For example, my case `{{</* chat huilinBlog-room */>}}`, so my cactus chat website is like
+The **cactus-comments** is the name that will be shown in your cactus chat website. For example, my case `{{</* chat test */>}}`, so my cactus chat website is like
 {{< figure src="../images/comment4.PNG" width="400" alt=" ">}}
 7. Let us test! 
- {{<chat huilinBlog-room>}}
+ {{<chat test>}}
 
 
 
@@ -121,4 +121,4 @@ The **cactus-comments** is the name that will be shown in your cactus chat websi
 
  ## Thanks!
  Really appreciate your time for reading my blog, and bless you enjoy your day! If you have any suggestions or comments, please leave them below! (You don't need to login to post😉, feel free to add posts.)
- {{<chat huilinBlog-room>}}
+ {{<chat hugo>}}

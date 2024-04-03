@@ -107,4 +107,4 @@ Add more contents in `C:/myweb/Blogs/content/` folder, and then `git push` to Gi
 
  ## Thanks!
  Really appreciate your time for reading my blog, and bless you enjoy your day! If you have any suggestions or comments, please leave them below! (You don't need to login to post😉, feel free to add posts.)
- {{<chat huilinBlog-room>}}
+ {{<chat hugogithub>}}
