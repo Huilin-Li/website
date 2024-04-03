@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60971&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="How to insert images and resize images?#The file tree is like
+<meta name="description" content="How to use Hugo-book theme#How to insert images and resize images?#The file tree is like
 ├─content│ │ _index.md│ ││ └─docs│ ├─blogs│ │ │ hugo.md│ │ │ _index.md│ │ ││ │ └─images│ │ Nice.png In hugo.md file, we add Nice.png and scale it by
-{{&lt; figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34; &gt;}} Why we need to add ../ in front of images folder, altough hugo.">
+{{&lt; figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34; &gt;}} How to add emoji?#Directly copy emoji icon 👋 and paste to .">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="Hugo Commands" />
-<meta property="og:description" content="How to insert images and resize images?#The file tree is like
+<meta property="og:description" content="How to use Hugo-book theme#How to insert images and resize images?#The file tree is like
 ├─content│ │ _index.md│ ││ └─docs│ ├─blogs│ │ │ hugo.md│ │ │ _index.md│ │ ││ │ └─images│ │ Nice.png In hugo.md file, we add Nice.png and scale it by
-{{&lt; figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34; &gt;}} Why we need to add ../ in front of images folder, altough hugo." />
+{{&lt; figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34; &gt;}} How to add emoji?#Directly copy emoji icon 👋 and paste to ." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:60971/docs/blogs/hugo/hugo/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:1313/docs/blogs/hugo/hugo/" /><meta property="article:section" content="docs" />
 
 
 
 <title>Hugo Commands | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:60971/docs/blogs/hugo/hugo/">
+<link rel="canonical" href="http://localhost:1313/docs/blogs/hugo/hugo/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.834bb45eec27f5fe1532c38012b959843f5868f1d1de93476acae8d03d6a42a1.js" integrity="sha256-g0u0Xuwn9f4VMsOAErlZhD9YaPHR3pNHasro0D1qQqE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.56cacc0a186cb9c3708bce0e98925fc4c5154629f1c7e7065948a1c2536da737.js" integrity="sha256-VsrMChhsucNwi84OmJJfxMUVRinxx&#43;cGWUihwlNtpzc=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -289,14 +289,12 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#images">How to insert images and resize images?</a></li>
-    <li><a href="#emoji">How to add emoji?</a></li>
-    <li><a href="#map">How to add a travel map in Hugo?</a></li>
-    <li><a href="#update">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
-    <li><a href="#link">How to link pages and tiles?</a></li>
-    <li><a href="#comment">I want to add a comment section (via Cactus Comments).</a></li>
+    <li><a href="#how-to-insert-images-and-resize-images">How to insert images and resize images?</a></li>
+    <li><a href="#how-to-add-emoji">How to add emoji?</a></li>
+    <li><a href="#how-to-add-a-travel-map-in-hugo">How to add a travel map in Hugo?</a></li>
+    <li><a href="#why-my-local-website-doesnt-update-after-i-update-my-markdown-files">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
+    <li><a href="#how-to-link-pages-and-tiles">How to link pages and tiles?</a></li>
     <li><a href="#references">References</a></li>
-    <li><a href="#thanks">Thanks!</a></li>
   </ul>
 </nav>
 
@@ -309,9 +307,13 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h2 id="images">
+  <article class="markdown book-article"><h1 id="how-to-use-hugo-book-theme">
+  How to use Hugo-book theme
+  <a class="anchor" href="#how-to-use-hugo-book-theme">#</a>
+</h1>
+<h2 id="how-to-insert-images-and-resize-images">
   How to insert images and resize images?
-  <a class="anchor" href="#images">#</a>
+  <a class="anchor" href="#how-to-insert-images-and-resize-images">#</a>
 </h2>
 <p>The file tree is like</p>
 <pre tabindex="0"><code>    ├─content
@@ -330,14 +332,9 @@ https://github.com/alex-shpak/hugo-book
          alt=" " width="400"/>
 </figure>
 
-<blockquote>
-<p>Why we need to add <code>../</code> in front of <code>images</code> folder, altough <code>hugo.md</code> file and <code>images</code> folder are at the same level?
-Because Hugo system sees <code>hugo.md</code> as a foler too. However, Hugo system sees <code>_index.md</code> as a file! Therefore, If we want to insert iamges in <code>_index.md</code> file, the command will be like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span>
-</span></span></code></pre></div></blockquote>
-<h2 id="emoji">
+<h2 id="how-to-add-emoji">
   How to add emoji?
-  <a class="anchor" href="#emoji">#</a>
+  <a class="anchor" href="#how-to-add-emoji">#</a>
 </h2>
 <p>Directly copy emoji icon 👋 and paste to <code>.md</code> file, instead of using <code>:wave:</code>.</p>
 <blockquote>
@@ -345,9 +342,9 @@ Because Hugo system sees <code>hugo.md</code> as a foler too. However, Hugo syst
 
   <a href="https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md">https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md</a></p>
 </blockquote>
-<h2 id="map">
+<h2 id="how-to-add-a-travel-map-in-hugo">
   How to add a travel map in Hugo?
-  <a class="anchor" href="#map">#</a>
+  <a class="anchor" href="#how-to-add-a-travel-map-in-hugo">#</a>
 </h2>
 <p>Refer to 
   <a href="https://www.thecoffeemachine.net/writing/adding-maps-to-hugo-blogs-with-osm/">this article</a></p>
@@ -359,95 +356,17 @@ In <code>{{&lt; openstreetmap mapName=&quot;&lt;your map name&gt;&quot; &gt;}}</
 </figure>
 </p>
 </blockquote>
-<h2 id="update">
+<h2 id="why-my-local-website-doesnt-update-after-i-update-my-markdown-files">
   Why my local website doesn&rsquo;t update after I update my markdown files?
-  <a class="anchor" href="#update">#</a>
+  <a class="anchor" href="#why-my-local-website-doesnt-update-after-i-update-my-markdown-files">#</a>
 </h2>
 <p>Good question. I also find my local website does not update although I have save my changes. I am not clear the excat reason, but It works well if I <code>Pree Ctrl+C to stop</code> the local host, and <code>hugo server</code> again, I can see the updated website in <code>http://localhost:1313/</code>.</p>
-<h2 id="link">
+<h2 id="how-to-link-pages-and-tiles">
   How to link pages and tiles?
-  <a class="anchor" href="#link">#</a>
+  <a class="anchor" href="#how-to-link-pages-and-tiles">#</a>
 </h2>
-<p>I am in <code>now.md</code> file now, and there is another <code>page.md</code> which has <code>#Title I want to link</code>. I want to link to <code>page.md</code> and link to <code>#Title I want to link</code>.
-In <code>page.md</code> file, add an anchor:</p>
-<pre tabindex="0"><code class="language-tp1" data-lang="tp1"># Title I want to link {#anchor}
-</code></pre><p>In <code>now.md</code> file, add commands:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>[text] ( <span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">ref</span> <span style="color:#e6db74">&#34;./pages.md&#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span> ) # link to one page
-</span></span><span style="display:flex;"><span>[text] ( <span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">ref</span> <span style="color:#e6db74">&#34;./pages.md#anchor&#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span> ) # link to the title
-</span></span></code></pre></div><h2 id="comment">
-  I want to add a comment section (via Cactus Comments).
-  <a class="anchor" href="#comment">#</a>
-</h2>
-<ol>
-<li>Register a Matrix account via 
-  <a href="https://app.element.io/#/login">https://app.element.io/#/login</a>.</li>
-<li>Login.</li>
-<li><code>register huilinBlog</code> by
-<figure><img src="../images/comment1.PNG"
-         alt=" " width="500"/>
-</figure>
-
-<figure><img src="../images/comment2.PNG"
-         alt=" " width="500"/>
-</figure>
-
-<figure><img src="../images/comment3.PNG"
-         alt=" " width="500"/>
-</figure>
-
-The name we will use to add comment section is <strong>huilinBlog</strong>.</li>
-<li>Create and add <code>chat.html</code>. In my case, my root directory is <code>Blogs/</code> and <code>chat.html</code> is added to <code>Blogs/layouts/shortcodes/</code> in which <code>shortcodes</code> folder is also created by yourself.</li>
-</ol>
-<pre tabindex="0"><code>├─.github
-├─layouts
-│  └─shortcodes
-└─themes
-    ├─hugo-book
-    │  ├─.github
-    │  ├─layouts
-    │  │  ├─shortcodes
-</code></pre><blockquote>
-<p><strong>NOTE:</strong>
-Do not add <code>chat.html</code> to <code>themes/layouts/shortcodes/</code>, because we are not authorized to modify the the theme github via git push and so on.</p>
-</blockquote>
-<ol start="5">
-<li>Copy the following and paste to <code>chat.html</code>, and replace <code>&lt;YOUR-SITE-NAME&gt;</code> with <code>huilinBlog</code>, like <code>siteName: &quot;huilinBlog&quot;,</code></li>
-</ol>
-<pre tabindex="0"><code>&lt;script type=&#34;text/javascript&#34; src=&#34;https://latest.cactus.chat/cactus.js&#34;&gt;&lt;/script&gt;
-&lt;link rel=&#34;stylesheet&#34; href=&#34;https://latest.cactus.chat/style.css&#34; type=&#34;text/css&#34;&gt;
-&lt;div id=&#34;comment-section&#34;&gt;&lt;/div&gt;
-&lt;script&gt;
-initComments({
-  node: document.getElementById(&#34;comment-section&#34;),
-  defaultHomeserverUrl: &#34;https://matrix.cactus.chat:8448&#34;,
-  serverName: &#34;cactus.chat&#34;,
-  siteName: &#34;&lt;YOUR-SITE-NAME&gt;&#34;,
-  commentSectionId: &#34;{{ index .Params 0 }}&#34;
-})
-&lt;/script&gt;
-</code></pre><ol start="6">
-<li>Add the chat comment section to post.</li>
-</ol>
-<pre tabindex="0"><code>{{&lt; chat cactus-comments &gt;}}
-</code></pre><p>The <strong>cactus-comments</strong> is the name that will be shown in your cactus chat website. For example, my case <code>{{&lt; chat huilinBlog-room &gt;}}</code>, so my cactus chat website is like
-<figure><img src="../images/comment4.PNG"
-         alt=" " width="400"/>
-</figure>
-
-7. Let us test! After deployment,
-<script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
- <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
- <div id="comment-section"></div>
- <script>
- initComments({
-   node: document.getElementById("comment-section"),
-   defaultHomeserverUrl: "https://matrix.cactus.chat:8448",
-   serverName: "cactus.chat",
-   siteName: "huilinBlog",
-   commentSectionId: "huilinBlog-room"
- })
- </script></p>
-<h2 id="references">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>[text] ( <span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">ref</span> <span style="color:#e6db74">&#34;./pages.md&#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span> )
+</span></span></code></pre></div><h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
 </h2>
@@ -462,28 +381,7 @@ initComments({
   <a href="https://discourse.gohugo.io/t/how-to-render-markdown-url-with-md-to-correct-link/26372">How to render markdown url with .md to correct link</a></li>
 <li>
   <a href="https://stackoverflow.com/questions/33225067/linking-pages-in-hugo-markdown">Linking pages in Hugo/markdown</a></li>
-<li>
-  <a href="https://novores.github.io/en/post/cactus-comment/">Added Cactus Comments to Hugo</a></li>
-<li>
-  <a href="https://cactus.chat/docs/getting-started/quick-start/">Cactus Comments</a></li>
 </ol>
-<h2 id="thanks">
-  Thanks!
-  <a class="anchor" href="#thanks">#</a>
-</h2>
-<p>Really appreciate your time for reading my blog, and bless you enjoy your day! If you have any suggestions or comments, please leave them below! (You don&rsquo;t need to login to post😉, feel free to add posts.)
-<script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
- <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
- <div id="comment-section"></div>
- <script>
- initComments({
-   node: document.getElementById("comment-section"),
-   defaultHomeserverUrl: "https://matrix.cactus.chat:8448",
-   serverName: "cactus.chat",
-   siteName: "huilinBlog",
-   commentSectionId: "huilinBlog-room"
- })
- </script></p>
 </article>
  
       
@@ -532,14 +430,12 @@ initComments({
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#images">How to insert images and resize images?</a></li>
-    <li><a href="#emoji">How to add emoji?</a></li>
-    <li><a href="#map">How to add a travel map in Hugo?</a></li>
-    <li><a href="#update">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
-    <li><a href="#link">How to link pages and tiles?</a></li>
-    <li><a href="#comment">I want to add a comment section (via Cactus Comments).</a></li>
+    <li><a href="#how-to-insert-images-and-resize-images">How to insert images and resize images?</a></li>
+    <li><a href="#how-to-add-emoji">How to add emoji?</a></li>
+    <li><a href="#how-to-add-a-travel-map-in-hugo">How to add a travel map in Hugo?</a></li>
+    <li><a href="#why-my-local-website-doesnt-update-after-i-update-my-markdown-files">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
+    <li><a href="#how-to-link-pages-and-tiles">How to link pages and tiles?</a></li>
     <li><a href="#references">References</a></li>
-    <li><a href="#thanks">Thanks!</a></li>
   </ul>
 </nav>
 
