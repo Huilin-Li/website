@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on Huilin Li</title>
-    <link>http://localhost:50571/docs/blogs/</link>
+    <link>http://localhost:52071/docs/blogs/</link>
     <description>Recent content in Blog on Huilin Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:50571/docs/blogs/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:52071/docs/blogs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Shell Commands</title>
-      <link>http://localhost:50571/docs/blogs/shell/</link>
+      <link>http://localhost:52071/docs/blogs/shell/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:50571/docs/blogs/shell/</guid>
+      <guid>http://localhost:52071/docs/blogs/shell/</guid>
       <description>&#xD;Shell Commands&#xD;#&#xD;How to discard changes in VScode?&#xD;#&#xD;Navigate to reporsitory (has .github folder) with changes. Then, git restore &amp;lt;file&amp;gt; </description>
     </item>
   </channel>

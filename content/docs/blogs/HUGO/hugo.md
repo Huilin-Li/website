@@ -64,10 +64,11 @@ In `now.md` file, add commands:
 ## I want to add a comment section (via Cactus Comments).{#comment}
 1. Register a Matrix account via https://app.element.io/#/login. 
 2. Login.
-3. `register huilinBlog` by
+3. `register comments` by
 {{< figure src="../images/comment1.PNG" width="500" alt=" ">}}
 {{< figure src="../images/comment2.PNG" width="500" alt=" ">}}
 {{< figure src="../images/comment3.PNG" width="500" alt=" ">}}
+{{< figure src="../images/comment5.PNG" width="500" alt=" ">}}
 The name we will use to add comment section is **huilinBlog**.
 4. Create and add `chat.html`. In my case, my root directory is `Blogs/` and `chat.html` is added to `Blogs/layouts/shortcodes/` in which `shortcodes` folder is also created by yourself. 
 ```
@@ -82,7 +83,7 @@ The name we will use to add comment section is **huilinBlog**.
 ```
 > **NOTE:** 
 > Do not add `chat.html` to `themes/layouts/shortcodes/`, because we are not authorized to modify the the theme github via git push and so on.
-5. Copy the following and paste to `chat.html`, and replace `<YOUR-SITE-NAME>` with `huilinBlog`, like `siteName: "huilinBlog",`
+5. Copy the following and paste to `chat.html`, and replace `<YOUR-SITE-NAME>` with `comments`, like `siteName: "comments",`
 ```
 <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
 <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">

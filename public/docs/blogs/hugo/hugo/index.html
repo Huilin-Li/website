@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=50571&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52071&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="How to insert images and resize images?#The file tree is like
@@ -13,17 +13,17 @@
 ├─content│ │ _index.md│ ││ └─docs│ ├─blogs│ │ │ hugo.md│ │ │ _index.md│ │ ││ │ └─images│ │ Nice.png In hugo.md file, we add Nice.png and scale it by
 {{&lt; figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34; &gt;}} Why we need to add ../ in front of images folder, altough hugo." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:50571/docs/blogs/hugo/hugo/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:52071/docs/blogs/hugo/hugo/" /><meta property="article:section" content="docs" />
 
 
 
 <title>Hugo Commands | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:50571/docs/blogs/hugo/hugo/">
+<link rel="canonical" href="http://localhost:52071/docs/blogs/hugo/hugo/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.07898b39d1f277144404b5113de14fedb62c7077356611b5e6de31265ae0cc50.js" integrity="sha256-B4mLOdHydxREBLURPeFP7bYscHc1ZhG15t4xJlrgzFA=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.a663f487459cc50a5c4c8b36a1b558cf9503ad41825cf27f5fc9b781dae97278.js" integrity="sha256-pmP0h0WcxQpcTIs2obVYz5UDrUGCXPJ/X8m3gdrpcng=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -382,7 +382,7 @@ In <code>page.md</code> file, add an anchor:</p>
 <li>Register a Matrix account via 
   <a href="https://app.element.io/#/login">https://app.element.io/#/login</a>.</li>
 <li>Login.</li>
-<li><code>register huilinBlog</code> by
+<li><code>register comments</code> by
 <figure><img src="../images/comment1.PNG"
          alt=" " width="500"/>
 </figure>
@@ -392,6 +392,10 @@ In <code>page.md</code> file, add an anchor:</p>
 </figure>
 
 <figure><img src="../images/comment3.PNG"
+         alt=" " width="500"/>
+</figure>
+
+<figure><img src="../images/comment5.PNG"
          alt=" " width="500"/>
 </figure>
 
@@ -411,7 +415,7 @@ The name we will use to add comment section is <strong>huilinBlog</strong>.</li>
 Do not add <code>chat.html</code> to <code>themes/layouts/shortcodes/</code>, because we are not authorized to modify the the theme github via git push and so on.</p>
 </blockquote>
 <ol start="5">
-<li>Copy the following and paste to <code>chat.html</code>, and replace <code>&lt;YOUR-SITE-NAME&gt;</code> with <code>huilinBlog</code>, like <code>siteName: &quot;huilinBlog&quot;,</code></li>
+<li>Copy the following and paste to <code>chat.html</code>, and replace <code>&lt;YOUR-SITE-NAME&gt;</code> with <code>comments</code>, like <code>siteName: &quot;comments&quot;,</code></li>
 </ol>
 <pre tabindex="0"><code>&lt;script type=&#34;text/javascript&#34; src=&#34;https://latest.cactus.chat/cactus.js&#34;&gt;&lt;/script&gt;
 &lt;link rel=&#34;stylesheet&#34; href=&#34;https://latest.cactus.chat/style.css&#34; type=&#34;text/css&#34;&gt;
@@ -440,7 +444,7 @@ initComments({
    node: document.getElementById("comment-section"),
    defaultHomeserverUrl: "https://matrix.cactus.chat:8448",
    serverName: "cactus.chat",
-   siteName: "huilinBlog",
+   siteName: "comments",
    commentSectionId: "test"
  })
  </script></li>
@@ -478,7 +482,7 @@ initComments({
    node: document.getElementById("comment-section"),
    defaultHomeserverUrl: "https://matrix.cactus.chat:8448",
    serverName: "cactus.chat",
-   siteName: "huilinBlog",
+   siteName: "comments",
    commentSectionId: "hugo"
  })
  </script></p>
