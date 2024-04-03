@@ -107,7 +107,10 @@ The **cactus-comments** is the name that will be shown in your cactus chat websi
 7. Let us test! 
  {{<chat test>}}
 
-
+{{< hint warning >}}
+**NOTE**  
+I am also trying other comment tools, and let's see which one is more suitable.
+{{< /hint >}}
 
 
 

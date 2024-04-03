@@ -19,6 +19,7 @@ Let's keep things simple! You can get these following experiences here, and hope
     3. [Add a travel map]({{< ref "./hugo.md#map">}})
     4. [Why my local website doesn't update after I update my markdown files?]({{< ref "./hugo.md#update">}})
     5. [Link to pages and titles]({{< ref "./hugo.md#link">}})
+    6. [Add a comment section]({{< ref "./hugo.md#comment">}})
 
 
 
