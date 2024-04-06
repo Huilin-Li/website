@@ -6,6 +6,10 @@ There are four levels of protein structure: primary, secondary, tertiary and qua
 
 ## Primary Structure.
 > A protein’s primary structure is the unique sequence of amino acids in each polypeptide chain that makes up the protein. 
+1. fasta file
+2. sequence of 20 amino acids
+
+## Secondary Structure
 
 
 

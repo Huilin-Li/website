@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52978&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=65382&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Binder Design#In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
-Step1:#">
+<meta name="description" content="Binder Design#In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
+AF-A2VEY9-F1, Alphafold.
+In this case, I take the A2VEY9 as the example. Its 3D view is here
+Step0: Labaries#from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly.express as px import plotly.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="TP Binder Design" />
-<meta property="og:description" content="Binder Design#In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
-Step1:#" />
+<meta property="og:description" content="Binder Design#In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
+AF-A2VEY9-F1, Alphafold.
+In this case, I take the A2VEY9 as the example. Its 3D view is here
+Step0: Labaries#from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly.express as px import plotly." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:52978/docs/blogs/bioworld/binderdesign/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:65382/docs/blogs/bioworld/binderdesign/" /><meta property="article:section" content="docs" />
 
 
 
 <title>TP Binder Design | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:52978/docs/blogs/bioworld/binderdesign/">
+<link rel="canonical" href="http://localhost:65382/docs/blogs/bioworld/binderdesign/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.9761f4f015de920ea23401400442021ea7de7e9483a3c70e7ba75eff2d6a29c2.js" integrity="sha256-l2H08BXekg6iNAFABEICHqfefpSDo8cOe6de/y1qKcI=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.ecf1958f0747f4737de29af3de5732ed48276106a91fc3a88e21f9d2cea53614.js" integrity="sha256-7PGVjwdH9HN94prz3lcy7UgnYQapH8OojiH50s6lNhQ=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -287,7 +291,9 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#step1">Step1:</a></li>
+    <li><a href="#step0-labaries">Step0: Labaries</a></li>
+    <li><a href="#step1-load-the-target-protein">Step1: Load the target protein.</a></li>
+    <li><a href="#step2-truncate-target-protein">Step2: Truncate target protein</a></li>
   </ul>
 </nav>
 
@@ -307,11 +313,62 @@ https://github.com/alex-shpak/hugo-book
 <p>In this blog, I want to make notes on how I design the binder of the target protein using 
   <a href="https://github.com/RosettaCommons/RFdiffusion">RFdiffusion</a>, 
   <a href="https://github.com/nrbennet/dl_binder_design/tree/main">ProteinMPNN-FastRelax</a> and so on.</p>
-<h2 id="step1">
-  Step1:
-  <a class="anchor" href="#step1">#</a>
+<center><figure><img src="../bioIMG/AF-A2VEY9-F1.png"
+         alt="AF-A2VEY9-F1, Alphafold." width="400"/><figcaption>
+            <p>AF-A2VEY9-F1, Alphafold.</p>
+        </figcaption>
+</figure>
+</center>
+<p>In this case, I take the 
+  <a href="https://www.uniprot.org/uniprotkb/A2VEY9/entry#structure">A2VEY9</a> as the example. Its 3D view is 
+  <a href="https://alphafold.ebi.ac.uk/entry/A2VEY9">here</a></p>
+<h2 id="step0-labaries">
+  Step0: Labaries
+  <a class="anchor" href="#step0-labaries">#</a>
 </h2>
-</article>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> biopandas.pdb <span style="color:#f92672">import</span> PandasPdb
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> chain
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Bio <span style="color:#f92672">import</span> PDB
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> plotly.express <span style="color:#66d9ef">as</span> px
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> plotly.graph_objects <span style="color:#66d9ef">as</span> go
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> KMeans
+</span></span></code></pre></div><h2 id="step1-load-the-target-protein">
+  Step1: Load the target protein.
+  <a class="anchor" href="#step1-load-the-target-protein">#</a>
+</h2>
+<p>The pdb file can be downloaded 
+  <a href="https://alphafold.ebi.ac.uk/entry/A2VEY9">here</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>target_pdb <span style="color:#f92672">=</span> PandasPdb()<span style="color:#f92672">.</span>read_pdb(<span style="color:#e6db74">&#39;AF-A2VEY9-F1-model_v4.pdb&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># read structure information into pd.DataFrame</span>
+</span></span><span style="display:flex;"><span>target_df <span style="color:#f92672">=</span> target_pdb<span style="color:#f92672">.</span>df[<span style="color:#e6db74">&#39;ATOM&#39;</span>]
+</span></span></code></pre></div><center><figure><img src="../bioIMG/df1.PNG"/>
+</figure>
+</center>
+<h2 id="step2-truncate-target-protein">
+  Step2: Truncate target protein
+  <a class="anchor" href="#step2-truncate-target-protein">#</a>
+</h2>
+<p>For example, I want to <strong>remove AAs with very low pLDDT and AAs who are located in the cell membrane</strong>. By selecting the most big dark green area, we exclude AAs with very low pLDDT score from highlighted areas. We collect positions of AAs with very low pLDDT are (1, 2, 336-693).</p>
+<center><figure><img src="../bioIMG/fig1.PNG"
+         alt="https://alphafold.ebi.ac.uk/entry/A2VEY9" width="600"/><figcaption>
+            <p><a href="https://alphafold.ebi.ac.uk/entry/A2VEY9">https://alphafold.ebi.ac.uk/entry/A2VEY9</a></p>
+        </figcaption>
+</figure>
+</center>
+<p>At the same time, we can collecr positions of AAs who are located in the transmembrane parts from <em>Subcellular Location</em> section 
+  <a href="https://www.uniprot.org/uniprotkb/A2VEY9/entry#subcellular_location">here</a>.</p>
+<center><figure><img src="../bioIMG/fig2.PNG"
+         alt="https://www.uniprot.org/uniprotkb/A2VEY9/entry#subcellular_location" width="800"/><figcaption>
+            <p><a href="https://www.uniprot.org/uniprotkb/A2VEY9/entry#subcellular_location">https://www.uniprot.org/uniprotkb/A2VEY9/entry#subcellular_location</a></p>
+        </figcaption>
+</figure>
+</center>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># truncating ids</span>
+</span></span><span style="display:flex;"><span>truncating_ids <span style="color:#f92672">=</span> set([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>]<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">336</span>,<span style="color:#ae81ff">694</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">43</span>,<span style="color:#ae81ff">64</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">72</span>,<span style="color:#ae81ff">93</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">191</span>,<span style="color:#ae81ff">212</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">233</span>,<span style="color:#ae81ff">254</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">347</span>,<span style="color:#ae81ff">368</span>)))
+</span></span><span style="display:flex;"><span>len(truncating_ids) <span style="color:#75715e">#=444</span>
+</span></span></code></pre></div></article>
  
       
 
@@ -359,7 +416,9 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#step1">Step1:</a></li>
+    <li><a href="#step0-labaries">Step0: Labaries</a></li>
+    <li><a href="#step1-load-the-target-protein">Step1: Load the target protein.</a></li>
+    <li><a href="#step2-truncate-target-protein">Step2: Truncate target protein</a></li>
   </ul>
 </nav>
 

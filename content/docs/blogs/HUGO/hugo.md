@@ -4,7 +4,7 @@ bookToc: true
 weight: 2
 ---
 
-## How to insert images and resize images?{#images}
+## How to insert images and resize and center images?{#images}
 The file tree is like
 ```
     ├─content
@@ -30,7 +30,19 @@ In `hugo.md` file, we add Nice.png and scale it by
 > ```tpl
 > {{</* figure src="./images/Nice.png" width="400" alt=" " */>}}
 > ```
-
+{{< hint warning >}}
+**Center the image?**  
+```
+<center>{ {<figure src="../images/Nice.png" width="400" alt=" ">} }</center>
+```
+At the same time, in `hugo.toml`, add
+```
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+```
+{{< /hint >}}
 
 
 ## How to add emoji?{#emoji}

@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Introduction on Huilin Li</title>
-    <link>http://localhost:52978/</link>
+    <link>http://localhost:65382/</link>
     <description>Recent content in Introduction on Huilin Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:52978/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:65382/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HugoBook&#43;GithubAction</title>
-      <link>http://localhost:52978/docs/blogs/hugo/hugobookgithubaction/</link>
+      <link>http://localhost:65382/docs/blogs/hugo/hugobookgithubaction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:52978/docs/blogs/hugo/hugobookgithubaction/</guid>
+      <guid>http://localhost:65382/docs/blogs/hugo/hugobookgithubaction/</guid>
       <description>In Windows10, build personal website via Hugo-book and Github Actions&#xD;#&#xD;This blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.&#xA;Prerequisites&#xD;#&#xD;Git Windows 10 VScode Github account Install Hugo&#xD;#&#xD;In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey.</description>
     </item>
     <item>
       <title>TP Binder Design</title>
-      <link>http://localhost:52978/docs/blogs/bioworld/binderdesign/</link>
+      <link>http://localhost:65382/docs/blogs/bioworld/binderdesign/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:52978/docs/blogs/bioworld/binderdesign/</guid>
-      <description>&#xD;Binder Design&#xD;#&#xD;In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.&#xA;Step1:&#xD;#&#xD;</description>
+      <guid>http://localhost:65382/docs/blogs/bioworld/binderdesign/</guid>
+      <description>Binder Design&#xD;#&#xD;In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.&#xA;AF-A2VEY9-F1, Alphafold.&#xA;In this case, I take the A2VEY9 as the example. Its 3D view is here&#xA;Step0: Labaries&#xD;#&#xD;from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly.express as px import plotly.</description>
     </item>
     <item>
       <title>4 levels of protein structure</title>
-      <link>http://localhost:52978/docs/blogs/bioworld/proteinstruture/</link>
+      <link>http://localhost:65382/docs/blogs/bioworld/proteinstruture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:52978/docs/blogs/bioworld/proteinstruture/</guid>
-      <description>There are four levels of protein structure: primary, secondary, tertiary and quaternary.&#xA;Primary Structure.&#xD;#&#xD;A protein’s primary structure is the unique sequence of amino acids in each polypeptide chain that makes up the protein.&#xA;Reference:&#xD;#&#xD;3.9: Proteins - Protein Structure Thanks!&#xD;#&#xD;Really appreciate your time for reading my blog, and bless you enjoy your day! If you have any suggestions or comments, please leave them below! (You don&amp;rsquo;t need to login to post😉, feel free to add posts.</description>
+      <guid>http://localhost:65382/docs/blogs/bioworld/proteinstruture/</guid>
+      <description>There are four levels of protein structure: primary, secondary, tertiary and quaternary.&#xA;Primary Structure.&#xD;#&#xD;A protein’s primary structure is the unique sequence of amino acids in each polypeptide chain that makes up the protein.&#xA;fasta file sequence of 20 amino acids Secondary Structure&#xD;#&#xD;Reference:&#xD;#&#xD;3.9: Proteins - Protein Structure Thanks!&#xD;#&#xD;Really appreciate your time for reading my blog, and bless you enjoy your day! If you have any suggestions or comments, please leave them below!</description>
     </item>
     <item>
       <title>Hugo Commands</title>
-      <link>http://localhost:52978/docs/blogs/hugo/hugo/</link>
+      <link>http://localhost:65382/docs/blogs/hugo/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:52978/docs/blogs/hugo/hugo/</guid>
-      <description>How to insert images and resize images?&#xD;#&#xD;The file tree is like&#xA;├─content&#xD;│ │ _index.md&#xD;│ │&#xD;│ └─docs&#xD;│ ├─blogs&#xD;│ │ │ hugo.md&#xD;│ │ │ _index.md&#xD;│ │ │&#xD;│ │ └─images&#xD;│ │ Nice.png In hugo.md file, we add Nice.png and scale it by&#xA;{{&amp;lt; figure src=&amp;#34;../images/Nice.png&amp;#34; width=&amp;#34;400&amp;#34; alt=&amp;#34; &amp;#34; &amp;gt;}} Why we need to add ../ in front of images folder, altough hugo.</description>
+      <guid>http://localhost:65382/docs/blogs/hugo/hugo/</guid>
+      <description>How to insert images and resize and center images?&#xD;#&#xD;The file tree is like&#xA;├─content&#xD;│ │ _index.md&#xD;│ │&#xD;│ └─docs&#xD;│ ├─blogs&#xD;│ │ │ hugo.md&#xD;│ │ │ _index.md&#xD;│ │ │&#xD;│ │ └─images&#xD;│ │ Nice.png In hugo.md file, we add Nice.png and scale it by&#xA;{{&amp;lt; figure src=&amp;#34;../images/Nice.png&amp;#34; width=&amp;#34;400&amp;#34; alt=&amp;#34; &amp;#34; &amp;gt;}} Why we need to add ../ in front of images folder, altough hugo.</description>
     </item>
     <item>
       <title>Shell Commands</title>
-      <link>http://localhost:52978/docs/blogs/shell/</link>
+      <link>http://localhost:65382/docs/blogs/shell/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:52978/docs/blogs/shell/</guid>
+      <guid>http://localhost:65382/docs/blogs/shell/</guid>
       <description>&#xD;Shell Commands&#xD;#&#xD;How to discard changes in VScode?&#xD;#&#xD;Navigate to reporsitory (has .github folder) with changes. Then, git restore &amp;lt;file&amp;gt; </description>
     </item>
   </channel>

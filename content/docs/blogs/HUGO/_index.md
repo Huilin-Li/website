@@ -14,7 +14,7 @@ Let's keep things simple! You can get these following experiences here, and hope
 
 1. [In Windows 10, build personal website via Hugo-book theme and deploy the static website to github via Github Action.]({{< ref "./HugoBookGithubAction.md">}})
 2. [Some commands you might use when building a website:]({{< ref "./hugo.md#images">}})
-    1. [Insert images and resize images]({{< ref "./hugo.md#images">}})
+    1. [Insert images and resize and center images]({{< ref "./hugo.md#images">}})
     2. [Add emoji]({{< ref "./hugo.md#emoji">}})
     3. [Add a travel map]({{< ref "./hugo.md#map">}})
     4. [Why my local website doesn't update after I update my markdown files?]({{< ref "./hugo.md#update">}})

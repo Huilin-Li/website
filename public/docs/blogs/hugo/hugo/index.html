@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60971&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=59460&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="How to insert images and resize images?#The file tree is like
+<meta name="description" content="How to insert images and resize and center images?#The file tree is like
 ├─content│ │ _index.md│ ││ └─docs│ ├─blogs│ │ │ hugo.md│ │ │ _index.md│ │ ││ │ └─images│ │ Nice.png In hugo.md file, we add Nice.png and scale it by
 {{&lt; figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34; &gt;}} Why we need to add ../ in front of images folder, altough hugo.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="Hugo Commands" />
-<meta property="og:description" content="How to insert images and resize images?#The file tree is like
+<meta property="og:description" content="How to insert images and resize and center images?#The file tree is like
 ├─content│ │ _index.md│ ││ └─docs│ ├─blogs│ │ │ hugo.md│ │ │ _index.md│ │ ││ │ └─images│ │ Nice.png In hugo.md file, we add Nice.png and scale it by
 {{&lt; figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34; &gt;}} Why we need to add ../ in front of images folder, altough hugo." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:60971/docs/blogs/hugo/hugo/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:59460/docs/blogs/hugo/hugo/" /><meta property="article:section" content="docs" />
 
 
 
 <title>Hugo Commands | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:60971/docs/blogs/hugo/hugo/">
+<link rel="canonical" href="http://localhost:59460/docs/blogs/hugo/hugo/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.834bb45eec27f5fe1532c38012b959843f5868f1d1de93476acae8d03d6a42a1.js" integrity="sha256-g0u0Xuwn9f4VMsOAErlZhD9YaPHR3pNHasro0D1qQqE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.19c97b442d727afe77486385797eaf88d8e4d10659bb4b1bf02a7d8d0a23f29f.js" integrity="sha256-Gcl7RC1yev53SGOFeX6viNjk0QZZu0sb8Cp9jQoj8p8=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -289,7 +289,7 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#images">How to insert images and resize images?</a></li>
+    <li><a href="#images">How to insert images and resize and center images?</a></li>
     <li><a href="#emoji">How to add emoji?</a></li>
     <li><a href="#map">How to add a travel map in Hugo?</a></li>
     <li><a href="#update">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
@@ -310,7 +310,7 @@ https://github.com/alex-shpak/hugo-book
       
       
   <article class="markdown book-article"><h2 id="images">
-  How to insert images and resize images?
+  How to insert images and resize and center images?
   <a class="anchor" href="#images">#</a>
 </h2>
 <p>The file tree is like</p>
@@ -335,6 +335,17 @@ https://github.com/alex-shpak/hugo-book
 Because Hugo system sees <code>hugo.md</code> as a foler too. However, Hugo system sees <code>_index.md</code> as a file! Therefore, If we want to insert iamges in <code>_index.md</code> file, the command will be like:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span>
 </span></span></code></pre></div></blockquote>
+<blockquote class="book-hint warning">
+  <p><strong>Center the image?</strong></p>
+<pre tabindex="0"><code>&lt;center&gt;{ {&lt;figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34;&gt;} }&lt;/center&gt;
+</code></pre><p>At the same time, in <code>hugo.toml</code>, add</p>
+<pre tabindex="0"><code>[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+</code></pre>
+</blockquote>
+
 <h2 id="emoji">
   How to add emoji?
   <a class="anchor" href="#emoji">#</a>
@@ -382,7 +393,7 @@ In <code>page.md</code> file, add an anchor:</p>
 <li>Register a Matrix account via 
   <a href="https://app.element.io/#/login">https://app.element.io/#/login</a>.</li>
 <li>Login.</li>
-<li><code>register huilinBlog</code> by
+<li><code>register comments</code> by
 <figure><img src="../images/comment1.PNG"
          alt=" " width="500"/>
 </figure>
@@ -392,6 +403,10 @@ In <code>page.md</code> file, add an anchor:</p>
 </figure>
 
 <figure><img src="../images/comment3.PNG"
+         alt=" " width="500"/>
+</figure>
+
+<figure><img src="../images/comment5.PNG"
          alt=" " width="500"/>
 </figure>
 
@@ -411,7 +426,7 @@ The name we will use to add comment section is <strong>huilinBlog</strong>.</li>
 Do not add <code>chat.html</code> to <code>themes/layouts/shortcodes/</code>, because we are not authorized to modify the the theme github via git push and so on.</p>
 </blockquote>
 <ol start="5">
-<li>Copy the following and paste to <code>chat.html</code>, and replace <code>&lt;YOUR-SITE-NAME&gt;</code> with <code>huilinBlog</code>, like <code>siteName: &quot;huilinBlog&quot;,</code></li>
+<li>Copy the following and paste to <code>chat.html</code>, and replace <code>&lt;YOUR-SITE-NAME&gt;</code> with <code>comments</code>, like <code>siteName: &quot;comments&quot;,</code></li>
 </ol>
 <pre tabindex="0"><code>&lt;script type=&#34;text/javascript&#34; src=&#34;https://latest.cactus.chat/cactus.js&#34;&gt;&lt;/script&gt;
 &lt;link rel=&#34;stylesheet&#34; href=&#34;https://latest.cactus.chat/style.css&#34; type=&#34;text/css&#34;&gt;
@@ -429,12 +444,9 @@ initComments({
 <li>Add the chat comment section to post.</li>
 </ol>
 <pre tabindex="0"><code>{{&lt; chat cactus-comments &gt;}}
-</code></pre><p>The <strong>cactus-comments</strong> is the name that will be shown in your cactus chat website. For example, my case <code>{{&lt; chat test &gt;}}</code>, so my cactus chat website is like
-<figure><img src="../images/comment4.PNG"
-         alt=" " width="400"/>
-</figure>
-
-7. Let us test!
+</code></pre><p>The <strong>cactus-comments</strong> is the name that will be shown in your cactus chat website. For example, my case <code>{{&lt; chat test &gt;}}</code>, so my cactus chat website is like</p>
+<ol start="7">
+<li>Let us test!
 <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
  <div id="comment-section"></div>
@@ -446,7 +458,13 @@ initComments({
    siteName: "comments",
    commentSectionId: "test"
  })
- </script></p>
+ </script></li>
+</ol>
+<blockquote class="book-hint warning">
+  <strong>NOTE</strong><br>
+I am also trying other comment tools, and let&rsquo;s see which one is more suitable.
+</blockquote>
+
 <h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
@@ -532,7 +550,7 @@ initComments({
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#images">How to insert images and resize images?</a></li>
+    <li><a href="#images">How to insert images and resize and center images?</a></li>
     <li><a href="#emoji">How to add emoji?</a></li>
     <li><a href="#map">How to add a travel map in Hugo?</a></li>
     <li><a href="#update">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>

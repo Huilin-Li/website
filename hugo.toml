@@ -19,6 +19,8 @@ theme = ['osm', 'hugo-book']
       wrapStandAloneImageWithinParagraph = false
       [markup.goldmark.parser.attribute]
         block = true
+    [markup.goldmark.renderer]
+      unsafe = true
 
 
 [menu]

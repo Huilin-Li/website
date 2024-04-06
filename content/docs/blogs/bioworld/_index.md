@@ -8,4 +8,6 @@ bookCollapseSection: false
 # Biology World
 
 
-{{< figure src="./pah.png" alt=" " caption="Astrobiology, NASA.">}}
+{{< figure src="./bioIMG/pah.png" alt=" " caption="Astrobiology, NASA.">}}
+
+In this section, I want to record and share my studies on Computational Biology.
