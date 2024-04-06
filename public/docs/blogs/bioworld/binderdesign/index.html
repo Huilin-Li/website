@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=65382&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=53469&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Binder Design#In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
 AF-A2VEY9-F1, Alphafold.
 In this case, I take the A2VEY9 as the example. Its 3D view is here
-Step0: Labaries#from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly.express as px import plotly.">
+Step0: Labaries and Helpful tools#from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="TP Binder Design" />
 <meta property="og:description" content="Binder Design#In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
 AF-A2VEY9-F1, Alphafold.
 In this case, I take the A2VEY9 as the example. Its 3D view is here
-Step0: Labaries#from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly.express as px import plotly." />
+Step0: Labaries and Helpful tools#from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:65382/docs/blogs/bioworld/binderdesign/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:53469/docs/blogs/bioworld/binderdesign/" /><meta property="article:section" content="docs" />
 
 
 
 <title>TP Binder Design | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:65382/docs/blogs/bioworld/binderdesign/">
+<link rel="canonical" href="http://localhost:53469/docs/blogs/bioworld/binderdesign/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.ecf1958f0747f4737de29af3de5732ed48276106a91fc3a88e21f9d2cea53614.js" integrity="sha256-7PGVjwdH9HN94prz3lcy7UgnYQapH8OojiH50s6lNhQ=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.d55629b877ae44e3c66e8fcf71f8d820b09a4246a69456d0774478dc6832065b.js" integrity="sha256-1VYpuHeuROPGbo/PcfjYILCaQkamlFbQd0R43GgyBls=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -291,7 +291,7 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#step0-labaries">Step0: Labaries</a></li>
+    <li><a href="#step0-labaries-and-helpful-tools">Step0: Labaries and Helpful tools</a></li>
     <li><a href="#step1-load-the-target-protein">Step1: Load the target protein.</a></li>
     <li><a href="#step2-truncate-target-protein">Step2: Truncate target protein</a></li>
   </ul>
@@ -322,9 +322,9 @@ https://github.com/alex-shpak/hugo-book
 <p>In this case, I take the 
   <a href="https://www.uniprot.org/uniprotkb/A2VEY9/entry#structure">A2VEY9</a> as the example. Its 3D view is 
   <a href="https://alphafold.ebi.ac.uk/entry/A2VEY9">here</a></p>
-<h2 id="step0-labaries">
-  Step0: Labaries
-  <a class="anchor" href="#step0-labaries">#</a>
+<h2 id="step0-labaries-and-helpful-tools">
+  Step0: Labaries and Helpful tools
+  <a class="anchor" href="#step0-labaries-and-helpful-tools">#</a>
 </h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> biopandas.pdb <span style="color:#f92672">import</span> PandasPdb
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> chain
@@ -334,6 +334,56 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> plotly.express <span style="color:#66d9ef">as</span> px
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> plotly.graph_objects <span style="color:#66d9ef">as</span> go
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> KMeans
+</span></span></code></pre></div><blockquote class="book-hint warning">
+  I also programmed some helpful tools for computations. We could leave them here, and when these tools are used, we could come back and check them.
+</blockquote>
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">residue_remove</span>(pdbfile, remove_ids, outputName):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Remove residues based on positions.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assumption: pdbfile only has A chain
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    residue_to_remove <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pdb_io <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBIO()
+</span></span><span style="display:flex;"><span>    pdb_parser <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBParser()
+</span></span><span style="display:flex;"><span>    structure <span style="color:#f92672">=</span> pdb_parser<span style="color:#f92672">.</span>get_structure(<span style="color:#e6db74">&#34; &#34;</span>, pdbfile)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> structure[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    chain <span style="color:#f92672">=</span> model[<span style="color:#e6db74">&#34;A&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> residue <span style="color:#f92672">in</span> chain:
+</span></span><span style="display:flex;"><span>        id <span style="color:#f92672">=</span> residue<span style="color:#f92672">.</span>id
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> id[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">in</span> remove_ids: 
+</span></span><span style="display:flex;"><span>            residue_to_remove<span style="color:#f92672">.</span>append(residue<span style="color:#f92672">.</span>id)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> residue <span style="color:#f92672">in</span> residue_to_remove:
+</span></span><span style="display:flex;"><span>        chain<span style="color:#f92672">.</span>detach_child(residue)
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>set_structure(structure)
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>save(outputName)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_resnum</span>(pdbfile):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    🌟 CHANGE RESIDUE NUMBER from discrete position IDs to continuous position IDs
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assumption: pdbfile only has A chain
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    pdb_io <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBIO()
+</span></span><span style="display:flex;"><span>    pdb_parser <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBParser()
+</span></span><span style="display:flex;"><span>    structure <span style="color:#f92672">=</span> pdb_parser<span style="color:#f92672">.</span>get_structure(<span style="color:#e6db74">&#34; &#34;</span>, pdbfile)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> structure[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    chain <span style="color:#f92672">=</span> model[<span style="color:#e6db74">&#34;A&#34;</span>]
+</span></span><span style="display:flex;"><span>    print(len([i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> chain<span style="color:#f92672">.</span>get_residues()]))
+</span></span><span style="display:flex;"><span>    new_resnums <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>len([i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> chain<span style="color:#f92672">.</span>get_residues()])))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, residue <span style="color:#f92672">in</span> enumerate(chain<span style="color:#f92672">.</span>get_residues()):
+</span></span><span style="display:flex;"><span>        res_id <span style="color:#f92672">=</span> list(residue<span style="color:#f92672">.</span>id)
+</span></span><span style="display:flex;"><span>        res_id[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> new_resnums[i]
+</span></span><span style="display:flex;"><span>        residue<span style="color:#f92672">.</span>id <span style="color:#f92672">=</span> tuple(res_id)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>set_structure(structure)
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>save(pdbfile<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;pdb&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_update_resnum.pdb&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
 </span></span></code></pre></div><h2 id="step1-load-the-target-protein">
   Step1: Load the target protein.
   <a class="anchor" href="#step1-load-the-target-protein">#</a>
@@ -350,7 +400,7 @@ https://github.com/alex-shpak/hugo-book
   Step2: Truncate target protein
   <a class="anchor" href="#step2-truncate-target-protein">#</a>
 </h2>
-<p>For example, I want to <strong>remove AAs with very low pLDDT and AAs who are located in the cell membrane</strong>. By selecting the most big dark green area, we exclude AAs with very low pLDDT score from highlighted areas. We collect positions of AAs with very low pLDDT are (1, 2, 336-693).</p>
+<p>For example, I want to <strong>remove AAs with very low pLDDT and AAs who are located in the cell membrane</strong>. By selecting the most big dark green area, we exclude AAs with very low pLDDT score from highlighted areas. We collect positions of AAs with very low pLDDT are (1-13, 336-693).</p>
 <center><figure><img src="../bioIMG/fig1.PNG"
          alt="https://alphafold.ebi.ac.uk/entry/A2VEY9" width="600"/><figcaption>
             <p><a href="https://alphafold.ebi.ac.uk/entry/A2VEY9">https://alphafold.ebi.ac.uk/entry/A2VEY9</a></p>
@@ -366,9 +416,21 @@ https://github.com/alex-shpak/hugo-book
 </figure>
 </center>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># truncating ids</span>
-</span></span><span style="display:flex;"><span>truncating_ids <span style="color:#f92672">=</span> set([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>]<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">336</span>,<span style="color:#ae81ff">694</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">43</span>,<span style="color:#ae81ff">64</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">72</span>,<span style="color:#ae81ff">93</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">191</span>,<span style="color:#ae81ff">212</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">233</span>,<span style="color:#ae81ff">254</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">347</span>,<span style="color:#ae81ff">368</span>)))
-</span></span><span style="display:flex;"><span>len(truncating_ids) <span style="color:#75715e">#=444</span>
-</span></span></code></pre></div></article>
+</span></span><span style="display:flex;"><span>truncating_ids <span style="color:#f92672">=</span> set(list(range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">14</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">336</span>,<span style="color:#ae81ff">694</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">43</span>,<span style="color:#ae81ff">64</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">72</span>,<span style="color:#ae81ff">93</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">191</span>,<span style="color:#ae81ff">212</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">233</span>,<span style="color:#ae81ff">254</span>))<span style="color:#f92672">+</span>list(range(<span style="color:#ae81ff">347</span>,<span style="color:#ae81ff">368</span>)))
+</span></span><span style="display:flex;"><span>len(truncating_ids) <span style="color:#75715e">#=455</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>residue_remove(pdbfile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;AF-A2VEY9-F1-model_v4.pdb&#34;</span>, 
+</span></span><span style="display:flex;"><span>               remove_ids<span style="color:#f92672">=</span>truncating_ids, 
+</span></span><span style="display:flex;"><span>               outputName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;truncation.pdb&#34;</span>)
+</span></span></code></pre></div><p>Let&rsquo;s check this truncated protein in 
+  <a href="https://pymol.org/">PyMol</a>!</p>
+<center><figure><img src="../bioIMG/fig3.PNG"
+         alt="Original protein (red) and Truncated protein(green)" width="800"/><figcaption>
+            <p>Original protein (red) and Truncated protein(green)</p>
+        </figcaption>
+</figure>
+</center>
+</article>
  
       
 
@@ -416,7 +478,7 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#step0-labaries">Step0: Labaries</a></li>
+    <li><a href="#step0-labaries-and-helpful-tools">Step0: Labaries and Helpful tools</a></li>
     <li><a href="#step1-load-the-target-protein">Step1: Load the target protein.</a></li>
     <li><a href="#step2-truncate-target-protein">Step2: Truncate target protein</a></li>
   </ul>

@@ -10,7 +10,7 @@ In this blog, I want to make notes on how I design the binder of the target prot
 
 In this case, I take the [A2VEY9](https://www.uniprot.org/uniprotkb/A2VEY9/entry#structure) as the example. Its 3D view is [here](https://alphafold.ebi.ac.uk/entry/A2VEY9)
 
-## Step0: Labaries
+## Step0: Labaries and Helpful tools
 ```python
 from biopandas.pdb import PandasPdb
 from itertools import chain
@@ -21,7 +21,61 @@ import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.cluster import KMeans
 ```
+{{< hint warning >}}
+I also programmed some helpful tools for computations. We could leave them here, and when these tools are used, we could come back and check them.
+{{< /hint >}}
+```python
+def residue_remove(pdbfile, remove_ids, outputName):
+    """
+    Remove residues based on positions.
+    Assumption: pdbfile only has A chain
+    """
+    residue_to_remove = []
 
+    pdb_io = PDB.PDBIO()
+    pdb_parser = PDB.PDBParser()
+    structure = pdb_parser.get_structure(" ", pdbfile)
+
+    model = structure[0]
+    chain = model["A"]
+
+    for residue in chain:
+        id = residue.id
+        if id[1] in remove_ids: 
+            residue_to_remove.append(residue.id)
+
+    for residue in residue_to_remove:
+        chain.detach_child(residue)
+    pdb_io.set_structure(structure)
+    pdb_io.save(outputName)
+    return 
+```
+
+```python
+def update_resnum(pdbfile):
+    """
+    🌟 CHANGE RESIDUE NUMBER from discrete position IDs to continuous position IDs
+    Assumption: pdbfile only has A chain
+    """
+    pdb_io = PDB.PDBIO()
+    pdb_parser = PDB.PDBParser()
+    structure = pdb_parser.get_structure(" ", pdbfile)
+
+    model = structure[0]
+    chain = model["A"]
+    print(len([i for i in chain.get_residues()]))
+    new_resnums = list(range(1, 1+len([i for i in chain.get_residues()])))
+
+    for i, residue in enumerate(chain.get_residues()):
+        res_id = list(residue.id)
+        res_id[1] = new_resnums[i]
+        residue.id = tuple(res_id)
+
+    pdb_io.set_structure(structure)
+    pdb_io.save(pdbfile.split('pdb')[0] + '_update_resnum.pdb')
+    return
+
+```
 
 ## Step1: Load the target protein.
 The pdb file can be downloaded [here](https://alphafold.ebi.ac.uk/entry/A2VEY9).
@@ -33,7 +87,7 @@ target_df = target_pdb.df['ATOM']
 <center>{{<figure src="../bioIMG/df1.PNG" >}}</center>
 
 ## Step2: Truncate target protein
-For example, I want to **remove AAs with very low pLDDT and AAs who are located in the cell membrane**. By selecting the most big dark green area, we exclude AAs with very low pLDDT score from highlighted areas. We collect positions of AAs with very low pLDDT are (1, 2, 336-693).
+For example, I want to **remove AAs with very low pLDDT and AAs who are located in the cell membrane**. By selecting the most big dark green area, we exclude AAs with very low pLDDT score from highlighted areas. We collect positions of AAs with very low pLDDT are (1-13, 336-693).
 
 <center>{{<figure src="../bioIMG/fig1.PNG" width="600" caption="https://alphafold.ebi.ac.uk/entry/A2VEY9" >}}</center>
 
@@ -42,6 +96,14 @@ At the same time, we can collecr positions of AAs who are located in the transme
 
 ```python
 # truncating ids
-truncating_ids = set([1,2]+list(range(336,694))+list(range(43,64))+list(range(72,93))+list(range(191,212))+list(range(233,254))+list(range(347,368)))
-len(truncating_ids) #=444
+truncating_ids = set(list(range(1,14))+list(range(336,694))+list(range(43,64))+list(range(72,93))+list(range(191,212))+list(range(233,254))+list(range(347,368)))
+len(truncating_ids) #=455
+
+residue_remove(pdbfile="AF-A2VEY9-F1-model_v4.pdb", 
+               remove_ids=truncating_ids, 
+               outputName="truncation.pdb")
 ```
+Let's check this truncated protein in [PyMol](https://pymol.org/)!
+<center>{{<figure src="../bioIMG/fig3.PNG" width="800" caption="Original protein (red) and Truncated protein(green)" >}}</center>
+
+
