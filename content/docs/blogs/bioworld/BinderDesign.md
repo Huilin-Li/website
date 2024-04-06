@@ -77,6 +77,21 @@ def update_resnum(pdbfile):
 
 ```
 
+```python
+# distance calculation
+def dist_to_plane(p, p0, p1, p2):
+    """
+    Distance from point p to the plane determined by three points (p0, p1, p2)
+    """
+    u = p1 - p0
+    v = p2 - p0
+    # vector normal to plane
+    n = np.cross(u, v)
+    n /= np.linalg.norm(n)
+    p_ = p - p0
+    dist_to_plane = np.dot(p_, n)
+    return dist_to_plane
+```
 ## Step1: Load the target protein.
 The pdb file can be downloaded [here](https://alphafold.ebi.ac.uk/entry/A2VEY9).
 ```python
@@ -103,7 +118,7 @@ residue_remove(pdbfile="AF-A2VEY9-F1-model_v4.pdb",
                remove_ids=truncating_ids, 
                outputName="truncation.pdb")
 ```
-Let's check this truncated protein in [PyMol](https://pymol.org/)!
+Let's check this truncated protein in [PyMol](https://pymol.org/)! We can see that the original protein becomes two much smaller parts, but these two parts are more robust to analysis in next steps.
 <center>{{<figure src="../bioIMG/fig3.PNG" width="800" caption="Original protein (red) and Truncated protein(green)" >}}</center>
 
-
+## Step2. Visualize truncation.pdb with only 𝐶𝛽 ATOM
