@@ -105,16 +105,5 @@ theme = ['osm', 'hugo-book']
   # (Optional, experimental, default false) Enables a drop-down menu for translations only if a translation is present.
   BookTranslatedOnly = false
 
-  [params.giscus]
-    repo = "Huilin-Li/Blogs"
-    repoID = "R_kgDOGzJrfg"
-    category = "Articles"
-    categoryID = "DIC_kwDOGzJrfs4CP2TM"
-    mapping = "og:title"
-    reactionsEnabled = "1"
-    emitMetadata = "0"
-    inputPosition = "bottom"
-    theme = "light"
-    lang = "en"
-    loading = "lazy"
-
+  giscusTheme="preferred_color_scheme"
+  disableComments=false
