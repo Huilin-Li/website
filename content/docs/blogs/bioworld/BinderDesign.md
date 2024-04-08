@@ -1,6 +1,7 @@
 ---
 title: TP Binder Design
 weight: 1
+plotly: true
 ---
 # Binder Design
 In this blog, I want to make notes on how I design the binder of the target protein using [RFdiffusion](https://github.com/RosettaCommons/RFdiffusion), [ProteinMPNN-FastRelax](https://github.com/nrbennet/dl_binder_design/tree/main) and so on.
@@ -22,7 +23,7 @@ import plotly.graph_objects as go
 from sklearn.cluster import KMeans
 ```
 {{< hint warning >}}
-I also programmed some helpful tools for computations. We could leave them here, and when these tools are used, we could come back and check them.
+I also programmed some helpful tools for computations. We could leave them here, and when these tools are used, we come back and check them.
 {{< /hint >}}
 ```python
 def residue_remove(pdbfile, remove_ids, outputName):
@@ -78,10 +79,12 @@ def update_resnum(pdbfile):
 ```
 
 ```python
-# distance calculation
-def dist_to_plane(p, p0, p1, p2):
+def point_to_plane_dist(p, p0, p1, p2):
     """
-    Distance from point p to the plane determined by three points (p0, p1, p2)
+    The distance from point p to the plane determined by three points (p0, p1, p2)
+    :param p: point p
+    :param p0, p1, p2: three points determine one plane
+    :return: the distance between point to plane
     """
     u = p1 - p0
     v = p2 - p0
@@ -91,6 +94,7 @@ def dist_to_plane(p, p0, p1, p2):
     p_ = p - p0
     dist_to_plane = np.dot(p_, n)
     return dist_to_plane
+
 ```
 ## Step1: Load the target protein.
 The pdb file can be downloaded [here](https://alphafold.ebi.ac.uk/entry/A2VEY9).
@@ -106,7 +110,7 @@ For example, I want to **remove AAs with very low pLDDT and AAs who are located 
 
 <center>{{<figure src="../bioIMG/fig1.PNG" width="600" caption="https://alphafold.ebi.ac.uk/entry/A2VEY9" >}}</center>
 
-At the same time, we can collecr positions of AAs who are located in the transmembrane parts from *Subcellular Location* section [here](https://www.uniprot.org/uniprotkb/A2VEY9/entry#subcellular_location).
+At the same time, we can get positions of AAs who are located in the transmembrane parts from *Subcellular Location* section [here](https://www.uniprot.org/uniprotkb/A2VEY9/entry#subcellular_location).
 <center>{{<figure src="../bioIMG/fig2.PNG" width="800" caption="https://www.uniprot.org/uniprotkb/A2VEY9/entry#subcellular_location" >}}</center>
 
 ```python
@@ -121,4 +125,29 @@ residue_remove(pdbfile="AF-A2VEY9-F1-model_v4.pdb",
 Let's check this truncated protein in [PyMol](https://pymol.org/)! We can see that the original protein becomes two much smaller parts, but these two parts are more robust to analysis in next steps.
 <center>{{<figure src="../bioIMG/fig3.PNG" width="800" caption="Original protein (red) and Truncated protein(green)" >}}</center>
 
-## Step2. Visualize truncation.pdb with only 𝐶𝛽 ATOM
+## Step3. Visualize truncation.pdb with only 𝐶𝛽 ATOM
+Here, we take 𝐶𝛽 ATOM as the represent of each AA. 
+```python
+truncation = PandasPdb().read_pdb("truncation.pdb")
+cols = ["atom_name", "residue_name", "residue_number", "x_coord", "y_coord", "z_coord"]
+df = truncation.df["ATOM"][cols]
+df_CB = df[df["atom_name"]=="CB"]
+# visualization
+fig = go.Figure(data=[go.Scatter3d(x=df_CB["x_coord"],
+                                   y=df_CB["y_coord"],
+                                   z=df_CB["z_coord"],
+                                   name="",
+                                   hoverinfo="text",
+                                   hovertext=df_CB["residue_number"],
+                                   mode="markers",
+                                   marker=dict(color="gray", size=5))])
+fig.update_layout(
+    width=1100,
+    height=1100,
+    margin=dict(l=0, r=0, b=0, t=0),
+    scene=dict(xaxis_title='x coord', yaxis_title='y coord', zaxis_title='z coord'))
+fig.show()
+```
+
+{{<load-plotly >}} {{<plotly json="/fig.json" height="300px" >}}
+

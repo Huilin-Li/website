@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=53700&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Shell Commands#How to discard changes in VScode?#Navigate to reporsitory (has .github folder) with changes. Then, git restore &lt;file&gt; ">
+<meta name="description" content="Bash Scripts#How to discard changes in VScode?#Navigate to reporsitory (has .github folder) with changes. Then, git restore &lt;file&gt; Activate conda environment in bash script#source ~/miniconda3/etc/profile.d/conda.sh conda activate ENV SBATCH Array jobs##SBATCH -J array-job	#SBATCH -a 1-3 #SBATCH -o array-job.%A.%a.log id_list=&#34;./id_list.txt&#34; id=`head -n $SLURM ARRAY TASK ID $id_list | tail -n 1` python3 script.py -in $id ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="Shell Commands" />
-<meta property="og:description" content="Shell Commands#How to discard changes in VScode?#Navigate to reporsitory (has .github folder) with changes. Then, git restore &lt;file&gt; " />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Bash Scripts" />
+<meta property="og:description" content="Bash Scripts#How to discard changes in VScode?#Navigate to reporsitory (has .github folder) with changes. Then, git restore &lt;file&gt; Activate conda environment in bash script#source ~/miniconda3/etc/profile.d/conda.sh conda activate ENV SBATCH Array jobs##SBATCH -J array-job	#SBATCH -a 1-3 #SBATCH -o array-job.%A.%a.log id_list=&#34;./id_list.txt&#34; id=`head -n $SLURM ARRAY TASK ID $id_list | tail -n 1` python3 script.py -in $id " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:53700/docs/blogs/shell/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:1313/docs/blogs/shell/" /><meta property="article:section" content="docs" />
 
 
 
-<title>Shell Commands | Huilin Li</title>
+<title>Bash Scripts | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:53700/docs/blogs/shell/">
+<link rel="canonical" href="http://localhost:1313/docs/blogs/shell/">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.690c10f8594a6ff34dc0766b85f303bc6c1226e0a0a7d92c5362c26efaffcc09.js" integrity="sha256-aQwQ&#43;FlKb/NNwHZrhfMDvGwSJuCgp9ksU2LCbvr/zAk=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.e9f4f06d9437c3c31e9d2cd69488ee6a0a436eeaa7ce22eb55dbd83a9a27ab80.js" integrity="sha256-6fTwbZQ3w8MenSzWlIjuagpDbuqnziLrVdvYOponq4A=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -192,7 +192,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/blogs/shell/" class="active">Shell Commands</a>
+    <a href="/docs/blogs/shell/" class="active">Bash Scripts</a>
   
 
         </li>
@@ -269,7 +269,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Shell Commands</strong>
+  <strong>Bash Scripts</strong>
 
   <label for="toc-control">
     
@@ -286,6 +286,8 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#how-to-discard-changes-in-vscode">How to discard changes in VScode?</a></li>
+    <li><a href="#activate-conda-environment-in-bash-script">Activate conda environment in bash script</a></li>
+    <li><a href="#sbatch-array-jobs">SBATCH Array jobs</a></li>
   </ul>
 </nav>
 
@@ -298,9 +300,9 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="shell-commands">
-  Shell Commands
-  <a class="anchor" href="#shell-commands">#</a>
+  <article class="markdown book-article"><h1 id="bash-scripts">
+  Bash Scripts
+  <a class="anchor" href="#bash-scripts">#</a>
 </h1>
 <h2 id="how-to-discard-changes-in-vscode">
   How to discard changes in VScode?
@@ -311,7 +313,24 @@ https://github.com/alex-shpak/hugo-book
          alt=" "/>
 </figure>
 </p>
-</article>
+<h2 id="activate-conda-environment-in-bash-script">
+  Activate conda environment in bash script
+  <a class="anchor" href="#activate-conda-environment-in-bash-script">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>source ~/miniconda3/etc/profile.d/conda.sh
+</span></span><span style="display:flex;"><span>conda activate ENV
+</span></span></code></pre></div><h2 id="sbatch-array-jobs">
+  SBATCH Array jobs
+  <a class="anchor" href="#sbatch-array-jobs">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>#SBATCH -J array-job					
+</span></span><span style="display:flex;"><span>#SBATCH -a 1-3
+</span></span><span style="display:flex;"><span>#SBATCH -o array-job.%A.%a.log
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>id_list=&#34;./id_list.txt&#34;
+</span></span><span style="display:flex;"><span>id=`head -n $SLURM ARRAY TASK ID $id_list | tail -n 1`
+</span></span><span style="display:flex;"><span>python3 script.py -in $id
+</span></span></code></pre></div></article>
  
       
 
@@ -360,6 +379,8 @@ https://github.com/alex-shpak/hugo-book
 <nav id="TableOfContents">
   <ul>
     <li><a href="#how-to-discard-changes-in-vscode">How to discard changes in VScode?</a></li>
+    <li><a href="#activate-conda-environment-in-bash-script">Activate conda environment in bash script</a></li>
+    <li><a href="#sbatch-array-jobs">SBATCH Array jobs</a></li>
   </ul>
 </nav>
 

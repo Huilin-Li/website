@@ -137,4 +137,3 @@ I am also trying other comment tools, and let's see which one is more suitable.
 
  ## Thanks!
  Really appreciate your time for reading my blog, and bless you enjoy your day! If you have any suggestions or comments, please leave them below! (You don't need to login to post😉, feel free to add posts.)
- {{<chat hugo>}}
