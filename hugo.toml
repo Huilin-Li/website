@@ -104,6 +104,26 @@ theme = ['osm', 'hugo-book']
   # /!\ This is an experimental feature, might be removed or changed at any time
   # (Optional, experimental, default false) Enables a drop-down menu for translations only if a translation is present.
   BookTranslatedOnly = false
+  [params.page.comment.giscus]   
+    # 你可以参考官方文档来使用下列配置   
+    enable = true   
+    repo = "Huilin-Li/COMMENTS-STORAGE"   
+    repoId = "R_kgDOLrRUFQ"   
+    category = "General"   
+    categoryId = "DIC_kwDOLrRUFc4Ceice"   
+    # <your_repo> 对应官网的 data-repo   
+    # <your_repoId> 对应官网的 data-repo-id   
+    # <your_category> 对应官网的 data-category   
+    # <your_categoryId> 对应官网的 data-category-id
 
-  giscusTheme="preferred_color_scheme"
-  disableComments=false
+    # 为空时自动适配当前主题 i18n 配置   
+    lang = ""   
+    mapping = "og:title"   
+    # <your_mapping> 对应官网的 data-mapping   
+    reactionsEnabled = "1"   
+    emitMetadata = "0"   
+    inputPosition = "bottom"   
+    lazyLoading = false   
+    lightTheme = "light"   
+    darkTheme = "dark_dimmed"
+
