@@ -111,18 +111,7 @@ initComments({
 </script>
 ```
 6. Add the chat comment section to post. 
-```
-{{</* chat cactus-comments */>}}
-```
-The **cactus-comments** is the name that will be shown in your cactus chat website. For example, my case `{{</* chat test */>}}`, so my cactus chat website is like
 
-7. Let us test! 
- {{<chat test>}}
-
-{{< hint warning >}}
-**NOTE**  
-I am also trying other comment tools, and let's see which one is more suitable.
-{{< /hint >}}
 
 
 
