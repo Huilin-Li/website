@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Protein on Huilin Li</title>
-    <link>http://localhost:49612/tags/protein/</link>
+    <link>http://localhost:1313/tags/protein/</link>
     <description>Recent content in Protein on Huilin Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:49612/tags/protein/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/protein/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>4 levels of protein structure</title>
-      <link>http://localhost:49612/posts/proteinstruture/</link>
+      <link>http://localhost:1313/posts/proteinstruture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49612/posts/proteinstruture/</guid>
+      <guid>http://localhost:1313/posts/proteinstruture/</guid>
       <description>There are four levels of protein structure: primary, secondary, tertiary and quaternary.&#xA;Primary Structure.&#xD;#&#xD;A protein’s primary structure is the unique sequence of amino acids in each polypeptide chain that makes up the protein.&#xA;fasta file sequence of 20 amino acids Secondary Structure&#xD;#&#xD;Reference:&#xD;#&#xD;3.9: Proteins - Protein Structure </description>
     </item>
   </channel>
