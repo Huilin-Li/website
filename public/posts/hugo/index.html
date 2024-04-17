@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49612&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Introduction#Some commands and issues you might want to know when building a website, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.
+How to insert images and resize and center images?#The file tree is like
+├─content│ │ _index.md│ ││ └─posts│ │ hugo.md│ │ _index.md│ ││ └─images│ Nice.png In hugo.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Hugo commands" />
+<meta property="og:description" content="Introduction#Some commands and issues you might want to know when building a website, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.
+How to insert images and resize and center images?#The file tree is like
+├─content│ │ _index.md│ ││ └─posts│ │ hugo.md│ │ _index.md│ ││ └─images│ Nice.png In hugo." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:49612/posts/hugo/" /><meta property="article:section" content="posts" />
+
+
+
+<title>Hugo commands | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:49612/posts/hugo/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.812a13f5f9a1d077a3cf0564e46425a14d1f44180c38b8e6b08d42d0e7648ebe.js" integrity="sha256-gSoT9fmh0HejzwVk5GQloU0fRBgMOLjmsI1C0Odkjr4=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
+    <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
+      <a role="button" class="">project</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6b2297e97d707e7ee14411430da62d58" class="toggle"  />
+    <label for="section-6b2297e97d707e7ee14411430da62d58" class="flex justify-between">
+      <a role="button" class="">binder design</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/binderdesign/" class="">Binder Design</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.goodreads.com/review/list/177314441"  target="_blank" rel="noopener">
+        goodreads
+      </a>
+  </li>
+  
+  <li>
+    <a href="/links/"  >
+        world
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Hugo commands</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#images">How to insert images and resize and center images?</a></li>
+    <li><a href="#emoji">How to add emoji?</a></li>
+    <li><a href="#map">How to add a travel map in Hugo?</a></li>
+    <li><a href="#update">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
+    <li><a href="#link">How to link pages and tiles?</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/hugo/">Hugo commands</a>
+  </h1>
+  
+
+
+  
+  <div>
+    
+      <a href="/categories/hugo/">Hugo</a>
+  </div>
+  
+
+  
+  <div>
+    
+      <a href="/tags/hugo/">Hugo</a>
+  </div>
+  
+
+
+
+<h1 id="introduction">
+  Introduction
+  <a class="anchor" href="#introduction">#</a>
+</h1>
+<p>Some commands and issues you might want to know when building a website, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.</p>
+<h2 id="images">
+  How to insert images and resize and center images?
+  <a class="anchor" href="#images">#</a>
+</h2>
+<p>The file tree is like</p>
+<pre tabindex="0"><code>    ├─content
+    │  │  _index.md
+    │  │
+    │  └─posts
+    │      │  hugo.md
+    │      │  _index.md
+    │      │
+    │      └─images
+    │           Nice.png
+</code></pre><p>In <code>hugo.md</code> file, we add Nice.png and scale it by</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span>
+</span></span></code></pre></div><figure><img src="../images/Nice.png"
+         alt=" " width="400"/>
+</figure>
+
+<blockquote>
+<p>Why we need to add <code>../</code> in front of <code>images</code> folder, altough <code>hugo.md</code> file and <code>images</code> folder are at the same level?
+Because Hugo system sees <code>hugo.md</code> as a foler too. However, Hugo system sees <code>_index.md</code> as a file! Therefore, If we want to insert iamges in <code>_index.md</code> file, the command will be like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span>
+</span></span></code></pre></div></blockquote>
+<blockquote class="book-hint warning">
+  <p><strong>Center the image?</strong></p>
+<pre tabindex="0"><code>&lt;center&gt;{ {&lt;figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34;&gt;} }&lt;/center&gt;
+</code></pre><p>At the same time, in <code>hugo.toml</code>, add</p>
+<pre tabindex="0"><code>[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+</code></pre>
+</blockquote>
+
+<h2 id="emoji">
+  How to add emoji?
+  <a class="anchor" href="#emoji">#</a>
+</h2>
+<p>Directly copy emoji icon 👋 and paste to <code>.md</code> file, instead of using <code>:wave:</code>.</p>
+<blockquote>
+<p>Emoji Cheat Sheet:
+
+  <a href="https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md">https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md</a></p>
+</blockquote>
+<h2 id="map">
+  How to add a travel map in Hugo?
+  <a class="anchor" href="#map">#</a>
+</h2>
+<p>Refer to 
+  <a href="https://www.thecoffeemachine.net/writing/adding-maps-to-hugo-blogs-with-osm/">this article</a></p>
+<blockquote>
+<p><strong><em>NOTE:</em></strong><br>
+In <code>{{&lt; openstreetmap mapName=&quot;&lt;your map name&gt;&quot; &gt;}}</code>, the <code>&lt;your map name&gt;</code> is not the name you give to your map, but the name in the website link of your map. For example, I created a map whose name is <strong>Travel</strong>, I need to use <strong>travel_1036974</strong> in the hugo shortcode.
+<figure><img src="../images/map.jpeg"
+         alt="umap" width="400"/>
+</figure>
+</p>
+</blockquote>
+<h2 id="update">
+  Why my local website doesn&rsquo;t update after I update my markdown files?
+  <a class="anchor" href="#update">#</a>
+</h2>
+<p>Good question. I also find my local website does not update although I have save my changes. I am not clear the excat reason, but It works well if I <code>Pree Ctrl+C to stop</code> the local host, and <code>hugo server</code> again, I can see the updated website in <code>http://localhost:1313/</code>.</p>
+<h2 id="link">
+  How to link pages and tiles?
+  <a class="anchor" href="#link">#</a>
+</h2>
+<p>I am in <code>now.md</code> file now, and there is another <code>page.md</code> which has <code>#Title I want to link</code>. I want to link to <code>page.md</code> and link to <code>#Title I want to link</code>.
+In <code>page.md</code> file, add an anchor:</p>
+<pre tabindex="0"><code class="language-tp1" data-lang="tp1"># Title I want to link {#anchor}
+</code></pre><p>In <code>now.md</code> file, add commands:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>[text] ( <span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">ref</span> <span style="color:#e6db74">&#34;./pages.md&#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span> ) # link to one page
+</span></span><span style="display:flex;"><span>[text] ( <span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">ref</span> <span style="color:#e6db74">&#34;./pages.md#anchor&#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span> ) # link to the title
+</span></span></code></pre></div><h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ol>
+<li>
+  <a href="https://hugo-book-demo.netlify.app/docs/shortcodes/hints/">hugo book demo</a></li>
+<li>
+  <a href="https://hongmao.run/blog/post/010-hugo-book/">【Hugo】hugo-book主题使用</a></li>
+<li>
+  <a href="https://lysandert.github.io/posts/blog/blog_insert_pic/">hugo博客 文内插入图片</a></li>
+<li>
+  <a href="https://discourse.gohugo.io/t/how-to-render-markdown-url-with-md-to-correct-link/26372">How to render markdown url with .md to correct link</a></li>
+<li>
+  <a href="https://stackoverflow.com/questions/33225067/linking-pages-in-hugo-markdown">Linking pages in Hugo/markdown</a></li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/posts/hugo.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#images">How to insert images and resize and center images?</a></li>
+    <li><a href="#emoji">How to add emoji?</a></li>
+    <li><a href="#map">How to add a travel map in Hugo?</a></li>
+    <li><a href="#update">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
+    <li><a href="#link">How to link pages and tiles?</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

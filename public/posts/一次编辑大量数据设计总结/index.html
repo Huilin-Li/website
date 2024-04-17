@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="记录记录#产品下来一个需求，是做一个价格策略功能，流程大概是建立一个策略，然后添加一批商品，对这些商品进行设置规则。
+在分析的时候，发现一个问题，产品上需要对一批商品数据进行编辑，全部编辑完成之后才保存，编辑完成之后也可能丢弃。
+问题是这一批数据有可能会很大，达到10几万的数据，不能让前端全部拉下来，编辑完成后，再一次传给后端保存。拉取全部数据，会对服务端造成很大压力，还可能造成内存问题，同时前端一次发送大量数据给后端保存也是有问题的，一是传输问题，大量数据网络传输慢，二是后端处理问题，需要处理大量数据，再一次性保存到数据库，整个流程下来是会占用了大量时间，接口请求很慢；从用户端体验来说，是功能卡顿。
+只能再想想其他方案，按照以前的操作，编辑第一页数据，保存下来，接着对下一页进行编辑，再保存。这种方式一次请求和操作的数据量不多，请求和响应上是没有什么问题，但是编辑完一页就保存，达不到产品上的效果，一次编辑完所有的商品，编辑完后再保存。
+所以，我在想如果一次请求少量数据，最后又是一次性保存编辑后的结果，那就达到我们的要求。
+顺着这个思路，如果使用一个中间表把这些操作数据转移到服务端，先不保存，等全部编辑完成后再保存，是不是就可以达到这个效果，每一页修改的数据都暂存在这里，最后保存时再一起保存上去，在回显时，也优化回显编辑后的数据，这样就达到了可以一次编辑几百页，最后再一起保存，在性能上又没有什么问题。
+当然，这样做还有一个问题，那就是在编辑时，会保存一个临时数据，如果我们每次都只是修改，没有进行保存，那表上的临时数据会产生很多，所以这里也需要做一个数据清理操作，也就是每天、或者每个小时清理一下没用的数据。">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="一次编辑大量数据设计总结" />
+<meta property="og:description" content="记录记录#产品下来一个需求，是做一个价格策略功能，流程大概是建立一个策略，然后添加一批商品，对这些商品进行设置规则。
+在分析的时候，发现一个问题，产品上需要对一批商品数据进行编辑，全部编辑完成之后才保存，编辑完成之后也可能丢弃。
+问题是这一批数据有可能会很大，达到10几万的数据，不能让前端全部拉下来，编辑完成后，再一次传给后端保存。拉取全部数据，会对服务端造成很大压力，还可能造成内存问题，同时前端一次发送大量数据给后端保存也是有问题的，一是传输问题，大量数据网络传输慢，二是后端处理问题，需要处理大量数据，再一次性保存到数据库，整个流程下来是会占用了大量时间，接口请求很慢；从用户端体验来说，是功能卡顿。
+只能再想想其他方案，按照以前的操作，编辑第一页数据，保存下来，接着对下一页进行编辑，再保存。这种方式一次请求和操作的数据量不多，请求和响应上是没有什么问题，但是编辑完一页就保存，达不到产品上的效果，一次编辑完所有的商品，编辑完后再保存。
+所以，我在想如果一次请求少量数据，最后又是一次性保存编辑后的结果，那就达到我们的要求。
+顺着这个思路，如果使用一个中间表把这些操作数据转移到服务端，先不保存，等全部编辑完成后再保存，是不是就可以达到这个效果，每一页修改的数据都暂存在这里，最后保存时再一起保存上去，在回显时，也优化回显编辑后的数据，这样就达到了可以一次编辑几百页，最后再一起保存，在性能上又没有什么问题。
+当然，这样做还有一个问题，那就是在编辑时，会保存一个临时数据，如果我们每次都只是修改，没有进行保存，那表上的临时数据会产生很多，所以这里也需要做一个数据清理操作，也就是每天、或者每个小时清理一下没用的数据。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/%E4%B8%80%E6%AC%A1%E7%BC%96%E8%BE%91%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-23T14:44:09+08:00" />
+<meta property="article:modified_time" content="2023-08-23T14:44:09+08:00" />
+
+<title>一次编辑大量数据设计总结 | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/posts/%E4%B8%80%E6%AC%A1%E7%BC%96%E8%BE%91%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.86af72ebcfd9cc69d8906710e66fef4c779a9978224cda6ecbb64f2332a2e15e.js" integrity="sha256-hq9y68/ZzGnYkGcQ5m/vTHeamXgiTNpuy7ZPIzKi4V4=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
+    <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
+      <a role="button" class="">Projects</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/project/me/" class="">Keep Things Simple</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Blog</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/bioworld/" class="">Biology World</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/bioworld/binderdesign/" class="">TP Binder Design</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/bioworld/proteinstruture/" class="">4 levels of protein structure</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/hugo/" class="">Hugo</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/hugo/hugobookgithubaction/" class="">HugoBook&#43;GithubAction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/hugo/hugo/" class="">Hugo Commands</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/shell/" class="">Bash Scripts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>literature</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>Plotly</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/plotly/examples/" class="">Visualization via plotly</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/project/travel/" class="">World</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blogs
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.goodreads.com/review/list/177314441"  target="_blank" rel="noopener">
+        goodreads
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>一次编辑大量数据设计总结</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#记录记录">记录记录</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/%E4%B8%80%E6%AC%A1%E7%BC%96%E8%BE%91%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE%E8%AE%BE%E8%AE%A1%E6%80%BB%E7%BB%93/">一次编辑大量数据设计总结</a>
+  </h1>
+  
+  <h5>August 23, 2023</h5>
+
+
+
+  
+
+  
+
+
+
+<h2 id="记录记录">
+  记录记录
+  <a class="anchor" href="#%e8%ae%b0%e5%bd%95%e8%ae%b0%e5%bd%95">#</a>
+</h2>
+<p>产品下来一个需求，是做一个价格策略功能，流程大概是建立一个策略，然后添加一批商品，对这些商品进行设置规则。</p>
+<p>在分析的时候，发现一个问题，产品上需要对一批商品数据进行编辑，全部编辑完成之后才保存，编辑完成之后也可能丢弃。</p>
+<p>问题是这一批数据有可能会很大，达到10几万的数据，不能让前端全部拉下来，编辑完成后，再一次传给后端保存。拉取全部数据，会对服务端造成很大压力，还可能造成内存问题，同时前端一次发送大量数据给后端保存也是有问题的，一是传输问题，大量数据网络传输慢，二是后端处理问题，需要处理大量数据，再一次性保存到数据库，整个流程下来是会占用了大量时间，接口请求很慢；从用户端体验来说，是功能卡顿。</p>
+<p>只能再想想其他方案，按照以前的操作，编辑第一页数据，保存下来，接着对下一页进行编辑，再保存。这种方式一次请求和操作的数据量不多，请求和响应上是没有什么问题，但是编辑完一页就保存，达不到产品上的效果，一次编辑完所有的商品，编辑完后再保存。</p>
+<p>所以，我在想如果一次请求少量数据，最后又是一次性保存编辑后的结果，那就达到我们的要求。</p>
+<p>顺着这个思路，如果使用一个中间表把这些操作数据转移到服务端，先不保存，等全部编辑完成后再保存，是不是就可以达到这个效果，每一页修改的数据都暂存在这里，最后保存时再一起保存上去，在回显时，也优化回显编辑后的数据，这样就达到了可以一次编辑几百页，最后再一起保存，在性能上又没有什么问题。</p>
+<p>当然，这样做还有一个问题，那就是在编辑时，会保存一个临时数据，如果我们每次都只是修改，没有进行保存，那表上的临时数据会产生很多，所以这里也需要做一个数据清理操作，也就是每天、或者每个小时清理一下没用的数据。</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/posts/%e4%b8%80%e6%ac%a1%e7%bc%96%e8%be%91%e5%a4%a7%e9%87%8f%e6%95%b0%e6%8d%ae%e8%ae%be%e8%ae%a1%e6%80%bb%e7%bb%93.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#记录记录">记录记录</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

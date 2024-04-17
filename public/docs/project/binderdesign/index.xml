@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>binder design on Huilin Li</title>
+    <link>http://localhost:49612/docs/project/binderdesign/</link>
+    <description>Recent content in binder design on Huilin Li</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:49612/docs/project/binderdesign/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Binder Design</title>
+      <link>http://localhost:49612/docs/project/binderdesign/binderdesign/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:49612/docs/project/binderdesign/binderdesign/</guid>
+      <description>Binder Design&#xD;#&#xD;In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.&#xA;AF-A2VEY9-F1, Alphafold.&#xA;In this case, I take the A2VEY9 as the example. Its 3D view is here&#xA;Step0: Labaries and Helpful tools&#xD;#&#xD;from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly.</description>
+    </item>
+  </channel>
+</rss>

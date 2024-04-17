@@ -3,6 +3,6 @@ title: Introduction
 type: docs
 ---
 
-# Huilin Li
+# Keep Things Simple
 
 

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="堆的回收区域
+新生代（Young Generation）NewSize和MaxNewSize分别可以控制年轻代的初始大小和最大的大小。 老年代（Old Generation）。 永久代（Permanent Generation）【1.8以后采用元空间，不在虚拟机里，而是使用本地内存】。 三大垃圾收集算法
+标记/清除算法 复制算法 标记/整理算法 JVM GC算法
+JVM采用“分代收集算法”对不同区域采用不同的回收算法。 新生代采用复制算法。 老年代采用标记/清除算法或标记/整理算法。 GC过程
+1-2、当new新对象时，Eden空间满了，使用复制算法把存活的对象复制到空的S0(S1)上。 3-4、判断S1中存活对象的年龄值，当年龄值&#43;1达到15时（默认15，可修改），对象将进入老年代，当没有满足时，就复制进去S0中。
+大对象直接进入老年代。 当对象总数大于Survivor（S0/S1）的一半时，也会直接进入老年代。 判断对象是否存活算法 1.引用计数算法 早期判断对象是否存活大多都是以这种算法，这种算法判断很简单，简单来说就是给对象添加一个引用计数器，每当对象被引用一次就加1，引用失效时就减1。当为0的时候就判断对象不会再被引用。
+2.可达性分析算法 它的基本思路是通过一个称为“GC Roots”的对象（局部变量）为起始点，搜索所经过的路径称为引用链，当一个对象到GC Roots没有任何引用跟它连接则证明对象是不可用的。(解决了循环利用)
+Minor GC、Major GC、Full GC
+在年轻代Young space(包括Eden区和Survivor区)中的垃圾回收称之为 Minor GC,Minor GC只会清理年轻代. Major GC清理老年代，但是通常也可以指和Full GC是等价，因为收集老年代的时候往往也会伴随着升级年轻代，收集整个Java堆。 Full GC是对新生代、老年代、永久代统一的回收。 ">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Java Gc" />
+<meta property="og:description" content="堆的回收区域
+新生代（Young Generation）NewSize和MaxNewSize分别可以控制年轻代的初始大小和最大的大小。 老年代（Old Generation）。 永久代（Permanent Generation）【1.8以后采用元空间，不在虚拟机里，而是使用本地内存】。 三大垃圾收集算法
+标记/清除算法 复制算法 标记/整理算法 JVM GC算法
+JVM采用“分代收集算法”对不同区域采用不同的回收算法。 新生代采用复制算法。 老年代采用标记/清除算法或标记/整理算法。 GC过程
+1-2、当new新对象时，Eden空间满了，使用复制算法把存活的对象复制到空的S0(S1)上。 3-4、判断S1中存活对象的年龄值，当年龄值&#43;1达到15时（默认15，可修改），对象将进入老年代，当没有满足时，就复制进去S0中。
+大对象直接进入老年代。 当对象总数大于Survivor（S0/S1）的一半时，也会直接进入老年代。 判断对象是否存活算法 1.引用计数算法 早期判断对象是否存活大多都是以这种算法，这种算法判断很简单，简单来说就是给对象添加一个引用计数器，每当对象被引用一次就加1，引用失效时就减1。当为0的时候就判断对象不会再被引用。
+2.可达性分析算法 它的基本思路是通过一个称为“GC Roots”的对象（局部变量）为起始点，搜索所经过的路径称为引用链，当一个对象到GC Roots没有任何引用跟它连接则证明对象是不可用的。(解决了循环利用)
+Minor GC、Major GC、Full GC
+在年轻代Young space(包括Eden区和Survivor区)中的垃圾回收称之为 Minor GC,Minor GC只会清理年轻代. Major GC清理老年代，但是通常也可以指和Full GC是等价，因为收集老年代的时候往往也会伴随着升级年轻代，收集整个Java堆。 Full GC是对新生代、老年代、永久代统一的回收。 " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/history/javagc/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-07-27T17:04:15+00:00" />
+<meta property="article:modified_time" content="2020-07-27T17:04:15+00:00" />
+
+<title>Java Gc | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/posts/history/javagc/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.63b6564d7b3b31dd72b69135cc6c6b73c5ad27a2c8e9373f7ae6f091b7281354.js" integrity="sha256-Y7ZWTXs7Md1ytpE1zGxrc8WtJ6LI6Tc/eubwkbcoE1Q=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/me/" class="">Keep Things Simple</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Blog</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/bioworld/" class="">Biology World</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/bioworld/binderdesign/" class="">TP Binder Design</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/bioworld/proteinstruture/" class="">4 levels of protein structure</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/" class="">Hugo</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/hugobookgithubaction/" class="">HugoBook&#43;GithubAction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/hugo/" class="">Hugo Commands</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/shell/" class="">Bash Scripts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>literature</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>Plotly</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/plotly/examples/" class="">Visualization via plotly</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/travel/" class="">World</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        我的博客
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.goodreads.com/review/list/177314441"  target="_blank" rel="noopener">
+        goodreads
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Java Gc</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/history/javagc/">Java Gc</a>
+  </h1>
+  
+  <h5>July 27, 2020</h5>
+
+
+
+  
+
+  
+  <div>
+    
+      <a href="/tags/2023-05-07%E4%BB%8Ehalo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">2023-05-07从halo博客迁移</a>
+  </div>
+  
+
+
+
+<p><strong>堆的回收区域</strong></p>
+
+  <img src="/images/image-e3306adf515a4f35bcb374771abd444d.png" alt="GC" /><ul>
+<li>新生代（Young Generation）NewSize和MaxNewSize分别可以控制年轻代的初始大小和最大的大小。</li>
+<li>老年代（Old Generation）。</li>
+<li>永久代（Permanent Generation）【1.8以后采用元空间，不在虚拟机里，而是使用本地内存】。</li>
+</ul>
+<p><strong>三大垃圾收集算法</strong></p>
+<ul>
+<li>标记/清除算法</li>
+<li>复制算法</li>
+<li>标记/整理算法</li>
+</ul>
+<p><strong>JVM GC算法</strong></p>
+<ul>
+<li>JVM采用“分代收集算法”对不同区域采用不同的回收算法。</li>
+<li>新生代采用复制算法。</li>
+<li>老年代采用标记/清除算法或标记/整理算法。</li>
+</ul>
+<p><strong>GC过程</strong></p>
+
+  <img src="/images/image-13ac21ec2d554676a0502c67b0995704.png" alt="image.png" /><p>1-2、当new新对象时，Eden空间满了，使用复制算法把存活的对象复制到空的S0(S1)上。
+3-4、判断S1中存活对象的年龄值，当年龄值+1达到15时（默认15，可修改），对象将进入老年代，当没有满足时，就复制进去S0中。</p>
+<ul>
+<li>大对象直接进入老年代。</li>
+<li>当对象总数大于Survivor（S0/S1）的一半时，也会直接进入老年代。</li>
+</ul>
+<p><strong>判断对象是否存活算法</strong>
+1.引用计数算法
+早期判断对象是否存活大多都是以这种算法，这种算法判断很简单，简单来说就是给对象添加一个引用计数器，每当对象被引用一次就加1，引用失效时就减1。当为0的时候就判断对象不会再被引用。</p>
+<p>2.可达性分析算法
+它的基本思路是通过一个称为“GC Roots”的对象（局部变量）为起始点，搜索所经过的路径称为引用链，当一个对象到GC Roots没有任何引用跟它连接则证明对象是不可用的。(解决了循环利用)</p>
+<p><strong>Minor GC、Major GC、Full GC</strong></p>
+<ul>
+<li>在年轻代Young space(包括Eden区和Survivor区)中的垃圾回收称之为 Minor GC,Minor GC只会清理年轻代.</li>
+<li>Major GC清理老年代，但是通常也可以指和Full GC是等价，因为收集老年代的时候往往也会伴随着升级年轻代，收集整个Java堆。</li>
+<li>Full GC是对新生代、老年代、永久代统一的回收。</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/posts/history/JavaGC.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

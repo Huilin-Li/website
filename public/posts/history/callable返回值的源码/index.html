@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="分析一下Callable是如何拿到返回值的
+callable 是如何保存返回值#1、先写一个callable测试类
+public static void main(String[] args) throws ExecutionException, InterruptedException { ExecutorService pool = Executors.newCachedThreadPool(); Future&lt;String&gt; result = pool.submit(() -&gt; { return &#34;Callable Test&#34;; }); System.out.println(result.get()); } 2、看一下submit方法有什么
+public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) { if (task == null) throw new NullPointerException(); RunnableFuture&lt;T&gt; ftask = newTaskFor(task); execute(ftask); return ftask; } 构建一个 RunnableFuture 对象，通过AbstractExecutorService的execute方法来执行，那么返回值的获取操作应该就在RunnableFuture对象里了，执行的方法是run()。
+3、再深入查看newTaskFor(task)方法
+protected &lt;T&gt; RunnableFuture&lt;T&gt; newTaskFor(Callable&lt;T&gt; callable) { return new FutureTask&lt;T&gt;(callable); } 发现他实际是构建了一个 FutureTask(callable) 对象，把我们创建的callable对象传进去。
+4、那我们来看一下这个对象的run()方法">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Callable返回值的源码" />
+<meta property="og:description" content="分析一下Callable是如何拿到返回值的
+callable 是如何保存返回值#1、先写一个callable测试类
+public static void main(String[] args) throws ExecutionException, InterruptedException { ExecutorService pool = Executors.newCachedThreadPool(); Future&lt;String&gt; result = pool.submit(() -&gt; { return &#34;Callable Test&#34;; }); System.out.println(result.get()); } 2、看一下submit方法有什么
+public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) { if (task == null) throw new NullPointerException(); RunnableFuture&lt;T&gt; ftask = newTaskFor(task); execute(ftask); return ftask; } 构建一个 RunnableFuture 对象，通过AbstractExecutorService的execute方法来执行，那么返回值的获取操作应该就在RunnableFuture对象里了，执行的方法是run()。
+3、再深入查看newTaskFor(task)方法
+protected &lt;T&gt; RunnableFuture&lt;T&gt; newTaskFor(Callable&lt;T&gt; callable) { return new FutureTask&lt;T&gt;(callable); } 发现他实际是构建了一个 FutureTask(callable) 对象，把我们创建的callable对象传进去。
+4、那我们来看一下这个对象的run()方法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/history/callable%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E6%BA%90%E7%A0%81/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-07-20T10:31:48+00:00" />
+<meta property="article:modified_time" content="2020-07-20T10:31:48+00:00" />
+
+<title>Callable返回值的源码 | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/posts/history/callable%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E6%BA%90%E7%A0%81/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.63b6564d7b3b31dd72b69135cc6c6b73c5ad27a2c8e9373f7ae6f091b7281354.js" integrity="sha256-Y7ZWTXs7Md1ytpE1zGxrc8WtJ6LI6Tc/eubwkbcoE1Q=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/me/" class="">Keep Things Simple</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Blog</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/bioworld/" class="">Biology World</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/bioworld/binderdesign/" class="">TP Binder Design</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/bioworld/proteinstruture/" class="">4 levels of protein structure</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/" class="">Hugo</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/hugobookgithubaction/" class="">HugoBook&#43;GithubAction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/hugo/" class="">Hugo Commands</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/shell/" class="">Bash Scripts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>literature</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>Plotly</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/plotly/examples/" class="">Visualization via plotly</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/travel/" class="">World</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        我的博客
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.goodreads.com/review/list/177314441"  target="_blank" rel="noopener">
+        goodreads
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Callable返回值的源码</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#callable-是如何保存返回值">callable 是如何保存返回值</a></li>
+    <li><a href="#获取callable返回值">获取callable返回值</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/history/callable%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E6%BA%90%E7%A0%81/">Callable返回值的源码</a>
+  </h1>
+  
+  <h5>July 20, 2020</h5>
+
+
+
+  
+
+  
+  <div>
+    
+      <a href="/tags/2023-05-07%E4%BB%8Ehalo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">2023-05-07从halo博客迁移</a>
+  </div>
+  
+
+
+
+<p>分析一下Callable是如何拿到返回值的</p>
+<h2 id="callable-是如何保存返回值">
+  callable 是如何保存返回值
+  <a class="anchor" href="#callable-%e6%98%af%e5%a6%82%e4%bd%95%e4%bf%9d%e5%ad%98%e8%bf%94%e5%9b%9e%e5%80%bc">#</a>
+</h2>
+<p>1、先写一个callable测试类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> ExecutionException, InterruptedException {
+</span></span><span style="display:flex;"><span>    ExecutorService pool <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newCachedThreadPool</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Future<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> pool.<span style="color:#a6e22e">submit</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Callable Test&#34;</span>;
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(result.<span style="color:#a6e22e">get</span>());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>2、看一下submit方法有什么</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> Future<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">submit</span>(Callable<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> task) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (task <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NullPointerException();
+</span></span><span style="display:flex;"><span>    RunnableFuture<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> ftask <span style="color:#f92672">=</span> newTaskFor(task);
+</span></span><span style="display:flex;"><span>    execute(ftask);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ftask;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>构建一个 RunnableFuture 对象，通过AbstractExecutorService的execute方法来执行，那么返回值的获取操作应该就在RunnableFuture对象里了，执行的方法是run()。</p>
+<p>3、再深入查看newTaskFor(task)方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> RunnableFuture<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">newTaskFor</span>(Callable<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> callable) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> FutureTask<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(callable);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>发现他实际是构建了一个 FutureTask<T>(callable) 对象，把我们创建的callable对象传进去。</p>
+<p>4、那我们来看一下这个对象的run()方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (state <span style="color:#f92672">!=</span> NEW <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">!</span>UNSAFE.<span style="color:#a6e22e">compareAndSwapObject</span>(<span style="color:#66d9ef">this</span>, runnerOffset, <span style="color:#66d9ef">null</span>, Thread.<span style="color:#a6e22e">currentThread</span>()))
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>		Callable<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</span> c <span style="color:#f92672">=</span> callable;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (c <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> state <span style="color:#f92672">==</span> NEW) {
+</span></span><span style="display:flex;"><span>			V result;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">boolean</span> ran;
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>				result <span style="color:#f92672">=</span> c.<span style="color:#a6e22e">call</span>(); <span style="color:#75715e">//执行线程，获取结果</span>
+</span></span><span style="display:flex;"><span>				ran <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>			} <span style="color:#66d9ef">catch</span> (Throwable ex) {
+</span></span><span style="display:flex;"><span>				result <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>; <span style="color:#75715e">//有异常，结果设置为空</span>
+</span></span><span style="display:flex;"><span>				ran <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>				setException(ex);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (ran)
+</span></span><span style="display:flex;"><span>				set(result); <span style="color:#75715e">//设置保存结果</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	} <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// runner must be non-null until state is settled to</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// prevent concurrent calls to run()</span>
+</span></span><span style="display:flex;"><span>		runner <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// state must be re-read after nulling runner to prevent</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// leaked interrupts</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> state;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (s <span style="color:#f92672">&gt;=</span> INTERRUPTING)
+</span></span><span style="display:flex;"><span>			handlePossibleCancellationInterrupt(s);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>5、再看看set()方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">set</span>(V v) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (UNSAFE.<span style="color:#a6e22e">compareAndSwapInt</span>(<span style="color:#66d9ef">this</span>, stateOffset, NEW, COMPLETING)) {
+</span></span><span style="display:flex;"><span>        outcome <span style="color:#f92672">=</span> v;
+</span></span><span style="display:flex;"><span>        UNSAFE.<span style="color:#a6e22e">putOrderedInt</span>(<span style="color:#66d9ef">this</span>, stateOffset, NORMAL); <span style="color:#75715e">// final state</span>
+</span></span><span style="display:flex;"><span>        finishCompletion();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>把线程执行结果通过set()进行保存，保存在outcome 变量中</p>
+<h2 id="获取callable返回值">
+  获取callable返回值
+  <a class="anchor" href="#%e8%8e%b7%e5%8f%96callable%e8%bf%94%e5%9b%9e%e5%80%bc">#</a>
+</h2>
+<p>主要是看看通过Future<T> 是怎样获取callable值的</p>
+<p>1、主要是看FutureTask<T> get()方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 没有设置等待时间</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> V <span style="color:#a6e22e">get</span>() <span style="color:#66d9ef">throws</span> InterruptedException, ExecutionException {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> state;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">&lt;=</span> COMPLETING) <span style="color:#75715e">//线程没有执行完</span>
+</span></span><span style="display:flex;"><span>        s <span style="color:#f92672">=</span> awaitDone(<span style="color:#66d9ef">false</span>, 0L); <span style="color:#75715e">//阻塞等待</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> report(s);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//设置等待时间</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> V <span style="color:#a6e22e">get</span>(<span style="color:#66d9ef">long</span> timeout, TimeUnit unit)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throws</span> InterruptedException, ExecutionException, TimeoutException {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (unit <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NullPointerException();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> state;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">&lt;=</span> COMPLETING <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>         (s <span style="color:#f92672">=</span> awaitDone(<span style="color:#66d9ef">true</span>, unit.<span style="color:#a6e22e">toNanos</span>(timeout))) <span style="color:#f92672">&lt;=</span> COMPLETING)
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> TimeoutException();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> report(s);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>2、awaitDone方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">awaitDone</span>(<span style="color:#66d9ef">boolean</span> timed, <span style="color:#66d9ef">long</span> nanos)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throws</span> InterruptedException {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> deadline <span style="color:#f92672">=</span> timed <span style="color:#f92672">?</span> System.<span style="color:#a6e22e">nanoTime</span>() <span style="color:#f92672">+</span> nanos : 0L;
+</span></span><span style="display:flex;"><span>    FutureTask.<span style="color:#a6e22e">WaitNode</span> q <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">boolean</span> queued <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (;;) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (Thread.<span style="color:#a6e22e">interrupted</span>()) {
+</span></span><span style="display:flex;"><span>            removeWaiter(q);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> InterruptedException();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> state;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">&gt;</span> COMPLETING) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (q <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>                q.<span style="color:#a6e22e">thread</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> s;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> COMPLETING) <span style="color:#75715e">// cannot time out yet</span>
+</span></span><span style="display:flex;"><span>            Thread.<span style="color:#a6e22e">yield</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (q <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>)
+</span></span><span style="display:flex;"><span>            q <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FutureTask.<span style="color:#a6e22e">WaitNode</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>queued)
+</span></span><span style="display:flex;"><span>            queued <span style="color:#f92672">=</span> UNSAFE.<span style="color:#a6e22e">compareAndSwapObject</span>(<span style="color:#66d9ef">this</span>, waitersOffset,
+</span></span><span style="display:flex;"><span>                    q.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> waiters, q);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (timed) {
+</span></span><span style="display:flex;"><span>            nanos <span style="color:#f92672">=</span> deadline <span style="color:#f92672">-</span> System.<span style="color:#a6e22e">nanoTime</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nanos <span style="color:#f92672">&lt;=</span> 0L) {
+</span></span><span style="display:flex;"><span>                removeWaiter(q);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> state;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            LockSupport.<span style="color:#a6e22e">parkNanos</span>(<span style="color:#66d9ef">this</span>, nanos);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            LockSupport.<span style="color:#a6e22e">park</span>(<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>通过自旋等待线程的执行完，返回值</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/posts/history/Callable%e8%bf%94%e5%9b%9e%e5%80%bc%e7%9a%84%e6%ba%90%e7%a0%81.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#callable-是如何保存返回值">callable 是如何保存返回值</a></li>
+    <li><a href="#获取callable返回值">获取callable返回值</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

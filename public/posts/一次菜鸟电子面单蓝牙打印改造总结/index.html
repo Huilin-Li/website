@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="前言#菜鸟电子面单平台停止蓝牙打印服务订购，很巧合，公司就使用到了他，一个是PC菜鸟组件，一个是蓝牙打印，后者的停用会对业务上产生一些影响，所以也要对其做一些业务上处理。
+菜鸟电子面单公告：
+尊敬的开发者： 您好！为进一步落实国家、地方法律、法规关于加强消费者个人信息保护以及规范数据处理行为的具体要求，我公司自2023年6月30日起停止蓝牙打印服务订购，6月30前订购的蓝牙打印服务在有效期内仍可继续使用。另外，您可继续使用装鸟提供的4G云打印服务及PC菜鸟组件有线打印服务，不受影响。 如您对蓝牙打印接口关闭事宜有任何疑问，可加入菜鸟钉钉群（群号：44766762）进行沟通。 感谢您对平台的支持与关注！浙江菜鸟供应链管理有限公司 2023年5月12日
+问题分析#为了减少对业务的影响，做了并行的两套方案：
+1、直接停止此服务，让用户去PC端打印，并做好提示；
+2、自己解析菜鸟模板的打印指令。
+如果能完成模板指令的解析，就直接上指令解析，那是非常用完美的，对用户零影响，无缝平滑过去；当然，解析菜鸟模板的指令也不是一件简单的事情，时间也很紧张，只有一周多的时间，所以也准备也第二套方案，不能上指令解析，就让用户去PC端打印，同时友好地提示用户。
+一些重要信息的整理
+整理系统里的订阅物流公司，目前需要处理以下物流就可以：
+中通速递	ZTO
+申通快递	STO
+韵达快递	YUNDA
+圆通速递	YTO
+德邦	DBKD
+菜鸟CLOUDPRINT_CMD_RENDER接口示例
+打印模板示例
+菜鸟电子面单解析分析过程#以http://cloudprint.cainiao.com/template/standard/401为例，分析菜鸟电子面单的解析过程。
+整体模板主要以js语法和xml标签为主，所以有可能是先使用js模板引擎解析，再解析xml成指令：
+模板 &#43; 数据 -&gt; 通过js模板引擎 -&gt; xml 模板 -&gt; 通过解析 xml 模板成指令
+猜测大概的过程可能是这样的，接下来我们就验证整个过程是否可行。
+验证js模板引擎#通过查找和验证，发现ejs对以上物流公司的蓝牙模板有效，可以正确地解析成xml。
+注意： 这个模板引擎不是能全部兼容模板，但是满足我们的需求了，同时由于时间问题，就没有继续验证其他的js模板引擎。
+模板引擎是 ejs，地址 https://ejs.bootcss.com/#install
+&lt;meta charset=&#34;UTF-8&#34;&gt; &lt;script src=&#34;ejs.js&#34;&gt;&lt;/script&gt; &lt;script&gt; // 需要自己按照菜鸟接口文档填入数据 let data = {} let config = { &#34;needMiddleLogo&#34;:&#34;false&#34;, &#34;horizontalCoordinate&#34;:&#34;0&#34;, &#34;verticalCoordinate&#34;:&#34;0&#34;, &#34;needBottomLogo&#34;:&#34;false&#34;, &#34;orientation&#34;:&#34;normal&#34;, &#34;extra&#34;:&#34;{watermark,true}&#34;, &#34;needTopLogo&#34;:&#34;false&#34; }; // 需要自己填入模板内容，示例模板 http://cloudprint.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="一次菜鸟电子面单蓝牙打印改造总结" />
+<meta property="og:description" content="前言#菜鸟电子面单平台停止蓝牙打印服务订购，很巧合，公司就使用到了他，一个是PC菜鸟组件，一个是蓝牙打印，后者的停用会对业务上产生一些影响，所以也要对其做一些业务上处理。
+菜鸟电子面单公告：
+尊敬的开发者： 您好！为进一步落实国家、地方法律、法规关于加强消费者个人信息保护以及规范数据处理行为的具体要求，我公司自2023年6月30日起停止蓝牙打印服务订购，6月30前订购的蓝牙打印服务在有效期内仍可继续使用。另外，您可继续使用装鸟提供的4G云打印服务及PC菜鸟组件有线打印服务，不受影响。 如您对蓝牙打印接口关闭事宜有任何疑问，可加入菜鸟钉钉群（群号：44766762）进行沟通。 感谢您对平台的支持与关注！浙江菜鸟供应链管理有限公司 2023年5月12日
+问题分析#为了减少对业务的影响，做了并行的两套方案：
+1、直接停止此服务，让用户去PC端打印，并做好提示；
+2、自己解析菜鸟模板的打印指令。
+如果能完成模板指令的解析，就直接上指令解析，那是非常用完美的，对用户零影响，无缝平滑过去；当然，解析菜鸟模板的指令也不是一件简单的事情，时间也很紧张，只有一周多的时间，所以也准备也第二套方案，不能上指令解析，就让用户去PC端打印，同时友好地提示用户。
+一些重要信息的整理
+整理系统里的订阅物流公司，目前需要处理以下物流就可以：
+中通速递	ZTO
+申通快递	STO
+韵达快递	YUNDA
+圆通速递	YTO
+德邦	DBKD
+菜鸟CLOUDPRINT_CMD_RENDER接口示例
+打印模板示例
+菜鸟电子面单解析分析过程#以http://cloudprint.cainiao.com/template/standard/401为例，分析菜鸟电子面单的解析过程。
+整体模板主要以js语法和xml标签为主，所以有可能是先使用js模板引擎解析，再解析xml成指令：
+模板 &#43; 数据 -&gt; 通过js模板引擎 -&gt; xml 模板 -&gt; 通过解析 xml 模板成指令
+猜测大概的过程可能是这样的，接下来我们就验证整个过程是否可行。
+验证js模板引擎#通过查找和验证，发现ejs对以上物流公司的蓝牙模板有效，可以正确地解析成xml。
+注意： 这个模板引擎不是能全部兼容模板，但是满足我们的需求了，同时由于时间问题，就没有继续验证其他的js模板引擎。
+模板引擎是 ejs，地址 https://ejs.bootcss.com/#install
+&lt;meta charset=&#34;UTF-8&#34;&gt; &lt;script src=&#34;ejs.js&#34;&gt;&lt;/script&gt; &lt;script&gt; // 需要自己按照菜鸟接口文档填入数据 let data = {} let config = { &#34;needMiddleLogo&#34;:&#34;false&#34;, &#34;horizontalCoordinate&#34;:&#34;0&#34;, &#34;verticalCoordinate&#34;:&#34;0&#34;, &#34;needBottomLogo&#34;:&#34;false&#34;, &#34;orientation&#34;:&#34;normal&#34;, &#34;extra&#34;:&#34;{watermark,true}&#34;, &#34;needTopLogo&#34;:&#34;false&#34; }; // 需要自己填入模板内容，示例模板 http://cloudprint." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/%E4%B8%80%E6%AC%A1%E8%8F%9C%E9%B8%9F%E7%94%B5%E5%AD%90%E9%9D%A2%E5%8D%95%E8%93%9D%E7%89%99%E6%89%93%E5%8D%B0%E6%94%B9%E9%80%A0%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-21T10:55:04+08:00" />
+<meta property="article:modified_time" content="2023-08-21T10:55:04+08:00" />
+
+<title>一次菜鸟电子面单蓝牙打印改造总结 | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/posts/%E4%B8%80%E6%AC%A1%E8%8F%9C%E9%B8%9F%E7%94%B5%E5%AD%90%E9%9D%A2%E5%8D%95%E8%93%9D%E7%89%99%E6%89%93%E5%8D%B0%E6%94%B9%E9%80%A0%E6%80%BB%E7%BB%93/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.86af72ebcfd9cc69d8906710e66fef4c779a9978224cda6ecbb64f2332a2e15e.js" integrity="sha256-hq9y68/ZzGnYkGcQ5m/vTHeamXgiTNpuy7ZPIzKi4V4=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
+    <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
+      <a role="button" class="">Projects</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/project/me/" class="">Keep Things Simple</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Blog</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/bioworld/" class="">Biology World</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/bioworld/binderdesign/" class="">TP Binder Design</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/bioworld/proteinstruture/" class="">4 levels of protein structure</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/hugo/" class="">Hugo</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/hugo/hugobookgithubaction/" class="">HugoBook&#43;GithubAction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/hugo/hugo/" class="">Hugo Commands</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/shell/" class="">Bash Scripts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>literature</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>Plotly</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/blogs/plotly/examples/" class="">Visualization via plotly</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/project/travel/" class="">World</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blogs
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.goodreads.com/review/list/177314441"  target="_blank" rel="noopener">
+        goodreads
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>一次菜鸟电子面单蓝牙打印改造总结</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#问题分析">问题分析</a></li>
+    <li><a href="#菜鸟电子面单解析分析过程">菜鸟电子面单解析分析过程</a>
+      <ul>
+        <li><a href="#验证js模板引擎">验证js模板引擎</a></li>
+        <li><a href="#xml-解析成cpcl指令">xml 解析成CPCL指令</a></li>
+        <li><a href="#其他问题">其他问题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/%E4%B8%80%E6%AC%A1%E8%8F%9C%E9%B8%9F%E7%94%B5%E5%AD%90%E9%9D%A2%E5%8D%95%E8%93%9D%E7%89%99%E6%89%93%E5%8D%B0%E6%94%B9%E9%80%A0%E6%80%BB%E7%BB%93/">一次菜鸟电子面单蓝牙打印改造总结</a>
+  </h1>
+  
+  <h5>August 21, 2023</h5>
+
+
+
+  
+
+  
+
+
+
+<h2 id="前言">
+  前言
+  <a class="anchor" href="#%e5%89%8d%e8%a8%80">#</a>
+</h2>
+<p>菜鸟电子面单平台停止蓝牙打印服务订购，很巧合，公司就使用到了他，一个是PC菜鸟组件，一个是蓝牙打印，后者的停用会对业务上产生一些影响，所以也要对其做一些业务上处理。</p>
+<p>菜鸟电子面单公告：</p>
+<blockquote>
+<p>尊敬的开发者：
+您好！为进一步落实国家、地方法律、法规关于加强消费者个人信息保护以及规范数据处理行为的具体要求，我公司自2023年6月30日起停止蓝牙打印服务订购，6月30前订购的蓝牙打印服务在有效期内仍可继续使用。另外，您可继续使用装鸟提供的4G云打印服务及PC菜鸟组件有线打印服务，不受影响。
+如您对蓝牙打印接口关闭事宜有任何疑问，可加入菜鸟钉钉群（群号：44766762）进行沟通。
+感谢您对平台的支持与关注！浙江菜鸟供应链管理有限公司
+2023年5月12日</p>
+</blockquote>
+<h2 id="问题分析">
+  问题分析
+  <a class="anchor" href="#%e9%97%ae%e9%a2%98%e5%88%86%e6%9e%90">#</a>
+</h2>
+<p>为了减少对业务的影响，做了并行的两套方案：<br>
+1、直接停止此服务，让用户去PC端打印，并做好提示；<br>
+2、自己解析菜鸟模板的打印指令。<br>
+如果能完成模板指令的解析，就直接上指令解析，那是非常用完美的，对用户零影响，无缝平滑过去；当然，解析菜鸟模板的指令也不是一件简单的事情，时间也很紧张，只有一周多的时间，所以也准备也第二套方案，不能上指令解析，就让用户去PC端打印，同时友好地提示用户。</p>
+<p><strong>一些重要信息的整理</strong></p>
+<p>整理系统里的订阅物流公司，目前需要处理以下物流就可以：<br>
+中通速递	ZTO<br>
+申通快递	STO<br>
+韵达快递	YUNDA<br>
+圆通速递	YTO<br>
+德邦	DBKD</p>
+<p>
+  <a href="https://global.link.cainiao.com/?spm=logistic_cloud.homepage.0.0.3bed4e08KBRYWI#/homepage/api/logistics/express_new/CLOUDPRINT_CMD_RENDER?_k=o26vu0">菜鸟CLOUDPRINT_CMD_RENDER接口示例</a></p>
+<p>
+  <a href="http://cloudprint.cainiao.com/template/standard/401">打印模板示例</a></p>
+<h2 id="菜鸟电子面单解析分析过程">
+  菜鸟电子面单解析分析过程
+  <a class="anchor" href="#%e8%8f%9c%e9%b8%9f%e7%94%b5%e5%ad%90%e9%9d%a2%e5%8d%95%e8%a7%a3%e6%9e%90%e5%88%86%e6%9e%90%e8%bf%87%e7%a8%8b">#</a>
+</h2>
+<p>以http://cloudprint.cainiao.com/template/standard/401为例，分析菜鸟电子面单的解析过程。</p>
+<p>整体模板主要以js语法和xml标签为主，所以有可能是先使用js模板引擎解析，再解析xml成指令：</p>
+<blockquote>
+<p>模板 + 数据 -&gt; 通过js模板引擎 -&gt; xml 模板 -&gt; 通过解析 xml 模板成指令</p>
+</blockquote>
+<p>猜测大概的过程可能是这样的，接下来我们就验证整个过程是否可行。</p>
+<h3 id="验证js模板引擎">
+  验证js模板引擎
+  <a class="anchor" href="#%e9%aa%8c%e8%af%81js%e6%a8%a1%e6%9d%bf%e5%bc%95%e6%93%8e">#</a>
+</h3>
+<p>通过查找和验证，发现ejs对以上物流公司的蓝牙模板有效，可以正确地解析成xml。</p>
+<blockquote>
+<p>注意：
+这个模板引擎不是能全部兼容模板，但是满足我们的需求了，同时由于时间问题，就没有继续验证其他的js模板引擎。</p>
+</blockquote>
+<p>模板引擎是 ejs，地址  
+  <a href="https://ejs.bootcss.com/#install">https://ejs.bootcss.com/#install</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ejs.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 需要自己按照菜鸟接口文档填入数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;needMiddleLogo&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;false&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;horizontalCoordinate&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;0&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;verticalCoordinate&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;0&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;needBottomLogo&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;false&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;orientation&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;normal&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;extra&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;{watermark,true}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;needTopLogo&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;false&#34;</span>
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 需要自己填入模板内容，示例模板 http://cloudprint.cainiao.com/template/standard/401
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">template</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 实现菜鸟模板中使用到的js函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">context</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">formatStartTime</span>(<span style="color:#a6e22e">format</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">date</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Date(); <span style="color:#75715e">// 获取当前时间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#75715e">// 提取年、月、日、小时、分钟和秒
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">year</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">getFullYear</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">month</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">getMonth</span>() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>).<span style="color:#a6e22e">padStart</span>(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">day</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">getDate</span>()).<span style="color:#a6e22e">padStart</span>(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hours</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">getHours</span>()).<span style="color:#a6e22e">padStart</span>(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">minutes</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">getMinutes</span>()).<span style="color:#a6e22e">padStart</span>(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">seconds</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">getSeconds</span>()).<span style="color:#a6e22e">padStart</span>(<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 替换格式字符串中的对应部分
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">formattedTime</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">format</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;yyyy&#39;</span>, <span style="color:#a6e22e">year</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">formattedTime</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">formattedTime</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;MM&#39;</span>, <span style="color:#a6e22e">month</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">formattedTime</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">formattedTime</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;dd&#39;</span>, <span style="color:#a6e22e">day</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">formattedTime</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">formattedTime</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;HH&#39;</span>, <span style="color:#a6e22e">hours</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">formattedTime</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">formattedTime</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;mm&#39;</span>, <span style="color:#a6e22e">minutes</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">formattedTime</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">formattedTime</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;ss&#39;</span>, <span style="color:#a6e22e">seconds</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">formattedTime</span>;
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">documentCount</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;1&#34;</span>;
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">documentNumber</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;1&#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 解析
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">html</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ejs</span>.<span style="color:#a6e22e">render</span>(<span style="color:#a6e22e">template</span>, {<span style="color:#e6db74">&#34;_data&#34;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">data</span>, <span style="color:#e6db74">&#34;_config&#34;</span><span style="color:#f92672">:</span><span style="color:#a6e22e">config</span>, <span style="color:#e6db74">&#34;_context&#34;</span><span style="color:#f92672">:</span><span style="color:#a6e22e">context</span>});
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">html</span>)
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><p>到此，我们的模板已经解析成xml了，接下来就是解析成CPCL指令。</p>
+<h3 id="xml-解析成cpcl指令">
+  xml 解析成CPCL指令
+  <a class="anchor" href="#xml-%e8%a7%a3%e6%9e%90%e6%88%90cpcl%e6%8c%87%e4%bb%a4">#</a>
+</h3>
+<p>打印机打印指令的单位是dot，一般8dot=1毫米，所以猜测模板是以毫米为单位的，就按照这个内容来搞个demo，验证是否可行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;page</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://cloudprint.cainiao.com/print&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://cloudprint.cainiao.com/print http://cloudprint-docs-resource.oss-cn-shanghai.aliyuncs.com/lpml_schema.xsd&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">xmlns:editor=</span><span style="color:#e6db74">&#34;http://cloudprint.cainiao.com/schema/editor&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">width=</span><span style="color:#e6db74">&#34;100&#34;</span> <span style="color:#a6e22e">height=</span><span style="color:#e6db74">&#34;180&#34;</span>  <span style="color:#a6e22e">splitable=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h4 id="基础指令解析">
+  基础指令解析
+  <a class="anchor" href="#%e5%9f%ba%e7%a1%80%e6%8c%87%e4%bb%a4%e8%a7%a3%e6%9e%90">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CpclCommand</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">static</span> String CHARSET <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GB18030&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** 指令内容 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Vector<span style="color:#f92672">&lt;</span>Byte<span style="color:#f92672">&gt;</span> command;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CpclCommand</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Vector<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 增加指令
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param array 数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCommand</span>(<span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> array) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(array <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Byte<span style="color:#f92672">&gt;</span> byteList <span style="color:#f92672">=</span> Bytes.<span style="color:#a6e22e">asList</span>(array);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">addAll</span>(command.<span style="color:#a6e22e">size</span>(), byteList);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 增加指令
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param index 索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param array 数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCommand</span>(<span style="color:#66d9ef">int</span> index, <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> array) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (array <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Byte<span style="color:#f92672">&gt;</span> byteList <span style="color:#f92672">=</span> Bytes.<span style="color:#a6e22e">asList</span>(array);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">addAll</span>(index, byteList);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 增加指令
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param bytes 指令字节
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCommand</span>(Vector<span style="color:#f92672">&lt;</span>Byte<span style="color:#f92672">&gt;</span> bytes) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(CollectionUtils.<span style="color:#a6e22e">isEmpty</span>(bytes)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">addAll</span>(bytes);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 增加指令
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param command  CPCL指令
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addCommand</span>(CpclCommand command) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(command <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        Vector<span style="color:#f92672">&lt;</span>Byte<span style="color:#f92672">&gt;</span> bytes <span style="color:#f92672">=</span> command.<span style="color:#a6e22e">getCommand</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>CollectionUtils.<span style="color:#a6e22e">isEmpty</span>(bytes)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">addAll</span>(bytes);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 添加文本指令
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param str 文本内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addStrToCommand</span>(String str) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (StringUtil.<span style="color:#a6e22e">isBlank</span>(str)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bs <span style="color:#f92672">=</span> str.<span style="color:#a6e22e">getBytes</span>(Charset.<span style="color:#a6e22e">forName</span>(CHARSET));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> bs.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">add</span>(Byte.<span style="color:#a6e22e">valueOf</span>(bs<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Vector<span style="color:#f92672">&lt;</span>Byte<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getCommand</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> command;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span>(<span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height, <span style="color:#66d9ef">int</span> copies) {
+</span></span><span style="display:flex;"><span>        StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        sj.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;!&#34;</span>).<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;0&#34;</span>).<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;200&#34;</span>).<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;200&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 高度减去18个点</span>
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(height <span style="color:#f92672">-</span> 18))
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(copies));
+</span></span><span style="display:flex;"><span>        addStrToCommand(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 打印宽度</span>
+</span></span><span style="display:flex;"><span>        String s <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>).<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;PAGE-WIDTH&#34;</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(width)).<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>        addStrToCommand(s);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setCn</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 设置中文</span>
+</span></span><span style="display:flex;"><span>        addStrToCommand(<span style="color:#e6db74">&#34;COUNTRY CHINA\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>() {
+</span></span><span style="display:flex;"><span>        addStrToCommand(<span style="color:#e6db74">&#34;GAP-SENSE\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        addStrToCommand(<span style="color:#e6db74">&#34;FORM\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        addStrToCommand(<span style="color:#e6db74">&#34;PRINT\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** 文本指令方向 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> TEXT {
+</span></span><span style="display:flex;"><span>        TEXT(<span style="color:#e6db74">&#34;T&#34;</span>),
+</span></span><span style="display:flex;"><span>        VTEXT(<span style="color:#e6db74">&#34;TV&#34;</span>),
+</span></span><span style="display:flex;"><span>        TEXT90(<span style="color:#e6db74">&#34;T90&#34;</span>),
+</span></span><span style="display:flex;"><span>        TEXT180(<span style="color:#e6db74">&#34;T180&#34;</span>),
+</span></span><span style="display:flex;"><span>        TEXT270(<span style="color:#e6db74">&#34;T270&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> String name;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        TEXT(String name) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** 字体大小 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> FONT {
+</span></span><span style="display:flex;"><span>        F0(<span style="color:#e6db74">&#34;0&#34;</span>, 12, 24, 24),
+</span></span><span style="display:flex;"><span>        F1(<span style="color:#e6db74">&#34;1&#34;</span>, 9, 17, 24),
+</span></span><span style="display:flex;"><span>        F2(<span style="color:#e6db74">&#34;2&#34;</span>, 12, 24, 24),
+</span></span><span style="display:flex;"><span>        F3(<span style="color:#e6db74">&#34;3&#34;</span>, 10, 20, 20),
+</span></span><span style="display:flex;"><span>        F4(<span style="color:#e6db74">&#34;4&#34;</span>, 16, 32, 32),
+</span></span><span style="display:flex;"><span>        F5(<span style="color:#e6db74">&#34;5&#34;</span>, 9, 17, 24),
+</span></span><span style="display:flex;"><span>        F6(<span style="color:#e6db74">&#34;6&#34;</span>, 12 ,24, 0),
+</span></span><span style="display:flex;"><span>        F7(<span style="color:#e6db74">&#34;7&#34;</span>, 12 ,24, 24),
+</span></span><span style="display:flex;"><span>        F8(<span style="color:#e6db74">&#34;8&#34;</span>, 12 ,24, 24),
+</span></span><span style="display:flex;"><span>        F10(<span style="color:#e6db74">&#34;10&#34;</span>, 24, 48, 48),
+</span></span><span style="display:flex;"><span>        F11(<span style="color:#e6db74">&#34;11&#34;</span>, 8, 16, 24),
+</span></span><span style="display:flex;"><span>        F13(<span style="color:#e6db74">&#34;13&#34;</span>, 12 ,24, 24),
+</span></span><span style="display:flex;"><span>        F20(<span style="color:#e6db74">&#34;20&#34;</span>, 8, 16, 16),
+</span></span><span style="display:flex;"><span>        F24(<span style="color:#e6db74">&#34;24&#34;</span>, 12 ,24, 24),
+</span></span><span style="display:flex;"><span>        F41(<span style="color:#e6db74">&#34;41&#34;</span>, 8, 12, 0),
+</span></span><span style="display:flex;"><span>        F42(<span style="color:#e6db74">&#34;42&#34;</span>, 12, 20, 0),
+</span></span><span style="display:flex;"><span>        F43(<span style="color:#e6db74">&#34;43&#34;</span>, 16, 24, 0),
+</span></span><span style="display:flex;"><span>        F44(<span style="color:#e6db74">&#34;44&#34;</span>, 24, 32, 0),
+</span></span><span style="display:flex;"><span>        F45(<span style="color:#e6db74">&#34;45&#34;</span>,32,48, 0),
+</span></span><span style="display:flex;"><span>        F46(<span style="color:#e6db74">&#34;46&#34;</span>,14,19, 0),
+</span></span><span style="display:flex;"><span>        F47(<span style="color:#e6db74">&#34;47&#34;</span>,21,27, 0),
+</span></span><span style="display:flex;"><span>        F48(<span style="color:#e6db74">&#34;48&#34;</span>,14,25, 0),
+</span></span><span style="display:flex;"><span>        F49(<span style="color:#e6db74">&#34;49&#34;</span>,28,56, 0),
+</span></span><span style="display:flex;"><span>        F55(<span style="color:#e6db74">&#34;55&#34;</span>,8,16, 16)
+</span></span><span style="display:flex;"><span>        ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> String value;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> width;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> cnWidth;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> height;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        FONT(String value, <span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height, <span style="color:#66d9ef">int</span> cnWidth) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> width;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">cnWidth</span> <span style="color:#f92672">=</span> cnWidth;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> height;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getWidth</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> width;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getHeight</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> height;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getCnWidth</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> cnWidth;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *  文本指令 {command} {font} {size} {x} {y} {data}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param text 指令
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param font 字体
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param size 请输入任意数字
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param x    横向起始位置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param y    纵向起始位置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param data 要打印的文本
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">text</span>(TEXT text, FONT font, <span style="color:#66d9ef">int</span> size, <span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y, String data) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (StringUtil.<span style="color:#a6e22e">isBlank</span>(data)) {
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34; &#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        sj.<span style="color:#a6e22e">add</span>(text.<span style="color:#a6e22e">name</span>).<span style="color:#a6e22e">add</span>(font.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(size)).
+</span></span><span style="display:flex;"><span>                add(String.<span style="color:#a6e22e">valueOf</span>(x)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(y)).<span style="color:#a6e22e">add</span>(data);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">addStrToCommand</span>(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addSimulateBlock</span>(TEXT text, FONT font, <span style="color:#66d9ef">int</span> size, <span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y, String data, <span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> xScal, <span style="color:#66d9ef">int</span> yScal, <span style="color:#66d9ef">int</span> gap, <span style="color:#66d9ef">boolean</span> isCenter) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 只支持正方向</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (StringUtil.<span style="color:#a6e22e">isNotBlank</span>(data)) {
+</span></span><span style="display:flex;"><span>            xScal <span style="color:#f92672">=</span> xScal <span style="color:#f92672">&lt;=</span> 0 <span style="color:#f92672">?</span> 1 : xScal;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> getStrIndex(data, width, font, xScal);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;=</span> 0) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 换行</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> data.<span style="color:#a6e22e">indexOf</span>(<span style="color:#e6db74">&#34;\n&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">&amp;&amp;</span> index <span style="color:#f92672">&gt;</span> i) {
+</span></span><span style="display:flex;"><span>                index <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>                data <span style="color:#f92672">=</span> data.<span style="color:#a6e22e">replaceFirst</span>(<span style="color:#e6db74">&#34;\n&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            String printSubData <span style="color:#f92672">=</span> data.<span style="color:#a6e22e">substring</span>(0, index).<span style="color:#a6e22e">replaceFirst</span>(<span style="color:#e6db74">&#34;\n&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (isCenter) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> strLen <span style="color:#f92672">=</span> getStrLen(printSubData, font, xScal);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> posX <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> (width <span style="color:#f92672">-</span> strLen) <span style="color:#f92672">/</span> 2;
+</span></span><span style="display:flex;"><span>                text(text, font, size, posX, y, printSubData);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                text(text, font, size, x, y, printSubData);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> data.<span style="color:#a6e22e">length</span>()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> nextY <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (gap <span style="color:#f92672">==</span> 0) {
+</span></span><span style="display:flex;"><span>                    nextY <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> font.<span style="color:#a6e22e">getHeight</span>() <span style="color:#f92672">*</span> yScal <span style="color:#f92672">*</span> 3 <span style="color:#f92672">/</span> 2;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                    nextY <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> font.<span style="color:#a6e22e">getHeight</span>() <span style="color:#f92672">*</span> yScal <span style="color:#f92672">+</span> gap;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                String nextText <span style="color:#f92672">=</span> data.<span style="color:#a6e22e">substring</span>(index);
+</span></span><span style="display:flex;"><span>                addSimulateBlock(text, font, size, x, nextY, nextText, width,xScal, yScal, gap, isCenter);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calcSimulateBlockNextY</span>(TEXT text, FONT font, <span style="color:#66d9ef">int</span> size, <span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y, String data, <span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> xScal, <span style="color:#66d9ef">int</span> yScal, <span style="color:#66d9ef">int</span> gap) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 只支持正方向</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (StringUtil.<span style="color:#a6e22e">isNotBlank</span>(data)) {
+</span></span><span style="display:flex;"><span>            xScal <span style="color:#f92672">=</span> xScal <span style="color:#f92672">&lt;=</span> 0 <span style="color:#f92672">?</span> 1 : xScal;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> getStrIndex(data, width, font, xScal);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;=</span> 0) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> y;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 换行</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> data.<span style="color:#a6e22e">indexOf</span>(<span style="color:#e6db74">&#34;\n&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">&amp;&amp;</span> index <span style="color:#f92672">&gt;</span> i) {
+</span></span><span style="display:flex;"><span>                index <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>                data <span style="color:#f92672">=</span> data.<span style="color:#a6e22e">replaceFirst</span>(<span style="color:#e6db74">&#34;\n&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> data.<span style="color:#a6e22e">length</span>()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> nextY <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (gap <span style="color:#f92672">==</span> 0) {
+</span></span><span style="display:flex;"><span>                    nextY <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> font.<span style="color:#a6e22e">getHeight</span>() <span style="color:#f92672">*</span> yScal <span style="color:#f92672">*</span> 3 <span style="color:#f92672">/</span> 2;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                    nextY <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> font.<span style="color:#a6e22e">getHeight</span>() <span style="color:#f92672">*</span> yScal <span style="color:#f92672">+</span> gap;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                String nextText <span style="color:#f92672">=</span> data.<span style="color:#a6e22e">substring</span>(index);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> calcSimulateBlockNextY(text, font, size, x, nextY, nextText, width,xScal, yScal, gap);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> y;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> y;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 获取字体宽度，数字和中文宽度不一样
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param str 字符串
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param width 可打印宽度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param font 字体宽度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param xScal 放大宽度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return 可打印字符串长度索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getStrIndex</span>(String str, <span style="color:#66d9ef">int</span> width, FONT font, <span style="color:#66d9ef">int</span> xScal) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> chars <span style="color:#f92672">=</span> str.<span style="color:#a6e22e">toCharArray</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> curWidth <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> chars.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ((chars<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;</span>).<span style="color:#a6e22e">getBytes</span>().<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>                curWidth <span style="color:#f92672">+=</span> font.<span style="color:#a6e22e">getWidth</span>() <span style="color:#f92672">*</span> xScal;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                curWidth <span style="color:#f92672">+=</span> font.<span style="color:#a6e22e">getCnWidth</span>() <span style="color:#f92672">*</span> xScal;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (width <span style="color:#f92672">&lt;</span> curWidth) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> i;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> chars.<span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getStrLen</span>(String str, FONT font, <span style="color:#66d9ef">int</span> xScal) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> chars <span style="color:#f92672">=</span> str.<span style="color:#a6e22e">toCharArray</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> curWidth <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> chars.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ((chars<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;</span>).<span style="color:#a6e22e">getBytes</span>().<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>                curWidth <span style="color:#f92672">+=</span> font.<span style="color:#a6e22e">getWidth</span>() <span style="color:#f92672">*</span> xScal;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                curWidth <span style="color:#f92672">+=</span> font.<span style="color:#a6e22e">getCnWidth</span>() <span style="color:#f92672">*</span> xScal;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> curWidth;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 命令可将常驻字体放大指定的放大倍数,使用于TEXT命令的上一行
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param width 宽度放大倍数，有效放大倍数为 1 到 16
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param height 高度放大倍数，有效放大倍数为 1 到 16
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span>  <span style="color:#a6e22e">setMag</span>(<span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height) {
+</span></span><span style="display:flex;"><span>        StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        sj.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;SETMAG&#34;</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(width)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(height));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">addStrToCommand</span>(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 命令可将常驻字体加粗
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param bold 是否加粗
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setBlod</span>(<span style="color:#66d9ef">boolean</span> bold) {
+</span></span><span style="display:flex;"><span>        StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        sj.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;SETBLOD&#34;</span>).<span style="color:#a6e22e">add</span>(bold <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;1&#34;</span> : <span style="color:#e6db74">&#34;0&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">addStrToCommand</span>(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 条码类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * BARCODE（或 B） 横向打印条码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * VBARCODE（或 VB） 纵向打印条码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> BARCODE {
+</span></span><span style="display:flex;"><span>        BARCODE(<span style="color:#e6db74">&#34;B&#34;</span>), VBARCODE(<span style="color:#e6db74">&#34;VB&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> String command;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        BARCODE(String command) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> command;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 条码类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> CODE_TYPE {
+</span></span><span style="display:flex;"><span>        UPC_A(<span style="color:#e6db74">&#34;UPCA&#34;</span>), UPC_E(<span style="color:#e6db74">&#34;UPCE&#34;</span>),EAN13(<span style="color:#e6db74">&#34;EAN13&#34;</span>),EAN8(<span style="color:#e6db74">&#34;EAN8&#34;</span>),
+</span></span><span style="display:flex;"><span>        CODE39(<span style="color:#e6db74">&#34;39&#34;</span>),CODE93(<span style="color:#e6db74">&#34;93&#34;</span>), CODE128(<span style="color:#e6db74">&#34;128&#34;</span>),CODABAR(<span style="color:#e6db74">&#34;CODABAR&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> String type;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        CODE_TYPE(String type) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">type</span> <span style="color:#f92672">=</span> type;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 条码宽高比例
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> RATIO {
+</span></span><span style="display:flex;"><span>        R0(<span style="color:#e6db74">&#34;0&#34;</span>, 1.<span style="color:#a6e22e">5F</span>), R1(<span style="color:#e6db74">&#34;1&#34;</span>, 2), R2(<span style="color:#e6db74">&#34;2&#34;</span>, 2.<span style="color:#a6e22e">5F</span>), R3(<span style="color:#e6db74">&#34;3&#34;</span>, 3), R4(<span style="color:#e6db74">&#34;4&#34;</span>, 3.<span style="color:#a6e22e">5F</span>),
+</span></span><span style="display:flex;"><span>        R20(<span style="color:#e6db74">&#34;20&#34;</span>, 20), R21(<span style="color:#e6db74">&#34;21&#34;</span>, 21), R22(<span style="color:#e6db74">&#34;22&#34;</span>, 22), R23(<span style="color:#e6db74">&#34;23&#34;</span>, 23), R24(<span style="color:#e6db74">&#34;24&#34;</span>, 24),
+</span></span><span style="display:flex;"><span>        R25(<span style="color:#e6db74">&#34;25&#34;</span>, 25), R26(<span style="color:#e6db74">&#34;26&#34;</span>, 26), R27(<span style="color:#e6db74">&#34;27&#34;</span>, 27), R28(<span style="color:#e6db74">&#34;28&#34;</span>, 28), R29(<span style="color:#e6db74">&#34;29&#34;</span>, 29),
+</span></span><span style="display:flex;"><span>        R30(<span style="color:#e6db74">&#34;30&#34;</span>, 30);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> String key;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> value;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        RATIO(String key, <span style="color:#66d9ef">float</span> value) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> key;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> <span style="color:#a6e22e">getValue</span>() {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> value;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> EEC {
+</span></span><span style="display:flex;"><span>        LEVEL_L(<span style="color:#e6db74">&#34;L&#34;</span>), LEVEL_M(<span style="color:#e6db74">&#34;M&#34;</span>), LEVEL_Q(<span style="color:#e6db74">&#34;Q&#34;</span>), LEVEL_H(<span style="color:#e6db74">&#34;H&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String value;
+</span></span><span style="display:flex;"><span>        EEC(String value) { <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> value; }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getValue</span>() { <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span>; }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 条码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param barcode 条码指令
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param codeType 条码类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param width 条码宽度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param ratio 宽高比例
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param height 条码高度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param x 条码X方向
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param y 条码Y方向
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param data 条码数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">barcode</span>(BARCODE barcode, CODE_TYPE codeType, <span style="color:#66d9ef">int</span> width, RATIO ratio, <span style="color:#66d9ef">int</span> height, <span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y, String data) {
+</span></span><span style="display:flex;"><span>        StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        sj.<span style="color:#a6e22e">add</span>(barcode.<span style="color:#a6e22e">command</span>).<span style="color:#a6e22e">add</span>(codeType.<span style="color:#a6e22e">type</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(width)).<span style="color:#a6e22e">add</span>(ratio.<span style="color:#a6e22e">key</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(height))
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(x)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(y)).<span style="color:#a6e22e">add</span>(data);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">addStrToCommand</span>(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 条码底部文本
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param font 字体
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param size 大小
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param offset 文本距离条码的单位偏移量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">barcodeText</span>(FONT font, <span style="color:#66d9ef">int</span> size, <span style="color:#66d9ef">int</span> offset) {
+</span></span><span style="display:flex;"><span>        StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        sj.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;BT&#34;</span>).<span style="color:#a6e22e">add</span>(font.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(size)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(offset));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">addStrToCommand</span>(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 关闭条码底部文本
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">barcodeTextOff</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">addStrToCommand</span>(<span style="color:#e6db74">&#34;BT OFF\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 二维码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param barcode 条码指令方向
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param x x
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param y y
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param mm QR Code 规范编号,1 或 2，推荐为 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param un 模块的单位宽度/单位高度 1-32，默认为 6
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param eec 纠错等级 H - 极高可靠性级别（H 级） Q - 高可靠性级别（Q 级） M - 标准级别（M 级） L - 高密度级别（L 级）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param data 打印数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">qrCode</span>(BARCODE barcode, <span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y, <span style="color:#66d9ef">int</span> mm, <span style="color:#66d9ef">int</span> un, EEC eec, String data) {
+</span></span><span style="display:flex;"><span>        StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        sj.<span style="color:#a6e22e">add</span>(barcode.<span style="color:#a6e22e">command</span>).<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;QR&#34;</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(x)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(y))
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;M&#34;</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(mm)).<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;U&#34;</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(un));
+</span></span><span style="display:flex;"><span>        addStrToCommand(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 二维码数据</span>
+</span></span><span style="display:flex;"><span>        addStrToCommand(eec.<span style="color:#a6e22e">value</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;A,&#34;</span> <span style="color:#f92672">+</span> data <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 结束二维码</span>
+</span></span><span style="display:flex;"><span>        addStrToCommand(<span style="color:#e6db74">&#34;ENDQR\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 用户可以使用 BOX 命令生成具有指定线条宽度的矩形。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param x0 左上角的 X 坐标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param y0 左上角的 Y 坐标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param x1 右下角的 X 坐标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param y1 右下角的 Y 坐标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param width 形成矩形框的线条的单位宽度 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">box</span>(<span style="color:#66d9ef">float</span> x0, <span style="color:#66d9ef">float</span> y0, <span style="color:#66d9ef">float</span> x1, <span style="color:#66d9ef">float</span> y1, <span style="color:#66d9ef">float</span> width) {
+</span></span><span style="display:flex;"><span>        StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        sj.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;BOX&#34;</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(x0)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(y0)).
+</span></span><span style="display:flex;"><span>                add(String.<span style="color:#a6e22e">valueOf</span>(x1)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(y1)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(width));
+</span></span><span style="display:flex;"><span>        addStrToCommand(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 使用 LINE 命令可以绘制任何长度、宽度和角度方向的线条。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param x0 左上角的 X 坐标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param y0 左上角的 Y 坐标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param x1 右下角的 X 坐标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param y1 右下角的 Y 坐标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param width 形成矩形框的线条的单位宽度 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">line</span>(<span style="color:#66d9ef">int</span> x0, <span style="color:#66d9ef">int</span> y0, <span style="color:#66d9ef">int</span> x1, <span style="color:#66d9ef">int</span> y1, <span style="color:#66d9ef">int</span> width) {
+</span></span><span style="display:flex;"><span>        StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>        sj.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;L&#34;</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(x0)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(y0)).
+</span></span><span style="display:flex;"><span>                add(String.<span style="color:#a6e22e">valueOf</span>(x1)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(y1)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(width));
+</span></span><span style="display:flex;"><span>        addStrToCommand(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 生成图片
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param x0 x
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param y0 y
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param width 图片宽度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param height 图片高度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param bmp bmp 数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">graphics</span>(<span style="color:#66d9ef">int</span> x0, <span style="color:#66d9ef">int</span> y0, <span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height, BufferedImage bmp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (bmp <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//生成2进制字符串</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> rgb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>3<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>            width <span style="color:#f92672">=</span> bmp.<span style="color:#a6e22e">getWidth</span>();
+</span></span><span style="display:flex;"><span>            height <span style="color:#f92672">=</span> bmp.<span style="color:#a6e22e">getHeight</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> wModByte <span style="color:#f92672">=</span> (width <span style="color:#f92672">%</span> 8) <span style="color:#f92672">==</span> 0 <span style="color:#f92672">?</span> 0 : 8 <span style="color:#f92672">-</span> (width <span style="color:#f92672">%</span> 8);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> pixelCount <span style="color:#f92672">=</span> (width <span style="color:#f92672">+</span> wModByte) <span style="color:#f92672">*</span> height;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> wPrintByte <span style="color:#f92672">=</span> (width <span style="color:#f92672">+</span> wModByte) <span style="color:#f92672">/</span> 8;
+</span></span><span style="display:flex;"><span>            StringBuilder res <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> 0; y <span style="color:#f92672">&lt;</span> height; y<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> 0; x <span style="color:#f92672">&lt;</span> width; x<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">int</span> pixel <span style="color:#f92672">=</span> bmp.<span style="color:#a6e22e">getRGB</span>(x, y);
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 下面三行代码将一个数字转换为RGB数字</span>
+</span></span><span style="display:flex;"><span>                    rgb<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> (pixel <span style="color:#f92672">&amp;</span> 0xff0000) <span style="color:#f92672">&gt;&gt;</span> 16;
+</span></span><span style="display:flex;"><span>                    rgb<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> (pixel <span style="color:#f92672">&amp;</span> 0xff00) <span style="color:#f92672">&gt;&gt;</span> 8;
+</span></span><span style="display:flex;"><span>                    rgb<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> (pixel <span style="color:#f92672">&amp;</span> 0xff);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    String bitStr <span style="color:#f92672">=</span> (rgb<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> rgb<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">+</span> rgb<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span>) <span style="color:#f92672">/</span> 3 <span style="color:#f92672">&gt;=</span> 200 <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;1&#34;</span> : <span style="color:#e6db74">&#34;0&#34;</span>;
+</span></span><span style="display:flex;"><span>                    res.<span style="color:#a6e22e">append</span>(bitStr);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> 0; k <span style="color:#f92672">&lt;</span> wModByte; k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    res.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;1&#34;</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//生成二值图字节流</span>
+</span></span><span style="display:flex;"><span>            String binary2 <span style="color:#f92672">=</span> res.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>            StringBuilder hexStr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> binary2.<span style="color:#a6e22e">length</span>(); i <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> 8) {
+</span></span><span style="display:flex;"><span>                String substring <span style="color:#f92672">=</span> binary2.<span style="color:#a6e22e">substring</span>(i, i <span style="color:#f92672">+</span> 8);
+</span></span><span style="display:flex;"><span>                String hex <span style="color:#f92672">=</span> Long.<span style="color:#a6e22e">toHexString</span>(Long.<span style="color:#a6e22e">parseLong</span>(substring,2));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(hex.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>                    hex <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#f92672">+</span> hex;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(hex.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">&gt;</span> 2) {
+</span></span><span style="display:flex;"><span>                    hex <span style="color:#f92672">=</span> hex.<span style="color:#a6e22e">substring</span>(hex.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">-</span> 2);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                hexStr.<span style="color:#a6e22e">append</span>(hex);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            StringJoiner sj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringJoiner(<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>            sj.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;EG&#34;</span>).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(wPrintByte)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(height))
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(x0)).<span style="color:#a6e22e">add</span>(String.<span style="color:#a6e22e">valueOf</span>(y0)).<span style="color:#a6e22e">add</span>(hexStr.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>            addStrToCommand(sj.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String <span style="color:#a6e22e">toHexString</span>(<span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bytes) {
+</span></span><span style="display:flex;"><span>        StringBuilder sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(Byte b : bytes) {
+</span></span><span style="display:flex;"><span>            String hex <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">toHexString</span>(b.<span style="color:#a6e22e">intValue</span>()).<span style="color:#a6e22e">toUpperCase</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(hex.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>                hex <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#f92672">+</span> hex;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(hex.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">&gt;</span> 2) {
+</span></span><span style="display:flex;"><span>                hex <span style="color:#f92672">=</span> hex.<span style="color:#a6e22e">substring</span>(hex.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">-</span> 2);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            sb.<span style="color:#a6e22e">append</span>(hex);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="模板解析处理">
+  模板解析处理
+  <a class="anchor" href="#%e6%a8%a1%e6%9d%bf%e8%a7%a3%e6%9e%90%e5%a4%84%e7%90%86">#</a>
+</h4>
+<p>标签</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> TAG {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    LAYOUT(<span style="color:#e6db74">&#34;layout&#34;</span>),
+</span></span><span style="display:flex;"><span>    HEADER(<span style="color:#e6db74">&#34;header&#34;</span>),
+</span></span><span style="display:flex;"><span>    FOOTER(<span style="color:#e6db74">&#34;footer&#34;</span>),
+</span></span><span style="display:flex;"><span>    TEXT(<span style="color:#e6db74">&#34;text&#34;</span>),
+</span></span><span style="display:flex;"><span>    IMAGE(<span style="color:#e6db74">&#34;image&#34;</span>),
+</span></span><span style="display:flex;"><span>    BARCODE(<span style="color:#e6db74">&#34;barcode&#34;</span>),
+</span></span><span style="display:flex;"><span>    LINE(<span style="color:#e6db74">&#34;line&#34;</span>),
+</span></span><span style="display:flex;"><span>    BOX(<span style="color:#e6db74">&#34;box&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String value;
+</span></span><span style="display:flex;"><span>    TAG(String value) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getValue</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>属性</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> ATTR {
+</span></span><span style="display:flex;"><span>    COMMAND(<span style="color:#e6db74">&#34;command&#34;</span>),
+</span></span><span style="display:flex;"><span>    SRC(<span style="color:#e6db74">&#34;src&#34;</span>),
+</span></span><span style="display:flex;"><span>    FONT_SIZE(<span style="color:#e6db74">&#34;fontSize&#34;</span>),
+</span></span><span style="display:flex;"><span>    FONT_WEIGHT(<span style="color:#e6db74">&#34;fontWeight&#34;</span>),
+</span></span><span style="display:flex;"><span>    WIDTH(<span style="color:#e6db74">&#34;width&#34;</span>),
+</span></span><span style="display:flex;"><span>    HEIGHT(<span style="color:#e6db74">&#34;height&#34;</span>),
+</span></span><span style="display:flex;"><span>    TYPE(<span style="color:#e6db74">&#34;type&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** 定义两张卷标纸间的垂直间距距离 */</span>
+</span></span><span style="display:flex;"><span>    GAP(<span style="color:#e6db74">&#34;gap&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** BARCODE: 0 表示人眼不可识，1 表示人眼可识 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** BARCODE: 一维条码种类 */</span>
+</span></span><span style="display:flex;"><span>    CODE_TYPE(<span style="color:#e6db74">&#34;codeType&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** BOX: 方框左上角 X 坐标，单位 dot */</span>
+</span></span><span style="display:flex;"><span>    START_X(<span style="color:#e6db74">&#34;startX&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** BOX: 方框左上角 Y 坐标，单位 dot */</span>
+</span></span><span style="display:flex;"><span>    START_Y(<span style="color:#e6db74">&#34;startY&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** BOX: 方框右下角 X 坐标，单位 dot */</span>
+</span></span><span style="display:flex;"><span>    END_X(<span style="color:#e6db74">&#34;endX&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** BOX: 方框右下角 Y 坐标，单位 dot */</span>
+</span></span><span style="display:flex;"><span>    END_Y(<span style="color:#e6db74">&#34;endY&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** BOX: 方框线宽，单位 dot */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** TEXT: 字体名称 */</span>
+</span></span><span style="display:flex;"><span>    FONT(<span style="color:#e6db74">&#34;font&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** TEXT: X 方向放大倍率 1-10*/</span>
+</span></span><span style="display:flex;"><span>    X_MULTIPLICATION(<span style="color:#e6db74">&#34;xMultiplication&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** TEXT: Y 方向放大倍率 1-10*/</span>
+</span></span><span style="display:flex;"><span>    Y_MULTIPLICATION(<span style="color:#e6db74">&#34;yMultiplication&#34;</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** 打印份数 */</span>
+</span></span><span style="display:flex;"><span>    COPIES(<span style="color:#e6db74">&#34;copies&#34;</span>),
+</span></span><span style="display:flex;"><span>    LEFT(<span style="color:#e6db74">&#34;left&#34;</span>),
+</span></span><span style="display:flex;"><span>    TOP(<span style="color:#e6db74">&#34;top&#34;</span>),
+</span></span><span style="display:flex;"><span>    VALUE(<span style="color:#e6db74">&#34;value&#34;</span>),
+</span></span><span style="display:flex;"><span>    ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> String value;
+</span></span><span style="display:flex;"><span>    ATTR(String value) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getValue</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">value</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>打印指令类型</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Printer</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** 解析模板 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">wrapTemplate</span>(Element element);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> T <span style="color:#a6e22e">printText</span>(Element element);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** 打印条形码 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> T <span style="color:#a6e22e">printBarcode</span>(Element element);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** 打印图片 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> T <span style="color:#a6e22e">printImage</span>(Element element);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** 打印线条 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> T <span style="color:#a6e22e">printLine</span>(Element element);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CpclPrinter</span> <span style="color:#66d9ef">extends</span> Printer<span style="color:#f92672">&lt;</span>CpclCommand<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">static</span> Logger logger <span style="color:#f92672">=</span> LoggerFactory.<span style="color:#a6e22e">getLogger</span>(CpclPrinter.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">wrapTemplate</span>(Element element) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(element <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        CpclCommand cpclCommand <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CpclCommand();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 指令预处理</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">preHandle</span>(cpclCommand, element);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> totalHeight <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">HEIGHT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        handlerNode(element, cpclCommand, totalHeight);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 模版解析后指令处理</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">afterHandle</span>(cpclCommand);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Vector<span style="color:#f92672">&lt;</span>Byte<span style="color:#f92672">&gt;</span> command <span style="color:#f92672">=</span> cpclCommand.<span style="color:#a6e22e">getCommand</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ArrayUtils.<span style="color:#a6e22e">toPrimitive</span>(command.<span style="color:#a6e22e">toArray</span>(<span style="color:#66d9ef">new</span> Byte<span style="color:#f92672">[</span>command.<span style="color:#a6e22e">size</span>()<span style="color:#f92672">]</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handlerNode</span>(Element element, CpclCommand cpclCommand, <span style="color:#66d9ef">int</span> totalHeight) {
+</span></span><span style="display:flex;"><span>        TAG parentElemEnum <span style="color:#f92672">=</span> EnumUtils.<span style="color:#a6e22e">getEnum</span>(TAG.<span style="color:#a6e22e">class</span>, element.<span style="color:#a6e22e">getName</span>().<span style="color:#a6e22e">toUpperCase</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Iterator iterator <span style="color:#f92672">=</span> element.<span style="color:#a6e22e">elementIterator</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (iterator.<span style="color:#a6e22e">hasNext</span>()) {
+</span></span><span style="display:flex;"><span>            Element elem <span style="color:#f92672">=</span> (Element) iterator.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>            String elemName <span style="color:#f92672">=</span> elem.<span style="color:#a6e22e">getName</span>();
+</span></span><span style="display:flex;"><span>            TAG elemEnum <span style="color:#f92672">=</span> EnumUtils.<span style="color:#a6e22e">getEnum</span>(TAG.<span style="color:#a6e22e">class</span>, elemName.<span style="color:#a6e22e">toUpperCase</span>());
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ((TAG.<span style="color:#a6e22e">HEADER</span>.<span style="color:#a6e22e">equals</span>(parentElemEnum) <span style="color:#f92672">||</span> TAG.<span style="color:#a6e22e">FOOTER</span>.<span style="color:#a6e22e">equals</span>(parentElemEnum)) <span style="color:#f92672">&amp;&amp;</span> TAG.<span style="color:#a6e22e">LAYOUT</span>.<span style="color:#a6e22e">equals</span>(elemEnum)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 把高度添加下下面layout中</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> parentHeight <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">HEIGHT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>                elem.<span style="color:#a6e22e">addAttribute</span>(<span style="color:#e6db74">&#34;top&#34;</span>, String.<span style="color:#a6e22e">valueOf</span>((totalHeight <span style="color:#f92672">-</span> parentHeight) <span style="color:#f92672">/</span> 8));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (TAG.<span style="color:#a6e22e">LAYOUT</span>.<span style="color:#a6e22e">equals</span>(parentElemEnum) <span style="color:#f92672">&amp;&amp;</span> TAG.<span style="color:#a6e22e">LAYOUT</span>.<span style="color:#a6e22e">equals</span>(elemEnum)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 把高度添加下下面layout中</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> parentHeight <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">HEIGHT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> parentTop <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">TOP</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> getIntValue(elem.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">HEIGHT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> top <span style="color:#f92672">=</span> getIntValue(elem.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">TOP</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>                elem.<span style="color:#a6e22e">addAttribute</span>(<span style="color:#e6db74">&#34;height&#34;</span>, String.<span style="color:#a6e22e">valueOf</span>((parentHeight <span style="color:#f92672">+</span> height) <span style="color:#f92672">/</span> 8));
+</span></span><span style="display:flex;"><span>                elem.<span style="color:#a6e22e">addAttribute</span>(<span style="color:#e6db74">&#34;top&#34;</span>, String.<span style="color:#a6e22e">valueOf</span>((parentTop <span style="color:#f92672">+</span> top) <span style="color:#f92672">/</span> 8));
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (TAG.<span style="color:#a6e22e">HEADER</span>.<span style="color:#a6e22e">equals</span>(elemEnum) <span style="color:#f92672">||</span> TAG.<span style="color:#a6e22e">FOOTER</span>.<span style="color:#a6e22e">equals</span>(elemEnum) <span style="color:#f92672">||</span> TAG.<span style="color:#a6e22e">LAYOUT</span>.<span style="color:#a6e22e">equals</span>(elemEnum)) {
+</span></span><span style="display:flex;"><span>                handlerNode(elem, cpclCommand, totalHeight);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                handlerTag(cpclCommand, elem);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handlerTag</span>(CpclCommand cpclCommand, Element elem) {
+</span></span><span style="display:flex;"><span>        String elemName <span style="color:#f92672">=</span> elem.<span style="color:#a6e22e">getName</span>();
+</span></span><span style="display:flex;"><span>        TAG elemEnum <span style="color:#f92672">=</span> EnumUtils.<span style="color:#a6e22e">getEnum</span>(TAG.<span style="color:#a6e22e">class</span>, elemName.<span style="color:#a6e22e">toUpperCase</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(elemEnum <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (elemEnum) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> TEXT:
+</span></span><span style="display:flex;"><span>                cpclCommand.<span style="color:#a6e22e">addCommand</span>(printText(elem));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> IMAGE:
+</span></span><span style="display:flex;"><span>                cpclCommand.<span style="color:#a6e22e">addCommand</span>(printImage(elem));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> BARCODE:
+</span></span><span style="display:flex;"><span>                cpclCommand.<span style="color:#a6e22e">addCommand</span>(printBarcode(elem));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> LINE:
+</span></span><span style="display:flex;"><span>                cpclCommand.<span style="color:#a6e22e">addCommand</span>(printLine(elem));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> BOX:
+</span></span><span style="display:flex;"><span>                cpclCommand.<span style="color:#a6e22e">addCommand</span>(printBox(elem));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">default</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">preHandle</span>(CpclCommand cpclCommand, Element element) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">WIDTH</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">HEIGHT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> copies <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">COPIES</span>.<span style="color:#a6e22e">getValue</span>()), 1);
+</span></span><span style="display:flex;"><span>        cpclCommand.<span style="color:#a6e22e">init</span>(width, height, copies);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">afterHandle</span>(CpclCommand cpclCommand) {
+</span></span><span style="display:flex;"><span>        cpclCommand.<span style="color:#a6e22e">print</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> CpclCommand <span style="color:#a6e22e">printText</span>(Element element) {
+</span></span><span style="display:flex;"><span>        Element parent <span style="color:#f92672">=</span> element.<span style="color:#a6e22e">getParent</span>();
+</span></span><span style="display:flex;"><span>        String style <span style="color:#f92672">=</span> element.<span style="color:#a6e22e">attributeValue</span>(<span style="color:#e6db74">&#34;style&#34;</span>);
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> split <span style="color:#f92672">=</span> style.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;;&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        CpclCommand cpclCommand <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CpclCommand();
+</span></span><span style="display:flex;"><span>        CpclCommand.<span style="color:#a6e22e">TEXT</span> textCommand <span style="color:#f92672">=</span> getValue(EnumUtils.<span style="color:#a6e22e">getEnum</span>(CpclCommand.<span style="color:#a6e22e">TEXT</span>.<span style="color:#a6e22e">class</span>, element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">COMMAND</span>.<span style="color:#a6e22e">getValue</span>())), CpclCommand.<span style="color:#a6e22e">TEXT</span>.<span style="color:#a6e22e">TEXT</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">LEFT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">TOP</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        String data <span style="color:#f92672">=</span> element.<span style="color:#a6e22e">getText</span>().<span style="color:#a6e22e">trim</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> size <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">FONT_SIZE</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> gap <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">GAP</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">WIDTH</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">HEIGHT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> blod <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">FONT_WEIGHT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 放大</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> xMultiplication <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">X_MULTIPLICATION</span>.<span style="color:#a6e22e">getValue</span>()), 1);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> yMultiplication <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">Y_MULTIPLICATION</span>.<span style="color:#a6e22e">getValue</span>()), 1);
+</span></span><span style="display:flex;"><span>        CpclCommand.<span style="color:#a6e22e">FONT</span> font <span style="color:#f92672">=</span> getValue(EnumUtils.<span style="color:#a6e22e">getEnum</span>(CpclCommand.<span style="color:#a6e22e">FONT</span>.<span style="color:#a6e22e">class</span>, element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">FONT</span>.<span style="color:#a6e22e">getValue</span>())), CpclCommand.<span style="color:#a6e22e">FONT</span>.<span style="color:#a6e22e">F24</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> isCenter <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> split.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            String<span style="color:#f92672">[]</span> split1 <span style="color:#f92672">=</span> split<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;:&#34;</span>);
+</span></span><span style="display:flex;"><span>            String key <span style="color:#f92672">=</span> split1<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>            String value <span style="color:#f92672">=</span> split1<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 字体加粗</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">contains</span>(<span style="color:#e6db74">&#34;fontWeight&#34;</span>)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#34;bold&#34;</span>.<span style="color:#a6e22e">equals</span>(value)) {
+</span></span><span style="display:flex;"><span>                    blod <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 字体大小</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">contains</span>(<span style="color:#e6db74">&#34;fontSize&#34;</span>)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#34;auto&#34;</span>.<span style="color:#a6e22e">equals</span>(value)) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">int</span> nextY <span style="color:#f92672">=</span> cpclCommand.<span style="color:#a6e22e">calcSimulateBlockNextY</span>(textCommand, font, size, x, y, data, width, 2, 2, gap);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (nextY <span style="color:#f92672">&gt;</span> y <span style="color:#f92672">+</span> height) {
+</span></span><span style="display:flex;"><span>                        xMultiplication <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>                        yMultiplication <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                        xMultiplication <span style="color:#f92672">=</span> 2;
+</span></span><span style="display:flex;"><span>                        yMultiplication <span style="color:#f92672">=</span> 2;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (Integer.<span style="color:#a6e22e">parseInt</span>(value) <span style="color:#f92672">&gt;</span> 14) {
+</span></span><span style="display:flex;"><span>                    xMultiplication <span style="color:#f92672">=</span> 2;
+</span></span><span style="display:flex;"><span>                    yMultiplication <span style="color:#f92672">=</span> 2;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (Integer.<span style="color:#a6e22e">parseInt</span>(value) <span style="color:#f92672">&lt;=</span> 6) {
+</span></span><span style="display:flex;"><span>                    font <span style="color:#f92672">=</span> CpclCommand.<span style="color:#a6e22e">FONT</span>.<span style="color:#a6e22e">F55</span>;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                    xMultiplication <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>                    yMultiplication <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 居中</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (key.<span style="color:#a6e22e">contains</span>(<span style="color:#e6db74">&#34;align&#34;</span>)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#34;center&#34;</span>.<span style="color:#a6e22e">equals</span>(value)) {
+</span></span><span style="display:flex;"><span>                    isCenter <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 加粗</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (blod <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>            cpclCommand.<span style="color:#a6e22e">setBlod</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 放大</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (xMultiplication <span style="color:#f92672">&gt;</span> 1 <span style="color:#f92672">&amp;&amp;</span> yMultiplication <span style="color:#f92672">&gt;</span> 1) {
+</span></span><span style="display:flex;"><span>            cpclCommand.<span style="color:#a6e22e">setMag</span>(xMultiplication, yMultiplication);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        cpclCommand.<span style="color:#a6e22e">addSimulateBlock</span>(textCommand, font, size, x, y, data, width, xMultiplication, yMultiplication, gap, isCenter);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 重置字体样式</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (xMultiplication <span style="color:#f92672">&gt;</span> 1 <span style="color:#f92672">&amp;&amp;</span> yMultiplication <span style="color:#f92672">&gt;</span> 1) {
+</span></span><span style="display:flex;"><span>            cpclCommand.<span style="color:#a6e22e">setMag</span>(1, 1);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (blod <span style="color:#f92672">==</span> 1) {
+</span></span><span style="display:flex;"><span>            cpclCommand.<span style="color:#a6e22e">setBlod</span>(<span style="color:#66d9ef">false</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cpclCommand;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> CpclCommand <span style="color:#a6e22e">printBarcode</span>(Element element) {
+</span></span><span style="display:flex;"><span>        Element parent <span style="color:#f92672">=</span> element.<span style="color:#a6e22e">getParent</span>();
+</span></span><span style="display:flex;"><span>        CpclCommand cpclCommand <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CpclCommand();
+</span></span><span style="display:flex;"><span>        CpclCommand.<span style="color:#a6e22e">BARCODE</span> barcode <span style="color:#f92672">=</span> getValue(EnumUtils.<span style="color:#a6e22e">getEnum</span>(CpclCommand.<span style="color:#a6e22e">BARCODE</span>.<span style="color:#a6e22e">class</span>, element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">COMMAND</span>.<span style="color:#a6e22e">getValue</span>())), CpclCommand.<span style="color:#a6e22e">BARCODE</span>.<span style="color:#a6e22e">BARCODE</span>);
+</span></span><span style="display:flex;"><span>        CpclCommand.<span style="color:#a6e22e">CODE_TYPE</span> codeType <span style="color:#f92672">=</span> getValue(EnumUtils.<span style="color:#a6e22e">getEnum</span>(CpclCommand.<span style="color:#a6e22e">CODE_TYPE</span>.<span style="color:#a6e22e">class</span>, element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">CODE_TYPE</span>.<span style="color:#a6e22e">getValue</span>())), CpclCommand.<span style="color:#a6e22e">CODE_TYPE</span>.<span style="color:#a6e22e">CODE128</span>);
+</span></span><span style="display:flex;"><span>        String type <span style="color:#f92672">=</span> getValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">TYPE</span>.<span style="color:#a6e22e">getValue</span>()), <span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">LEFT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">TOP</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">WIDTH</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">HEIGHT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        CpclCommand.<span style="color:#a6e22e">RATIO</span> ratio <span style="color:#f92672">=</span> CpclCommand.<span style="color:#a6e22e">RATIO</span>.<span style="color:#a6e22e">R2</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        String data <span style="color:#f92672">=</span> StringUtil.<span style="color:#a6e22e">valueOf</span>(element.<span style="color:#a6e22e">getText</span>()).<span style="color:#a6e22e">trim</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (StringUtil.<span style="color:#a6e22e">isBlank</span>(data)) {
+</span></span><span style="display:flex;"><span>            data <span style="color:#f92672">=</span> StringUtil.<span style="color:#a6e22e">valueOf</span>(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">VALUE</span>.<span style="color:#a6e22e">getValue</span>())).<span style="color:#a6e22e">trim</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (StringUtil.<span style="color:#a6e22e">isBlank</span>(data)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> cpclCommand;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#34;qrcode&#34;</span>.<span style="color:#a6e22e">equals</span>(type)) {
+</span></span><span style="display:flex;"><span>            cpclCommand.<span style="color:#a6e22e">qrCode</span>(barcode, x, y, 2, 3, CpclCommand.<span style="color:#a6e22e">EEC</span>.<span style="color:#a6e22e">LEVEL_M</span>, data);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> cellWidth <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) Math.<span style="color:#a6e22e">floor</span>(width <span style="color:#f92672">/</span> (ratio.<span style="color:#a6e22e">getValue</span>() <span style="color:#f92672">*</span> data.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">*</span> 6));
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> posX <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> (<span style="color:#66d9ef">int</span>) ((width <span style="color:#f92672">-</span> ratio.<span style="color:#a6e22e">getValue</span>() <span style="color:#f92672">*</span> data.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">*</span> 6 <span style="color:#f92672">*</span> cellWidth) <span style="color:#f92672">*</span> 0.<span style="color:#a6e22e">3</span>);
+</span></span><span style="display:flex;"><span>            cpclCommand.<span style="color:#a6e22e">barcode</span>(barcode, codeType, cellWidth, ratio, height, posX, y, data);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cpclCommand;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> CpclCommand <span style="color:#a6e22e">printImage</span>(Element element) {
+</span></span><span style="display:flex;"><span>        Element parent <span style="color:#f92672">=</span> element.<span style="color:#a6e22e">getParent</span>();
+</span></span><span style="display:flex;"><span>        CpclCommand cpclCommand <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CpclCommand();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">LEFT</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">TOP</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>        String src <span style="color:#f92672">=</span> element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">SRC</span>.<span style="color:#a6e22e">getValue</span>());
+</span></span><span style="display:flex;"><span>        BufferedImage image <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(src.<span style="color:#a6e22e">startsWith</span>(<span style="color:#e6db74">&#34;data:image/png;base64,&#34;</span>)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bytes <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">getDecoder</span>().<span style="color:#a6e22e">decode</span>(src.<span style="color:#a6e22e">substring</span>(<span style="color:#e6db74">&#34;data:image/png;base64,&#34;</span>.<span style="color:#a6e22e">length</span>()));
+</span></span><span style="display:flex;"><span>                ByteArrayInputStream is <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteArrayInputStream(bytes);
+</span></span><span style="display:flex;"><span>                image <span style="color:#f92672">=</span> ImageIO.<span style="color:#a6e22e">read</span>(is);
+</span></span><span style="display:flex;"><span>                is.<span style="color:#a6e22e">close</span>();
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                image <span style="color:#f92672">=</span> ImgUtils.<span style="color:#a6e22e">getImageFromUrl</span>(src);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(image <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> cpclCommand;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 未设定宽度值则根据高度同比例进行压缩</span>
+</span></span><span style="display:flex;"><span>            height <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">HEIGHT</span>.<span style="color:#a6e22e">getValue</span>()), image.<span style="color:#a6e22e">getHeight</span>());
+</span></span><span style="display:flex;"><span>            width <span style="color:#f92672">=</span> getIntValue(parent.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">WIDTH</span>.<span style="color:#a6e22e">getValue</span>()), image.<span style="color:#a6e22e">getWidth</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 压缩图片大小</span>
+</span></span><span style="display:flex;"><span>            BufferedImage bitMap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedImage(width, height, BufferedImage.<span style="color:#a6e22e">TYPE_BYTE_BINARY</span>);
+</span></span><span style="display:flex;"><span>            bitMap.<span style="color:#a6e22e">getGraphics</span>().<span style="color:#a6e22e">drawImage</span>(image, 0, 0, width, height, <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>            bitMap.<span style="color:#a6e22e">getGraphics</span>().<span style="color:#a6e22e">dispose</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            cpclCommand.<span style="color:#a6e22e">graphics</span>(x, y, width, height, bitMap);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            bitMap.<span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>            image.<span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (MalformedURLException e) {
+</span></span><span style="display:flex;"><span>            logger.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;图片URL解析异常！&#34;</span>, e);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            logger.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;图片读取或下载异常！&#34;</span>, e);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (image <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                image.<span style="color:#a6e22e">getGraphics</span>().<span style="color:#a6e22e">dispose</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cpclCommand;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> CpclCommand <span style="color:#a6e22e">printLine</span>(Element element) {
+</span></span><span style="display:flex;"><span>        CpclCommand cpclCommand <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CpclCommand();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x0 <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">START_X</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y0 <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">START_Y</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x1 <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">END_X</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> y1 <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">END_Y</span>.<span style="color:#a6e22e">getValue</span>()), 0);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> getIntValue(element.<span style="color:#a6e22e">attributeValue</span>(ATTR.<span style="color:#a6e22e">WIDTH</span>.<span style="color:#a6e22e">getValue</span>()), 1);
+</span></span><span style="display:flex;"><span>        cpclCommand.<span style="color:#a6e22e">line</span>(x0, y0, x1, y1, width);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cpclCommand;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getIntValue</span>(String str, <span style="color:#66d9ef">int</span> defaultValue) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> StringUtil.<span style="color:#a6e22e">isNotBlank</span>(str) <span style="color:#f92672">?</span> (<span style="color:#66d9ef">int</span>)(Float.<span style="color:#a6e22e">parseFloat</span>(str) <span style="color:#f92672">*</span> 8) : defaultValue;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> T <span style="color:#a6e22e">getValue</span>(T value, T defaultValue) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> value <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> value : defaultValue;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> BufferedImage <span style="color:#a6e22e">getImageFromUrl</span>(String url) <span style="color:#66d9ef">throws</span> IOException {
+</span></span><span style="display:flex;"><span>        BufferedImage bufferedImage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        URL imgUrl <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> URL(url);
+</span></span><span style="display:flex;"><span>        HttpURLConnection conn <span style="color:#f92672">=</span> (HttpURLConnection)imgUrl.<span style="color:#a6e22e">openConnection</span>();
+</span></span><span style="display:flex;"><span>        conn.<span style="color:#a6e22e">setConnectTimeout</span>(5000);
+</span></span><span style="display:flex;"><span>        conn.<span style="color:#a6e22e">setReadTimeout</span>(5000);
+</span></span><span style="display:flex;"><span>        conn.<span style="color:#a6e22e">connect</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (HttpURLConnection.<span style="color:#a6e22e">HTTP_OK</span> <span style="color:#f92672">==</span> conn.<span style="color:#a6e22e">getResponseCode</span>()) {
+</span></span><span style="display:flex;"><span>          InputStream inputStream <span style="color:#f92672">=</span> conn.<span style="color:#a6e22e">getInputStream</span>();
+</span></span><span style="display:flex;"><span>          bufferedImage <span style="color:#f92672">=</span> ImageIO.<span style="color:#a6e22e">read</span>(inputStream);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>          logger.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;获取网络图片失败,scr={}, code={}, msg={} &#34;</span>, url, conn.<span style="color:#a6e22e">getResponseCode</span>(), conn.<span style="color:#a6e22e">getResponseMessage</span>());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        conn.<span style="color:#a6e22e">disconnect</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> bufferedImage;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 合并字节数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param bt1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param bt2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">byteMerger</span>(<span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bt1, <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bt2) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bt3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>bt1.<span style="color:#a6e22e">length</span> <span style="color:#f92672">+</span> bt2.<span style="color:#a6e22e">length</span><span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">arraycopy</span>(bt1, 0, bt3, 0, bt1.<span style="color:#a6e22e">length</span>);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">arraycopy</span>(bt2, 0, bt3, bt1.<span style="color:#a6e22e">length</span>, bt2.<span style="color:#a6e22e">length</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> bt3;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="测试">
+  测试
+  <a class="anchor" href="#%e6%b5%8b%e8%af%95">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>SAXReader saxreader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SAXReader();
+</span></span><span style="display:flex;"><span>Document dom <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  dom <span style="color:#f92672">=</span> saxreader.<span style="color:#a6e22e">read</span>(<span style="color:#66d9ef">new</span> ByteArrayInputStream(DemoConstnts.<span style="color:#a6e22e">template_74</span>.<span style="color:#a6e22e">getBytes</span>(<span style="color:#e6db74">&#34;UTF-8&#34;</span>)));
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>  e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>Element rootEle <span style="color:#f92672">=</span> dom.<span style="color:#a6e22e">getRootElement</span>();
+</span></span><span style="display:flex;"><span>CpclPrinter cpclPrinter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CpclPrinter();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> cmd <span style="color:#f92672">=</span> cpclPrinter.<span style="color:#a6e22e">wrapTemplate</span>(rootEle);
+</span></span><span style="display:flex;"><span>System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#66d9ef">new</span> String(cmd, <span style="color:#e6db74">&#34;GB18030&#34;</span>));
+</span></span></code></pre></div><h3 id="其他问题">
+  其他问题
+  <a class="anchor" href="#%e5%85%b6%e4%bb%96%e9%97%ae%e9%a2%98">#</a>
+</h3>
+<p>java 调用 js 问题</p>
+<p>由于模板引擎是js语言，xml解析成CPCL指令是使用java写的，所以需要在java应用中调用这套js逻辑。</p>
+<blockquote>
+<p>注意：这里也可以把java解析CPCL改造成js的写法，这样就直接起个nodejs项目就可以。</p>
+<p>上面java调用js可能会性能问题，还有其他不可预估问题，所以这里的是单独起个应用，不能因为这个问题而影响到其他功能的正常运行。</p>
+</blockquote>
+<p>调用 node 应用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EjsRenderUtils</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">ejsRender</span>( String data) {
+</span></span><span style="display:flex;"><span>        ProcessBuilder processBuilder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ProcessBuilder();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Random rand <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Random();
+</span></span><span style="display:flex;"><span>        String tempFileName <span style="color:#f92672">=</span> System.<span style="color:#a6e22e">currentTimeMillis</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_&#34;</span> <span style="color:#f92672">+</span> rand.<span style="color:#a6e22e">nextInt</span>(1000);
+</span></span><span style="display:flex;"><span>        String dataTempFileName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;temp/&#34;</span> <span style="color:#f92672">+</span> tempFileName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.json&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 清理一小时前的临时文件</span>
+</span></span><span style="display:flex;"><span>            File tempDir <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File(<span style="color:#e6db74">&#34;temp/&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>tempDir.<span style="color:#a6e22e">exists</span>()) {
+</span></span><span style="display:flex;"><span>                tempDir.<span style="color:#a6e22e">mkdirs</span>();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">long</span> oneHourAgo <span style="color:#f92672">=</span> System.<span style="color:#a6e22e">currentTimeMillis</span>() <span style="color:#f92672">-</span> (1000 <span style="color:#f92672">*</span> 60 <span style="color:#f92672">*</span> 60);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (tempDir.<span style="color:#a6e22e">listFiles</span>() <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (File file : tempDir.<span style="color:#a6e22e">listFiles</span>()) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (file.<span style="color:#a6e22e">lastModified</span>() <span style="color:#f92672">&lt;</span> oneHourAgo) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">// Delete the file if it&#39;s older than one hour</span>
+</span></span><span style="display:flex;"><span>                        file.<span style="color:#a6e22e">delete</span>(); 
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 将参数写入临时文件</span>
+</span></span><span style="display:flex;"><span>            File dataTempFile <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File(dataTempFileName);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            Files.<span style="color:#a6e22e">write</span>(dataTempFile.<span style="color:#a6e22e">toPath</span>(), data.<span style="color:#a6e22e">getBytes</span>(), StandardOpenOption.<span style="color:#a6e22e">CREATE</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span>(IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        processBuilder.<span style="color:#a6e22e">command</span>(<span style="color:#e6db74">&#34;node&#34;</span>,  <span style="color:#e6db74">&#34;script/ejsRender.js&#34;</span>, tempFileName);
+</span></span><span style="display:flex;"><span>        StringBuilder output <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            Process process <span style="color:#f92672">=</span> processBuilder.<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            BufferedReader reader <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">new</span> BufferedReader(<span style="color:#66d9ef">new</span> InputStreamReader(process.<span style="color:#a6e22e">getInputStream</span>()));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            String line;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> ((line <span style="color:#f92672">=</span> reader.<span style="color:#a6e22e">readLine</span>()) <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                output.<span style="color:#a6e22e">append</span>(line).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;\n&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> exitCode <span style="color:#f92672">=</span> process.<span style="color:#a6e22e">waitFor</span>();
+</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;\nExited with error code : &#34;</span> <span style="color:#f92672">+</span> exitCode);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (IOException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Return the output from the script</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> output.<span style="color:#a6e22e">toString</span>().<span style="color:#a6e22e">trim</span>(); 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>最后整合起来就是</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 获取模板内容</span>
+</span></span><span style="display:flex;"><span>String xmlTemplate <span style="color:#f92672">=</span> EjsRenderUtils.<span style="color:#a6e22e">ejsRender</span>(...);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 把xml模板转换成document</span>
+</span></span><span style="display:flex;"><span>Document templateDom <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  SAXReader saxreader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SAXReader();
+</span></span><span style="display:flex;"><span>  templateDom <span style="color:#f92672">=</span> saxreader.<span style="color:#a6e22e">read</span>(<span style="color:#66d9ef">new</span> ByteArrayInputStream(xmlTemplate.<span style="color:#a6e22e">getBytes</span>(StandardCharsets.<span style="color:#a6e22e">UTF_8</span>)));
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>  logger.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;SAXReader.read转换错误, {}&#34;</span>, e.<span style="color:#a6e22e">getMessage</span>());
+</span></span><span style="display:flex;"><span>  logger.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#34;xml解析后的结果: {}&#34;</span>, xmlTemplate);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 解析指令</span>
+</span></span><span style="display:flex;"><span>Element rootEle <span style="color:#f92672">=</span> templateDom.<span style="color:#a6e22e">getRootElement</span>();
+</span></span><span style="display:flex;"><span>CpclPrinter cpclPrinter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CpclPrinter();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> cmd <span style="color:#f92672">=</span> cpclPrinter.<span style="color:#a6e22e">wrapTemplate</span>(rootEle);
+</span></span></code></pre></div><p>整体内容结束！</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/posts/%e4%b8%80%e6%ac%a1%e8%8f%9c%e9%b8%9f%e7%94%b5%e5%ad%90%e9%9d%a2%e5%8d%95%e8%93%9d%e7%89%99%e6%89%93%e5%8d%b0%e6%94%b9%e9%80%a0%e6%80%bb%e7%bb%93.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#问题分析">问题分析</a></li>
+    <li><a href="#菜鸟电子面单解析分析过程">菜鸟电子面单解析分析过程</a>
+      <ul>
+        <li><a href="#验证js模板引擎">验证js模板引擎</a></li>
+        <li><a href="#xml-解析成cpcl指令">xml 解析成CPCL指令</a></li>
+        <li><a href="#其他问题">其他问题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

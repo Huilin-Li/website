@@ -2,80 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/docs/blogs/bioworld/</loc>
+    <loc>http://localhost:49612/docs/project/binderdesign/binderdesign/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/hugo/hugobookgithubaction/</loc>
+    <loc>http://localhost:49612/docs/project/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/me/</loc>
+    <loc>http://localhost:49612/posts/proteinstruture/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/bioworld/binderdesign/</loc>
+    <loc>http://localhost:49612/tags/bash/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/bioworld/proteinstruture/</loc>
+    <loc>http://localhost:49612/posts/shell/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/</loc>
+    <loc>http://localhost:49612/docs/project/binderdesign/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/hugo/</loc>
+    <loc>http://localhost:49612/categories/biology/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/hugo/hugo/</loc>
+    <loc>http://localhost:49612/posts/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/travel/</loc>
+    <loc>http://localhost:49612/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/blogs/shell/</loc>
+    <loc>http://localhost:49612/categories/command-line/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/creating-a-new-theme/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/docs/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/migrate-from-jekyll/</loc>
-    <lastmod>2014-03-10T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/tags/git/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/tags/github-action/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/tags/hugo/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/goisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/categories/hugo/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/posts/hugo/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/development/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/development/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/tags/protein/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/hugoisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/tags/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/go/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>http://localhost:49612/posts/hugobookgithubaction/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/golang/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/golang/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/hugo/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/templates/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/themes/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/docs/</loc>
-  </url><url>
-    <loc>http://localhost:1313/docs/blogs/literature/</loc>
-  </url><url>
-    <loc>http://localhost:1313/docs/blogs/plotly/</loc>
-  </url><url>
-    <loc>http://localhost:1313/docs/blogs/plotly/examples/</loc>
+    <loc>http://localhost:49612/links/</loc>
   </url>
 </urlset>

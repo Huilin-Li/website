@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Git提交规范#格式：
+&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt; [&lt;ISSUE_ID&gt;] &lt;body&gt; &lt;footer&gt; 例子：
+feat(user): Add user registration [777] Use Tencent cloud verification code to verify mobile phone and add user registration function https://github.com/one-user/a-project/issues/777 以下是字段说明#type [必须]#用于说明 commit 的类别，只允许使用下面几种标识：
+feat：新功能（feature） fix：修补bug docs：文档（documentation） style： 格式（不影响代码运行的变动） refactor：重构（即不是新增功能，也不是修改bug的代码变动） perf：优化 test：增加测试 chore：构建过程或辅助工具的变动 revert：撤销上一次的 commit
+scope [必须]#用于说明修改的范围，基本上有有以下几种情形：
+all：表示大范围的修改 loation：表示小范围的修改 module：表示修改了某个模块 例如：feat(user): add user login
+subject [必须]#用于表示本次提交修改的简要说明，尽量简短
+ISSUE_ID [可选]#添加在 git issues 中需求或者 bug 修复对应的 issues 记录ID">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Git提交规范" />
+<meta property="og:description" content="Git提交规范#格式：
+&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt; [&lt;ISSUE_ID&gt;] &lt;body&gt; &lt;footer&gt; 例子：
+feat(user): Add user registration [777] Use Tencent cloud verification code to verify mobile phone and add user registration function https://github.com/one-user/a-project/issues/777 以下是字段说明#type [必须]#用于说明 commit 的类别，只允许使用下面几种标识：
+feat：新功能（feature） fix：修补bug docs：文档（documentation） style： 格式（不影响代码运行的变动） refactor：重构（即不是新增功能，也不是修改bug的代码变动） perf：优化 test：增加测试 chore：构建过程或辅助工具的变动 revert：撤销上一次的 commit
+scope [必须]#用于说明修改的范围，基本上有有以下几种情形：
+all：表示大范围的修改 loation：表示小范围的修改 module：表示修改了某个模块 例如：feat(user): add user login
+subject [必须]#用于表示本次提交修改的简要说明，尽量简短
+ISSUE_ID [可选]#添加在 git issues 中需求或者 bug 修复对应的 issues 记录ID" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/history/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-11T11:31:04+00:00" />
+<meta property="article:modified_time" content="2023-04-11T11:31:04+00:00" />
+
+<title>Git提交规范 | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/posts/history/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.63b6564d7b3b31dd72b69135cc6c6b73c5ad27a2c8e9373f7ae6f091b7281354.js" integrity="sha256-Y7ZWTXs7Md1ytpE1zGxrc8WtJ6LI6Tc/eubwkbcoE1Q=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><img src="/logo.png" alt="Logo" /><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/me/" class="">Keep Things Simple</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Blog</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/bioworld/" class="">Biology World</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/bioworld/binderdesign/" class="">TP Binder Design</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/bioworld/proteinstruture/" class="">4 levels of protein structure</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/" class="">Hugo</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/hugobookgithubaction/" class="">HugoBook&#43;GithubAction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/hugo/hugo/" class="">Hugo Commands</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/shell/" class="">Bash Scripts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>literature</span>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <span>Plotly</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blogs/plotly/examples/" class="">Visualization via plotly</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/travel/" class="">World</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        我的博客
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.goodreads.com/review/list/177314441"  target="_blank" rel="noopener">
+        goodreads
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Git提交规范</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#type-必须">type [必须]</a></li>
+    <li><a href="#scope-必须">scope [必须]</a></li>
+    <li><a href="#subject-必须">subject [必须]</a></li>
+    <li><a href="#issue_id-可选">ISSUE_ID [可选]</a></li>
+    <li><a href="#body-可选">body [可选]</a></li>
+    <li><a href="#footer-可选">footer [可选]</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/history/git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83/">Git提交规范</a>
+  </h1>
+  
+  <h5>April 11, 2023</h5>
+
+
+
+  
+
+  
+  <div>
+    
+      <a href="/tags/2023-05-07%E4%BB%8Ehalo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">2023-05-07从halo博客迁移</a>
+  </div>
+  
+
+
+
+<h1 id="git提交规范">
+  Git提交规范
+  <a class="anchor" href="#git%e6%8f%90%e4%ba%a4%e8%a7%84%e8%8c%83">#</a>
+</h1>
+<p>格式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt; [&lt;ISSUE_ID&gt;]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;body&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;footer&gt;
+</span></span></code></pre></div><p>例子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>feat(user): Add user registration [777]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Use Tencent cloud verification code to verify mobile phone 
+</span></span><span style="display:flex;"><span>and add user registration function
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>https://github.com/one-user/a-project/issues/777
+</span></span></code></pre></div><h1 id="以下是字段说明">
+  以下是字段说明
+  <a class="anchor" href="#%e4%bb%a5%e4%b8%8b%e6%98%af%e5%ad%97%e6%ae%b5%e8%af%b4%e6%98%8e">#</a>
+</h1>
+<h2 id="type-必须">
+  type [必须]
+  <a class="anchor" href="#type-%e5%bf%85%e9%a1%bb">#</a>
+</h2>
+<p>用于说明 commit 的类别，只允许使用下面几种标识：</p>
+<p>feat：新功能（feature）
+fix：修补bug
+docs：文档（documentation）
+style： 格式（不影响代码运行的变动）
+refactor：重构（即不是新增功能，也不是修改bug的代码变动）
+perf：优化
+test：增加测试
+chore：构建过程或辅助工具的变动
+revert：撤销上一次的 commit</p>
+<h2 id="scope-必须">
+  scope [必须]
+  <a class="anchor" href="#scope-%e5%bf%85%e9%a1%bb">#</a>
+</h2>
+<p>用于说明修改的范围，基本上有有以下几种情形：</p>
+<p>all：表示大范围的修改
+loation：表示小范围的修改
+module：表示修改了某个模块 例如：feat(user): add user login</p>
+<h2 id="subject-必须">
+  subject [必须]
+  <a class="anchor" href="#subject-%e5%bf%85%e9%a1%bb">#</a>
+</h2>
+<p>用于表示本次提交修改的简要说明，尽量简短</p>
+<h2 id="issue_id-可选">
+  ISSUE_ID [可选]
+  <a class="anchor" href="#issue_id-%e5%8f%af%e9%80%89">#</a>
+</h2>
+<p>添加在 git issues 中需求或者 bug
+修复对应的 issues 记录ID</p>
+<h2 id="body-可选">
+  body [可选]
+  <a class="anchor" href="#body-%e5%8f%af%e9%80%89">#</a>
+</h2>
+<p>body中就是 subject的详细说明</p>
+<h2 id="footer-可选">
+  footer [可选]
+  <a class="anchor" href="#footer-%e5%8f%af%e9%80%89">#</a>
+</h2>
+<p>可以写备注，填写相关的需求管理 issues id</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/posts/history/Git%e6%8f%90%e4%ba%a4%e8%a7%84%e8%8c%83.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#type-必须">type [必须]</a></li>
+    <li><a href="#scope-必须">scope [必须]</a></li>
+    <li><a href="#subject-必须">subject [必须]</a></li>
+    <li><a href="#issue_id-可选">ISSUE_ID [可选]</a></li>
+    <li><a href="#body-可选">body [可选]</a></li>
+    <li><a href="#footer-可选">footer [可选]</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
