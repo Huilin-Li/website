@@ -6,6 +6,8 @@
   </url><url>
     <loc>http://localhost:1313/docs/project/</loc>
   </url><url>
+    <loc>http://localhost:1313/tags/3d/</loc>
+  </url><url>
     <loc>http://localhost:1313/posts/proteinstruture/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/bash/</loc>
@@ -24,6 +26,8 @@
   </url><url>
     <loc>http://localhost:1313/docs/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/plane/</loc>
+  </url><url>
     <loc>http://localhost:1313/tags/git/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/github-action/</loc>
@@ -36,9 +40,15 @@
   </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>
+    <loc>http://localhost:1313/tags/plane/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/plotly/</loc>
+  </url><url>
     <loc>http://localhost:1313/tags/protein/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/visualization/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/hugobookgithubaction/</loc>
   </url><url>
