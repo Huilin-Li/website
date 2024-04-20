@@ -22,6 +22,13 @@
       <description></description>
     </item>
     <item>
+      <title>Excel</title>
+      <link>http://localhost:1313/categories/excel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/excel/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Hugo</title>
       <link>http://localhost:1313/categories/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -33,6 +40,13 @@
       <link>http://localhost:1313/categories/plotly/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/plotly/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PyMol</title>
+      <link>http://localhost:1313/categories/pymol/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/pymol/</guid>
       <description></description>
     </item>
   </channel>

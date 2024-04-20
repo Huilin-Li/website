@@ -6,6 +6,8 @@
   </url><url>
     <loc>http://localhost:1313/docs/project/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/pymol/</loc>
+  </url><url>
     <loc>http://localhost:1313/tags/3d/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/proteinstruture/</loc>
@@ -28,6 +30,12 @@
   </url><url>
     <loc>http://localhost:1313/posts/plane/</loc>
   </url><url>
+    <loc>http://localhost:1313/tags/excel/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/excel/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/excel/</loc>
+  </url><url>
     <loc>http://localhost:1313/tags/git/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/github-action/</loc>
@@ -45,6 +53,10 @@
     <loc>http://localhost:1313/categories/plotly/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/protein/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/pymol/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/pymol/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url><url>

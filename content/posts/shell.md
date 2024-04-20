@@ -25,7 +25,7 @@ conda activate ENV
 #SBATCH -o array-job.%A.%a.log
 
 id_list="./id_list.txt"
-id=`head -n $SLURM ARRAY TASK ID $id_list | tail -n 1`
+id=`head -n $SLURM_ARRAY_TASK_ID $id_list | tail -n 1`
 python3 script.py -in $id
 ```
 
