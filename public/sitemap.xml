@@ -26,6 +26,8 @@
   </url><url>
     <loc>http://localhost:1313/categories/command-line/</loc>
   </url><url>
+    <loc>http://localhost:1313/tools/</loc>
+  </url><url>
     <loc>http://localhost:1313/docs/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/plane/</loc>
