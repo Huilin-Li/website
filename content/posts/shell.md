@@ -29,3 +29,28 @@ id=`head -n $SLURM_ARRAY_TASK_ID $id_list | tail -n 1`
 python3 script.py -in $id
 ```
 
+## srun gpu
+```console
+srun -N 1 --ntasks-per-node 2 -p v100 -q gpu --gres=gpu:1 --mem=50G --pty /bin/bash
+```
+
+## run scripts
+```console
+sbatch test.slm
+```
+
+## check sequence process
+```console
+squeue -u username
+```
+## cancel sequence
+```console
+scancel jobID
+```
+
+## copy files into another folder
+```console
+cp ./*.pdb ../newfoler
+```
+
+
