@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pandas on Huilin Li</title>
+    <link>http://localhost:1313/tags/pandas/</link>
+    <description>Recent content in Pandas on Huilin Li</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/tags/pandas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Helpul python/pandas scripts</title>
+      <link>http://localhost:1313/posts/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/python/</guid>
+      <description>So&amp;hellip;, I find I used these codes a lot, and they are very helpful for effectivity.&#xA;Assign files into different folders&#xD;#&#xD;Assuming I have 230 files in db_folder, and I want to copy these 230 files into different folders (folder0, folder1 and so on) with at least 50 files in each folder.&#xA;files_list contains names of these 230 files, like files_list=[&amp;quot;file1&amp;quot;, &amp;quot;file2&amp;quot;, ..., &amp;quot;file230&amp;quot;]&#xA;import shutil chunks = [files_list[x:x+50] for x in range(0, len(files_list), 50)] # len(chunks) = 5 for i in range(53): chunk = chunks[i] newpath = &amp;#34;db_folder/folder&amp;#34; + str(i) if not os.</description>
+    </item>
+  </channel>
+</rss>

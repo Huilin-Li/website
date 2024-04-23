@@ -4,6 +4,8 @@
   <url>
     <loc>http://localhost:1313/docs/project/binderdesign/binderdesign/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/python/</loc>
+  </url><url>
     <loc>http://localhost:1313/docs/project/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/pymol/</loc>
@@ -50,6 +52,8 @@
   </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>
+    <loc>http://localhost:1313/tags/pandas/</loc>
+  </url><url>
     <loc>http://localhost:1313/tags/plane/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/plotly/</loc>
@@ -59,6 +63,8 @@
     <loc>http://localhost:1313/tags/pymol/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/pymol/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/python/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url><url>
