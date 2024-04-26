@@ -41,7 +41,7 @@ truncating_ids = [1,2,3]
 # remove some AAs
 residue_remove(pdbfile="target.pdb", remove_ids=truncating_ids, outputName="truncation.pdb")
 ```
-
+This step can also be achieved in **PyMol**
 
 {{< hint danger >}}
 **How much we can remove from our target protein?**  

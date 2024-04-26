@@ -21,7 +21,7 @@ Truncating target.pdb#Truncating target protein helps a lot in reducing the st
 <link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/truncation/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.7feac2a5a0d71569e7d97e712626806ae1eedb192ac28247c1db1bdbedd6a0ed.js" integrity="sha256-f&#43;rCpaDXFWnn2X5xJiaAauHu2xkqwoJHwdsb2&#43;3WoO0=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.63609efe1d33e8649515e79f3d3cdf987f6b815b30c20cb859687969f960e8b9.js" integrity="sha256-Y2Ce/h0z6GSVFeefPTzfmH9rgVswwgy4WWh5aflg6Lk=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -285,7 +285,8 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># remove some AAs</span>
 </span></span><span style="display:flex;"><span>residue_remove(pdbfile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;target.pdb&#34;</span>, remove_ids<span style="color:#f92672">=</span>truncating_ids, outputName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;truncation.pdb&#34;</span>)
-</span></span></code></pre></div><blockquote class="book-hint danger">
+</span></span></code></pre></div><p>This step can also be achieved in <strong>PyMol</strong></p>
+<blockquote class="book-hint danger">
   <p><strong>How much we can remove from our target protein?</strong><br>
 At the very beginning, I was thinking removing all useless AAs. For example, I was creating a binder to a transmembrane protein, and I only left the part of protein which is located at the outside of the whole protein. Unfornutately, this part of protein I aim to create binders to bind with is too &ldquo;thin&rdquo; to lead design binders correctly.</p>
 <p>If the &ldquo;target&rdquo; protein you feed into the RFdiffusion model is too small, <code>ppi.hotspot_res</code> argument becomes ineffective. Let&rsquo;s imagine the &ldquo;target&rdquo; protein we feed into the RFdiffusion model is a paper, and <code>ppi.hotspot_res</code> is located somewhere in this paper. Since this &ldquo;target&rdquo; protein (the paper) is too thin, RFdiffusion model feels confused about which side (above or below the paper ) the <code>ppi.hotspot_res</code> points to.</p>
