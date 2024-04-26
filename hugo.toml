@@ -28,10 +28,7 @@ theme = ['osm', 'hugo-book']
     name = "Github"
     url = "https://github.com/Huilin-Li"
     weight = 10
-  [[menu.after]]
-    name = "goodreads"
-    url = "https://www.goodreads.com/review/list/177314441"
-    weight = 20
+
 
 
 
