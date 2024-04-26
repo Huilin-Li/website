@@ -1,4 +1,4 @@
 ---
-title: "binder design"
+title: "Binder Design"
 bookCollapseSection: true
 ---

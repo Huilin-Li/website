@@ -1,6 +1,6 @@
 ---
 title: Notes
-weight: 1
+weight: 10
 ---
 
 - scaffold-based binder design performs much better than de novo binder design
