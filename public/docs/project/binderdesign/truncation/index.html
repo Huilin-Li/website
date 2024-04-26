@@ -21,7 +21,7 @@ Truncating target.pdb#Truncating target protein helps a lot in reducing the st
 <link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/truncation/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.6189b71fcdfc6f54bc8d1deb3575501d7d08dd87fe0c8fd2295ba60e3b0e62fc.js" integrity="sha256-YYm3H838b1S8jR3rNXVQHX0I3Yf&#43;DI/SKVumDjsOYvw=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.7feac2a5a0d71569e7d97e712626806ae1eedb192ac28247c1db1bdbedd6a0ed.js" integrity="sha256-f&#43;rCpaDXFWnn2X5xJiaAauHu2xkqwoJHwdsb2&#43;3WoO0=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -297,7 +297,30 @@ At the very beginning, I was thinking removing all useless AAs. For example, I w
   Reset AAs&rsquo; residues numbers in <code>truncation.pdb</code>
   <a class="anchor" href="#reset-aas-residues-numbers-in-truncationpdb">#</a>
 </h2>
-</article>
+<p>Normally, after removing some AAs, the residues number in <code>truncation.pdb</code> becomes discontinuous, and we want to concatenate them again and update their residue number with continuous numbers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_resnum</span>(pdbfile):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    🌟 CHANGE RESIDUE NUMBER
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assumption: pdbfile only has A chain
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    pdb_io <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBIO()
+</span></span><span style="display:flex;"><span>    pdb_parser <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBParser()
+</span></span><span style="display:flex;"><span>    structure <span style="color:#f92672">=</span> pdb_parser<span style="color:#f92672">.</span>get_structure(<span style="color:#e6db74">&#34; &#34;</span>, pdbfile)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> structure[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    chain <span style="color:#f92672">=</span> model[<span style="color:#e6db74">&#34;A&#34;</span>]
+</span></span><span style="display:flex;"><span>    print(len([i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> chain<span style="color:#f92672">.</span>get_residues()]))
+</span></span><span style="display:flex;"><span>    new_resnums <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>len([i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> chain<span style="color:#f92672">.</span>get_residues()])))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, residue <span style="color:#f92672">in</span> enumerate(chain<span style="color:#f92672">.</span>get_residues()):
+</span></span><span style="display:flex;"><span>        res_id <span style="color:#f92672">=</span> list(residue<span style="color:#f92672">.</span>id)
+</span></span><span style="display:flex;"><span>        res_id[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> new_resnums[i]
+</span></span><span style="display:flex;"><span>        residue<span style="color:#f92672">.</span>id <span style="color:#f92672">=</span> tuple(res_id)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>set_structure(structure)
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>save(pdbfile<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;.pdb&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_update_resnum.pdb&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
+</span></span></code></pre></div></article>
  
       
 

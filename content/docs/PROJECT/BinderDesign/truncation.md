@@ -54,4 +54,29 @@ My suggestion would be to try some different trunctations and pick one that can 
 
 
 ## Reset AAs' residues numbers in `truncation.pdb`
+Normally, after removing some AAs, the residues number in `truncation.pdb` becomes discontinuous, and we want to concatenate them again and update their residue number with continuous numbers.
 
+```python
+def update_resnum(pdbfile):
+    """
+    🌟 CHANGE RESIDUE NUMBER
+    Assumption: pdbfile only has A chain
+    """
+    pdb_io = PDB.PDBIO()
+    pdb_parser = PDB.PDBParser()
+    structure = pdb_parser.get_structure(" ", pdbfile)
+
+    model = structure[0]
+    chain = model["A"]
+    print(len([i for i in chain.get_residues()]))
+    new_resnums = list(range(1, 1+len([i for i in chain.get_residues()])))
+
+    for i, residue in enumerate(chain.get_residues()):
+        res_id = list(residue.id)
+        res_id[1] = new_resnums[i]
+        residue.id = tuple(res_id)
+
+    pdb_io.set_structure(structure)
+    pdb_io.save(pdbfile.split('.pdb')[0] + '_update_resnum.pdb')
+    return
+```
