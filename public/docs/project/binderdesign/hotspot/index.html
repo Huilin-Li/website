@@ -3,26 +3,24 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Binder Design#In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
-AF-A2VEY9-F1, Alphafold.
-In this case, I take the A2VEY9 as the example. Its 3D view is here
-Step0: Labaries and Helpful tools#from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly.">
+<meta name="description" content="ppi.hotspot_res argument#I spent a great of time on ppi.hotspot_res argument.
+In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
+def point_to_plane_dist(p, p0, p1, p2): &#34;&#34;&#34; The distance from point p to the plane determined by three points (p0, p1, p2) :param p: point p :param p0, p1, p2: three points determine one plane :return: the distance between point to plane &#34;&#34;&#34; u = p1 - p0 v = p2 - p0 # vector normal to plane n = np.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="ppi.hotspot_res argument" />
-<meta property="og:description" content="Binder Design#In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
-AF-A2VEY9-F1, Alphafold.
-In this case, I take the A2VEY9 as the example. Its 3D view is here
-Step0: Labaries and Helpful tools#from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly." />
+<meta property="og:description" content="ppi.hotspot_res argument#I spent a great of time on ppi.hotspot_res argument.
+In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.
+def point_to_plane_dist(p, p0, p1, p2): &#34;&#34;&#34; The distance from point p to the plane determined by three points (p0, p1, p2) :param p: point p :param p0, p1, p2: three points determine one plane :return: the distance between point to plane &#34;&#34;&#34; u = p1 - p0 v = p2 - p0 # vector normal to plane n = np." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/docs/project/binderdesign/binderdesign/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:1313/docs/project/binderdesign/hotspot/" /><meta property="article:section" content="docs" />
 
 
 
 <title>ppi.hotspot_res argument | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/binderdesign/">
+<link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/hotspot/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
   <script defer src="/en.search.min.63609efe1d33e8649515e79f3d3cdf987f6b815b30c20cb859687969f960e8b9.js" integrity="sha256-Y2Ce/h0z6GSVFeefPTzfmH9rgVswwgy4WWh5aflg6Lk=" crossorigin="anonymous"></script>
@@ -111,7 +109,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/project/binderdesign/truncation/" class="">Truncation</a>
+    <a href="/docs/project/binderdesign/truncation/" class="">truncation</a>
   
 
         </li>
@@ -124,7 +122,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/project/binderdesign/binderdesign/" class="active">ppi.hotspot_res argument</a>
+    <a href="/docs/project/binderdesign/hotspot/" class="active">ppi.hotspot_res argument</a>
   
 
         </li>
@@ -235,7 +233,6 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#step0-labaries-and-helpful-tools">Step0: Labaries and Helpful tools</a></li>
     <li><a href="#step1-load-the-target-protein">Step1: Load the target protein.</a></li>
     <li><a href="#step2-truncate-target-protein">Step2: Truncate target protein</a></li>
     <li><a href="#step3-visualize-truncationpdb-with-only-𝐶𝛽-atom">Step3. Visualize truncation.pdb with only 𝐶𝛽 ATOM</a></li>
@@ -251,85 +248,15 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="binder-design">
-  Binder Design
-  <a class="anchor" href="#binder-design">#</a>
+  <article class="markdown book-article"><h1 id="ppihotspot_res-argument">
+  <code>ppi.hotspot_res</code> argument
+  <a class="anchor" href="#ppihotspot_res-argument">#</a>
 </h1>
+<p>I spent a great of time on <code>ppi.hotspot_res</code> argument.</p>
 <p>In this blog, I want to make notes on how I design the binder of the target protein using 
   <a href="https://github.com/RosettaCommons/RFdiffusion">RFdiffusion</a>, 
   <a href="https://github.com/nrbennet/dl_binder_design/tree/main">ProteinMPNN-FastRelax</a> and so on.</p>
-<center><figure><img src="../bioIMG/AF-A2VEY9-F1.png"
-         alt="AF-A2VEY9-F1, Alphafold." width="400"/><figcaption>
-            <p>AF-A2VEY9-F1, Alphafold.</p>
-        </figcaption>
-</figure>
-</center>
-<p>In this case, I take the 
-  <a href="https://www.uniprot.org/uniprotkb/A2VEY9/entry#structure">A2VEY9</a> as the example. Its 3D view is 
-  <a href="https://alphafold.ebi.ac.uk/entry/A2VEY9">here</a></p>
-<h2 id="step0-labaries-and-helpful-tools">
-  Step0: Labaries and Helpful tools
-  <a class="anchor" href="#step0-labaries-and-helpful-tools">#</a>
-</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> biopandas.pdb <span style="color:#f92672">import</span> PandasPdb
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> chain
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> Bio <span style="color:#f92672">import</span> PDB
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> plotly.express <span style="color:#66d9ef">as</span> px
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> plotly.graph_objects <span style="color:#66d9ef">as</span> go
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> KMeans
-</span></span></code></pre></div><blockquote class="book-hint warning">
-  I also programmed some helpful tools for computations. We could leave them here, and when these tools are used, we come back and check them.
-</blockquote>
-
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">residue_remove</span>(pdbfile, remove_ids, outputName):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Remove residues based on positions.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assumption: pdbfile only has A chain
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    residue_to_remove <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    pdb_io <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBIO()
-</span></span><span style="display:flex;"><span>    pdb_parser <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBParser()
-</span></span><span style="display:flex;"><span>    structure <span style="color:#f92672">=</span> pdb_parser<span style="color:#f92672">.</span>get_structure(<span style="color:#e6db74">&#34; &#34;</span>, pdbfile)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> structure[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>    chain <span style="color:#f92672">=</span> model[<span style="color:#e6db74">&#34;A&#34;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> residue <span style="color:#f92672">in</span> chain:
-</span></span><span style="display:flex;"><span>        id <span style="color:#f92672">=</span> residue<span style="color:#f92672">.</span>id
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> id[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">in</span> remove_ids: 
-</span></span><span style="display:flex;"><span>            residue_to_remove<span style="color:#f92672">.</span>append(residue<span style="color:#f92672">.</span>id)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> residue <span style="color:#f92672">in</span> residue_to_remove:
-</span></span><span style="display:flex;"><span>        chain<span style="color:#f92672">.</span>detach_child(residue)
-</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>set_structure(structure)
-</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>save(outputName)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> 
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_resnum</span>(pdbfile):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    🌟 CHANGE RESIDUE NUMBER from discrete position IDs to continuous position IDs
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assumption: pdbfile only has A chain
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    pdb_io <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBIO()
-</span></span><span style="display:flex;"><span>    pdb_parser <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBParser()
-</span></span><span style="display:flex;"><span>    structure <span style="color:#f92672">=</span> pdb_parser<span style="color:#f92672">.</span>get_structure(<span style="color:#e6db74">&#34; &#34;</span>, pdbfile)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> structure[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>    chain <span style="color:#f92672">=</span> model[<span style="color:#e6db74">&#34;A&#34;</span>]
-</span></span><span style="display:flex;"><span>    print(len([i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> chain<span style="color:#f92672">.</span>get_residues()]))
-</span></span><span style="display:flex;"><span>    new_resnums <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>len([i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> chain<span style="color:#f92672">.</span>get_residues()])))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, residue <span style="color:#f92672">in</span> enumerate(chain<span style="color:#f92672">.</span>get_residues()):
-</span></span><span style="display:flex;"><span>        res_id <span style="color:#f92672">=</span> list(residue<span style="color:#f92672">.</span>id)
-</span></span><span style="display:flex;"><span>        res_id[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> new_resnums[i]
-</span></span><span style="display:flex;"><span>        residue<span style="color:#f92672">.</span>id <span style="color:#f92672">=</span> tuple(res_id)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>set_structure(structure)
-</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>save(pdbfile<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;pdb&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_update_resnum.pdb&#39;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">point_to_plane_dist</span>(p, p0, p1, p2):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">point_to_plane_dist</span>(p, p0, p1, p2):
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    The distance from point p to the plane determined by three points (p0, p1, p2)
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param p: point p
@@ -437,7 +364,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <div>
-    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/docs/PROJECT/BinderDesign/BinderDesign.md" target="_blank" rel="noopener">
+    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/docs/PROJECT/BinderDesign/hotspot.md" target="_blank" rel="noopener">
       <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
       <span>Edit this page</span>
     </a>
@@ -473,7 +400,6 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#step0-labaries-and-helpful-tools">Step0: Labaries and Helpful tools</a></li>
     <li><a href="#step1-load-the-target-protein">Step1: Load the target protein.</a></li>
     <li><a href="#step2-truncate-target-protein">Step2: Truncate target protein</a></li>
     <li><a href="#step3-visualize-truncationpdb-with-only-𝐶𝛽-atom">Step3. Visualize truncation.pdb with only 𝐶𝛽 ATOM</a></li>

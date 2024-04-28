@@ -1,82 +1,13 @@
 ---
-title: Binder Design
-weight: 1
-plotly: true
+title: ppi.hotspot_res argument
+weight: 2
 ---
-# Binder Design
+# `ppi.hotspot_res` argument
+I spent a great of time on `ppi.hotspot_res` argument. 
+
 In this blog, I want to make notes on how I design the binder of the target protein using [RFdiffusion](https://github.com/RosettaCommons/RFdiffusion), [ProteinMPNN-FastRelax](https://github.com/nrbennet/dl_binder_design/tree/main) and so on.
 
-<center>{{<figure src="../bioIMG/AF-A2VEY9-F1.png" width="400" caption="AF-A2VEY9-F1, Alphafold." >}}</center>
 
-
-In this case, I take the [A2VEY9](https://www.uniprot.org/uniprotkb/A2VEY9/entry#structure) as the example. Its 3D view is [here](https://alphafold.ebi.ac.uk/entry/A2VEY9)
-
-## Step0: Labaries and Helpful tools
-```python
-from biopandas.pdb import PandasPdb
-from itertools import chain
-from Bio import PDB
-import numpy as np
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from sklearn.cluster import KMeans
-```
-{{< hint warning >}}
-I also programmed some helpful tools for computations. We could leave them here, and when these tools are used, we come back and check them.
-{{< /hint >}}
-```python
-def residue_remove(pdbfile, remove_ids, outputName):
-    """
-    Remove residues based on positions.
-    Assumption: pdbfile only has A chain
-    """
-    residue_to_remove = []
-
-    pdb_io = PDB.PDBIO()
-    pdb_parser = PDB.PDBParser()
-    structure = pdb_parser.get_structure(" ", pdbfile)
-
-    model = structure[0]
-    chain = model["A"]
-
-    for residue in chain:
-        id = residue.id
-        if id[1] in remove_ids: 
-            residue_to_remove.append(residue.id)
-
-    for residue in residue_to_remove:
-        chain.detach_child(residue)
-    pdb_io.set_structure(structure)
-    pdb_io.save(outputName)
-    return 
-```
-
-```python
-def update_resnum(pdbfile):
-    """
-    🌟 CHANGE RESIDUE NUMBER from discrete position IDs to continuous position IDs
-    Assumption: pdbfile only has A chain
-    """
-    pdb_io = PDB.PDBIO()
-    pdb_parser = PDB.PDBParser()
-    structure = pdb_parser.get_structure(" ", pdbfile)
-
-    model = structure[0]
-    chain = model["A"]
-    print(len([i for i in chain.get_residues()]))
-    new_resnums = list(range(1, 1+len([i for i in chain.get_residues()])))
-
-    for i, residue in enumerate(chain.get_residues()):
-        res_id = list(residue.id)
-        res_id[1] = new_resnums[i]
-        residue.id = tuple(res_id)
-
-    pdb_io.set_structure(structure)
-    pdb_io.save(pdbfile.split('pdb')[0] + '_update_resnum.pdb')
-    return
-
-```
 
 ```python
 def point_to_plane_dist(p, p0, p1, p2):

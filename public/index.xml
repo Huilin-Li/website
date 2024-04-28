@@ -8,13 +8,6 @@
     <language>en-us</language>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Binder Design</title>
-      <link>http://localhost:1313/docs/project/binderdesign/binderdesign/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/project/binderdesign/binderdesign/</guid>
-      <description>Binder Design&#xD;#&#xD;In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.&#xA;AF-A2VEY9-F1, Alphafold.&#xA;In this case, I take the A2VEY9 as the example. Its 3D view is here&#xA;Step0: Labaries and Helpful tools&#xD;#&#xD;from biopandas.pdb import PandasPdb from itertools import chain from Bio import PDB import numpy as np import pandas as pd import plotly.</description>
-    </item>
-    <item>
       <title>Helpul python/pandas scripts</title>
       <link>http://localhost:1313/posts/python/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -29,11 +22,18 @@
       <description> select residues based on residue number select nterm, resi 42+74+43+56+39 mutate one amino acid cmd.wizard(&amp;#34;mutagenesis&amp;#34;) cmd.fetch(&amp;#34;target.pdb&amp;#34;) cmd.get_wizard().set_mode(&amp;#34;LEU&amp;#34;) cmd.get_wizard().do_select(&amp;#34;chain A and resid 22&amp;#34;) cmd.get_wizard().apply() cmd.save(&amp;#34;mutated_target.pdb&amp;#34;) </description>
     </item>
     <item>
-      <title>Truncation</title>
+      <title>truncation</title>
       <link>http://localhost:1313/docs/project/binderdesign/truncation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/project/binderdesign/truncation/</guid>
       <description>target.pdb preprocessing&#xD;#&#xD;Assuming we have a target protein target.pdb, and we want to create a binder to target.pdb. The first step is preprocessing target.pdb. Generally spearking, there are two steps we need to think of.&#xA;Truncating target.pdb&#xD;#&#xD;Truncating target protein helps a lot in reducing the stress of computing. For example, we could remove AAs with very low pLDDT or AAs who are far away from the place we want binders to bind with.</description>
+    </item>
+    <item>
+      <title>ppi.hotspot_res argument</title>
+      <link>http://localhost:1313/docs/project/binderdesign/hotspot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/project/binderdesign/hotspot/</guid>
+      <description>ppi.hotspot_res argument&#xD;#&#xD;I spent a great of time on ppi.hotspot_res argument.&#xA;In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.&#xA;def point_to_plane_dist(p, p0, p1, p2): &amp;#34;&amp;#34;&amp;#34; The distance from point p to the plane determined by three points (p0, p1, p2) :param p: point p :param p0, p1, p2: three points determine one plane :return: the distance between point to plane &amp;#34;&amp;#34;&amp;#34; u = p1 - p0 v = p2 - p0 # vector normal to plane n = np.</description>
     </item>
     <item>
       <title>Notes</title>

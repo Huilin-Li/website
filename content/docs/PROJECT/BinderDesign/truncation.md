@@ -1,5 +1,5 @@
 ---
-title: Truncation
+title: truncation
 weight: 1
 ---
 # `target.pdb` preprocessing
