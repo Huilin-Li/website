@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bash on Huilin Li</title>
-    <link>http://localhost:49281/tags/bash/</link>
+    <link>http://localhost:49429/tags/bash/</link>
     <description>Recent content in Bash on Huilin Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:49281/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:49429/tags/bash/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bash Scripts</title>
-      <link>http://localhost:49281/posts/shell/</link>
+      <link>http://localhost:49429/posts/shell/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49281/posts/shell/</guid>
+      <guid>http://localhost:49429/posts/shell/</guid>
       <description>Bash Scripts&#xD;#&#xD;How to discard changes in VScode?&#xD;#&#xD;Navigate to reporsitory (has .github folder) with changes. Then, git restore &amp;lt;file&amp;gt; Activate conda environment in bash script&#xD;#&#xD;source ~/miniconda3/etc/profile.d/conda.sh conda activate ENV SBATCH Array jobs&#xD;#&#xD;#SBATCH -J array-job&#x9;#SBATCH -a 1-3 #SBATCH -o array-job.%A.%a.log id_list=&amp;#34;./id_list.txt&amp;#34; id=`head -n $SLURM_ARRAY_TASK_ID $id_list | tail -n 1` python3 script.py -in $id srun gpu&#xD;#&#xD;srun -N 1 --ntasks-per-node 2 -p v100 -q gpu --gres=gpu:1 --mem=50G --pty /bin/bash run scripts&#xD;#&#xD;sbatch test.</description>
     </item>
   </channel>

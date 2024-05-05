@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PyMol on Huilin Li</title>
-    <link>http://localhost:49281/tags/pymol/</link>
+    <link>http://localhost:49429/tags/pymol/</link>
     <description>Recent content in PyMol on Huilin Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:49281/tags/pymol/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:49429/tags/pymol/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PyMol commands</title>
-      <link>http://localhost:49281/posts/pymol/</link>
+      <link>http://localhost:49429/posts/pymol/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49281/posts/pymol/</guid>
+      <guid>http://localhost:49429/posts/pymol/</guid>
       <description> select residues based on residue number select nterm, resi 42+74+43+56+39 mutate one amino acid cmd.wizard(&amp;#34;mutagenesis&amp;#34;) cmd.fetch(&amp;#34;target.pdb&amp;#34;) cmd.get_wizard().set_mode(&amp;#34;LEU&amp;#34;) cmd.get_wizard().do_select(&amp;#34;chain A and resid 22&amp;#34;) cmd.get_wizard().apply() cmd.save(&amp;#34;mutated_target.pdb&amp;#34;) </description>
     </item>
   </channel>
