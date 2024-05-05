@@ -52,8 +52,8 @@ At the same time, in `hugo.toml`, add
 
 ## How to add emoji?{#emoji}
 Directly copy emoji icon 👋 and paste to `.md` file, instead of using `:wave:`. 
-> Emoji Cheat Sheet: 
-> https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
+> Emoji Copy&Paste: 
+> https://emojidb.org/number-emojis
 
 ## How to add a travel map in Hugo?{#map}
 Refer to [this article](https://www.thecoffeemachine.net/writing/adding-maps-to-hugo-blogs-with-osm/)

@@ -2,93 +2,114 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Introduction on Huilin Li</title>
-    <link>http://localhost:1313/</link>
+    <link>http://localhost:60489/</link>
     <description>Recent content in Introduction on Huilin Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:60489/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Helpul python/pandas scripts</title>
-      <link>http://localhost:1313/posts/python/</link>
+      <link>http://localhost:60489/posts/python/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/python/</guid>
+      <guid>http://localhost:60489/posts/python/</guid>
       <description>So&amp;hellip;, I find I used these codes a lot, and they are very helpful for effectivity.&#xA;Assign files into different folders&#xD;#&#xD;Assuming I have 230 files in db_folder, and I want to copy these 230 files into different folders (folder0, folder1 and so on) with at least 50 files in each folder.&#xA;files_list contains names of these 230 files, like files_list=[&amp;quot;file1&amp;quot;, &amp;quot;file2&amp;quot;, ..., &amp;quot;file230&amp;quot;]&#xA;import shutil chunks = [files_list[x:x+50] for x in range(0, len(files_list), 50)] # len(chunks) = 5 for i in range(53): chunk = chunks[i] newpath = &amp;#34;db_folder/folder&amp;#34; + str(i) if not os.</description>
     </item>
     <item>
       <title>PyMol commands</title>
-      <link>http://localhost:1313/posts/pymol/</link>
+      <link>http://localhost:60489/posts/pymol/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pymol/</guid>
+      <guid>http://localhost:60489/posts/pymol/</guid>
       <description> select residues based on residue number select nterm, resi 42+74+43+56+39 mutate one amino acid cmd.wizard(&amp;#34;mutagenesis&amp;#34;) cmd.fetch(&amp;#34;target.pdb&amp;#34;) cmd.get_wizard().set_mode(&amp;#34;LEU&amp;#34;) cmd.get_wizard().do_select(&amp;#34;chain A and resid 22&amp;#34;) cmd.get_wizard().apply() cmd.save(&amp;#34;mutated_target.pdb&amp;#34;) </description>
     </item>
     <item>
       <title>truncation</title>
-      <link>http://localhost:1313/docs/project/binderdesign/truncation/</link>
+      <link>http://localhost:60489/docs/project/binderdesign/truncation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/project/binderdesign/truncation/</guid>
+      <guid>http://localhost:60489/docs/project/binderdesign/truncation/</guid>
       <description>target.pdb preprocessing&#xD;#&#xD;Assuming we have a target protein target.pdb, and we want to create a binder to target.pdb. The first step is preprocessing target.pdb. Generally spearking, there are two steps we need to think of.&#xA;Truncating target.pdb&#xD;#&#xD;Truncating target protein helps a lot in reducing the stress of computing. For example, we could remove AAs with very low pLDDT or AAs who are far away from the place we want binders to bind with.</description>
     </item>
     <item>
-      <title>ppi.hotspot_res argument</title>
-      <link>http://localhost:1313/docs/project/binderdesign/hotspot/</link>
+      <title>design binders via RFdiffusion and ProteinMPNN-FastRelax</title>
+      <link>http://localhost:60489/docs/project/binderdesign/design/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/project/binderdesign/hotspot/</guid>
+      <guid>http://localhost:60489/docs/project/binderdesign/design/</guid>
+      <description>In my use case, firstly, I tried to de novo design binders. However, I found that designed binders are limited to proteins with only one helix. Then, I changed to design binders based on scaffolds. The design process and scripts I used a lot are as follows.&#xA;Three needed designing environments&#xD;#&#xD;Thanks a lot to the great work, RFdiffusion and ProteinMPNN-FastRelax, as well as AlphaFold2, who give us great ways to design proteins.</description>
+    </item>
+    <item>
+      <title>ppi.hotspot_res argument</title>
+      <link>http://localhost:60489/docs/project/binderdesign/hotspot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60489/docs/project/binderdesign/hotspot/</guid>
       <description>ppi.hotspot_res argument&#xD;#&#xD;I spent a great of time on ppi.hotspot_res argument.&#xA;In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.&#xA;def point_to_plane_dist(p, p0, p1, p2): &amp;#34;&amp;#34;&amp;#34; The distance from point p to the plane determined by three points (p0, p1, p2) :param p: point p :param p0, p1, p2: three points determine one plane :return: the distance between point to plane &amp;#34;&amp;#34;&amp;#34; u = p1 - p0 v = p2 - p0 # vector normal to plane n = np.</description>
     </item>
     <item>
       <title>Notes</title>
-      <link>http://localhost:1313/docs/project/binderdesign/analysis/</link>
+      <link>http://localhost:60489/docs/project/binderdesign/analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/project/binderdesign/analysis/</guid>
+      <guid>http://localhost:60489/docs/project/binderdesign/analysis/</guid>
       <description> scaffold-based binder design performs much better than de novo binder design Experiments I tried&#xD;#&#xD;Argument Observation Star complete target protein + given scaffolds designed binders are motsly limited to 3-helix prorein complete target protein + given scaffolds (10,000) </description>
     </item>
     <item>
       <title>4 levels of protein structure</title>
-      <link>http://localhost:1313/posts/proteinstruture/</link>
+      <link>http://localhost:60489/posts/proteinstruture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/proteinstruture/</guid>
+      <guid>http://localhost:60489/posts/proteinstruture/</guid>
       <description>There are four levels of protein structure: primary, secondary, tertiary and quaternary.&#xA;Primary Structure.&#xD;#&#xD;A protein’s primary structure is the unique sequence of amino acids in each polypeptide chain that makes up the protein.&#xA;fasta file sequence of 20 amino acids Secondary Structure&#xD;#&#xD;Reference:&#xD;#&#xD;3.9: Proteins - Protein Structure </description>
     </item>
     <item>
-      <title>Bash Scripts</title>
-      <link>http://localhost:1313/posts/shell/</link>
+      <title>All about Latex and Overleaf</title>
+      <link>http://localhost:60489/posts/overleaf/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/shell/</guid>
+      <guid>http://localhost:60489/posts/overleaf/</guid>
+      <description>\documentclass{article}&#xD;\usepackage[utf8]{inputenc}&#xD;\usepackage{tcolorbox}&#xD;\newtcbox{\inlinecode}{on line, boxrule=0pt, boxsep=0pt, top=2pt, left=2pt, bottom=2pt, right=2pt, colback=gray!15, colframe=white, fontupper={\ttfamily \footnotesize}}&#xD;\begin{document}&#xD;This is a sample of some inline code: \inlinecode{int x = 0;}.&#xD;\end{document} Remove the space on the left hand of the beginning of a paragraph \noindent Typeseeting programming packages/libraries in LaTex \textsc{} </description>
+    </item>
+    <item>
+      <title>Bash Scripts</title>
+      <link>http://localhost:60489/posts/shell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60489/posts/shell/</guid>
       <description>Bash Scripts&#xD;#&#xD;How to discard changes in VScode?&#xD;#&#xD;Navigate to reporsitory (has .github folder) with changes. Then, git restore &amp;lt;file&amp;gt; Activate conda environment in bash script&#xD;#&#xD;source ~/miniconda3/etc/profile.d/conda.sh conda activate ENV SBATCH Array jobs&#xD;#&#xD;#SBATCH -J array-job&#x9;#SBATCH -a 1-3 #SBATCH -o array-job.%A.%a.log id_list=&amp;#34;./id_list.txt&amp;#34; id=`head -n $SLURM_ARRAY_TASK_ID $id_list | tail -n 1` python3 script.py -in $id srun gpu&#xD;#&#xD;srun -N 1 --ntasks-per-node 2 -p v100 -q gpu --gres=gpu:1 --mem=50G --pty /bin/bash run scripts&#xD;#&#xD;sbatch test.</description>
     </item>
     <item>
       <title>Continuous and Discrete colors in Plotly</title>
-      <link>http://localhost:1313/posts/plotlycolor/</link>
+      <link>http://localhost:60489/posts/plotlycolor/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/plotlycolor/</guid>
+      <guid>http://localhost:60489/posts/plotlycolor/</guid>
       <description></description>
     </item>
     <item>
       <title>Drawing a plane perpendicular to a given line in Plotly</title>
-      <link>http://localhost:1313/posts/plane/</link>
+      <link>http://localhost:60489/posts/plane/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/plane/</guid>
+      <guid>http://localhost:60489/posts/plane/</guid>
       <description>When I am working on my binder design task, I need to select suitable hotspot residues that can lead to design better binders. In addition to hydrophobic amino acids, I also want to focus on the amino acids whose positions are close to the outside edge, and far away from the center of the protein. Therefore, I expect a plane that can approximately cut the protein layer by layer with my expected distance to the outside edge.</description>
     </item>
     <item>
       <title>Excel commands</title>
-      <link>http://localhost:1313/posts/excel/</link>
+      <link>http://localhost:60489/posts/excel/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/excel/</guid>
+      <guid>http://localhost:60489/posts/excel/</guid>
       <description> In one row, concat each cell into one cell as string =CONCAT(A1:D1) </description>
     </item>
     <item>
       <title>Hugo commands</title>
-      <link>http://localhost:1313/posts/hugo/</link>
+      <link>http://localhost:60489/posts/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hugo/</guid>
+      <guid>http://localhost:60489/posts/hugo/</guid>
       <description>Introduction&#xD;#&#xD;Some commands and issues you might want to know when building a website, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.&#xA;How to insert images and resize and center images?&#xD;#&#xD;The file tree is like&#xA;├─content&#xD;│ │ _index.md&#xD;│ │&#xD;│ └─posts&#xD;│ │ hugo.md&#xD;│ │ _index.md&#xD;│ │&#xD;│ └─images&#xD;│ Nice.png In hugo.</description>
     </item>
     <item>
-      <title>Website via Hugo Book and deployed by Github Action</title>
-      <link>http://localhost:1313/posts/hugobookgithubaction/</link>
+      <title>Protein structure measurement</title>
+      <link>http://localhost:60489/posts/assessment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hugobookgithubaction/</guid>
+      <guid>http://localhost:60489/posts/assessment/</guid>
+      <description>pLDDT&#xD;#&#xD;&amp;ldquo;predicted Local Distance Difference Test&amp;rdquo; is a per-residue measure of local confidence. It is scaled from 0 to 100, with higher scores indicating higher confidence and usually a more accurate prediction. ref&#xA;PAE&#xD;#&#xD;Predicted Aligned Error (PAE) is a measure of how confident AlphaFold2 is in the relative position of two residues within the predicted structure. PAE is defined as the expected positional error at residue X, measured in Ångströms (Å), if the predicted and actual structures were aligned on residue Y.</description>
+    </item>
+    <item>
+      <title>Website via Hugo Book and deployed by Github Action</title>
+      <link>http://localhost:60489/posts/hugobookgithubaction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:60489/posts/hugobookgithubaction/</guid>
       <description>In Windows10, build personal website via Hugo-book and Github Actions&#xD;#&#xD;This blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.&#xA;Prerequisites&#xD;#&#xD;Git Windows 10 VScode Github account Install Hugo&#xD;#&#xD;In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey.</description>
     </item>
   </channel>

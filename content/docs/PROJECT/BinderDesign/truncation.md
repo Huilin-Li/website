@@ -41,15 +41,15 @@ truncating_ids = [1,2,3]
 # remove some AAs
 residue_remove(pdbfile="target.pdb", remove_ids=truncating_ids, outputName="truncation.pdb")
 ```
-This step can also be achieved in **PyMol**
+This step can also be achieved in **PyMol**.
 
 {{< hint danger >}}
-**How much we can remove from our target protein?**  
+**How many we can remove from our target protein?**  
 At the very beginning, I was thinking removing all useless AAs. For example, I was creating a binder to a transmembrane protein, and I only left the part of protein which is located at the outside of the whole protein. Unfornutately, this part of protein I aim to create binders to bind with is too "thin" to lead design binders correctly.
 
 If the "target" protein you feed into the RFdiffusion model is too small, `ppi.hotspot_res` argument becomes ineffective. Let's imagine the "target" protein we feed into the RFdiffusion model is a paper, and `ppi.hotspot_res` is located somewhere in this paper. Since this "target" protein (the paper) is too thin, RFdiffusion model feels confused about which side (above or below the paper ) the `ppi.hotspot_res` points to.
 
-My suggestion would be to try some different trunctations and pick one that can approcimately balance the computation and correct leading of bidner design.
+My suggestion would be to try some different trunctations and pick one that can approcimately balance the computation stress and correct leading of bidner design.
 {{< /hint >}}
 
 
