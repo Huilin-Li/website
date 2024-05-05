@@ -8,11 +8,11 @@ In my use case, firstly, I tried to de novo design binders. However, I found tha
 
 Thanks a lot to the great work, [**RFdiffusion**](https://github.com/RosettaCommons/RFdiffusion) and [**ProteinMPNN-FastRelax**](https://github.com/nrbennet/dl_binder_design/tree/main), as well as [**AlphaFold2**](https://github.com/nrbennet/dl_binder_design/tree/main?tab=readme-ov-file#alphafold2-complex-prediction-), who give us great ways to design proteins.
 
-- **RFdiffuion** for desigining protein backbones, under <code>SE3nv environment</code>. \
-- **ProteinMPNN-FastRelax** for desiging protein sequences, under <code>dl_binder_design environment</code>. \
+- **RFdiffuion** for desigining protein backbones, under <code>SE3nv environment</code>. 
+- **ProteinMPNN-FastRelax** for desiging protein sequences, under <code>dl_binder_design environment</code>. 
 - **AlphaFold2** for evaluating designed proteins, under <code>af2_binder_design environment</code>.
 
-We will design binders under these three environment: <code>SE3nv environment</code>, <code>dl_binder_design environment</code>, <code>af2_binder_design environment</code>.
+We will design binders under these three environments: <code>SE3nv environment</code>, <code>dl_binder_design environment</code>, <code>af2_binder_design environment</code>.
 {{< hint info >}}
 <details>
 <summary><b>Install these three environments</b></summary>
@@ -80,7 +80,7 @@ Then, our directories tree is updated as:
 
 
 ### 2️⃣ backbones design script `bb.slm`
-I use *array-job* to parallely execute different <code>ppi.hotspot_res</code> arguments simultaneously. For example, I have 10 `ppi.hotspot_res` arguments to test, so my `paraID.txt` is like:
+I use *array-job* to parallelly execute different <code>ppi.hotspot_res</code> arguments simultaneously. For example, I have 10 `ppi.hotspot_res` arguments to test, so my `paraID.txt` is like:
 <center>{{<figure src="../bioIMG/PARAid.PNG" width="400" caption="my `paraID.txt` file">}}</center>
 and I setup 10 jobs (<code>#SBATCH -a 1-10</code>) for each `ppi.hotspot_res`. Each `ppi.hotspot_res` will design <code>inference.num_designs=10000</code> binder backbones.
 
@@ -114,14 +114,14 @@ python3 ../RFdiffusion/scripts/run_inference.py \
         scaffoldguided.target_adj=./slightly_truncation_adj_secstruct/slightly_truncation_adj.pt \
         scaffoldguided.scaffold_dir=../RFdiffusion/examples/ppi_scaffolds/ \
         scaffoldguided.mask_loops=False \
-        inference.num_designs=7000 \
+        inference.num_designs=10000 \
         denoiser.noise_scale_ca=0 \
         denoiser.noise_scale_frame=0
 ```
 {{< hint info >}}
 <details>
 <summary><b>Untar 1000 scaffold templates</b></summary>
-Don't forget to untar the provided 1000 scaffold templates (<code>RFdiffusion/examples/ppi_scaffolds_subset.tar.gz</code>). In <code>ppi_scaffolds_subset.tar.gz</code>, there is <code>ppi_scaffolds</code> folder and we will use it to in our backbone designing script.
+Don't forget to untar the provided 1000 scaffold templates (<code>RFdiffusion/examples/ppi_scaffolds_subset.tar.gz</code>). In <code>ppi_scaffolds_subset.tar.gz</code>, there is <code>ppi_scaffolds</code> folder and we will use it in our backbone designing script.
 </details>
 {{< /hint >}}
 Now, our directories tree becomes:
@@ -133,6 +133,7 @@ Now, our directories tree becomes:
 │   │   ├── dl_interface_design.py
 ├── mydesigns
 │   ├── get_adj_secstruct.slm
+│   ├── paraID.txt
 │   ├── bb.slm
 │   ├── target
 │   │   └── target.pdb
@@ -154,7 +155,7 @@ Now, our directories tree becomes:
 {{< hint info >}}
 <details>
 <summary><b>Add <code>ppi_scaffolds</code> argument in backbone name</b></summary>
-In <code>RFdiffusion/scripts/run_inference.py</code>, I modify some codes a little bid, so that, the backbone pdb file name will contain the `ppi_scaffolds` argument.
+In <code>RFdiffusion/scripts/run_inference.py</code>, I modify some codes a little bit, so that, the backbone pdb file name will contain the `ppi_scaffolds` argument.
 <center>{{<figure src="../bioIMG/mdf1.PNG" width="600">}}</center>
 <center>{{<figure src="../bioIMG/mdf2.PNG" width="600">}}</center>
 Therefore, one of <code>inference.num_designs=10000</code> binder backbones for <code>ppi.hotspot_res=[A28-A25-A29-A26-A63]</code> argument is <code>A28-A25-A29-A26-A63_0.pdb</code>.
@@ -173,7 +174,7 @@ Let's say that we finally select 1000 favourite backbones, and we go to design b
 ```python
 # sele_list contains names of 1000 selected backbones, 
 # such as A28-A25-A29-A26-A63_0.pdb
-folder_size = 100 # how many pdb files you want at most to be grouped
+folder_size = 100 # how many pdb files you want at most to be grouped in one folder
 chunks = [sele_list[x:x+folder_size] for x in range(0, len(sele_list), folder_size)]
 # len(chunks)=5
 for i in range(len(chunks)):
@@ -182,48 +183,11 @@ for i in range(len(chunks)):
     if not os.path.exists(newpath):
         os.makedirs(newpath)
 
-    for j in sele_list:
+    for j in chunk:
         src = "../mydesigns/backbones_OUT/" + j
         dst = "../mydesigns/select_1000_mpnn_af/folder" + str(i) + "/" + j
         shutil.copyfile(src, dst)
 ```
-And, our current directories tree is like:
-```commandline
-├── dl_binder_design
-│   ├── af2_initial_guess
-│   │   ├── predict.py
-│   ├── mpnn_fr
-│   │   ├── dl_interface_design.py
-├── mydesigns
-│   ├── get_adj_secstruct.slm
-│   ├── paraID.txt
-│   ├── bb.slm
-│   ├── target
-│   │   └── target.pdb
-│   ├── target_adj_secstruct
-│   │   └── target_adj.pt
-│   │   └── target_ss.pt
-│   ├── backbones_OUT
-│   │   ├── traj
-│   │   ├── A28-A25-A29-A26-A63_0.pdb
-│   │   ├── A28-A25-A29-A26-A63_0.trb
-│   │   ├── ...
-│   ├── select_1000_mpnn_af
-│   │   ├── folder0
-│   │   │   └── A28-A25-A29-A26-A63_0.pdb
-│   │   │   └── ...
-│   │   ├── folder1
-│   │   ├── ...
-│   │   ├── folderID.txt
-│   │   ├── mpnn_af.slm
-├── RFdiffusion
-│   ├── rfdiffusion
-│   ├── scripts
-│   │   └── run_inference.py
-│   ├── helper_scripts
-│   │   └── make_secstruc_adj.py
-```
-
 ```t
 #!/bin/bash
 #SBATCH -q gpu-huge
@@ -251,4 +215,50 @@ conda deactivate
 conda activate af2_binder_design
 python ../../../BinderDesign/dl_binder_design/af2_initial_guess/predict.py -silent seq.silent -outsilent af2.silent  -scorefilename score.sc
 ```
+Now our directories tree is like:
+```commandline
+├── dl_binder_design
+│   ├── af2_initial_guess
+│   │   ├── predict.py
+│   ├── mpnn_fr
+│   │   ├── dl_interface_design.py
+├── mydesigns
+│   ├── get_adj_secstruct.slm
+│   ├── paraID.txt
+│   ├── bb.slm
+│   ├── target
+│   │   └── target.pdb
+│   ├── target_adj_secstruct
+│   │   └── target_adj.pt
+│   │   └── target_ss.pt
+│   ├── backbones_OUT
+│   │   ├── traj
+│   │   ├── A28-A25-A29-A26-A63_0.pdb
+│   │   ├── A28-A25-A29-A26-A63_0.trb
+│   │   ├── ...
+│   ├── select_1000_mpnn_af
+│   │   ├── folder0
+│   │   │   └── A28-A25-A29-A26-A63_0.pdb
+│   │   │   └── ...
+│   │   │   └── af2.silent
+│   │   │   └── check.point
+│   │   │   └── score.sc
+│   │   │   └── seq.silent
+│   │   │   └── seq.silent.idx
+│   │   │   └── silent.silent
+│   │   │   └── silent.silent.idx
+│   │   ├── folder1
+│   │   ├── ...
+│   │   ├── folderID.txt
+│   │   ├── mpnn_af.slm
+├── RFdiffusion
+│   ├── rfdiffusion
+│   ├── scripts
+│   │   └── run_inference.py
+│   ├── helper_scripts
+│   │   └── make_secstruc_adj.py
+```
+
+### 4️⃣ End
+In each `mydesigns/select_1000_mpnn_af/folder`, `af2.silent` has our designed binders.
 
