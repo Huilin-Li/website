@@ -38,7 +38,7 @@ Let us say that we want to design binders for *target.pdb*, and our current dire
 │   ├── helper_scripts
 │   │   └── make_secstruc_adj.py
 ```
-### 1️⃣ get secondary structure and block adjacency information script
+### 1️⃣ get secondary structure and block adjacency information script `get_adj_secstruct.slm`
 We will provide these two `.pt` files (`target_adj.pt` and `target_ss.pt`) to the scaffold-based binder design model.
 ```t
 #!/bin/bash
@@ -64,6 +64,7 @@ Then, our directories tree is updated as:
 │   ├── mpnn_fr
 │   │   ├── dl_interface_design.py
 ├── mydesigns
+│   ├── get_adj_secstruct.slm
 │   ├── target
 │   │   └── target.pdb
 │   ├── target_adj_secstruct
@@ -78,7 +79,7 @@ Then, our directories tree is updated as:
 ```
 
 
-### 2️⃣ backbones design script
+### 2️⃣ backbones design script `bb.slm`
 I use *array-job* to parallely execute different <code>ppi.hotspot_res</code> arguments simultaneously. For example, I have 10 `ppi.hotspot_res` arguments to test, so my `paraID.txt` is like:
 <center>{{<figure src="../bioIMG/PARAid.PNG" width="400" caption="my `paraID.txt` file">}}</center>
 and I setup 10 jobs (<code>#SBATCH -a 1-10</code>) for each `ppi.hotspot_res`. Each `ppi.hotspot_res` will design <code>inference.num_designs=10000</code> binder backbones.
@@ -94,7 +95,7 @@ and I setup 10 jobs (<code>#SBATCH -a 1-10</code>) for each `ppi.hotspot_res`. E
 #SBATCH --mem=50G
 #SBATCH -J array-job					
 #SBATCH -a 1-10
-#SBATCH -o %A.%a.log
+#SBATCH -o backbone_10000.%A.%a.log
 
 
 id_list="./paraID.txt"
@@ -131,6 +132,8 @@ Now, our directories tree becomes:
 │   ├── mpnn_fr
 │   │   ├── dl_interface_design.py
 ├── mydesigns
+│   ├── get_adj_secstruct.slm
+│   ├── bb.slm
 │   ├── target
 │   │   └── target.pdb
 │   ├── target_adj_secstruct
@@ -158,7 +161,7 @@ Therefore, one of <code>inference.num_designs=10000</code> binder backbones for 
 </details>
 {{< /hint >}}
 
-### 3️⃣ sequence design and binder assessment script
+### 3️⃣ sequence design and binder assessment script `mpnn_af.slm`
 {{< hint info >}}
 <details>
 <summary><b>Perform a filtering step</b></summary>
@@ -184,6 +187,42 @@ for i in range(len(chunks)):
         dst = "../mydesigns/select_1000_mpnn_af/folder" + str(i) + "/" + j
         shutil.copyfile(src, dst)
 ```
+And, our current directories tree is like:
+```commandline
+├── dl_binder_design
+│   ├── af2_initial_guess
+│   │   ├── predict.py
+│   ├── mpnn_fr
+│   │   ├── dl_interface_design.py
+├── mydesigns
+│   ├── get_adj_secstruct.slm
+│   ├── paraID.txt
+│   ├── bb.slm
+│   ├── target
+│   │   └── target.pdb
+│   ├── target_adj_secstruct
+│   │   └── target_adj.pt
+│   │   └── target_ss.pt
+│   ├── backbones_OUT
+│   │   ├── traj
+│   │   ├── A28-A25-A29-A26-A63_0.pdb
+│   │   ├── A28-A25-A29-A26-A63_0.trb
+│   │   ├── ...
+│   ├── select_1000_mpnn_af
+│   │   ├── folder0
+│   │   │   └── A28-A25-A29-A26-A63_0.pdb
+│   │   │   └── ...
+│   │   ├── folder1
+│   │   ├── ...
+│   │   ├── folderID.txt
+│   │   ├── mpnn_af.slm
+├── RFdiffusion
+│   ├── rfdiffusion
+│   ├── scripts
+│   │   └── run_inference.py
+│   ├── helper_scripts
+│   │   └── make_secstruc_adj.py
+```
 
 ```t
 #!/bin/bash
@@ -195,7 +234,7 @@ for i in range(len(chunks)):
 #SBATCH --mem=50G
 #SBATCH -J array-job					
 #SBATCH -a 1-5
-#SBATCH -o mpnn_af_789.%A.%a.log
+#SBATCH -o mpnn_af_1000.%A.%a.log
 
 id_list="./folderID.txt"
 id=`head -n $SLURM_ARRAY_TASK_ID $id_list | tail -n 1`

@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Binder Design on Huilin Li</title>
-    <link>http://localhost:60489/docs/project/binderdesign/</link>
+    <link>http://localhost:65191/docs/project/binderdesign/</link>
     <description>Recent content in Binder Design on Huilin Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:60489/docs/project/binderdesign/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:65191/docs/project/binderdesign/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>truncation</title>
-      <link>http://localhost:60489/docs/project/binderdesign/truncation/</link>
+      <link>http://localhost:65191/docs/project/binderdesign/truncation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:60489/docs/project/binderdesign/truncation/</guid>
+      <guid>http://localhost:65191/docs/project/binderdesign/truncation/</guid>
       <description>target.pdb preprocessing&#xD;#&#xD;Assuming we have a target protein target.pdb, and we want to create a binder to target.pdb. The first step is preprocessing target.pdb. Generally spearking, there are two steps we need to think of.&#xA;Truncating target.pdb&#xD;#&#xD;Truncating target protein helps a lot in reducing the stress of computing. For example, we could remove AAs with very low pLDDT or AAs who are far away from the place we want binders to bind with.</description>
     </item>
     <item>
       <title>design binders via RFdiffusion and ProteinMPNN-FastRelax</title>
-      <link>http://localhost:60489/docs/project/binderdesign/design/</link>
+      <link>http://localhost:65191/docs/project/binderdesign/design/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:60489/docs/project/binderdesign/design/</guid>
+      <guid>http://localhost:65191/docs/project/binderdesign/design/</guid>
       <description>In my use case, firstly, I tried to de novo design binders. However, I found that designed binders are limited to proteins with only one helix. Then, I changed to design binders based on scaffolds. The design process and scripts I used a lot are as follows.&#xA;Three needed designing environments&#xD;#&#xD;Thanks a lot to the great work, RFdiffusion and ProteinMPNN-FastRelax, as well as AlphaFold2, who give us great ways to design proteins.</description>
     </item>
     <item>
       <title>ppi.hotspot_res argument</title>
-      <link>http://localhost:60489/docs/project/binderdesign/hotspot/</link>
+      <link>http://localhost:65191/docs/project/binderdesign/hotspot/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:60489/docs/project/binderdesign/hotspot/</guid>
+      <guid>http://localhost:65191/docs/project/binderdesign/hotspot/</guid>
       <description>ppi.hotspot_res argument&#xD;#&#xD;I spent a great of time on ppi.hotspot_res argument.&#xA;In this blog, I want to make notes on how I design the binder of the target protein using RFdiffusion, ProteinMPNN-FastRelax and so on.&#xA;def point_to_plane_dist(p, p0, p1, p2): &amp;#34;&amp;#34;&amp;#34; The distance from point p to the plane determined by three points (p0, p1, p2) :param p: point p :param p0, p1, p2: three points determine one plane :return: the distance between point to plane &amp;#34;&amp;#34;&amp;#34; u = p1 - p0 v = p2 - p0 # vector normal to plane n = np.</description>
     </item>
     <item>
       <title>Notes</title>
-      <link>http://localhost:60489/docs/project/binderdesign/analysis/</link>
+      <link>http://localhost:65191/docs/project/binderdesign/analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:60489/docs/project/binderdesign/analysis/</guid>
+      <guid>http://localhost:65191/docs/project/binderdesign/analysis/</guid>
       <description> scaffold-based binder design performs much better than de novo binder design Experiments I tried&#xD;#&#xD;Argument Observation Star complete target protein + given scaffolds designed binders are motsly limited to 3-helix prorein complete target protein + given scaffolds (10,000) </description>
     </item>
   </channel>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=60489&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=65191&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="In my use case, firstly, I tried to de novo design binders. However, I found that designed binders are limited to proteins with only one helix. Then, I changed to design binders based on scaffolds. The design process and scripts I used a lot are as follows.
@@ -11,17 +11,17 @@ Three needed designing environments#Thanks a lot to the great work, RFdiffusio
 <meta property="og:description" content="In my use case, firstly, I tried to de novo design binders. However, I found that designed binders are limited to proteins with only one helix. Then, I changed to design binders based on scaffolds. The design process and scripts I used a lot are as follows.
 Three needed designing environments#Thanks a lot to the great work, RFdiffusion and ProteinMPNN-FastRelax, as well as AlphaFold2, who give us great ways to design proteins." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:60489/docs/project/binderdesign/design/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:65191/docs/project/binderdesign/design/" /><meta property="article:section" content="docs" />
 
 
 
 <title>design binders via RFdiffusion and ProteinMPNN-FastRelax | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:60489/docs/project/binderdesign/design/">
+<link rel="canonical" href="http://localhost:65191/docs/project/binderdesign/design/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.5fde2d1532512cb8e5ed28c597a5ac1ab9b248a6205f79a369dc3cfcb8a5e847.js" integrity="sha256-X94tFTJRLLjl7SjFl6WsGrmySKYgX3mjadw8/Lil6Ec=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.e621fc0d71a8ca4dcec2b9c98c1ad5fd658c90fe405755ee9525cd8525e6c60e.js" integrity="sha256-5iH8DXGoyk3OwrnJjBrV/WWMkP5AV1XulSXNhSXmxg4=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -247,9 +247,9 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#three-needed-designing-environments">Three needed designing environments</a></li>
     <li><a href="#quickly-go-through-the-whole-process">Quickly go through the whole process</a>
       <ul>
-        <li><a href="#1-get-secondary-structure-and-block-adjacency-information-script">1️⃣ get secondary structure and block adjacency information script</a></li>
-        <li><a href="#2-backbones-design-script">2️⃣ backbones design script</a></li>
-        <li><a href="#3-sequence-design-and-binder-assessment-script">3️⃣ sequence design and binder assessment script</a></li>
+        <li><a href="#1-get-secondary-structure-and-block-adjacency-information-script-get_adj_secstructslm">1️⃣ get secondary structure and block adjacency information script <code>get_adj_secstruct.slm</code></a></li>
+        <li><a href="#2-backbones-design-script-bbslm">2️⃣ backbones design script <code>bb.slm</code></a></li>
+        <li><a href="#3-sequence-design-and-binder-assessment-script-mpnn_afslm">3️⃣ sequence design and binder assessment script <code>mpnn_af.slm</code></a></li>
       </ul>
     </li>
   </ul>
@@ -306,9 +306,9 @@ Make sure you have high performance computating envrionment with CUDA, and you c
 │   │   └── run_inference.py
 │   ├── helper_scripts
 │   │   └── make_secstruc_adj.py
-</code></pre><h3 id="1-get-secondary-structure-and-block-adjacency-information-script">
-  1️⃣ get secondary structure and block adjacency information script
-  <a class="anchor" href="#1-get-secondary-structure-and-block-adjacency-information-script">#</a>
+</code></pre><h3 id="1-get-secondary-structure-and-block-adjacency-information-script-get_adj_secstructslm">
+  1️⃣ get secondary structure and block adjacency information script <code>get_adj_secstruct.slm</code>
+  <a class="anchor" href="#1-get-secondary-structure-and-block-adjacency-information-script-get_adj_secstructslm">#</a>
 </h3>
 <p>We will provide these two <code>.pt</code> files (<code>target_adj.pt</code> and <code>target_ss.pt</code>) to the scaffold-based binder design model.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-t" data-lang="t"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash</span>
@@ -332,6 +332,7 @@ Make sure you have high performance computating envrionment with CUDA, and you c
 │   ├── mpnn_fr
 │   │   ├── dl_interface_design.py
 ├── mydesigns
+│   ├── get_adj_secstruct.slm
 │   ├── target
 │   │   └── target.pdb
 │   ├── target_adj_secstruct
@@ -343,9 +344,9 @@ Make sure you have high performance computating envrionment with CUDA, and you c
 │   │   └── run_inference.py
 │   ├── helper_scripts
 │   │   └── make_secstruc_adj.py
-</code></pre><h3 id="2-backbones-design-script">
-  2️⃣ backbones design script
-  <a class="anchor" href="#2-backbones-design-script">#</a>
+</code></pre><h3 id="2-backbones-design-script-bbslm">
+  2️⃣ backbones design script <code>bb.slm</code>
+  <a class="anchor" href="#2-backbones-design-script-bbslm">#</a>
 </h3>
 <p>I use <em>array-job</em> to parallely execute different <code>ppi.hotspot_res</code> arguments simultaneously. For example, I have 10 <code>ppi.hotspot_res</code> arguments to test, so my <code>paraID.txt</code> is like:</p>
 <center><figure><img src="../bioIMG/PARAid.PNG"
@@ -364,7 +365,7 @@ and I setup 10 jobs (<code>#SBATCH -a 1-10</code>) for each `ppi.hotspot_res`. E
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH --mem=50G</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -J array-job					</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -a 1-10</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -o %A.%a.log</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -o backbone_10000.%A.%a.log</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>id_list<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./paraID.txt&#34;</span>
@@ -401,6 +402,8 @@ Now, our directories tree becomes:</p>
 │   ├── mpnn_fr
 │   │   ├── dl_interface_design.py
 ├── mydesigns
+│   ├── get_adj_secstruct.slm
+│   ├── bb.slm
 │   ├── target
 │   │   └── target.pdb
 │   ├── target_adj_secstruct
@@ -432,9 +435,9 @@ Therefore, one of <code>inference.num_designs=10000</code> binder backbones for 
 
 </blockquote>
 
-<h3 id="3-sequence-design-and-binder-assessment-script">
-  3️⃣ sequence design and binder assessment script
-  <a class="anchor" href="#3-sequence-design-and-binder-assessment-script">#</a>
+<h3 id="3-sequence-design-and-binder-assessment-script-mpnn_afslm">
+  3️⃣ sequence design and binder assessment script <code>mpnn_af.slm</code>
+  <a class="anchor" href="#3-sequence-design-and-binder-assessment-script-mpnn_afslm">#</a>
 </h3>
 <p><blockquote class="book-hint info">
   <details>
@@ -463,7 +466,41 @@ Let&rsquo;s say that we finally select 1000 favourite backbones, and we go to de
 </span></span><span style="display:flex;"><span>        src <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;../mydesigns/backbones_OUT/&#34;</span> <span style="color:#f92672">+</span> j
 </span></span><span style="display:flex;"><span>        dst <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;../mydesigns/select_1000_mpnn_af/folder&#34;</span> <span style="color:#f92672">+</span> str(i) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> j
 </span></span><span style="display:flex;"><span>        shutil<span style="color:#f92672">.</span>copyfile(src, dst)
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-t" data-lang="t"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash</span>
+</span></span></code></pre></div><p>And, our current directories tree is like:</p>
+<pre tabindex="0"><code class="language-commandline" data-lang="commandline">├── dl_binder_design
+│   ├── af2_initial_guess
+│   │   ├── predict.py
+│   ├── mpnn_fr
+│   │   ├── dl_interface_design.py
+├── mydesigns
+│   ├── get_adj_secstruct.slm
+│   ├── paraID.txt
+│   ├── bb.slm
+│   ├── target
+│   │   └── target.pdb
+│   ├── target_adj_secstruct
+│   │   └── target_adj.pt
+│   │   └── target_ss.pt
+│   ├── backbones_OUT
+│   │   ├── traj
+│   │   ├── A28-A25-A29-A26-A63_0.pdb
+│   │   ├── A28-A25-A29-A26-A63_0.trb
+│   │   ├── ...
+│   ├── select_1000_mpnn_af
+│   │   ├── folder0
+│   │   │   └── A28-A25-A29-A26-A63_0.pdb
+│   │   │   └── ...
+│   │   ├── folder1
+│   │   ├── ...
+│   │   ├── folderID.txt
+│   │   ├── mpnn_af.slm
+├── RFdiffusion
+│   ├── rfdiffusion
+│   ├── scripts
+│   │   └── run_inference.py
+│   ├── helper_scripts
+│   │   └── make_secstruc_adj.py
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-t" data-lang="t"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -q gpu-huge</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH --nodes=1</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH --ntasks-per-node=8</span>
@@ -472,7 +509,7 @@ Let&rsquo;s say that we finally select 1000 favourite backbones, and we go to de
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH --mem=50G</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -J array-job					</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -a 1-5</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -o mpnn_af_789.%A.%a.log</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -o mpnn_af_1000.%A.%a.log</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>id_list<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./folderID.txt&#34;</span>
 </span></span><span style="display:flex;"><span>id<span style="color:#f92672">=</span><span style="color:#e6db74">`head -n $SLURM_ARRAY_TASK_ID $id_list | tail -n 1`</span>
@@ -539,9 +576,9 @@ Let&rsquo;s say that we finally select 1000 favourite backbones, and we go to de
     <li><a href="#three-needed-designing-environments">Three needed designing environments</a></li>
     <li><a href="#quickly-go-through-the-whole-process">Quickly go through the whole process</a>
       <ul>
-        <li><a href="#1-get-secondary-structure-and-block-adjacency-information-script">1️⃣ get secondary structure and block adjacency information script</a></li>
-        <li><a href="#2-backbones-design-script">2️⃣ backbones design script</a></li>
-        <li><a href="#3-sequence-design-and-binder-assessment-script">3️⃣ sequence design and binder assessment script</a></li>
+        <li><a href="#1-get-secondary-structure-and-block-adjacency-information-script-get_adj_secstructslm">1️⃣ get secondary structure and block adjacency information script <code>get_adj_secstruct.slm</code></a></li>
+        <li><a href="#2-backbones-design-script-bbslm">2️⃣ backbones design script <code>bb.slm</code></a></li>
+        <li><a href="#3-sequence-design-and-binder-assessment-script-mpnn_afslm">3️⃣ sequence design and binder assessment script <code>mpnn_af.slm</code></a></li>
       </ul>
     </li>
   </ul>
