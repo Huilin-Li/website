@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Protein on Huilin Li</title>
-    <link>http://localhost:49429/tags/protein/</link>
+    <link>http://localhost:51618/tags/protein/</link>
     <description>Recent content in Protein on Huilin Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:49429/tags/protein/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:51618/tags/protein/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>4 levels of protein structure</title>
-      <link>http://localhost:49429/posts/proteinstruture/</link>
+      <link>http://localhost:51618/posts/proteinstruture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49429/posts/proteinstruture/</guid>
+      <guid>http://localhost:51618/posts/proteinstruture/</guid>
       <description>There are four levels of protein structure: primary, secondary, tertiary and quaternary.&#xA;Primary Structure.&#xD;#&#xD;A protein’s primary structure is the unique sequence of amino acids in each polypeptide chain that makes up the protein.&#xA;fasta file sequence of 20 amino acids Secondary Structure&#xD;#&#xD;Reference:&#xD;#&#xD;3.9: Proteins - Protein Structure </description>
     </item>
     <item>
       <title>Protein structure measurement</title>
-      <link>http://localhost:49429/posts/assessment/</link>
+      <link>http://localhost:51618/posts/assessment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49429/posts/assessment/</guid>
+      <guid>http://localhost:51618/posts/assessment/</guid>
       <description>pLDDT&#xD;#&#xD;&amp;ldquo;predicted Local Distance Difference Test&amp;rdquo; is a per-residue measure of local confidence. It is scaled from 0 to 100, with higher scores indicating higher confidence and usually a more accurate prediction. ref&#xA;PAE&#xD;#&#xD;Predicted Aligned Error (PAE) is a measure of how confident AlphaFold2 is in the relative position of two residues within the predicted structure. PAE is defined as the expected positional error at residue X, measured in Ångströms (Å), if the predicted and actual structures were aligned on residue Y.</description>
     </item>
   </channel>

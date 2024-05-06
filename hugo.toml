@@ -106,10 +106,9 @@ theme = ['osm', 'hugo-book']
   # (Optional, experimental, default false) Enables a drop-down menu for translations only if a translation is present.
   BookTranslatedOnly = false
 
-  # utterances
-  [params.utterances]
-    enable = true
-    repo="Huilin-Li/COMMENTS-STORAGE"
-    issue-term="pathname"
-    theme="github-light"
-    crossorigin="anonymous"
+  [params.blog.giscus]
+  repo = "Huilin-Li/site-comment"
+  repo_id = "R_kgDOL3ovHA"
+  category = "General"
+  category_id = "DIC_kwDOL3ovHM4CfKps"
+
