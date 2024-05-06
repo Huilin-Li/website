@@ -4,4 +4,7 @@ weight: 3
 ---
 As [RFdiffusion]()
 
-{{ partial "giscus/script" . }}
+
+<div class="giscus_comments">
+{{- partial "comments.html" . }}
+</div>
