@@ -7,5 +7,5 @@ type: docs
 
 
 - Research assistant, Neurodegenerative Lab, Westlake University, China
-- Master edegree, Computer Science: Data Science, Leiden University, the Netherlands
+- Master degree, Computer Science: Data Science, Leiden University, the Netherlands
 - Bechalor degree, Information management and Information system, Huazhong Agricultural University, China
