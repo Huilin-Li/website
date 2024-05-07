@@ -57,6 +57,13 @@
       <description></description>
     </item>
     <item>
+      <title>Issue</title>
+      <link>http://localhost:1313/tags/issue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/issue/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Overleaf</title>
       <link>http://localhost:1313/tags/overleaf/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -89,6 +96,13 @@
       <link>http://localhost:1313/tags/pymol/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/pymol/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Script</title>
+      <link>http://localhost:1313/tags/script/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/script/</guid>
       <description></description>
     </item>
     <item>

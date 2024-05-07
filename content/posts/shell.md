@@ -2,7 +2,7 @@
 title = "Bash Scripts"
 description = ""
 tags = ["bash", "git"]
-categories = ["Command-line",]
+categories = ["script",]
 +++ 
 
 

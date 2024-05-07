@@ -3,15 +3,13 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Introduction#Some commands and issues you might want to know when building a website, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.
-How to insert images and resize and center images?#The file tree is like
-├─content│ │ _index.md│ ││ └─posts│ │ hugo.md│ │ _index.md│ ││ └─images│ Nice.png In hugo.">
+<meta name="description" content="Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.
+SUMMARY#use themes as your own repositories insert and resize images center images add emoji add travel map Why my local website doesn&rsquo;t update after I update my markdown files? link pages and tiles Add Giscus comment in Hugo-book theme Remove git in themes, and use themes as your own repositories.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="Hugo commands" />
-<meta property="og:description" content="Introduction#Some commands and issues you might want to know when building a website, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.
-How to insert images and resize and center images?#The file tree is like
-├─content│ │ _index.md│ ││ └─posts│ │ hugo.md│ │ _index.md│ ││ └─images│ Nice.png In hugo." />
+<meta property="og:description" content="Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.
+SUMMARY#use themes as your own repositories insert and resize images center images add emoji add travel map Why my local website doesn&rsquo;t update after I update my markdown files? link pages and tiles Add Giscus comment in Hugo-book theme Remove git in themes, and use themes as your own repositories." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/posts/hugo/" /><meta property="article:section" content="posts" />
 
@@ -23,7 +21,7 @@ How to insert images and resize and center images?#The file tree is like
 <link rel="canonical" href="http://localhost:1313/posts/hugo/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.6526c78a8f85100d7404e480967ada3292dc3df581b2a8f5d73863cb85478fba.js" integrity="sha256-ZSbHio&#43;FEA10BOSAlnraMpLcPfWBsqj11zhjy4VHj7o=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.0453f63d80c31eaf0068131bccb2239c7c40b24e702064a96a1109e0818b015a.js" integrity="sha256-BFP2PYDDHq8AaBMbzLIjnHxAsk5wIGSpahEJ4IGLAVo=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -233,11 +231,14 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#images">How to insert images and resize and center images?</a></li>
+    <li><a href="#git">Remove git in themes, and use themes as your own repositories.</a></li>
+    <li><a href="#images">How to insert images and resize images?</a></li>
+    <li><a href="#center">Center the image?</a></li>
     <li><a href="#emoji">How to add emoji?</a></li>
     <li><a href="#map">How to add a travel map in Hugo?</a></li>
     <li><a href="#update">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
     <li><a href="#link">How to link pages and tiles?</a></li>
+    <li><a href="#Giscus">Add Giscus comment in Hugo-book theme</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -268,54 +269,82 @@ https://github.com/alex-shpak/hugo-book
   
   <div>
     
-      <a href="/tags/hugo/">Hugo</a>
+      <a href="/tags/script/">Script</a>, 
+      <a href="/tags/issue/">Issue</a>
   </div>
   
 
 
 
-<h1 id="introduction">
-  Introduction
-  <a class="anchor" href="#introduction">#</a>
+<p>Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.</p>
+<h1 id="summary">
+  SUMMARY
+  <a class="anchor" href="#summary">#</a>
 </h1>
-<p>Some commands and issues you might want to know when building a website, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.</p>
+<ul>
+<li>
+  <a href="#git">use themes as your own repositories</a></li>
+<li>
+  <a href="#images">insert and resize images</a></li>
+<li>
+  <a href="#center">center images</a></li>
+<li>
+  <a href="#emoji">add emoji</a></li>
+<li>
+  <a href="#map">add travel map</a></li>
+<li>
+  <a href="#update">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
+<li>
+  <a href="#link">link pages and tiles</a></li>
+<li>
+  <a href="#Giscus">Add Giscus comment in Hugo-book theme</a></li>
+</ul>
+<center><figure><img src="../images/mona.png"
+         alt=" "/>
+</figure>
+</center>
+<h2 id="git">
+  Remove git in themes, and use themes as your own repositories.
+  <a class="anchor" href="#git">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-t" data-lang="t"><span style="display:flex;"><span> git rm <span style="color:#f92672">--</span>cached hugo<span style="color:#f92672">-</span>book <span style="color:#f92672">-</span>f
+</span></span></code></pre></div><p>So that, we could modify, git add, and git push the theme repository as our own.</p>
 <h2 id="images">
-  How to insert images and resize and center images?
+  How to insert images and resize images?
   <a class="anchor" href="#images">#</a>
 </h2>
 <p>The file tree is like</p>
 <pre tabindex="0"><code>    ├─content
     │  │  _index.md
-    │  │
     │  └─posts
     │      │  hugo.md
     │      │  _index.md
-    │      │
     │      └─images
     │           Nice.png
 </code></pre><p>In <code>hugo.md</code> file, we add Nice.png and scale it by</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span>  <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span>
 </span></span></code></pre></div><figure><img src="../images/Nice.png"
          alt=" " width="400"/>
 </figure>
 
-<blockquote>
-<p>Why we need to add <code>../</code> in front of <code>images</code> folder, altough <code>hugo.md</code> file and <code>images</code> folder are at the same level?
-Because Hugo system sees <code>hugo.md</code> as a foler too. However, Hugo system sees <code>_index.md</code> as a file! Therefore, If we want to insert iamges in <code>_index.md</code> file, the command will be like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span>
-</span></span></code></pre></div></blockquote>
-<blockquote class="book-hint warning">
-  <p><strong>Center the image?</strong></p>
-<pre tabindex="0"><code>&lt;center&gt;{ {&lt;figure src=&#34;../images/Nice.png&#34; width=&#34;400&#34; alt=&#34; &#34;&gt;} }&lt;/center&gt;
-</code></pre><p>At the same time, in <code>hugo.toml</code>, add</p>
-<pre tabindex="0"><code>[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-</code></pre>
+<blockquote class="book-hint info">
+  <p><strong>Why we need to add <code>../</code> in front of <code>images</code> folder, altough <code>hugo.md</code> file and <code>images</code> folder are at the same level?</strong></p>
+<p>Because Hugo system sees <code>hugo.md</code> as a foler too. However, Hugo system sees <code>_index.md</code> as a file! Therefore, If we want to insert iamges in <code>_index.md</code> file, the command will be like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{</span> <span style="color:#75715e">{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}</span> <span style="color:#75715e">}</span>
+</span></span></code></pre></div>
 </blockquote>
 
-<h2 id="emoji">
+<h2 id="center">
+  Center the image?
+  <a class="anchor" href="#center">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>&lt;center&gt;<span style="color:#75715e">{</span> <span style="color:#75715e">{</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">&gt;</span><span style="color:#75715e">}</span> <span style="color:#75715e">}</span>&lt;/center&gt;
+</span></span></code></pre></div><p>At the same time, in <code>hugo.toml</code>, add</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>[markup]
+</span></span><span style="display:flex;"><span>  [markup.goldmark]
+</span></span><span style="display:flex;"><span>    [markup.goldmark.renderer]
+</span></span><span style="display:flex;"><span>      unsafe = true
+</span></span></code></pre></div><h2 id="emoji">
   How to add emoji?
   <a class="anchor" href="#emoji">#</a>
 </h2>
@@ -330,20 +359,21 @@ Because Hugo system sees <code>hugo.md</code> as a foler too. However, Hugo syst
   <a class="anchor" href="#map">#</a>
 </h2>
 <p>Refer to 
-  <a href="https://www.thecoffeemachine.net/writing/adding-maps-to-hugo-blogs-with-osm/">this article</a></p>
-<blockquote>
-<p><strong><em>NOTE:</em></strong><br>
-In <code>{{&lt; openstreetmap mapName=&quot;&lt;your map name&gt;&quot; &gt;}}</code>, the <code>&lt;your map name&gt;</code> is not the name you give to your map, but the name in the website link of your map. For example, I created a map whose name is <strong>Travel</strong>, I need to use <strong>travel_1036974</strong> in the hugo shortcode.
+  <a href="https://www.thecoffeemachine.net/writing/adding-maps-to-hugo-blogs-with-osm/">this article</a>
+<blockquote class="book-hint info">
+  <p><strong>NOTE:</strong></p>
+<p>In <code>{ {&lt; openstreetmap mapName=&quot;&lt;your map name&gt;&quot; &gt;} }</code>, the <code>&lt;your map name&gt;</code> is not the name you give to your map, but the name in the website link of your map. For example, I created a map whose name is <strong>Travel</strong>, I need to use <strong>travel_1036974</strong> in the hugo shortcode.</p>
 <figure><img src="../images/map.jpeg"
          alt="umap" width="400"/>
 </figure>
-</p>
+
 </blockquote>
+</p>
 <h2 id="update">
   Why my local website doesn&rsquo;t update after I update my markdown files?
   <a class="anchor" href="#update">#</a>
 </h2>
-<p>Good question. I also find my local website does not update although I have save my changes. I am not clear the excat reason, but It works well if I <code>Pree Ctrl+C to stop</code> the local host, and <code>hugo server</code> again, I can see the updated website in <code>http://localhost:1313/</code>.</p>
+<p>Good question. I also find my local website does not update although I have save my changes. I am not clear the excat reason, but It works well if I <code>Press Ctrl+C to stop</code> the local host, and <code>hugo server</code> again, I can see the updated website in <code>http://localhost:1313/</code>.</p>
 <h2 id="link">
   How to link pages and tiles?
   <a class="anchor" href="#link">#</a>
@@ -354,7 +384,43 @@ In <code>page.md</code> file, add an anchor:</p>
 </code></pre><p>In <code>now.md</code> file, add commands:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>[text] ( <span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">ref</span> <span style="color:#e6db74">&#34;./pages.md&#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span> ) # link to one page
 </span></span><span style="display:flex;"><span>[text] ( <span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">ref</span> <span style="color:#e6db74">&#34;./pages.md#anchor&#34;</span> <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span> ) # link to the title
-</span></span></code></pre></div><h2 id="references">
+</span></span></code></pre></div><h2 id="Giscus">
+  Add Giscus comment in Hugo-book theme
+  <a class="anchor" href="#Giscus">#</a>
+</h2>
+<ol>
+<li>Create a new public github repository, e.g. <code>site-comment</code>.</li>
+<li>
+  <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/enabling-or-disabling-github-discussions-for-a-repository">Enable the discussions feature</a>.</li>
+<li>
+  <a href="https://github.com/apps/giscus">Install the giscus app</a></li>
+</ol>
+<p>For example,</p>
+<center><figure><img src="../images/giscus1.PNG"
+         alt=" " width="400"/>
+</figure>
+</center>
+<ol start="4">
+<li>Configure giscus codeblock. Go to 
+  <a href="https://giscus.app/">Giscus App</a>, and get the anable Giscus.</li>
+</ol>
+<center><figure><img src="../images/giscus2.png"
+         alt=" " width="500"/>
+</figure>
+</center>
+<center><figure><img src="../images/giscus3.png"
+         alt=" " width="600"/>
+</figure>
+</center>
+5. Add the <code>script</code> to <code>themes\hugo-book\layouts\partials\docs\comments.html</code>, like this
+<center><figure><img src="../images/giscus4.png"
+         alt=" " width="600"/>
+</figure>
+</center>
+<ol start="6">
+<li><code>bookComments: false</code> controls whether you want to display comment in this page.</li>
+</ol>
+<h2 id="references">
   References
   <a class="anchor" href="#references">#</a>
 </h2>
@@ -369,6 +435,8 @@ In <code>page.md</code> file, add an anchor:</p>
   <a href="https://discourse.gohugo.io/t/how-to-render-markdown-url-with-md-to-correct-link/26372">How to render markdown url with .md to correct link</a></li>
 <li>
   <a href="https://stackoverflow.com/questions/33225067/linking-pages-in-hugo-markdown">Linking pages in Hugo/markdown</a></li>
+<li>
+  <a href="https://www.justinjbird.me/blog/2023/adding-comments-to-a-hugo-site-using-giscus/">Adding comments system to a Hugo site using Giscus</a></li>
 </ol>
 </article>
  
@@ -380,13 +448,6 @@ In <code>page.md</code> file, add an anchor:</p>
 
 
 
-
-  <div>
-    <a class="flex align-center" href="https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content/posts/hugo.md" target="_blank" rel="noopener">
-      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
-      <span>Edit this page</span>
-    </a>
-  </div>
 
 
 </div>
@@ -430,11 +491,14 @@ In <code>page.md</code> file, add an anchor:</p>
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#images">How to insert images and resize and center images?</a></li>
+    <li><a href="#git">Remove git in themes, and use themes as your own repositories.</a></li>
+    <li><a href="#images">How to insert images and resize images?</a></li>
+    <li><a href="#center">Center the image?</a></li>
     <li><a href="#emoji">How to add emoji?</a></li>
     <li><a href="#map">How to add a travel map in Hugo?</a></li>
     <li><a href="#update">Why my local website doesn&rsquo;t update after I update my markdown files?</a></li>
     <li><a href="#link">How to link pages and tiles?</a></li>
+    <li><a href="#Giscus">Add Giscus comment in Hugo-book theme</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>

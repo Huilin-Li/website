@@ -6,6 +6,7 @@ menu:
     name: world
     weight: 20
 bookToc: false
+bookComments: false
 ---
 
 # World

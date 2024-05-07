@@ -6,6 +6,7 @@ menu:
     name: contact
     weight: 30
 bookToc: false
+bookComments: false
 ---
 
 # Contact

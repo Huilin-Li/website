@@ -1,10 +1,6 @@
 ---
 title: pae_interaction score
 weight: 3
+comment: false
 ---
 As [RFdiffusion]()
-
-
-<div class="giscus_comments">
-{{- partial "comments.html" . }}
-</div>

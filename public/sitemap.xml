@@ -34,8 +34,6 @@
   </url><url>
     <loc>http://localhost:1313/tags/colors/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/command-line/</loc>
-  </url><url>
     <loc>http://localhost:1313/tools/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/plotlycolor/</loc>
@@ -62,6 +60,8 @@
   </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>
+    <loc>http://localhost:1313/tags/issue/</loc>
+  </url><url>
     <loc>http://localhost:1313/categories/latex/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/overleaf/</loc>
@@ -81,6 +81,10 @@
     <loc>http://localhost:1313/categories/pymol/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/python/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/script/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/script/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url><url>
