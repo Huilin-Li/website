@@ -1,7 +1,7 @@
 +++
 title = "PyMol commands"
 description = ""
-tags = ["PyMol",]
+tags = ["script",]
 categories = ["PyMol",]
 weight = 1
 +++ 

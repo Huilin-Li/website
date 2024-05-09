@@ -1,8 +1,8 @@
 +++
 title = "Protein structure measurement"
 description = ""
-tags = ["protein",]
-categories = ["Biology",]
+tags = ["knowledge",]
+categories = ["Bioinformatics",]
 math = true
 +++ 
 ## pLDDT

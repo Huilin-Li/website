@@ -1,8 +1,8 @@
 +++
 title = "Bash Scripts"
 description = ""
-tags = ["bash", "git"]
-categories = ["script",]
+tags = ["script",]
+categories = ["terminal",]
 +++ 
 
 

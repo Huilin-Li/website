@@ -1,7 +1,7 @@
 +++
 title = "4 levels of protein structure"
 description = ""
-tags = ["protein",]
+tags = ["knowledge",]
 categories = ["Biology",]
 +++ 
 

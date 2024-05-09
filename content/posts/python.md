@@ -1,7 +1,7 @@
 +++
 title = "Helpul python/pandas scripts"
 description = ""
-tags = ["Pandas",]
+tags = ["script",]
 categories = ["Python",]
 weight = 1
 +++ 

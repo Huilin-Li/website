@@ -1,7 +1,7 @@
 +++
 title = "All about Latex and Overleaf"
 description = ""
-tags = ["overleaf",]
+tags = ["script",]
 categories = ["Latex",]
 math = true
 +++ 

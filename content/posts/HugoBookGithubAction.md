@@ -1,7 +1,7 @@
 +++
 title = "Website via Hugo Book and deployed by Github Action"
 description = ""
-tags = ["hugo", "Github action",]
+tags = ["script",]
 categories = ["Hugo",]
 +++ 
 

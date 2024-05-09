@@ -1,7 +1,7 @@
 +++
 title = "Excel commands"
 description = ""
-tags = ["excel",]
+tags = ["script",]
 categories = ["excel",]
 +++ 
 - In one row, concat each cell into one cell as string
