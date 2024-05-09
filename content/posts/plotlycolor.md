@@ -1,5 +1,5 @@
 +++
-title = "Continuous and Discrete colors in Plotly"
+title = "Copy&Paste Continuous and Discrete colors in Plotly"
 description = ""
 tags = ["script"]
 categories = ["Visualization",]
