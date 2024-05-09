@@ -3,11 +3,13 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="As RFdiffusion">
+<meta name="description" content="As RFdiffusion states, we expect a binder whose pae_interaction score is lower than 10. However, we should also have a look at other scores, such as pLDDT, rmsd.
+check_n = 6 folder_nam = [&#34;folder&#34;&#43;str(i) for i in range(check_n)] score_paths = [&#34;../MyBinderWork/ThreeThoudand_mpnn_af/&#34;&#43;nam&#43;&#34;/score.sc&#34; for nam in folder_nam] ALL_DF = [] for p in score_paths: df = pd.read_csv(p, delim_whitespace=True) ALL_DF.append(df) SCORE_df = pd.concat(ALL_DF)[[&#34;binder_aligned_rmsd&#34;, &#34;pae_binder&#34;, &#34;pae_interaction&#34;, &#34;plddt_binder&#34;, &#34;description&#34;]] An example of one of my experiments">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="pae_interaction score" />
-<meta property="og:description" content="As RFdiffusion" />
+<meta property="og:description" content="As RFdiffusion states, we expect a binder whose pae_interaction score is lower than 10. However, we should also have a look at other scores, such as pLDDT, rmsd.
+check_n = 6 folder_nam = [&#34;folder&#34;&#43;str(i) for i in range(check_n)] score_paths = [&#34;../MyBinderWork/ThreeThoudand_mpnn_af/&#34;&#43;nam&#43;&#34;/score.sc&#34; for nam in folder_nam] ALL_DF = [] for p in score_paths: df = pd.read_csv(p, delim_whitespace=True) ALL_DF.append(df) SCORE_df = pd.concat(ALL_DF)[[&#34;binder_aligned_rmsd&#34;, &#34;pae_binder&#34;, &#34;pae_interaction&#34;, &#34;plddt_binder&#34;, &#34;description&#34;]] An example of one of my experiments" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/docs/project/binderdesign/pae_score/" /><meta property="article:section" content="docs" />
 
@@ -19,7 +21,7 @@
 <link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/pae_score/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.0453f63d80c31eaf0068131bccb2239c7c40b24e702064a96a1109e0818b015a.js" integrity="sha256-BFP2PYDDHq8AaBMbzLIjnHxAsk5wIGSpahEJ4IGLAVo=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.9bcc79ceadc629c14f148b6ee5ca231470a03e93ae06909d9c1ca3113a335855.js" integrity="sha256-m8x5zq3GKcFPFItu5cojFHCgPpOuBpCdnByjETozWFU=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -137,6 +139,19 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/filtering/" class="">backbones filtering</a>
+  
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -239,7 +254,23 @@ https://github.com/alex-shpak/hugo-book
       
       
   <article class="markdown book-article"><p>As 
-  <a href="/">RFdiffusion</a></p>
+  <a href="https://github.com/RosettaCommons/RFdiffusion">RFdiffusion</a> states, we expect a binder whose <code>pae_interaction</code> score is lower than 10. However, we should also have a look at other scores, such as pLDDT, rmsd.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>check_n <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>folder_nam <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;folder&#34;</span><span style="color:#f92672">+</span>str(i) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(check_n)]
+</span></span><span style="display:flex;"><span>score_paths <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;../MyBinderWork/ThreeThoudand_mpnn_af/&#34;</span><span style="color:#f92672">+</span>nam<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/score.sc&#34;</span> <span style="color:#66d9ef">for</span> nam <span style="color:#f92672">in</span> folder_nam]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ALL_DF <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> score_paths:
+</span></span><span style="display:flex;"><span>    df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(p, delim_whitespace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    ALL_DF<span style="color:#f92672">.</span>append(df)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SCORE_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(ALL_DF)[[<span style="color:#e6db74">&#34;binder_aligned_rmsd&#34;</span>, <span style="color:#e6db74">&#34;pae_binder&#34;</span>, <span style="color:#e6db74">&#34;pae_interaction&#34;</span>, <span style="color:#e6db74">&#34;plddt_binder&#34;</span>, <span style="color:#e6db74">&#34;description&#34;</span>]]
+</span></span></code></pre></div><center><figure><img src="../bioIMG/pae.PNG"
+         alt="An example of one of my experiments" width="600"/><figcaption>
+            <p>An example of one of my experiments</p>
+        </figcaption>
+</figure>
+</center>
 </article>
  
       

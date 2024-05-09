@@ -162,7 +162,7 @@ Therefore, one of <code>inference.num_designs=10000</code> binder backbones for 
 </details>
 {{< /hint >}}
 
-### 3️⃣ sequence design and binder assessment script `mpnn_af.slm`
+### 3️⃣ sequence design and binder assessment script `mpnn_af.slm`{#step3}
 {{< hint info >}}
 <details>
 <summary><b>Perform a filtering step</b></summary>

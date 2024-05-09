@@ -14,6 +14,8 @@
   </url><url>
     <loc>http://localhost:1313/docs/project/binderdesign/pae_score/</loc>
   </url><url>
+    <loc>http://localhost:1313/docs/project/binderdesign/filtering/</loc>
+  </url><url>
     <loc>http://localhost:1313/tags/3d/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/proteinstruture/</loc>
@@ -31,8 +33,6 @@
     <loc>http://localhost:1313/posts/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/colors/</loc>
   </url><url>
     <loc>http://localhost:1313/tools/</loc>
   </url><url>
@@ -89,6 +89,8 @@
     <loc>http://localhost:1313/tags/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/visualization/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/visualization/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/hugobookgithubaction/</loc>
   </url><url>

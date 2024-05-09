@@ -26,7 +26,14 @@
       <link>http://localhost:1313/docs/project/binderdesign/pae_score/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/project/binderdesign/pae_score/</guid>
-      <description>As RFdiffusion</description>
+      <description>As RFdiffusion states, we expect a binder whose pae_interaction score is lower than 10. However, we should also have a look at other scores, such as pLDDT, rmsd.&#xA;check_n = 6 folder_nam = [&amp;#34;folder&amp;#34;+str(i) for i in range(check_n)] score_paths = [&amp;#34;../MyBinderWork/ThreeThoudand_mpnn_af/&amp;#34;+nam+&amp;#34;/score.sc&amp;#34; for nam in folder_nam] ALL_DF = [] for p in score_paths: df = pd.read_csv(p, delim_whitespace=True) ALL_DF.append(df) SCORE_df = pd.concat(ALL_DF)[[&amp;#34;binder_aligned_rmsd&amp;#34;, &amp;#34;pae_binder&amp;#34;, &amp;#34;pae_interaction&amp;#34;, &amp;#34;plddt_binder&amp;#34;, &amp;#34;description&amp;#34;]] An example of one of my experiments</description>
+    </item>
+    <item>
+      <title>backbones filtering</title>
+      <link>http://localhost:1313/docs/project/binderdesign/filtering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/project/binderdesign/filtering/</guid>
+      <description>In design binders via RFdiffusion and ProteinMPNN-FastRelax, at the beginning of sequence design and binder assessment script mpnn_af.slm, we could perform a fitering step to remove useless backnones.&#xA;In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, my target.pdb is like:&#xA;target.pdb (only showing C_{/beta}) atom&#xA;I firstly finding two centers:</description>
     </item>
   </channel>
 </rss>
