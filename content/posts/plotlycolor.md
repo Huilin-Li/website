@@ -452,9 +452,390 @@ math = true
   </tr>
 </table>
 
-<details>
-<summary>code</summary>
 
+
+## Continuous color names
+<table>
+  <tr>
+    <td><img src="../images/colors2/aggrnyl.png"></td>
+    <td>aggrnyl</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/agsunset.png"></td>
+    <td>agsunset</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/blackbody.png"></td>
+    <td>blackbody</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/bluered.png"></td>
+    <td>bluered</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/blues.png"></td>
+    <td>blues</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/blugrn.png"></td>
+    <td>blugrn</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/bluyl.png"></td>
+    <td>bluyl</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/brwnyl.png"></td>
+    <td>brwnyl</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/bugn.png"></td>
+    <td>bugn</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/bupu.png"></td>
+    <td>bupu</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/burg.png"></td>
+    <td>burg</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/burgyl.png"></td>
+    <td>burgyl</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/cividis.png"></td>
+    <td>cividis</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/darkmint.png"></td>
+    <td>darkmint</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/electric.png"></td>
+    <td>electric</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/emrld.png"></td>
+    <td>emrld</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/gnbu.png"></td>
+    <td>gnbu</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/greens.png"></td>
+    <td>greens</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/greys.png"></td>
+    <td>greys</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/hot.png"></td>
+    <td>hot</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/inferno.png"></td>
+    <td>inferno</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/jet.png"></td>
+    <td>jet</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/magenta.png"></td>
+    <td>magenta</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/magma.png"></td>
+    <td>magma</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/mint.png"></td>
+    <td>mint</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/orrd.png"></td>
+    <td>orrd</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/oranges.png"></td>
+    <td>oranges</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/oryel.png"></td>
+    <td>oryel</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/peach.png"></td>
+    <td>peach</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/pinkyl.png"></td>
+    <td>pinkyl</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/plasma.png"></td>
+    <td>plasma</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/plotly3.png"></td>
+    <td>plotly3</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/pubu.png"></td>
+    <td>pubu</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/pubugn.png"></td>
+    <td>pubugn</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/purd.png"></td>
+    <td>purd</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/purp.png"></td>
+    <td>purp</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/purples.png"></td>
+    <td>purples</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/purpor.png"></td>
+    <td>purpor</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/rainbow.png"></td>
+    <td>rainbow</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/rdbu.png"></td>
+    <td>rdbu</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/rdpu.png"></td>
+    <td>rdpu</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/redor.png"></td>
+    <td>redor</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/reds.png"></td>
+    <td>reds</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/sunset.png"></td>
+    <td>sunset</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/sunsetdark.png"></td>
+    <td>sunsetdark</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/teal.png"></td>
+    <td>teal</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/tealgrn.png"></td>
+    <td>tealgrn</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/turbo.png"></td>
+    <td>turbo</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/viridis.png"></td>
+    <td>viridis</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/ylgn.png"></td>
+    <td>ylgn</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/ylgnbu.png"></td>
+    <td>ylgnbu</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/ylorbr.png"></td>
+    <td>ylorbr</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/ylorrd.png"></td>
+    <td>ylorrd</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/algae.png"></td>
+    <td>algae</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/amp.png"></td>
+    <td>amp</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/deep.png"></td>
+    <td>deep</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/dense.png"></td>
+    <td>dense</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/gray.png"></td>
+    <td>gray</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/haline.png"></td>
+    <td>haline</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/ice.png"></td>
+    <td>ice</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/matter.png"></td>
+    <td>matter</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/solar.png"></td>
+    <td>solar</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/speed.png"></td>
+    <td>speed</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/tempo.png"></td>
+    <td>tempo</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/thermal.png"></td>
+    <td>thermal</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/turbid.png"></td>
+    <td>turbid</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/armyrose.png"></td>
+    <td>armyrose</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/brbg.png"></td>
+    <td>brbg</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/earth.png"></td>
+    <td>earth</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/fall.png"></td>
+    <td>fall</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/geyser.png"></td>
+    <td>geyser</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/prgn.png"></td>
+    <td>prgn</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/piyg.png"></td>
+    <td>piyg</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/picnic.png"></td>
+    <td>picnic</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/portland.png"></td>
+    <td>portland</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/puor.png"></td>
+    <td>puor</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/rdgy.png"></td>
+    <td>rdgy</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/rdylbu.png"></td>
+    <td>rdylbu</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/rdylgn.png"></td>
+    <td>rdylgn</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/spectral.png"></td>
+    <td>spectral</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/tealrose.png"></td>
+    <td>tealrose</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/temps.png"></td>
+    <td>temps</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/tropic.png"></td>
+    <td>tropic</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/balance.png"></td>
+    <td>balance</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/curl.png"></td>
+    <td>curl</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/delta.png"></td>
+    <td>delta</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/oxy.png"></td>
+    <td>oxy</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/edge.png"></td>
+    <td>edge</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/hsv.png"></td>
+    <td>hsv</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/icefire.png"></td>
+    <td>icefire</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/phase.png"></td>
+    <td>phase</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/twilight.png"></td>
+    <td>twilight</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/mrybm.png"></td>
+    <td>mrybm</td>
+  </tr>
+  <tr>
+    <td><img src="../images/colors2/mygbm.png"></td>
+    <td>mygbm</td>
+  </tr>
+</table>
+
+## Code
 [plotlycolors.ipynb](https://github.com/Huilin-Li/BlogCode/blob/main/plotlycolors.ipynb)
-</details>
 
+## More
+https://plotly.com/python/builtin-colorscales/
