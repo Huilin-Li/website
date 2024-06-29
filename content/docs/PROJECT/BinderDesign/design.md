@@ -259,6 +259,66 @@ Now our directories tree is like:
 │   │   └── make_secstruc_adj.py
 ```
 
-### 4️⃣ End
-In each `mydesigns/select_1000_mpnn_af/folder`, `af2.silent` has our designed binders.
+### 4️⃣ Get designed binders
+In each `mydesigns/select_1000_mpnn_af/folder`, `af2.silent` has our designed binders. And, we will extract their `.pdb` files from the `.silent` file by (for example)
+```t
+#!/bin/bash
+#SBATCH -q gpu-huge
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH -p GPU-name
+#SBATCH --gres=gpu:1
+#SBATCH --mem=50G
 
+cd /(root)/mydesigns/select_1000_mpnn_af/folder0
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate proteinmpnn_binder_design
+silentextract af2.silent
+```
+Our final directories tree is like:
+```commandline
+├── dl_binder_design
+│   ├── af2_initial_guess
+│   │   ├── predict.py
+│   ├── mpnn_fr
+│   │   ├── dl_interface_design.py
+├── mydesigns
+│   ├── get_adj_secstruct.slm
+│   ├── paraID.txt
+│   ├── bb.slm
+│   ├── target
+│   │   └── target.pdb
+│   ├── target_adj_secstruct
+│   │   └── target_adj.pt
+│   │   └── target_ss.pt
+│   ├── backbones_OUT
+│   │   ├── traj
+│   │   ├── A28-A25-A29-A26-A63_0.pdb
+│   │   ├── A28-A25-A29-A26-A63_0.trb
+│   │   ├── ...
+│   ├── select_1000_mpnn_af
+│   │   ├── folder0
+│   │   │   └── A28-A25-A29-A26-A63_0.pdb
+│   │   │   └── A28-A25-A29-A26-A63_0_dldesign_0_cycle1_af2pred.pdb
+│   │   │   └── ...
+│   │   │   └── af2.silent
+│   │   │   └── check.point
+│   │   │   └── score.sc
+│   │   │   └── seq.silent
+│   │   │   └── seq.silent.idx
+│   │   │   └── silent.silent
+│   │   │   └── silent.silent.idx
+│   │   ├── folder1
+│   │   ├── ...
+│   │   ├── folderID.txt
+│   │   ├── mpnn_af.slm
+├── RFdiffusion
+│   ├── rfdiffusion
+│   ├── scripts
+│   │   └── run_inference.py
+│   ├── helper_scripts
+│   │   └── make_secstruc_adj.py
+```
+
+Each file with `_cycle1_af2pred.pdb` in name is our expected designed binders.

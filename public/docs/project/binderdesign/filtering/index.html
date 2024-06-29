@@ -4,16 +4,12 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="In design binders via RFdiffusion and ProteinMPNN-FastRelax, at the beginning of sequence design and binder assessment script mpnn_af.slm, we could perform a fitering step to remove useless backnones.
-In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, my target.pdb is like:
-target.pdb (only showing C_{/beta}) atom
-I firstly finding two centers:">
+In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, in my target.pdb, I only expect designed binders could bind with the outside part of the target.pdb (see fig.1).">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="backbones filtering" />
 <meta property="og:description" content="In design binders via RFdiffusion and ProteinMPNN-FastRelax, at the beginning of sequence design and binder assessment script mpnn_af.slm, we could perform a fitering step to remove useless backnones.
-In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, my target.pdb is like:
-target.pdb (only showing C_{/beta}) atom
-I firstly finding two centers:" />
+In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, in my target.pdb, I only expect designed binders could bind with the outside part of the target.pdb (see fig.1)." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/docs/project/binderdesign/filtering/" /><meta property="article:section" content="docs" />
 
@@ -25,7 +21,7 @@ I firstly finding two centers:" />
 <link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/filtering/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.f8c7e910ed28fd833b84a6df66f10a3798e2809e3667a3f716e6815ec482c472.js" integrity="sha256-&#43;MfpEO0o/YM7hKbfZvEKN5jigJ42Z6P3FuaBXsSCxHI=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.95852f3a126177a5cba833ffba2b73c4ef54af6b4827898453779e4b66e87874.js" integrity="sha256-lYUvOhJhd6XLqDP/uitzxO9Ur2tIJ4mEU3eeS2boeHQ=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -188,6 +184,12 @@ https://github.com/alex-shpak/hugo-book
   </li>
   
   <li>
+    <a href="/notes/"  >
+        random notes
+      </a>
+  </li>
+  
+  <li>
     <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
         Github
       </a>
@@ -260,15 +262,19 @@ https://github.com/alex-shpak/hugo-book
   <article class="markdown book-article"><p>In 
   <a href="http://localhost:1313/docs/project/binderdesign/design/">design binders via RFdiffusion and ProteinMPNN-FastRelax</a>, at the beginning of 
   <a href="http://localhost:1313/docs/project/binderdesign/design/#step3">sequence design and binder assessment script <code>mpnn_af.slm</code></a>, we could perform a fitering step to remove useless backnones.</p>
-<p>In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, my <code>target.pdb</code> is like:</p>
-<center><figure><img src="../bioIMG/target1.png"
-         alt="target.pdb (only showing C_{/beta}) atom" width="400"/><figcaption>
-            <p><code>target.pdb</code> (only showing C_{/beta}) atom</p>
+<p>In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, in my <code>target.pdb</code>, I only expect designed binders could bind with the outside part of the <code>target.pdb</code> (see fig.1).</p>
+<center><figure><img src="../bioIMG/CB.png"
+         alt="fig.1 target.pdb and atoms where binders should bind with"/><figcaption>
+            <p>fig.1 <code>target.pdb</code> and atoms where binders should bind with</p>
         </figcaption>
 </figure>
 </center>
-<p>I firstly finding two centers:</p>
-</article>
+<center><figure><img src="../bioIMG/vis_bbs.png"
+         alt="fig.2 distribution of all designed backbone centers"/><figcaption>
+            <p>fig.2 distribution of all designed backbone centers</p>
+        </figcaption>
+</figure>
+</center></article>
  
       
 

@@ -21,7 +21,7 @@ Truncating target.pdb#Truncating target protein helps a lot in reducing the st
 <link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/truncation/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.f8c7e910ed28fd833b84a6df66f10a3798e2809e3667a3f716e6815ec482c472.js" integrity="sha256-&#43;MfpEO0o/YM7hKbfZvEKN5jigJ42Z6P3FuaBXsSCxHI=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.95852f3a126177a5cba833ffba2b73c4ef54af6b4827898453779e4b66e87874.js" integrity="sha256-lYUvOhJhd6XLqDP/uitzxO9Ur2tIJ4mEU3eeS2boeHQ=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -184,6 +184,12 @@ https://github.com/alex-shpak/hugo-book
   </li>
   
   <li>
+    <a href="/notes/"  >
+        random notes
+      </a>
+  </li>
+  
+  <li>
     <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
         Github
       </a>
@@ -300,7 +306,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>residue_remove(pdbfile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;target.pdb&#34;</span>, remove_ids<span style="color:#f92672">=</span>truncating_ids, outputName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;truncation.pdb&#34;</span>)
 </span></span></code></pre></div><p>This step can also be achieved in <strong>PyMol</strong>.</p>
 <blockquote class="book-hint danger">
-  <p><strong>How many we can remove from our target protein?</strong><br>
+  <p><strong>How many AAs we can remove from our target protein?</strong><br>
 At the very beginning, I was thinking removing all useless AAs. For example, I was creating a binder to a transmembrane protein, and I only left the part of protein which is located at the outside of the whole protein. Unfornutately, this part of protein I aim to create binders to bind with is too &ldquo;thin&rdquo; to lead design binders correctly.</p>
 <p>If the &ldquo;target&rdquo; protein you feed into the RFdiffusion model is too small, <code>ppi.hotspot_res</code> argument becomes ineffective. Let&rsquo;s imagine the &ldquo;target&rdquo; protein we feed into the RFdiffusion model is a paper, and <code>ppi.hotspot_res</code> is located somewhere in this paper. Since this &ldquo;target&rdquo; protein (the paper) is too thin, RFdiffusion model feels confused about which side (above or below the paper ) the <code>ppi.hotspot_res</code> points to.</p>
 <p>My suggestion would be to try some different trunctations and pick one that can approcimately balance the computation stress and correct leading of bidner design.</p>

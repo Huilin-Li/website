@@ -21,7 +21,7 @@ Three needed designing environments#Thanks a lot to the great work, RFdiffusio
 <link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/design/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.f8c7e910ed28fd833b84a6df66f10a3798e2809e3667a3f716e6815ec482c472.js" integrity="sha256-&#43;MfpEO0o/YM7hKbfZvEKN5jigJ42Z6P3FuaBXsSCxHI=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.95852f3a126177a5cba833ffba2b73c4ef54af6b4827898453779e4b66e87874.js" integrity="sha256-lYUvOhJhd6XLqDP/uitzxO9Ur2tIJ4mEU3eeS2boeHQ=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -184,6 +184,12 @@ https://github.com/alex-shpak/hugo-book
   </li>
   
   <li>
+    <a href="/notes/"  >
+        random notes
+      </a>
+  </li>
+  
+  <li>
     <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
         Github
       </a>
@@ -250,7 +256,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#1-get-secondary-structure-and-block-adjacency-information-script-get_adj_secstructslm">1️⃣ get secondary structure and block adjacency information script <code>get_adj_secstruct.slm</code></a></li>
         <li><a href="#2-backbones-design-script-bbslm">2️⃣ backbones design script <code>bb.slm</code></a></li>
         <li><a href="#step3">3️⃣ sequence design and binder assessment script <code>mpnn_af.slm</code></a></li>
-        <li><a href="#4-end">4️⃣ End</a></li>
+        <li><a href="#4-get-designed-binders">4️⃣ Get designed binders</a></li>
       </ul>
     </li>
   </ul>
@@ -534,11 +540,67 @@ Let&rsquo;s say that we finally select 1000 favourite backbones, and we go to de
 │   │   └── run_inference.py
 │   ├── helper_scripts
 │   │   └── make_secstruc_adj.py
-</code></pre><h3 id="4-end">
-  4️⃣ End
-  <a class="anchor" href="#4-end">#</a>
+</code></pre><h3 id="4-get-designed-binders">
+  4️⃣ Get designed binders
+  <a class="anchor" href="#4-get-designed-binders">#</a>
 </h3>
-<p>In each <code>mydesigns/select_1000_mpnn_af/folder</code>, <code>af2.silent</code> has our designed binders.</p>
+<p>In each <code>mydesigns/select_1000_mpnn_af/folder</code>, <code>af2.silent</code> has our designed binders. And, we will extract their <code>.pdb</code> files from the <code>.silent</code> file by (for example)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-t" data-lang="t"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -q gpu-huge</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH --nodes=1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH --ntasks-per-node=8</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -p GPU-name</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH --gres=gpu:1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH --mem=50G</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd <span style="color:#e6db74">/(root)/m</span>ydesigns<span style="color:#e6db74">/select_1000_mpnn_af/</span>folder0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>source <span style="color:#f92672">~</span><span style="color:#e6db74">/miniconda3/</span>etc<span style="color:#e6db74">/profile.d/co</span>nda<span style="color:#f92672">.</span>sh
+</span></span><span style="display:flex;"><span>conda activate proteinmpnn_binder_design
+</span></span><span style="display:flex;"><span>silentextract af2<span style="color:#f92672">.</span>silent
+</span></span></code></pre></div><p>Our final directories tree is like:</p>
+<pre tabindex="0"><code class="language-commandline" data-lang="commandline">├── dl_binder_design
+│   ├── af2_initial_guess
+│   │   ├── predict.py
+│   ├── mpnn_fr
+│   │   ├── dl_interface_design.py
+├── mydesigns
+│   ├── get_adj_secstruct.slm
+│   ├── paraID.txt
+│   ├── bb.slm
+│   ├── target
+│   │   └── target.pdb
+│   ├── target_adj_secstruct
+│   │   └── target_adj.pt
+│   │   └── target_ss.pt
+│   ├── backbones_OUT
+│   │   ├── traj
+│   │   ├── A28-A25-A29-A26-A63_0.pdb
+│   │   ├── A28-A25-A29-A26-A63_0.trb
+│   │   ├── ...
+│   ├── select_1000_mpnn_af
+│   │   ├── folder0
+│   │   │   └── A28-A25-A29-A26-A63_0.pdb
+│   │   │   └── A28-A25-A29-A26-A63_0_dldesign_0_cycle1_af2pred.pdb
+│   │   │   └── ...
+│   │   │   └── af2.silent
+│   │   │   └── check.point
+│   │   │   └── score.sc
+│   │   │   └── seq.silent
+│   │   │   └── seq.silent.idx
+│   │   │   └── silent.silent
+│   │   │   └── silent.silent.idx
+│   │   ├── folder1
+│   │   ├── ...
+│   │   ├── folderID.txt
+│   │   ├── mpnn_af.slm
+├── RFdiffusion
+│   ├── rfdiffusion
+│   ├── scripts
+│   │   └── run_inference.py
+│   ├── helper_scripts
+│   │   └── make_secstruc_adj.py
+</code></pre><p>Each file with <code>_cycle1_af2pred.pdb</code> in name is our expected designed binders.</p>
 </article>
  
       
@@ -598,7 +660,7 @@ Let&rsquo;s say that we finally select 1000 favourite backbones, and we go to de
         <li><a href="#1-get-secondary-structure-and-block-adjacency-information-script-get_adj_secstructslm">1️⃣ get secondary structure and block adjacency information script <code>get_adj_secstruct.slm</code></a></li>
         <li><a href="#2-backbones-design-script-bbslm">2️⃣ backbones design script <code>bb.slm</code></a></li>
         <li><a href="#step3">3️⃣ sequence design and binder assessment script <code>mpnn_af.slm</code></a></li>
-        <li><a href="#4-end">4️⃣ End</a></li>
+        <li><a href="#4-get-designed-binders">4️⃣ Get designed binders</a></li>
       </ul>
     </li>
   </ul>

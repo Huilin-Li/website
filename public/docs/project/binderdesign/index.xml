@@ -33,7 +33,7 @@
       <link>http://localhost:1313/docs/project/binderdesign/filtering/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/project/binderdesign/filtering/</guid>
-      <description>In design binders via RFdiffusion and ProteinMPNN-FastRelax, at the beginning of sequence design and binder assessment script mpnn_af.slm, we could perform a fitering step to remove useless backnones.&#xA;In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, my target.pdb is like:&#xA;target.pdb (only showing C_{/beta}) atom&#xA;I firstly finding two centers:</description>
+      <description>In design binders via RFdiffusion and ProteinMPNN-FastRelax, at the beginning of sequence design and binder assessment script mpnn_af.slm, we could perform a fitering step to remove useless backnones.&#xA;In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, in my target.pdb, I only expect designed binders could bind with the outside part of the target.pdb (see fig.1).</description>
     </item>
   </channel>
 </rss>

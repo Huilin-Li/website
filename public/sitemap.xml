@@ -62,6 +62,8 @@
   </url><url>
     <loc>http://localhost:1313/categories/python/</loc>
   </url><url>
+    <loc>http://localhost:1313/notes/</loc>
+  </url><url>
     <loc>http://localhost:1313/tags/script/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>

@@ -53,4 +53,8 @@ scancel jobID
 cp ./*.pdb ../newfoler
 ```
 
-
+## count files in a directory in command line
+```console
+cd directory
+ls -l | wc -l
+```
