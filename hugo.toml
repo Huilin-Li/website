@@ -28,6 +28,10 @@ theme = ['osm', 'hugo-book']
     name = "Github"
     url = "https://github.com/Huilin-Li"
     weight = 10
+  [[menu.after]]
+    name = "GitHub Gist"
+    url = "https://gist.github.com/Huilin-Li"
+    weight = 11
 
 
 
