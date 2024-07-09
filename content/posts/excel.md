@@ -1,8 +1,6 @@
 +++
 title = "Excel commands"
-description = ""
-tags = ["script",]
-categories = ["excel",]
+bookToc=false
 +++ 
 - In one row, concat each cell into one cell as string
 ```t

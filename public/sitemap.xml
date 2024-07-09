@@ -2,15 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/python/</loc>
-  </url><url>
     <loc>http://localhost:1313/docs/project/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/pymol/</loc>
+    <loc>http://localhost:1313/posts/one/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/project/binderdesign/truncation/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/project/binderdesign/design/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/pymol/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/python/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/project/binderdesign/pae_score/</loc>
   </url><url>
@@ -24,10 +26,6 @@
   </url><url>
     <loc>http://localhost:1313/docs/project/binderdesign/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/bioinformatics/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/biology/</loc>
-  </url><url>
     <loc>http://localhost:1313/posts/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
@@ -40,37 +38,15 @@
   </url><url>
     <loc>http://localhost:1313/posts/plane/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/excel/</loc>
-  </url><url>
     <loc>http://localhost:1313/posts/excel/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/hugo/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/hugo/</loc>
   </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/issue/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/knowledge/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/latex/</loc>
-  </url><url>
     <loc>http://localhost:1313/posts/assessment/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/pymol/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/python/</loc>
-  </url><url>
-    <loc>http://localhost:1313/notes/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/script/</loc>
-  </url><url>
     <loc>http://localhost:1313/tags/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/terminal/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/visualization/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/hugobookgithubaction/</loc>
   </url><url>

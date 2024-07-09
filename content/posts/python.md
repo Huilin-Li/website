@@ -1,9 +1,6 @@
 +++
 title = "Helpul python/pandas scripts"
-description = ""
-tags = ["script",]
-categories = ["Python",]
-weight = 1
+weight = 3
 +++ 
 
 So..., I find I used these codes a lot, and they are very helpful for effectivity.

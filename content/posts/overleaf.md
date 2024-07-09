@@ -1,8 +1,5 @@
 +++
 title = "All about Latex and Overleaf"
-description = ""
-tags = ["script",]
-categories = ["Latex",]
 math = true
 +++ 
 

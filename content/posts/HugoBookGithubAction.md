@@ -1,8 +1,5 @@
 +++
 title = "Website via Hugo Book and deployed by Github Action"
-description = ""
-tags = ["script",]
-categories = ["Hugo",]
 +++ 
 
 

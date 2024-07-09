@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="target.pdb preprocessing#Assuming we have a target protein target.pdb, and we want to create a binder to target.pdb. The first step is preprocessing target.pdb. Generally spearking, there are two steps we need to think of.
+Truncating target.pdb#Truncating target protein helps a lot in reducing the stress of computing. For example, we could remove AAs with very low pLDDT or AAs who are far away from the place we want binders to bind with.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="truncation" />
+<meta property="og:description" content="target.pdb preprocessing#Assuming we have a target protein target.pdb, and we want to create a binder to target.pdb. The first step is preprocessing target.pdb. Generally spearking, there are two steps we need to think of.
+Truncating target.pdb#Truncating target protein helps a lot in reducing the stress of computing. For example, we could remove AAs with very low pLDDT or AAs who are far away from the place we want binders to bind with." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/test/project/binderdesign/truncation/" /><meta property="article:section" content="test" />
+
+
+
+<title>truncation | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/test/project/binderdesign/truncation/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.dabc82a3cffbe74151a9303ca0e660479b8590e8588fb282a87707a7796abb32.js" integrity="sha256-2ryCo8/750FRqTA8oOZgR5uFkOhYj7KCqHcHp3lquzI=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
+    <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
+      <a role="button" class="">project</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6b2297e97d707e7ee14411430da62d58" class="toggle"  />
+    <label for="section-6b2297e97d707e7ee14411430da62d58" class="flex justify-between">
+      <a role="button" class="">Binder Design</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/truncation/" class="">truncation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/design/" class="">design binders via RFdiffusion and ProteinMPNN-FastRelax</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/pae_score/" class="">pae_interaction score</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/filtering/" class="">backbones filtering</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        notes
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://gist.github.com/Huilin-Li"  target="_blank" rel="noopener">
+        GitHub Gist
+      </a>
+  </li>
+  
+  <li>
+    <a href="/links/"  >
+        world
+      </a>
+  </li>
+  
+  <li>
+    <a href="/tools/"  >
+        contact
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>truncation</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#truncating-targetpdb">Truncating <code>target.pdb</code></a></li>
+    <li><a href="#reset-aas-residues-numbers-in-truncationpdb">Reset AAs&rsquo; residues numbers in <code>truncation.pdb</code></a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="targetpdb-preprocessing">
+  <code>target.pdb</code> preprocessing
+  <a class="anchor" href="#targetpdb-preprocessing">#</a>
+</h1>
+<p>Assuming we have a target protein <code>target.pdb</code>, and we want to create a binder to <code>target.pdb</code>. The first step is preprocessing <code>target.pdb</code>. Generally spearking, there are two steps we need to think of.</p>
+<h2 id="truncating-targetpdb">
+  Truncating <code>target.pdb</code>
+  <a class="anchor" href="#truncating-targetpdb">#</a>
+</h2>
+<p>Truncating target protein helps a lot in reducing the stress of computing. For example, we could <strong>remove AAs with very low pLDDT or AAs who are far away from the place we want binders to bind with</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">residue_remove</span>(pdbfile, remove_ids, outputName):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Remove residues based on positions.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assumption: pdbfile only has A chain
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    residue_to_remove <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pdb_io <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBIO()
+</span></span><span style="display:flex;"><span>    pdb_parser <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBParser()
+</span></span><span style="display:flex;"><span>    structure <span style="color:#f92672">=</span> pdb_parser<span style="color:#f92672">.</span>get_structure(<span style="color:#e6db74">&#34; &#34;</span>, pdbfile)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> structure[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    chain <span style="color:#f92672">=</span> model[<span style="color:#e6db74">&#34;A&#34;</span>] <span style="color:#75715e"># assuming pdbfile only has A chain</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> residue <span style="color:#f92672">in</span> chain:
+</span></span><span style="display:flex;"><span>        id <span style="color:#f92672">=</span> residue<span style="color:#f92672">.</span>id
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> id[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">in</span> remove_ids: 
+</span></span><span style="display:flex;"><span>            residue_to_remove<span style="color:#f92672">.</span>append(residue<span style="color:#f92672">.</span>id)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> residue <span style="color:#f92672">in</span> residue_to_remove:
+</span></span><span style="display:flex;"><span>        chain<span style="color:#f92672">.</span>detach_child(residue)
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>set_structure(structure)
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>save(outputName)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># truncating ids</span>
+</span></span><span style="display:flex;"><span>truncating_ids <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># remove some AAs</span>
+</span></span><span style="display:flex;"><span>residue_remove(pdbfile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;target.pdb&#34;</span>, remove_ids<span style="color:#f92672">=</span>truncating_ids, outputName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;truncation.pdb&#34;</span>)
+</span></span></code></pre></div><p>This step can also be achieved in <strong>PyMol</strong>.</p>
+<blockquote class="book-hint danger">
+  <p><strong>How many AAs we can remove from our target protein?</strong><br>
+At the very beginning, I was thinking removing all useless AAs. For example, I was creating a binder to a transmembrane protein, and I only left the part of protein which is located at the outside of the whole protein. Unfornutately, this part of protein I aim to create binders to bind with is too &ldquo;thin&rdquo; to lead design binders correctly.</p>
+<p>If the &ldquo;target&rdquo; protein you feed into the RFdiffusion model is too small, <code>ppi.hotspot_res</code> argument becomes ineffective. Let&rsquo;s imagine the &ldquo;target&rdquo; protein we feed into the RFdiffusion model is a paper, and <code>ppi.hotspot_res</code> is located somewhere in this paper. Since this &ldquo;target&rdquo; protein (the paper) is too thin, RFdiffusion model feels confused about which side (above or below the paper ) the <code>ppi.hotspot_res</code> points to.</p>
+<p>My suggestion would be to try some different trunctations and pick one that can approcimately balance the computation stress and correct leading of bidner design.</p>
+
+</blockquote>
+
+<h2 id="reset-aas-residues-numbers-in-truncationpdb">
+  Reset AAs&rsquo; residues numbers in <code>truncation.pdb</code>
+  <a class="anchor" href="#reset-aas-residues-numbers-in-truncationpdb">#</a>
+</h2>
+<p>Normally, after removing some AAs, the residues number in <code>truncation.pdb</code> becomes discontinuous, and we want to concatenate them again and update their residue number with continuous numbers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_resnum</span>(pdbfile):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    🌟 CHANGE RESIDUE NUMBER
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assumption: pdbfile only has A chain
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    pdb_io <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBIO()
+</span></span><span style="display:flex;"><span>    pdb_parser <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBParser()
+</span></span><span style="display:flex;"><span>    structure <span style="color:#f92672">=</span> pdb_parser<span style="color:#f92672">.</span>get_structure(<span style="color:#e6db74">&#34; &#34;</span>, pdbfile)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> structure[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    chain <span style="color:#f92672">=</span> model[<span style="color:#e6db74">&#34;A&#34;</span>]
+</span></span><span style="display:flex;"><span>    print(len([i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> chain<span style="color:#f92672">.</span>get_residues()]))
+</span></span><span style="display:flex;"><span>    new_resnums <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>len([i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> chain<span style="color:#f92672">.</span>get_residues()])))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, residue <span style="color:#f92672">in</span> enumerate(chain<span style="color:#f92672">.</span>get_residues()):
+</span></span><span style="display:flex;"><span>        res_id <span style="color:#f92672">=</span> list(residue<span style="color:#f92672">.</span>id)
+</span></span><span style="display:flex;"><span>        res_id[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> new_resnums[i]
+</span></span><span style="display:flex;"><span>        residue<span style="color:#f92672">.</span>id <span style="color:#f92672">=</span> tuple(res_id)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>set_structure(structure)
+</span></span><span style="display:flex;"><span>    pdb_io<span style="color:#f92672">.</span>save(pdbfile<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;.pdb&#39;</span>)[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_update_resnum.pdb&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="Huilin-Li/site-comment"
+        data-repo-id="R_kgDOL3ovHA"
+        data-category="General"
+        data-category-id="DIC_kwDOL3ovHM4CfKps"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script></div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#truncating-targetpdb">Truncating <code>target.pdb</code></a></li>
+    <li><a href="#reset-aas-residues-numbers-in-truncationpdb">Reset AAs&rsquo; residues numbers in <code>truncation.pdb</code></a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

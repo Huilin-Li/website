@@ -1,9 +1,6 @@
 +++
 title = "PyMol commands"
-description = ""
-tags = ["script",]
-categories = ["PyMol",]
-weight = 1
+weight = 2
 +++ 
  
  - select residues based on residue number

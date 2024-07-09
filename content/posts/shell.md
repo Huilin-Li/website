@@ -1,8 +1,5 @@
 +++
 title = "Bash Scripts"
-description = ""
-tags = ["script",]
-categories = ["terminal",]
 +++ 
 
 

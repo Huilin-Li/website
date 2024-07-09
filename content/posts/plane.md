@@ -1,8 +1,5 @@
 +++
 title = "Drawing a plane perpendicular to a given line in Plotly"
-description = ""
-tags = ["script"]
-categories = ["Visualization",]
 math = true
 +++ 
 

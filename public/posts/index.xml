@@ -8,11 +8,11 @@
     <language>en-us</language>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Helpul python/pandas scripts</title>
-      <link>http://localhost:1313/posts/python/</link>
+      <title>The periodic table, electron shells, and orbitals</title>
+      <link>http://localhost:1313/posts/one/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/python/</guid>
-      <description>So&amp;hellip;, I find I used these codes a lot, and they are very helpful for effectivity.&#xA;Assign files into different folders&#xD;#&#xD;Assuming I have 230 files in db_folder, and I want to copy these 230 files into different folders (folder0, folder1 and so on) with at least 50 files in each folder.&#xA;files_list contains names of these 230 files, like files_list=[&amp;quot;file1&amp;quot;, &amp;quot;file2&amp;quot;, ..., &amp;quot;file230&amp;quot;]&#xA;import shutil chunks = [files_list[x:x+50] for x in range(0, len(files_list), 50)] # len(chunks) = 5 for i in range(53): chunk = chunks[i] newpath = &amp;#34;db_folder/folder&amp;#34; + str(i) if not os.</description>
+      <guid>http://localhost:1313/posts/one/</guid>
+      <description>Differences in chemical reactivity between elements are based on the number and spatial distribution of their electrons.&#xA;The Bohr model shows the atom as a central nucleus containing protons and neutrons, with the electrons in circular electron shells at specific distances from the nucleus, similar to planets orbiting around the sun. Each electron shell has a different energy level, with those shells closest to the nucleus being lower in energy than those farther from the nucleus.</description>
     </item>
     <item>
       <title>PyMol commands</title>
@@ -20,6 +20,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/pymol/</guid>
       <description> select residues based on residue number select nterm, resi 42+74+43+56+39 mutate one amino acid cmd.wizard(&amp;#34;mutagenesis&amp;#34;) cmd.fetch(&amp;#34;target.pdb&amp;#34;) cmd.get_wizard().set_mode(&amp;#34;LEU&amp;#34;) cmd.get_wizard().do_select(&amp;#34;chain A and resid 22&amp;#34;) cmd.get_wizard().apply() cmd.save(&amp;#34;mutated_target.pdb&amp;#34;) </description>
+    </item>
+    <item>
+      <title>Helpul python/pandas scripts</title>
+      <link>http://localhost:1313/posts/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/python/</guid>
+      <description>So&amp;hellip;, I find I used these codes a lot, and they are very helpful for effectivity.&#xA;Assign files into different folders&#xD;#&#xD;Assuming I have 230 files in db_folder, and I want to copy these 230 files into different folders (folder0, folder1 and so on) with at least 50 files in each folder.&#xA;files_list contains names of these 230 files, like files_list=[&amp;quot;file1&amp;quot;, &amp;quot;file2&amp;quot;, ..., &amp;quot;file230&amp;quot;]&#xA;import shutil chunks = [files_list[x:x+50] for x in range(0, len(files_list), 50)] # len(chunks) = 5 for i in range(53): chunk = chunks[i] newpath = &amp;#34;db_folder/folder&amp;#34; + str(i) if not os.</description>
     </item>
     <item>
       <title>4 levels of protein structure</title>

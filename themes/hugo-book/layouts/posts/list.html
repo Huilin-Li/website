@@ -6,7 +6,6 @@
     </h2>
     {{ partial "docs/post-meta" . }}
     <p>
-      {{- .Summary -}}
       {{ if .Truncated }}
         <a href="{{ .RelPermalink }}">...</a>
       {{ end }}

@@ -1,8 +1,5 @@
 +++
 title = "Hugo commands"
-description = ""
-tags = ["script", "issue"]
-categories = ["Hugo",]
 +++ 
 
 Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on. 

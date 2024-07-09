@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Binder Design test on Huilin Li</title>
+    <link>http://localhost:1313/notes/pro/binderdesign/</link>
+    <description>Recent content in Binder Design test on Huilin Li</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/notes/pro/binderdesign/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>truncation</title>
+      <link>http://localhost:1313/notes/pro/binderdesign/truncation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/pro/binderdesign/truncation/</guid>
+      <description>target.pdb preprocessing&#xD;#&#xD;Assuming we have a target protein target.pdb, and we want to create a binder to target.pdb. The first step is preprocessing target.pdb. Generally spearking, there are two steps we need to think of.&#xA;Truncating target.pdb&#xD;#&#xD;Truncating target protein helps a lot in reducing the stress of computing. For example, we could remove AAs with very low pLDDT or AAs who are far away from the place we want binders to bind with.</description>
+    </item>
+    <item>
+      <title>design binders via RFdiffusion and ProteinMPNN-FastRelax</title>
+      <link>http://localhost:1313/notes/pro/binderdesign/design/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/pro/binderdesign/design/</guid>
+      <description>In my use case, firstly, I tried to de novo design binders. However, I found that designed binders are limited to proteins with only one helix. Then, I changed to design binders based on scaffolds. The design process and scripts I used a lot are as follows.&#xA;Three needed designing environments&#xD;#&#xD;Thanks a lot to the great work, RFdiffusion and ProteinMPNN-FastRelax, as well as AlphaFold2, who give us great ways to design proteins.</description>
+    </item>
+    <item>
+      <title>pae_interaction score</title>
+      <link>http://localhost:1313/notes/pro/binderdesign/pae_score/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/pro/binderdesign/pae_score/</guid>
+      <description>As RFdiffusion states, we expect a binder whose pae_interaction score is lower than 10. However, we should also have a look at other scores, such as pLDDT, rmsd.&#xA;check_n = 6 folder_nam = [&amp;#34;folder&amp;#34;+str(i) for i in range(check_n)] score_paths = [&amp;#34;../MyBinderWork/ThreeThoudand_mpnn_af/&amp;#34;+nam+&amp;#34;/score.sc&amp;#34; for nam in folder_nam] ALL_DF = [] for p in score_paths: df = pd.read_csv(p, delim_whitespace=True) ALL_DF.append(df) SCORE_df = pd.concat(ALL_DF)[[&amp;#34;binder_aligned_rmsd&amp;#34;, &amp;#34;pae_binder&amp;#34;, &amp;#34;pae_interaction&amp;#34;, &amp;#34;plddt_binder&amp;#34;, &amp;#34;description&amp;#34;]] An example of one of my experiments</description>
+    </item>
+    <item>
+      <title>backbones filtering</title>
+      <link>http://localhost:1313/notes/pro/binderdesign/filtering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/pro/binderdesign/filtering/</guid>
+      <description>In design binders via RFdiffusion and ProteinMPNN-FastRelax, at the beginning of sequence design and binder assessment script mpnn_af.slm, we could perform a fitering step to remove useless backnones.&#xA;In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, in my target.pdb, I only expect designed binders could bind with the outside part of the target.pdb (see fig.1).</description>
+    </item>
+  </channel>
+</rss>

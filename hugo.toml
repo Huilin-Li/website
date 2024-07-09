@@ -25,6 +25,10 @@ theme = ['osm', 'hugo-book']
 
 [menu]
   [[menu.after]]
+    name= "random notes"
+    url= "https://huilin-li.github.io/mybook/"
+    weight=6
+  [[menu.after]]
     name = "Github"
     url = "https://github.com/Huilin-Li"
     weight = 10
@@ -32,6 +36,7 @@ theme = ['osm', 'hugo-book']
     name = "GitHub Gist"
     url = "https://gist.github.com/Huilin-Li"
     weight = 11
+
 
 
 
