@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ML on Huilin Li</title>
+    <link>http://localhost:1313/articles/</link>
+    <description>Recent content in ML on Huilin Li</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/articles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Excel commands</title>
+      <link>http://localhost:1313/articles/excel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/excel/</guid>
+      <description> In one row, concat each cell into one cell as string =CONCAT(A1:D1) </description>
+    </item>
+    <item>
+      <title>Hugo commands</title>
+      <link>http://localhost:1313/articles/hugo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/hugo/</guid>
+      <description>Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.&#xA;SUMMARY&#xD;#&#xD;use themes as your own repositories insert and resize images center images add emoji add travel map Why my local website doesn&amp;rsquo;t update after I update my markdown files? link pages and tiles Add Giscus comment in Hugo-book theme Remove git in themes, and use themes as your own repositories.</description>
+    </item>
+    <item>
+      <title>Protein structure measurement</title>
+      <link>http://localhost:1313/articles/assessment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/articles/assessment/</guid>
+      <description>pLDDT&#xD;#&#xD;&amp;ldquo;predicted Local Distance Difference Test&amp;rdquo; is a per-residue measure of local confidence. It is scaled from 0 to 100, with higher scores indicating higher confidence and usually a more accurate prediction. ref&#xA;PAE&#xD;#&#xD;Predicted Aligned Error (PAE) is a measure of how confident AlphaFold2 is in the relative position of two residues within the predicted structure. PAE is defined as the expected positional error at residue X, measured in Ångströms (Å), if the predicted and actual structures were aligned on residue Y.</description>
+    </item>
+  </channel>
+</rss>

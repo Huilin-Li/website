@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="When I am working on my binder design task, I need to select suitable hotspot residues that can lead to design better binders. In addition to hydrophobic amino acids, I also want to focus on the amino acids whose positions are close to the outside edge, and far away from the center of the protein. Therefore, I expect a plane that can approximately cut the protein layer by layer with my expected distance to the outside edge.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Drawing a plane perpendicular to a given line in Plotly" />
+<meta property="og:description" content="When I am working on my binder design task, I need to select suitable hotspot residues that can lead to design better binders. In addition to hydrophobic amino acids, I also want to focus on the amino acids whose positions are close to the outside edge, and far away from the center of the protein. Therefore, I expect a plane that can approximately cut the protein layer by layer with my expected distance to the outside edge." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/blog/plane/" /><meta property="article:section" content="posts" />
+
+
+
+<title>Drawing a plane perpendicular to a given line in Plotly | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/posts/blog/plane/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.d8e0bce4c000e06fa1054a2c8bac853afb0d431472f9089860a22c2e651ad8f0.js" integrity="sha256-2OC85MAA4G&#43;hBUosi6yFOvsNQxRy&#43;QiYYKIsLmUa2PA=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
+    <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
+      <a role="button" class="">project</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6b2297e97d707e7ee14411430da62d58" class="toggle"  />
+    <label for="section-6b2297e97d707e7ee14411430da62d58" class="flex justify-between">
+      <a role="button" class="">Binder Design</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/truncation/" class="">truncation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/design/" class="">design binders via RFdiffusion and ProteinMPNN-FastRelax</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/pae_score/" class="">pae_interaction score</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/filtering/" class="">backbones filtering</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/ml/"  >
+        ML algorithm
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/blog/"  >
+        blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://huilin-li.github.io/mybook/"  target="_blank" rel="noopener">
+        random notes
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://gist.github.com/Huilin-Li"  target="_blank" rel="noopener">
+        GitHub Gist
+      </a>
+  </li>
+  
+  <li>
+    <a href="/links/"  >
+        world
+      </a>
+  </li>
+  
+  <li>
+    <a href="/tools/"  >
+        contact
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Drawing a plane perpendicular to a given line in Plotly</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/blog/plane/">Drawing a plane perpendicular to a given line in Plotly</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<p>When I am working on my binder design task, I need to select suitable hotspot residues that can lead to design better binders.
+In addition to hydrophobic amino acids, I also want to focus on the amino acids whose positions are close to the outside edge, and far away from the center of the protein.
+Therefore, I expect a plane that can approximately cut the protein layer by layer with my expected distance to the outside edge.</p>
+<p>By calculating the centers of two parts of my protein, I can easily determine one line. However, it took me lots of time to find the plane that can be perpendicular to this line.</p>
+<p>Finally, I find the solution! 💪 TL;DR, 
+  <a href="https://github.com/Huilin-Li/plotly/tree/main">code is here!</a></p>
+<div align="center">
+<img src="../images/plane2.png" alt="" width="500" height="auto">
+<p><em>A plane perpendicular to the given line</em></p>
+</div>
+<p>Assuming that we want to make a plane whose vertical distance to $p_1$ is $d01$. We can determine the point $p0$ by</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> shapely.geometry <span style="color:#f92672">import</span> LineString
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>line <span style="color:#f92672">=</span> LineString([p1, p2])
+</span></span><span style="display:flex;"><span>p0_tmp <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>interpolate(d01)
+</span></span><span style="display:flex;"><span>p0 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([p0_tmp<span style="color:#f92672">.</span>x, p0_tmp<span style="color:#f92672">.</span>y, p0_tmp<span style="color:#f92672">.</span>z])
+</span></span></code></pre></div><div align="center">
+<img src="../images/plane1.png" alt="">
+<p><em>5 important points who determine the plane</em></p>
+</div>
+Finding $p_3$, $p_4$, $p_5$ and $p_6$ took me lots of time. I finally find that they can be found by vector calculation. 
+For example, we want the distance between $p_0$ and $p_3$/$p_4$/$p_5$/$p_6$ is $Radius = 3$. 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>P1 <span style="color:#f92672">=</span> p0
+</span></span><span style="display:flex;"><span>P2 <span style="color:#f92672">=</span> p2
+</span></span><span style="display:flex;"><span>Radius <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>V3 <span style="color:#f92672">=</span> P1 <span style="color:#f92672">-</span> P2
+</span></span><span style="display:flex;"><span>V3 <span style="color:#f92672">=</span> V3 <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(V3)
+</span></span><span style="display:flex;"><span>e <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>])
+</span></span><span style="display:flex;"><span>e[np<span style="color:#f92672">.</span>argmin(np<span style="color:#f92672">.</span>abs(V3))] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>V1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cross(e, V3)
+</span></span><span style="display:flex;"><span>V1 <span style="color:#f92672">=</span> V1 <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(V3)
+</span></span><span style="display:flex;"><span>V2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>cross(V3, V1)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># p3 90 degree</span>
+</span></span><span style="display:flex;"><span>s3 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>pi<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>p3 <span style="color:#f92672">=</span> P1 <span style="color:#f92672">+</span> Radius<span style="color:#f92672">*</span>( np<span style="color:#f92672">.</span>cos(s3)<span style="color:#f92672">*</span>V1 <span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>sin(s3)<span style="color:#f92672">*</span>V2 ) 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># p4 180 degree</span>
+</span></span><span style="display:flex;"><span>s4 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>pi
+</span></span><span style="display:flex;"><span>p4 <span style="color:#f92672">=</span> P1 <span style="color:#f92672">+</span> Radius<span style="color:#f92672">*</span>( np<span style="color:#f92672">.</span>cos(s4)<span style="color:#f92672">*</span>V1 <span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>sin(s4)<span style="color:#f92672">*</span>V2 ) 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># p5 270 degree</span>
+</span></span><span style="display:flex;"><span>s5 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>pi<span style="color:#f92672">*</span><span style="color:#ae81ff">1.5</span>
+</span></span><span style="display:flex;"><span>p5 <span style="color:#f92672">=</span> P1 <span style="color:#f92672">+</span> Radius<span style="color:#f92672">*</span>( np<span style="color:#f92672">.</span>cos(s5)<span style="color:#f92672">*</span>V1 <span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>sin(s5)<span style="color:#f92672">*</span>V2 )
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># p6 0 degree</span>
+</span></span><span style="display:flex;"><span>s6 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>p6 <span style="color:#f92672">=</span> P1 <span style="color:#f92672">+</span> Radius<span style="color:#f92672">*</span>( np<span style="color:#f92672">.</span>cos(s6)<span style="color:#f92672">*</span>V1 <span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>sin(s6)<span style="color:#f92672">*</span>V2 )
+</span></span></code></pre></div><p>Becasue three points determine one plane. We can finally make the plane by</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plane1_x, plane1_y, plane1_z <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([p6, p3, p5])<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>add_trace(go<span style="color:#f92672">.</span>Mesh3d(x<span style="color:#f92672">=</span>plane1_x, y<span style="color:#f92672">=</span>plane1_y, z<span style="color:#f92672">=</span>plane1_z, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lightgreen&#34;</span>, name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, hoverinfo<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;skip&#34;</span>, opacity<span style="color:#f92672">=</span><span style="color:#ae81ff">0.50</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plane2_x, plane2_y, plane2_z <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([p4, p3, p5])<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>add_trace(go<span style="color:#f92672">.</span>Mesh3d(x<span style="color:#f92672">=</span>plane2_x, y<span style="color:#f92672">=</span>plane2_y, z<span style="color:#f92672">=</span>plane2_z, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lightgreen&#34;</span>, name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, hoverinfo<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;skip&#34;</span>, opacity<span style="color:#f92672">=</span><span style="color:#ae81ff">0.50</span>))
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="Huilin-Li/site-comment"
+        data-repo-id="R_kgDOL3ovHA"
+        data-category="General"
+        data-category-id="DIC_kwDOL3ovHM4CfKps"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script></div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
