@@ -40,8 +40,6 @@
   </url><url>
     <loc>http://localhost:1313/posts/blog/excel/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/ml/excel/</loc>
-  </url><url>
     <loc>http://localhost:1313/posts/blog/hugo/</loc>
   </url><url>
     <loc>http://localhost:1313/</loc>
@@ -51,8 +49,6 @@
     <loc>http://localhost:1313/posts/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/blog/assessment/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/ml/assessment/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url><url>
