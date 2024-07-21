@@ -3,22 +3,20 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="In design binders via RFdiffusion and ProteinMPNN-FastRelax, at the beginning of sequence design and binder assessment script mpnn_af.slm, we could perform a fitering step to remove useless backnones.
-In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, in my target.pdb, I only expect designed binders could bind with the outside part of the target.pdb (see fig.1).">
+<meta name="description" content=" RFdiffusion is better at designing binders for target proteins that are already existing or have been verified by experiments. If the target protein is predcited by AI models, and has not been verified by experiments, the probability of designing a potential binder for this target will be reduced. The number of designed binders should be huge, in order to pick potential candidates as many as possible. ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="backbones filtering" />
-<meta property="og:description" content="In design binders via RFdiffusion and ProteinMPNN-FastRelax, at the beginning of sequence design and binder assessment script mpnn_af.slm, we could perform a fitering step to remove useless backnones.
-In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, in my target.pdb, I only expect designed binders could bind with the outside part of the target.pdb (see fig.1)." />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="notes" />
+<meta property="og:description" content=" RFdiffusion is better at designing binders for target proteins that are already existing or have been verified by experiments. If the target protein is predcited by AI models, and has not been verified by experiments, the probability of designing a potential binder for this target will be reduced. The number of designed binders should be huge, in order to pick potential candidates as many as possible. " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/docs/project/binderdesign/filtering/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:1313/docs/project/binderdesign/notes/" /><meta property="article:section" content="docs" />
 
 
 
-<title>backbones filtering | Huilin Li</title>
+<title>notes | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/filtering/">
+<link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/notes/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
   <script defer src="/en.search.min.627effcd1d3b0286af36ff75998a51f99b66d7aecf4a304c3f9f697283d865a8.js" integrity="sha256-Yn7/zR07AoavNv91mYpR&#43;Ztm167PSjBMP59pcoPYZag=" crossorigin="anonymous"></script>
@@ -146,7 +144,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/project/binderdesign/filtering/" class="active">backbones filtering</a>
+    <a href="/docs/project/binderdesign/filtering/" class="">backbones filtering</a>
   
 
         </li>
@@ -159,7 +157,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/project/binderdesign/notes/" class="">notes</a>
+    <a href="/docs/project/binderdesign/notes/" class="active">notes</a>
   
 
         </li>
@@ -259,7 +257,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>backbones filtering</strong>
+  <strong>notes</strong>
 
   <label for="toc-control">
     
@@ -284,22 +282,11 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><p>In 
-  <a href="http://localhost:1313/docs/project/binderdesign/design/">design binders via RFdiffusion and ProteinMPNN-FastRelax</a>, at the beginning of 
-  <a href="http://localhost:1313/docs/project/binderdesign/design/#step3">sequence design and binder assessment script <code>mpnn_af.slm</code></a>, we could perform a fitering step to remove useless backnones.</p>
-<p>In my opinion, this is a very heloful step, because it greatly increase the speed and efficiency of desigining reasonable binders. For example, in my <code>target.pdb</code>, I only expect designed binders could bind with the outside part of the <code>target.pdb</code> (see fig.1).</p>
-<center><figure><img src="../bioIMG/CB.png"
-         alt="fig.1 target.pdb and atoms where binders should bind with"/><figcaption>
-            <p>fig.1 <code>target.pdb</code> and atoms where binders should bind with</p>
-        </figcaption>
-</figure>
-</center>
-<center><figure><img src="../bioIMG/vis_bbs.png"
-         alt="fig.2 distribution of all designed backbone centers"/><figcaption>
-            <p>fig.2 distribution of all designed backbone centers</p>
-        </figcaption>
-</figure>
-</center></article>
+  <article class="markdown book-article"><ol>
+<li><strong>RFdiffusion</strong> is better at designing binders for target proteins that are already existing or have been verified by experiments. If the target protein is predcited by AI models, and has not been verified by experiments, the probability of designing a potential binder for this target will be reduced.</li>
+<li>The number of designed binders should be huge, in order to pick potential candidates as many as possible.</li>
+</ol>
+</article>
  
       
 
