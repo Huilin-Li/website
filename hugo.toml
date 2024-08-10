@@ -2,7 +2,7 @@ baseURL = 'https://example.org/'
 languageCode = 'en-us'
 title = 'Huilin Li'
 theme = ['osm', 'hugo-book']
-
+paginate = 100000
 
 
 [markup]
@@ -38,8 +38,6 @@ theme = ['osm', 'hugo-book']
     weight = 11
 
 
-[pagination]
-  pagerSize = 100000
 
 
 
