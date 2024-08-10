@@ -1,7 +1,7 @@
 ---
 menu:
   after:
-    name: test
-    weight: 1
+    name: prote
+    weight: 2
 title: proteomics
 ---
