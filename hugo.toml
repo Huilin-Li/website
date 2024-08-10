@@ -39,7 +39,7 @@ theme = ['osm', 'hugo-book']
 
 
 [pagination]
-  pagerSize = 100
+  pagerSize = 100000
 
 
 
