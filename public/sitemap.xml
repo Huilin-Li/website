@@ -34,13 +34,15 @@
   </url><url>
     <loc>http://localhost:1313/tools/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/blog/plotlycolor/</loc>
-  </url><url>
     <loc>http://localhost:1313/docs/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/blog/plane/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/blog/excel/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/omics/fasimilarity/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/omics/files/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/blog/hugo/</loc>
   </url><url>
@@ -48,11 +50,15 @@
   </url><url>
     <loc>http://localhost:1313/posts/ml/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/omics/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/blog/plotlycolor/</loc>
+  </url><url>
     <loc>http://localhost:1313/posts/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/blog/assessment/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/proteomics/</loc>
+    <loc>http://localhost:1313/posts/omics/readdata/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url><url>

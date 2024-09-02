@@ -85,25 +85,25 @@
       <description>Bash Scripts&#xD;#&#xD;How to discard changes in VScode?&#xD;#&#xD;Navigate to reporsitory (has .github folder) with changes. Then, git restore &amp;lt;file&amp;gt; Activate conda environment in bash script&#xD;#&#xD;source ~/miniconda3/etc/profile.d/conda.sh conda activate ENV SBATCH Array jobs&#xD;#&#xD;#SBATCH -J array-job&#x9;#SBATCH -a 1-3 #SBATCH -o array-job.%A.%a.log id_list=&amp;#34;./id_list.txt&amp;#34; id=`head -n $SLURM_ARRAY_TASK_ID $id_list | tail -n 1` python3 script.py -in $id srun gpu&#xD;#&#xD;srun -N 1 --ntasks-per-node 2 -p v100 -q gpu --gres=gpu:1 --mem=50G --pty /bin/bash run scripts&#xD;#&#xD;sbatch test.</description>
     </item>
     <item>
-      <title>Copy&amp;Paste Continuous and Discrete colors in Plotly</title>
-      <link>http://localhost:1313/posts/blog/plotlycolor/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/blog/plotlycolor/</guid>
-      <description>Discrete color names&#xD;#&#xD;aliceblue&#xD;antiquewhite&#xD;aqua&#xD;aquamarine&#xD;azure&#xD;beige&#xD;bisque&#xD;black&#xD;blanchedalmond&#xD;blue&#xD;blueviolet&#xD;brown&#xD;burlywood&#xD;cadetblue&#xD;chartreuse&#xD;chocolate&#xD;coral&#xD;cornflowerblue&#xD;cornsilk&#xD;crimson&#xD;cyan&#xD;darkblue&#xD;darkcyan&#xD;darkgoldenrod&#xD;darkgray&#xD;darkgrey&#xD;darkgreen&#xD;darkkhaki&#xD;darkmagenta&#xD;darkolivegreen&#xD;darkorange&#xD;darkorchid&#xD;darkred&#xD;darksalmon&#xD;darkseagreen&#xD;darkslateblue&#xD;darkslategray&#xD;darkslategrey&#xD;darkturquoise&#xD;darkviolet&#xD;deeppink&#xD;deepskyblue&#xD;dimgray&#xD;dimgrey&#xD;dodgerblue&#xD;firebrick&#xD;floralwhite&#xD;forestgreen&#xD;fuchsia&#xD;gainsboro&#xD;ghostwhite&#xD;gold&#xD;goldenrod&#xD;gray&#xD;grey&#xD;green&#xD;greenyellow&#xD;honeydew&#xD;hotpink&#xD;indianred&#xD;indigo&#xD;ivory&#xD;khaki&#xD;lavender&#xD;lavenderblush&#xD;lawngreen&#xD;lemonchiffon&#xD;lightblue&#xD;lightcoral&#xD;lightcyan&#xD;lightgoldenrodyellow&#xD;lightgray&#xD;lightgrey&#xD;lightgreen&#xD;lightpink&#xD;lightsalmon&#xD;lightseagreen&#xD;lightskyblue&#xD;lightslategray&#xD;lightslategrey&#xD;lightsteelblue&#xD;lightyellow&#xD;lime&#xD;limegreen&#xD;linen&#xD;magenta&#xD;maroon&#xD;mediumaquamarine&#xD;mediumblue&#xD;mediumorchid&#xD;mediumpurple&#xD;mediumseagreen&#xD;mediumslateblue&#xD;mediumspringgreen&#xD;mediumturquoise&#xD;mediumvioletred&#xD;midnightblue&#xD;mintcream&#xD;mistyrose&#xD;moccasin&#xD;navajowhite&#xD;navy&#xD;oldlace&#xD;olive&#xD;olivedrab&#xD;orange&#xD;orangered&#xD;orchid&#xD;palegoldenrod&#xD;palegreen&#xD;paleturquoise&#xD;palevioletred&#xD;papayawhip&#xD;peachpuff&#xD;peru&#xD;pink&#xD;plum&#xD;powderblue&#xD;purple&#xD;red&#xD;rosybrown&#xD;royalblue&#xD;saddlebrown&#xD;salmon&#xD;sandybrown&#xD;seagreen&#xD;seashell&#xD;sienna&#xD;silver&#xD;skyblue&#xD;slateblue&#xD;slategray&#xD;slategrey&#xD;snow&#xD;springgreen&#xD;steelblue&#xD;tan&#xD;teal&#xD;thistle&#xD;tomato&#xD;turquoise&#xD;violet&#xD;wheat&#xD;white&#xD;whitesmoke&#xD;yellow&#xD;yellowgreen&#xD;Continuous color names&#xD;#&#xD;aggrnyl&#xD;agsunset&#xD;blackbody&#xD;bluered&#xD;blues&#xD;blugrn&#xD;bluyl&#xD;brwnyl&#xD;bugn&#xD;bupu&#xD;burg&#xD;burgyl&#xD;cividis&#xD;darkmint&#xD;electric&#xD;emrld&#xD;gnbu&#xD;greens&#xD;greys&#xD;hot&#xD;inferno&#xD;jet&#xD;magenta&#xD;magma&#xD;mint&#xD;orrd&#xD;oranges&#xD;oryel&#xD;peach&#xD;pinkyl&#xD;plasma&#xD;plotly3&#xD;pubu&#xD;pubugn&#xD;purd&#xD;purp&#xD;purples&#xD;purpor&#xD;rainbow&#xD;rdbu&#xD;rdpu&#xD;redor&#xD;reds&#xD;sunset&#xD;sunsetdark&#xD;teal&#xD;tealgrn&#xD;turbo&#xD;viridis&#xD;ylgn&#xD;ylgnbu&#xD;ylorbr&#xD;ylorrd&#xD;algae&#xD;amp&#xD;deep&#xD;dense&#xD;gray&#xD;haline&#xD;ice&#xD;matter&#xD;solar&#xD;speed&#xD;tempo&#xD;thermal&#xD;turbid&#xD;armyrose&#xD;brbg&#xD;earth&#xD;fall&#xD;geyser&#xD;prgn&#xD;piyg&#xD;picnic&#xD;portland&#xD;puor&#xD;rdgy&#xD;rdylbu&#xD;rdylgn&#xD;spectral&#xD;tealrose&#xD;temps&#xD;tropic&#xD;balance&#xD;curl&#xD;delta&#xD;oxy&#xD;edge&#xD;hsv&#xD;icefire&#xD;phase&#xD;twilight&#xD;mrybm&#xD;mygbm&#xD;Code&#xD;#&#xD;plotlycolors.</description>
-    </item>
-    <item>
-      <title>Drawing a plane perpendicular to a given line in Plotly</title>
-      <link>http://localhost:1313/posts/blog/plane/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/blog/plane/</guid>
-      <description>When I am working on my binder design task, I need to select suitable hotspot residues that can lead to design better binders. In addition to hydrophobic amino acids, I also want to focus on the amino acids whose positions are close to the outside edge, and far away from the center of the protein. Therefore, I expect a plane that can approximately cut the protein layer by layer with my expected distance to the outside edge.</description>
-    </item>
-    <item>
       <title>Excel commands</title>
       <link>http://localhost:1313/posts/blog/excel/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/blog/excel/</guid>
       <description> In one row, concat each cell into one cell as string =CONCAT(A1:D1) </description>
+    </item>
+    <item>
+      <title>fasta similarity</title>
+      <link>http://localhost:1313/posts/omics/fasimilarity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/omics/fasimilarity/</guid>
+      <description>&#xD;import parasail&#xD;#&#xD;result = parasail.sw_trace_scan_16(&amp;#34;asdf&amp;#34;, &amp;#34;asdf&amp;#34;, 11, 1, parasail.blosum62) </description>
+    </item>
+    <item>
+      <title>files list</title>
+      <link>http://localhost:1313/posts/omics/files/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/omics/files/</guid>
+      <description>&#xD;list files in a folder&#xD;#&#xD;import glob files = glob.glob(&amp;#39;CSV/*.csv&amp;#39;) # [&amp;#39;CSV\\x_109.csv&amp;#39;, &amp;#39;CSV\\x_116.csv&amp;#39;, &amp;#39;CSV\\x_121.csv&amp;#39;, ... ] #&#xD;</description>
     </item>
     <item>
       <title>Hugo commands</title>
@@ -113,11 +113,32 @@
       <description>Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.&#xA;SUMMARY&#xD;#&#xD;use themes as your own repositories insert and resize images center images add emoji add travel map Why my local website doesn&amp;rsquo;t update after I update my markdown files? link pages and tiles Add Giscus comment in Hugo-book theme Remove git in themes, and use themes as your own repositories.</description>
     </item>
     <item>
+      <title>Plotly: Copy&amp;Paste Continuous and Discrete colors</title>
+      <link>http://localhost:1313/posts/blog/plotlycolor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/blog/plotlycolor/</guid>
+      <description>Discrete color names&#xD;#&#xD;aliceblue&#xD;antiquewhite&#xD;aqua&#xD;aquamarine&#xD;azure&#xD;beige&#xD;bisque&#xD;black&#xD;blanchedalmond&#xD;blue&#xD;blueviolet&#xD;brown&#xD;burlywood&#xD;cadetblue&#xD;chartreuse&#xD;chocolate&#xD;coral&#xD;cornflowerblue&#xD;cornsilk&#xD;crimson&#xD;cyan&#xD;darkblue&#xD;darkcyan&#xD;darkgoldenrod&#xD;darkgray&#xD;darkgrey&#xD;darkgreen&#xD;darkkhaki&#xD;darkmagenta&#xD;darkolivegreen&#xD;darkorange&#xD;darkorchid&#xD;darkred&#xD;darksalmon&#xD;darkseagreen&#xD;darkslateblue&#xD;darkslategray&#xD;darkslategrey&#xD;darkturquoise&#xD;darkviolet&#xD;deeppink&#xD;deepskyblue&#xD;dimgray&#xD;dimgrey&#xD;dodgerblue&#xD;firebrick&#xD;floralwhite&#xD;forestgreen&#xD;fuchsia&#xD;gainsboro&#xD;ghostwhite&#xD;gold&#xD;goldenrod&#xD;gray&#xD;grey&#xD;green&#xD;greenyellow&#xD;honeydew&#xD;hotpink&#xD;indianred&#xD;indigo&#xD;ivory&#xD;khaki&#xD;lavender&#xD;lavenderblush&#xD;lawngreen&#xD;lemonchiffon&#xD;lightblue&#xD;lightcoral&#xD;lightcyan&#xD;lightgoldenrodyellow&#xD;lightgray&#xD;lightgrey&#xD;lightgreen&#xD;lightpink&#xD;lightsalmon&#xD;lightseagreen&#xD;lightskyblue&#xD;lightslategray&#xD;lightslategrey&#xD;lightsteelblue&#xD;lightyellow&#xD;lime&#xD;limegreen&#xD;linen&#xD;magenta&#xD;maroon&#xD;mediumaquamarine&#xD;mediumblue&#xD;mediumorchid&#xD;mediumpurple&#xD;mediumseagreen&#xD;mediumslateblue&#xD;mediumspringgreen&#xD;mediumturquoise&#xD;mediumvioletred&#xD;midnightblue&#xD;mintcream&#xD;mistyrose&#xD;moccasin&#xD;navajowhite&#xD;navy&#xD;oldlace&#xD;olive&#xD;olivedrab&#xD;orange&#xD;orangered&#xD;orchid&#xD;palegoldenrod&#xD;palegreen&#xD;paleturquoise&#xD;palevioletred&#xD;papayawhip&#xD;peachpuff&#xD;peru&#xD;pink&#xD;plum&#xD;powderblue&#xD;purple&#xD;red&#xD;rosybrown&#xD;royalblue&#xD;saddlebrown&#xD;salmon&#xD;sandybrown&#xD;seagreen&#xD;seashell&#xD;sienna&#xD;silver&#xD;skyblue&#xD;slateblue&#xD;slategray&#xD;slategrey&#xD;snow&#xD;springgreen&#xD;steelblue&#xD;tan&#xD;teal&#xD;thistle&#xD;tomato&#xD;turquoise&#xD;violet&#xD;wheat&#xD;white&#xD;whitesmoke&#xD;yellow&#xD;yellowgreen&#xD;Continuous color names&#xD;#&#xD;aggrnyl&#xD;agsunset&#xD;blackbody&#xD;bluered&#xD;blues&#xD;blugrn&#xD;bluyl&#xD;brwnyl&#xD;bugn&#xD;bupu&#xD;burg&#xD;burgyl&#xD;cividis&#xD;darkmint&#xD;electric&#xD;emrld&#xD;gnbu&#xD;greens&#xD;greys&#xD;hot&#xD;inferno&#xD;jet&#xD;magenta&#xD;magma&#xD;mint&#xD;orrd&#xD;oranges&#xD;oryel&#xD;peach&#xD;pinkyl&#xD;plasma&#xD;plotly3&#xD;pubu&#xD;pubugn&#xD;purd&#xD;purp&#xD;purples&#xD;purpor&#xD;rainbow&#xD;rdbu&#xD;rdpu&#xD;redor&#xD;reds&#xD;sunset&#xD;sunsetdark&#xD;teal&#xD;tealgrn&#xD;turbo&#xD;viridis&#xD;ylgn&#xD;ylgnbu&#xD;ylorbr&#xD;ylorrd&#xD;algae&#xD;amp&#xD;deep&#xD;dense&#xD;gray&#xD;haline&#xD;ice&#xD;matter&#xD;solar&#xD;speed&#xD;tempo&#xD;thermal&#xD;turbid&#xD;armyrose&#xD;brbg&#xD;earth&#xD;fall&#xD;geyser&#xD;prgn&#xD;piyg&#xD;picnic&#xD;portland&#xD;puor&#xD;rdgy&#xD;rdylbu&#xD;rdylgn&#xD;spectral&#xD;tealrose&#xD;temps&#xD;tropic&#xD;balance&#xD;curl&#xD;delta&#xD;oxy&#xD;edge&#xD;hsv&#xD;icefire&#xD;phase&#xD;twilight&#xD;mrybm&#xD;mygbm&#xD;Code&#xD;#&#xD;plotlycolors.</description>
+    </item>
+    <item>
+      <title>Plotly: Drawing a plane perpendicular to a given line</title>
+      <link>http://localhost:1313/posts/blog/plane/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/blog/plane/</guid>
+      <description>When I am working on my binder design task, I need to select suitable hotspot residues that can lead to design better binders. In addition to hydrophobic amino acids, I also want to focus on the amino acids whose positions are close to the outside edge, and far away from the center of the protein. Therefore, I expect a plane that can approximately cut the protein layer by layer with my expected distance to the outside edge.</description>
+    </item>
+    <item>
       <title>Protein structure measurement</title>
       <link>http://localhost:1313/posts/blog/assessment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/blog/assessment/</guid>
       <description>pLDDT&#xD;#&#xD;&amp;ldquo;predicted Local Distance Difference Test&amp;rdquo; is a per-residue measure of local confidence. It is scaled from 0 to 100, with higher scores indicating higher confidence and usually a more accurate prediction. ref&#xA;PAE&#xD;#&#xD;Predicted Aligned Error (PAE) is a measure of how confident AlphaFold2 is in the relative position of two residues within the predicted structure. PAE is defined as the expected positional error at residue X, measured in Ångströms (Å), if the predicted and actual structures were aligned on residue Y.</description>
+    </item>
+    <item>
+      <title>read data</title>
+      <link>http://localhost:1313/posts/omics/readdata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/omics/readdata/</guid>
+      <description>&#xD;read id and seq from .fasta&#xD;#&#xD;from Bio import SeqIO with open(&amp;#39;fa.fasta&amp;#39;) as fasta_file: identifiers, seq = [], [] for seq_record in SeqIO.parse(fasta_file, &amp;#39;fasta&amp;#39;): identifiers.append(seq_record.id) seq.append(&amp;#34;&amp;#34;.join(seq_record.seq)) fa_df = pd.DataFrame() fa_df[&amp;#34;seq&amp;#34;] = seq fa_df[&amp;#34;id&amp;#34;] = identifiers pandas read&#xD;#&#xD;pd.read_csv(&amp;#39;result.csv&amp;#39;, header=None, index_col=0) # index_col=False </description>
     </item>
     <item>
       <title>Website via Hugo Book and deployed by Github Action</title>

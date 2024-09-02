@@ -1,6 +1,5 @@
 +++
-title = "Copy&Paste Continuous and Discrete colors in Plotly"
-math = true
+title = "Plotly: Copy&Paste Continuous and Discrete colors"
 +++ 
 
 ## Discrete color names

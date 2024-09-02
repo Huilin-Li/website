@@ -1,5 +1,5 @@
 +++
-title = "Drawing a plane perpendicular to a given line in Plotly"
+title = "Plotly: Drawing a plane perpendicular to a given line"
 math = true
 +++ 
 
