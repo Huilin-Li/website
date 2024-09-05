@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="databases#PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0].split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] parallel downloads # split into 22 entry_i.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
+<meta property="og:description" content="databases#PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0].split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] parallel downloads # split into 22 entry_i." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/omics/database/" /><meta property="article:section" content="posts" />
+
+
+
+<title>Database | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/posts/omics/database/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.59a4ed7202242fd726cbee2e907feec1fb611e9f62f85c924c307f69fe496da2.js" integrity="sha256-WaTtcgIkL9cmy&#43;4ukH/uwfthHp9i&#43;FySTDB/af5JbaI=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
+    <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
+      <a role="button" class="">project</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6b2297e97d707e7ee14411430da62d58" class="toggle"  />
+    <label for="section-6b2297e97d707e7ee14411430da62d58" class="flex justify-between">
+      <a role="button" class="">Binder Design</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/truncation/" class="">truncation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/design/" class="">design binders via RFdiffusion and ProteinMPNN-FastRelax</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/pae_score/" class="">pae_interaction score</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/filtering/" class="">backbones filtering</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/notes/" class="">notes</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/ml/"  >
+        ML algorithm
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/omics/"  >
+        omics
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/blog/"  >
+        blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://huilin-li.github.io/mybook/"  target="_blank" rel="noopener">
+        random notes
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://gist.github.com/Huilin-Li"  target="_blank" rel="noopener">
+        GitHub Gist
+      </a>
+  </li>
+  
+  <li>
+    <a href="/links/"  >
+        world
+      </a>
+  </li>
+  
+  <li>
+    <a href="/tools/"  >
+        contact
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Database</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services"><a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a></a>
+      <ul>
+        <li><a href="#download">download</a></li>
+        <li><a href="#desciption">desciption</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading"></a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/omics/database/">Database</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<h1 id="databases">
+  databases
+  <a class="anchor" href="#databases">#</a>
+</h1>
+<h2 id="pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services">
+  
+  <a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a>
+  <a class="anchor" href="#pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services">#</a>
+</h2>
+<h3 id="download">
+  download
+  <a class="anchor" href="#download">#</a>
+</h3>
+<ol>
+<li>
+  <a href="https://files.rcsb.org/pub/pdb/data/structures/all/pdb/">https://files.rcsb.org/pub/pdb/data/structures/all/pdb/</a></li>
+</ol>
+<figure><img src="../img/pdb_db.png"
+         alt=" " width="300"/>
+</figure>
+
+<ol start="2">
+<li>save this website <em>PDB - FTP Archive over HTTP.html</em></li>
+<li>extract <em>pdbXXXX.ent.gz</em> list</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># how many ent.gz file</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;PDB - FTP Archive over HTTP.html&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    html_content <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>soup <span style="color:#f92672">=</span> BeautifulSoup(html_content, <span style="color:#e6db74">&#39;lxml&#39;</span>)
+</span></span><span style="display:flex;"><span>text <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>get_text(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>lines <span style="color:#f92672">=</span> text<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PDB_id_list <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;ent.gz&#39;</span> <span style="color:#f92672">in</span> line:
+</span></span><span style="display:flex;"><span>        PDB_id_list<span style="color:#f92672">.</span>append(line<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;.&#34;</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;pdb&#34;</span>)[<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PDB_id_list[:5]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;]</span>
+</span></span></code></pre></div><ol start="4">
+<li>parallel downloads</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># split into 22 entry_i.txt file</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> g, subdf <span style="color:#f92672">in</span> df<span style="color:#f92672">.</span>groupby(np<span style="color:#f92672">.</span>arange(len(df)) <span style="color:#f92672">//</span> n):
+</span></span><span style="display:flex;"><span>    entry_text <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;entry_&#39;</span><span style="color:#f92672">+</span>str(g)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.txt&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> id <span style="color:#f92672">in</span> subdf[<span style="color:#e6db74">&#39;id&#39;</span>]<span style="color:#f92672">.</span>tolist():
+</span></span><span style="display:flex;"><span>        entry_text<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">,&#34;</span> <span style="color:#f92672">%</span> id)
+</span></span></code></pre></div><p>Obatin the batch-download script <strong>batch_download.sh</strong> from 
+  <a href="https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script">Batch Downloads with Shell Script</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cd /<span style="color:#f92672">(</span>your path<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> IFS<span style="color:#f92672">=</span> read -r line; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>   ./../batch_download.sh -f ./../groups/<span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span> -p &amp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span> &lt; &lt;<span style="color:#f92672">(</span>grep <span style="color:#e6db74">&#34;&#34;</span> ./../groups/entry_list.txt<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>where <em>entry_list.txt</em> has <em>entry_i.txt</em> line by line.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ bash parallel_download.sh &gt; download.log 
+</span></span></code></pre></div><h3 id="desciption">
+  desciption
+  <a class="anchor" href="#desciption">#</a>
+</h3>
+<h2 id="heading">
+  
+  <a class="anchor" href="#heading">#</a>
+</h2>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="Huilin-Li/site-comment"
+        data-repo-id="R_kgDOL3ovHA"
+        data-category="General"
+        data-category-id="DIC_kwDOL3ovHM4CfKps"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script></div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services"><a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a></a>
+      <ul>
+        <li><a href="#download">download</a></li>
+        <li><a href="#desciption">desciption</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading"></a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
