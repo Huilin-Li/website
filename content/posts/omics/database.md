@@ -28,21 +28,36 @@ for line in lines:
 ```
 4. parallel downloads
 ```python
-# split into 22 entry_i.txt file
-n = 10000
-for g, subdf in df.groupby(np.arange(len(df)) // n):
-    entry_text = open('entry_'+str(g)+'.txt', 'w')
-    for id in subdf['id'].tolist():
-        entry_text.write("%s," % id)
+# split into 44 entry_i.txt file
+length = 5000
+count = len(df)//length
+for i in range(43):
+    subdf = df.iloc[i*5000:i*5000+5000]
+    sublist =subdf["id"].tolist()
+    string = ",".join(sublist)
+    text = open('groups/entry_'+ str(i)+'.txt', 'w')
+    text.write(string)
+    text.close()
+
+final_sublist = df.iloc[43*5000:43*5000+5000]["id"].tolist()
+finalstring = ",".join(final_sublist)
+finaltext = open('groups/entry_'+ str(43)+'.txt', 'w')
+finaltext.write(finalstring)
+finaltext.close()
 ```
  Obatin the batch-download script **batch_download.sh** from [Batch Downloads with Shell Script](https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script)
 
 ```shell
 #!/bin/bash
 cd /(your path)
-while IFS= read -r line; do
+
+for line in $(cat ./../groups/entry_list.txt); do
    ./../batch_download.sh -f ./../groups/${line} -p &
-done < <(grep "" ./../groups/entry_list.txt)
+done
+
+# while IFS= read -r line; do
+#    ./../batch_download.sh -f ./../groups/${line} -p &
+# done < <(grep "" ./../groups/entry_list.txt)
 ```
 where *entry_list.txt* has *entry_i.txt* line by line.
 ```shell
@@ -52,4 +67,21 @@ $ bash parallel_download.sh > download.log
 
 
 
-## 
+## [Swiss-Prot database](https://www.uniprot.org/uniprotkb?query=*&facets=reviewed%3Atrue)
+### download
+#### option1: directly download compressed prediction files for Swiss-Prot from [Alphafold Protein Structure Database](https://alphafold.ebi.ac.uk/download#swissprot-section)
+
+{{< figure src="../img/afdb_sprot.png" width="600" alt=" ">}}
+
+#### option2: manually download by *Entry* from [UniProt](https://www.uniprot.org/uniprotkb?query=*&facets=reviewed%3Atrue)
+1. download proteins in *fasta* format.
+{{< figure src="../img/uniprot.png" width="500" alt=" ">}}
+2. 
+
+
+
+https://alphafold.ebi.ac.uk/files/AF-Q196V2-F1-model_v4.pdb
+
+
+
+### description
