@@ -52,6 +52,8 @@
   </url><url>
     <loc>http://localhost:1313/posts/omics/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/omics/pdb2fasta/</loc>
+  </url><url>
     <loc>http://localhost:1313/posts/blog/plotlycolor/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/blog/plane/</loc>
@@ -61,6 +63,8 @@
     <loc>http://localhost:1313/posts/blog/assessment/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/omics/readdata/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/omics/removehetatom/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url><url>

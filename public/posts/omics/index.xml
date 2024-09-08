@@ -29,6 +29,13 @@
       <description>&#xD;list files in a folder&#xD;#&#xD;import glob files = glob.glob(&amp;#39;CSV/*.csv&amp;#39;) # [&amp;#39;CSV\\x_109.csv&amp;#39;, &amp;#39;CSV\\x_116.csv&amp;#39;, &amp;#39;CSV\\x_121.csv&amp;#39;, ... ] #&#xD;</description>
     </item>
     <item>
+      <title>pdb 2 fasta</title>
+      <link>http://localhost:1313/posts/omics/pdb2fasta/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/omics/pdb2fasta/</guid>
+      <description>from Bio import SeqIO def pdb2fasta(pdb_file, fasta_file, HEADER=None): with open(pdb_file, &amp;#39;r&amp;#39;) as pdb_file: for record in SeqIO.parse(pdb_file, &amp;#39;pdb-atom&amp;#39;): if &amp;#39;?&amp;#39; in record.id: header = HEADER else: header = record.id with open(fasta_file, &amp;#39;w&amp;#39;) as fasta_file: fasta_file.write(&amp;#39;&amp;gt;&amp;#39; + header+&amp;#39;\n&amp;#39;) fasta_file.write(str(record.seq)) return record.seq </description>
+    </item>
+    <item>
       <title>read data</title>
       <link>http://localhost:1313/posts/omics/readdata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
