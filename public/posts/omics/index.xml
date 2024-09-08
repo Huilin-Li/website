@@ -35,5 +35,12 @@
       <guid>http://localhost:1313/posts/omics/readdata/</guid>
       <description>&#xD;read id and seq from .fasta&#xD;#&#xD;from Bio import SeqIO with open(&amp;#39;fa.fasta&amp;#39;) as fasta_file: identifiers, seq = [], [] for seq_record in SeqIO.parse(fasta_file, &amp;#39;fasta&amp;#39;): identifiers.append(seq_record.id) seq.append(&amp;#34;&amp;#34;.join(seq_record.seq)) fa_df = pd.DataFrame() fa_df[&amp;#34;seq&amp;#34;] = seq fa_df[&amp;#34;id&amp;#34;] = identifiers pandas read&#xD;#&#xD;pd.read_csv(&amp;#39;result.csv&amp;#39;, header=None, index_col=0) # index_col=False </description>
     </item>
+    <item>
+      <title>remove HETATOM from pdb format</title>
+      <link>http://localhost:1313/posts/omics/removehetatom/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/omics/removehetatom/</guid>
+      <description>from Bio import PDB pdb = PDB.PDBParser().get_structure(&amp;#34;2gq1&amp;#34;, &amp;#34;FBP/2gq1.pdb&amp;#34;) class ResSelect(PDB.Select): def accept_residue(self, res): if res.id[0] != &amp;#34; &amp;#34;: #&amp;gt;= start_res and res.id[1] &amp;lt;= end_res and res.parent.id == chain_id: return False else: return True pdb_io = PDB.PDBIO() pdb_io.set_structure(pdb) pdb_io.save(&amp;#34;FBP/2gq1_no_HETATOM.pdb&amp;#34;, ResSelect()) </description>
+    </item>
   </channel>
 </rss>
