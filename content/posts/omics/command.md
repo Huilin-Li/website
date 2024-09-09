@@ -6,6 +6,7 @@ bookToc=true
 ```shell
 ls -l | wc -l
 
+wget -i links.txt
 
 
 ```
