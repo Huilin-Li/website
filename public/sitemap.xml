@@ -20,8 +20,6 @@
   </url><url>
     <loc>http://localhost:1313/docs/project/binderdesign/notes/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/omics/database/</loc>
-  </url><url>
     <loc>http://localhost:1313/posts/blog/proteinstruture/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/blog/overleaf/</loc>
@@ -34,7 +32,11 @@
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/omics/command/</loc>
+  </url><url>
     <loc>http://localhost:1313/tools/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/omics/database/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/</loc>
   </url><url>

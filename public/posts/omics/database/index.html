@@ -3,23 +3,23 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="databases#PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0].split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] parallel downloads # split into 44 entry_i.">
+<meta name="description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0].split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] parallel downloads # split into 44 entry_i.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
-<meta property="og:description" content="databases#PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0].split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] parallel downloads # split into 44 entry_i." />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="databases: PDB, Swiss-Prot" />
+<meta property="og:description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0].split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] parallel downloads # split into 44 entry_i." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/posts/omics/database/" /><meta property="article:section" content="posts" />
 
 
 
-<title>Database | Huilin Li</title>
+<title>databases: PDB, Swiss-Prot | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
 <link rel="canonical" href="http://localhost:1313/posts/omics/database/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.719e7deba433a4094db7cb3f2e3e0963d77b0a49f13adc139dab8ac2e522bed3.js" integrity="sha256-cZ5966QzpAlNt8s/Lj4JY9d7CknxOtwTnauKwuUivtM=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.228e1bef25585a9233268c58027817c49b365169e866e7ea8b39a9e72b4d965d.js" integrity="sha256-Io4b7yVYWpIzJoxYAngXxJs2UWnoZufqizmp5ytNll0=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -263,7 +263,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Database</strong>
+  <strong>databases: PDB, Swiss-Prot</strong>
 
   <label for="toc-control">
     
@@ -305,7 +305,7 @@ https://github.com/alex-shpak/hugo-book
       
 <article class="markdown book-post">
   <h1>
-    <a href="/posts/omics/database/">Database</a>
+    <a href="/posts/omics/database/">databases: PDB, Swiss-Prot</a>
   </h1>
   
 
@@ -316,10 +316,6 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-<h1 id="databases">
-  databases
-  <a class="anchor" href="#databases">#</a>
-</h1>
 <h2 id="pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services">
   
   <a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a>
@@ -403,6 +399,15 @@ https://github.com/alex-shpak/hugo-book
   download
   <a class="anchor" href="#download-1">#</a>
 </h3>
+<p>
+  <a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">UniProt</a> provides the reviewed Swiss-Prot database.
+<figure><img src="../img/uniprot.png"
+         alt=" " width="500"/>
+</figure>
+
+Each <em>Entry</em> might (1) only have 3D structure from 
+  <a href="https://alphafold.ebi.ac.uk/download#swissprot-section">Alphafold Protein Structure Database</a>; (2) only have 3D structure from 
+  <a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a></p>
 <h4 id="option1-directly-download-compressed-prediction-files-for-swiss-prot-from-alphafold-protein-structure-databasehttpsalphafoldebiacukdownloadswissprot-section">
   option1: directly download compressed prediction files for Swiss-Prot from 
   <a href="https://alphafold.ebi.ac.uk/download#swissprot-section">Alphafold Protein Structure Database</a>
@@ -425,12 +430,15 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li></li>
 </ol>
-<p>
-  <a href="https://alphafold.ebi.ac.uk/files/AF-Q196V2-F1-model_v4.pdb">https://alphafold.ebi.ac.uk/files/AF-Q196V2-F1-model_v4.pdb</a></p>
 <h3 id="description">
   description
   <a class="anchor" href="#description">#</a>
 </h3>
+<p>In <em>UniProt</em>,  Swiss-Prot has 571,864 entries with its corresponding fasta file. 549,724 entries have 3D struture. And most (513,805) of these structure are from AlphaFold prediction.
+<figure><img src="../img/swprot_distribution.png"
+         alt=" "/>
+</figure>
+</p>
 </article>
  
       

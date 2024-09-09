@@ -1,4 +1,8 @@
-# databases
++++
+title = "databases: PDB, Swiss-Prot"
+bookToc=true
++++
+
 
 ## [PDB database](https://www.rcsb.org/docs/programmatic-access/file-download-services)
 ### download
@@ -69,6 +73,14 @@ $ bash parallel_download.sh > download.log
 
 ## [Swiss-Prot database](https://www.uniprot.org/uniprotkb?query=*&facets=reviewed%3Atrue)
 ### download
+[UniProt](https://www.uniprot.org/uniprotkb?query=*&facets=reviewed%3Atrue) provides the reviewed Swiss-Prot database.
+{{< figure src="../img/uniprot.png" width="500" alt=" ">}}
+Each *Entry* might (1) only have 3D structure from [Alphafold Protein Structure Database](https://alphafold.ebi.ac.uk/download#swissprot-section); (2) only have 3D structure from [PDB database](https://www.rcsb.org/docs/programmatic-access/file-download-services)
+
+
+
+
+
 #### option1: directly download compressed prediction files for Swiss-Prot from [Alphafold Protein Structure Database](https://alphafold.ebi.ac.uk/download#swissprot-section)
 
 {{< figure src="../img/afdb_sprot.png" width="600" alt=" ">}}
@@ -80,8 +92,9 @@ $ bash parallel_download.sh > download.log
 
 
 
-https://alphafold.ebi.ac.uk/files/AF-Q196V2-F1-model_v4.pdb
 
 
 
 ### description
+In *UniProt*,  Swiss-Prot has 571,864 entries with its corresponding fasta file. 549,724 entries have 3D struture. And most (513,805) of these structure are from AlphaFold prediction.
+{{< figure src="../img/swprot_distribution.png" alt=" ">}}

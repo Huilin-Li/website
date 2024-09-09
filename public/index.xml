@@ -64,13 +64,6 @@
       <description> RFdiffusion is better at designing binders for target proteins that are already existing or have been verified by experiments. If the target protein is predcited by AI models, and has not been verified by experiments, the probability of designing a potential binder for this target will be reduced. The number of designed binders should be huge, in order to pick potential candidates as many as possible. </description>
     </item>
     <item>
-      <title></title>
-      <link>http://localhost:1313/posts/omics/database/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/omics/database/</guid>
-      <description>databases&#xD;#&#xD;PDB database&#xD;#&#xD;download&#xD;#&#xD;https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&amp;#39;PDB - FTP Archive over HTTP.html&amp;#39;, &amp;#39;r&amp;#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &amp;#39;lxml&amp;#39;) text = soup.get_text(&amp;#39;\n&amp;#39;, &amp;#39;\n\n&amp;#39;) lines = text.split(&amp;#39;\n&amp;#39;) PDB_id_list = [] for line in lines: if &amp;#39;ent.gz&amp;#39; in line: PDB_id_list.append(line.split(&amp;#34;.&amp;#34;)[0].split(&amp;#34;pdb&amp;#34;)[1]) # PDB_id_list[:5] # [&amp;#39;100d&amp;#39;, &amp;#39;101d&amp;#39;, &amp;#39;101m&amp;#39;, &amp;#39;102d&amp;#39;, &amp;#39;102l&amp;#39;] parallel downloads # split into 44 entry_i.</description>
-    </item>
-    <item>
       <title>4 levels of protein structure</title>
       <link>http://localhost:1313/posts/blog/proteinstruture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -90,6 +83,20 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/blog/shell/</guid>
       <description>Bash Scripts&#xD;#&#xD;How to discard changes in VScode?&#xD;#&#xD;Navigate to reporsitory (has .github folder) with changes. Then, git restore &amp;lt;file&amp;gt; Activate conda environment in bash script&#xD;#&#xD;source ~/miniconda3/etc/profile.d/conda.sh conda activate ENV SBATCH Array jobs&#xD;#&#xD;#SBATCH -J array-job&#x9;#SBATCH -a 1-3 #SBATCH -o array-job.%A.%a.log id_list=&amp;#34;./id_list.txt&amp;#34; id=`head -n $SLURM_ARRAY_TASK_ID $id_list | tail -n 1` python3 script.py -in $id srun gpu&#xD;#&#xD;srun -N 1 --ntasks-per-node 2 -p v100 -q gpu --gres=gpu:1 --mem=50G --pty /bin/bash run scripts&#xD;#&#xD;sbatch test.</description>
+    </item>
+    <item>
+      <title>commonly used Shell script and Command line, when working on large dataset in HPC</title>
+      <link>http://localhost:1313/posts/omics/command/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/omics/command/</guid>
+      <description>ls -l | wc -l </description>
+    </item>
+    <item>
+      <title>databases: PDB, Swiss-Prot</title>
+      <link>http://localhost:1313/posts/omics/database/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/omics/database/</guid>
+      <description>PDB database&#xD;#&#xD;download&#xD;#&#xD;https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&amp;#39;PDB - FTP Archive over HTTP.html&amp;#39;, &amp;#39;r&amp;#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &amp;#39;lxml&amp;#39;) text = soup.get_text(&amp;#39;\n&amp;#39;, &amp;#39;\n\n&amp;#39;) lines = text.split(&amp;#39;\n&amp;#39;) PDB_id_list = [] for line in lines: if &amp;#39;ent.gz&amp;#39; in line: PDB_id_list.append(line.split(&amp;#34;.&amp;#34;)[0].split(&amp;#34;pdb&amp;#34;)[1]) # PDB_id_list[:5] # [&amp;#39;100d&amp;#39;, &amp;#39;101d&amp;#39;, &amp;#39;101m&amp;#39;, &amp;#39;102d&amp;#39;, &amp;#39;102l&amp;#39;] parallel downloads # split into 44 entry_i.</description>
     </item>
     <item>
       <title>Excel commands</title>
