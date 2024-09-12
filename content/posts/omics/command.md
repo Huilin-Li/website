@@ -10,7 +10,7 @@ wget -i links.txt -o wget.log
 
 tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line
 
-tar -zcvf ./myfolder ./myfolder.tar.gz
+tar -zcvf  myfolder.tar.gz myfolder
 
 cp ./folder/*.txt ./newfolder
 

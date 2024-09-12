@@ -3,11 +3,11 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf ./myfolder ./myfolder.tar.gz cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &#34;$f&#34;; done for f in *.gz; do if [[ $(file --mime-type -b &#34;$f&#34;) == &#34;application/gzip&#34; ]]; then gunzip &#34;$f&#34; else echo &#34;$f is not a valid gzip&#34; fi done ">
+<meta name="description" content="ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf myfolder.tar.gz myfolder cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &#34;$f&#34;; done for f in *.gz; do if [[ $(file --mime-type -b &#34;$f&#34;) == &#34;application/gzip&#34; ]]; then gunzip &#34;$f&#34; else echo &#34;$f is not a valid gzip&#34; fi done ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="commonly used Shell script and Command line, when working on large dataset in HPC" />
-<meta property="og:description" content="ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf ./myfolder ./myfolder.tar.gz cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &#34;$f&#34;; done for f in *.gz; do if [[ $(file --mime-type -b &#34;$f&#34;) == &#34;application/gzip&#34; ]]; then gunzip &#34;$f&#34; else echo &#34;$f is not a valid gzip&#34; fi done " />
+<meta property="og:description" content="ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf myfolder.tar.gz myfolder cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &#34;$f&#34;; done for f in *.gz; do if [[ $(file --mime-type -b &#34;$f&#34;) == &#34;application/gzip&#34; ]]; then gunzip &#34;$f&#34; else echo &#34;$f is not a valid gzip&#34; fi done " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/posts/omics/command/" /><meta property="article:section" content="posts" />
 
@@ -19,7 +19,7 @@
 <link rel="canonical" href="http://localhost:1313/posts/omics/command/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.3e043d4c3f260c352b7b1bc9e7448bee8b1852634ff4e23986602f60a112fae2.js" integrity="sha256-PgQ9TD8mDDUrexvJ50SL7osYUmNP9OI5hmAvYKES&#43;uI=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.fa2d1bbd5a2465592517d366333df9fa86a12a79a567594f95db1f22ab3de518.js" integrity="sha256-&#43;i0bvVokZVklF9NmMz35&#43;oahKnmlZ1lPldsfIqs95Rg=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -307,7 +307,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>tar -tzf file.tar.gz | wc -l <span style="color:#75715e"># count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>tar -zcvf ./myfolder ./myfolder.tar.gz
+</span></span><span style="display:flex;"><span>tar -zcvf  myfolder.tar.gz myfolder
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>cp ./folder/*.txt ./newfolder
 </span></span><span style="display:flex;"><span>

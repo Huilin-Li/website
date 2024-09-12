@@ -3,11 +3,11 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0].split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] parallel downloads # split into 44 entry_i.">
+<meta name="description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0][4:] #.split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] Is&rsquo;s not okay to extract id by .">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="databases: PDB, Swiss-Prot" />
-<meta property="og:description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0].split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] parallel downloads # split into 44 entry_i." />
+<meta property="og:description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0][4:] #.split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] Is&rsquo;s not okay to extract id by ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/posts/omics/database/" /><meta property="article:section" content="posts" />
 
@@ -19,7 +19,7 @@
 <link rel="canonical" href="http://localhost:1313/posts/omics/database/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.3e043d4c3f260c352b7b1bc9e7448bee8b1852634ff4e23986602f60a112fae2.js" integrity="sha256-PgQ9TD8mDDUrexvJ50SL7osYUmNP9OI5hmAvYKES&#43;uI=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.fa2d1bbd5a2465592517d366333df9fa86a12a79a567594f95db1f22ab3de518.js" integrity="sha256-&#43;i0bvVokZVklF9NmMz35&#43;oahKnmlZ1lPldsfIqs95Rg=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -334,7 +334,7 @@ https://github.com/alex-shpak/hugo-book
 </figure>
 
 <ol start="2">
-<li>save this website <em>PDB - FTP Archive over HTTP.html</em></li>
+<li>save this website as <em>PDB - FTP Archive over HTTP.html</em></li>
 <li>extract <em>pdbXXXX.ent.gz</em> list</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
@@ -350,10 +350,14 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines:
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;ent.gz&#39;</span> <span style="color:#f92672">in</span> line:
-</span></span><span style="display:flex;"><span>        PDB_id_list<span style="color:#f92672">.</span>append(line<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;.&#34;</span>)[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;pdb&#34;</span>)[<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        PDB_id_list<span style="color:#f92672">.</span>append(line<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;.&#34;</span>)[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">4</span>:] <span style="color:#75715e">#.split(&#34;pdb&#34;)[1])</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># PDB_id_list[:5]</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;]</span>
-</span></span></code></pre></div><ol start="4">
+</span></span></code></pre></div><blockquote class="book-hint danger">
+  Is&rsquo;s not okay to extract <em>id</em> by <code>.split(&quot;pdb&quot;)</code>. Because <em>pdb</em> might be also the part of the <em>id</em> in some special cases, for example, <em>pdb1pdb.ent.gz</em>.
+</blockquote>
+
+<ol start="4">
 <li>parallel downloads</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># split into 44 entry_i.txt file</span>
@@ -386,10 +390,15 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># done &lt; &lt;(grep &#34;&#34; ./../groups/entry_list.txt)</span>
 </span></span></code></pre></div><p>where <em>entry_list.txt</em> has <em>entry_i.txt</em> line by line.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ bash parallel_download.sh &gt; download.log 
-</span></span></code></pre></div><h3 id="desciption">
+</span></span></code></pre></div><blockquote class="book-hint danger">
+  <em>Failed download</em> is common when Shell script downloads large files simutaneously. Therefore, it is important to check whether the script has downloaded the complete and correct <em>ent.gz</em> files. For example, by <code>gunzip *gz</code>, the wrong <em>.gz</em> files will output unzip error. And then, this wrong <em>.gz</em> file should be removed and we need to download it again.
+</blockquote>
+
+<h3 id="desciption">
   desciption
   <a class="anchor" href="#desciption">#</a>
 </h3>
+<p>At this moment, I download 218,546 PDB entries from PDB database.</p>
 <h2 id="swiss-prot-databasehttpswwwuniprotorguniprotkbqueryfacetsreviewed3atrue">
   
   <a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">Swiss-Prot database</a>

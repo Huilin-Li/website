@@ -10,7 +10,7 @@ bookToc=true
 
 {{< figure src="../img/pdb_db.png" width="300" alt=" ">}}
 
-2. save this website *PDB - FTP Archive over HTTP.html*
+2. save this website as *PDB - FTP Archive over HTTP.html*
 3. extract *pdbXXXX.ent.gz* list
 ```python
 from bs4 import BeautifulSoup
@@ -26,10 +26,14 @@ PDB_id_list = []
 
 for line in lines:
     if 'ent.gz' in line:
-        PDB_id_list.append(line.split(".")[0].split("pdb")[1])
+        PDB_id_list.append(line.split(".")[0][4:] #.split("pdb")[1])
 # PDB_id_list[:5]
 # ['100d', '101d', '101m', '102d', '102l']
 ```
+{{< hint danger >}}
+Is's not okay to extract *id* by `.split("pdb")`. Because *pdb* might be also the part of the *id* in some special cases, for example, *pdb1pdb.ent.gz*.
+{{< /hint >}}
+
 4. parallel downloads
 ```python
 # split into 44 entry_i.txt file
@@ -67,7 +71,19 @@ where *entry_list.txt* has *entry_i.txt* line by line.
 ```shell
 $ bash parallel_download.sh > download.log 
 ```
+{{< hint danger >}}
+*Failed download* is common when Shell script downloads large files simutaneously. Therefore, it is important to check whether the script has downloaded the complete and correct *ent.gz* files. For example, by `gunzip *gz`, the wrong *.gz* files will output unzip error. And then, this wrong *.gz* file should be removed and we need to download it again.
+
+{{< /hint >}}
+
+
 ### desciption
+At this moment, I download 218,546 PDB entries from PDB database.
+ 
+
+
+
+
 
 
 
