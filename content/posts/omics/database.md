@@ -2,8 +2,6 @@
 title = "databases: PDB, Swiss-Prot"
 bookToc=true
 +++
-
-
 ## [PDB database](https://www.rcsb.org/docs/programmatic-access/file-download-services)
 ### download
 1. https://files.rcsb.org/pub/pdb/data/structures/all/pdb/
@@ -79,7 +77,7 @@ $ bash parallel_download.sh > download.log
 
 ### desciption
 At this moment, I download 218,546 PDB entries from PDB database.
- 
+
 
 
 
