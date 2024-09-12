@@ -98,3 +98,7 @@ Each *Entry* might (1) only have 3D structure from [Alphafold Protein Structure 
 ### description
 In *UniProt*,  Swiss-Prot has 571,864 entries with its corresponding fasta file. 549,724 entries have 3D struture. And most (513,805) of these structure are from AlphaFold prediction.
 {{< figure src="../img/swprot_distribution.png" alt=" ">}}
+
+
+
+https://www.uniprot.org/uniprotkb/A0A6N3IN21/entry#structure

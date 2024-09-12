@@ -3,11 +3,11 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ls -l | wc -l wget -i links.txt ">
+<meta name="description" content="ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf ./myfolder ./myfolder.tar.gz cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &#34;$f&#34;; done for f in *.gz; do if [[ $(file --mime-type -b &#34;$f&#34;) == &#34;application/gzip&#34; ]]; then gunzip &#34;$f&#34; else echo &#34;$f is not a valid gzip&#34; fi done ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="commonly used Shell script and Command line, when working on large dataset in HPC" />
-<meta property="og:description" content="ls -l | wc -l wget -i links.txt " />
+<meta property="og:description" content="ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf ./myfolder ./myfolder.tar.gz cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &#34;$f&#34;; done for f in *.gz; do if [[ $(file --mime-type -b &#34;$f&#34;) == &#34;application/gzip&#34; ]]; then gunzip &#34;$f&#34; else echo &#34;$f is not a valid gzip&#34; fi done " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/posts/omics/command/" /><meta property="article:section" content="posts" />
 
@@ -19,7 +19,7 @@
 <link rel="canonical" href="http://localhost:1313/posts/omics/command/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.b234c3f88e6261ccf8148d8b2cae820a663f485a4f81482f3c5c4aab3ac79101.js" integrity="sha256-sjTD&#43;I5iYcz4FI2LLK6CCmY/SFpPgUgvPFxKqzrHkQE=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.3e043d4c3f260c352b7b1bc9e7448bee8b1852634ff4e23986602f60a112fae2.js" integrity="sha256-PgQ9TD8mDDUrexvJ50SL7osYUmNP9OI5hmAvYKES&#43;uI=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -303,7 +303,24 @@ https://github.com/alex-shpak/hugo-book
 
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -l | wc -l
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>wget -i links.txt
+</span></span><span style="display:flex;"><span>wget -i links.txt -o wget.log
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tar -tzf file.tar.gz | wc -l <span style="color:#75715e"># count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tar -zcvf ./myfolder ./myfolder.tar.gz
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cp ./folder/*.txt ./newfolder
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>gunzip *.gz <span style="color:#75715e"># for f in *.gz; do gunzip &#34;$f&#34;; done</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> f in *.gz;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">do</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#66d9ef">$(</span>file --mime-type -b <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;application/gzip&#34;</span> <span style="color:#f92672">]]</span>; 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">then</span> 
+</span></span><span style="display:flex;"><span>        gunzip <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>        echo <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74"> is not a valid gzip&#34;</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
 </span></span></code></pre></div></article>
  
       
