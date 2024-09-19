@@ -3,5 +3,5 @@ menu:
   after:
     name: prote
     weight: 2
-title: omics
+title: proteomics
 ---

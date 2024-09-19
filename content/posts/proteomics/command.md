@@ -16,7 +16,7 @@ cp ./folder/*.txt ./newfolder
 
 gunzip *.gz # for f in *.gz; do gunzip "$f"; done
 
-
+cat *.fa > all_data.fa # concatenate multiple fasta files into one fasta file in command line
 
 ```
 
@@ -32,3 +32,4 @@ do
     fi
 done
 ```
+

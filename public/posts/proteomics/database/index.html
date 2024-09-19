@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52652&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0][4:] #.split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] Is&rsquo;s not okay to extract id by .">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="databases: PDB, Swiss-Prot" />
+<meta property="og:description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0][4:] #.split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] Is&rsquo;s not okay to extract id by ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:52652/posts/proteomics/database/" /><meta property="article:section" content="posts" />
+
+
+
+<title>databases: PDB, Swiss-Prot | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:52652/posts/proteomics/database/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.92712093cf2376c8b422f0a9c3de296db6ecc43e27add7a5223e55d3db10556e.js" integrity="sha256-knEgk88jdsi0IvCpw94pbbbsxD4nrdelIj5V09sQVW4=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
+    <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
+      <a role="button" class="">project</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6b2297e97d707e7ee14411430da62d58" class="toggle"  />
+    <label for="section-6b2297e97d707e7ee14411430da62d58" class="flex justify-between">
+      <a role="button" class="">Binder Design</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/truncation/" class="">truncation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/design/" class="">design binders via RFdiffusion and ProteinMPNN-FastRelax</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/pae_score/" class="">pae_interaction score</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/filtering/" class="">backbones filtering</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/notes/" class="">notes</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/ml/"  >
+        ML algorithm
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/proteomics/"  >
+        proteomics
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/blog/"  >
+        blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://huilin-li.github.io/mybook/"  target="_blank" rel="noopener">
+        random notes
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="/links/"  >
+        world
+      </a>
+  </li>
+  
+  <li>
+    <a href="/tools/"  >
+        contact
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>databases: PDB, Swiss-Prot</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services"><a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a></a>
+      <ul>
+        <li><a href="#download">download</a></li>
+        <li><a href="#desciption">desciption</a></li>
+      </ul>
+    </li>
+    <li><a href="#swiss-prot-databasehttpswwwuniprotorguniprotkbqueryfacetsreviewed3atrue"><a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">Swiss-Prot database</a></a>
+      <ul>
+        <li><a href="#download-1">download</a></li>
+        <li><a href="#description">description</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/proteomics/database/">databases: PDB, Swiss-Prot</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<h2 id="pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services">
+  
+  <a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a>
+  <a class="anchor" href="#pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services">#</a>
+</h2>
+<h3 id="download">
+  download
+  <a class="anchor" href="#download">#</a>
+</h3>
+<ol>
+<li>
+  <a href="https://files.rcsb.org/pub/pdb/data/structures/all/pdb/">https://files.rcsb.org/pub/pdb/data/structures/all/pdb/</a></li>
+</ol>
+<figure >
+    
+      <img src="../img/pdb_db.png" 
+      
+      alt=" 
+      " />
+      
+      
+  </figure>
+<ol start="2">
+<li>save this website as <em>PDB - FTP Archive over HTTP.html</em></li>
+<li>extract <em>pdbXXXX.ent.gz</em> list</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># how many ent.gz file</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;PDB - FTP Archive over HTTP.html&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    html_content <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>soup <span style="color:#f92672">=</span> BeautifulSoup(html_content, <span style="color:#e6db74">&#39;lxml&#39;</span>)
+</span></span><span style="display:flex;"><span>text <span style="color:#f92672">=</span> soup<span style="color:#f92672">.</span>get_text(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>lines <span style="color:#f92672">=</span> text<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PDB_id_list <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;ent.gz&#39;</span> <span style="color:#f92672">in</span> line:
+</span></span><span style="display:flex;"><span>        PDB_id_list<span style="color:#f92672">.</span>append(line<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;.&#34;</span>)[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">4</span>:] <span style="color:#75715e">#.split(&#34;pdb&#34;)[1])</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PDB_id_list[:5]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;]</span>
+</span></span></code></pre></div><blockquote class="book-hint danger">
+  Is&rsquo;s not okay to extract <em>id</em> by <code>.split(&quot;pdb&quot;)</code>. Because <em>pdb</em> might be also the part of the <em>id</em> in some special cases, for example, <em>pdb1pdb.ent.gz</em>.
+</blockquote>
+
+<ol start="4">
+<li>parallel downloads</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># split into 44 entry_i.txt file</span>
+</span></span><span style="display:flex;"><span>length <span style="color:#f92672">=</span> <span style="color:#ae81ff">5000</span>
+</span></span><span style="display:flex;"><span>count <span style="color:#f92672">=</span> len(df)<span style="color:#f92672">//</span>length
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">43</span>):
+</span></span><span style="display:flex;"><span>    subdf <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>iloc[i<span style="color:#f92672">*</span><span style="color:#ae81ff">5000</span>:i<span style="color:#f92672">*</span><span style="color:#ae81ff">5000</span><span style="color:#f92672">+</span><span style="color:#ae81ff">5000</span>]
+</span></span><span style="display:flex;"><span>    sublist <span style="color:#f92672">=</span>subdf[<span style="color:#e6db74">&#34;id&#34;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>    string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span><span style="color:#f92672">.</span>join(sublist)
+</span></span><span style="display:flex;"><span>    text <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;groups/entry_&#39;</span><span style="color:#f92672">+</span> str(i)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.txt&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>)
+</span></span><span style="display:flex;"><span>    text<span style="color:#f92672">.</span>write(string)
+</span></span><span style="display:flex;"><span>    text<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>final_sublist <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">43</span><span style="color:#f92672">*</span><span style="color:#ae81ff">5000</span>:<span style="color:#ae81ff">43</span><span style="color:#f92672">*</span><span style="color:#ae81ff">5000</span><span style="color:#f92672">+</span><span style="color:#ae81ff">5000</span>][<span style="color:#e6db74">&#34;id&#34;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>finalstring <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span><span style="color:#f92672">.</span>join(final_sublist)
+</span></span><span style="display:flex;"><span>finaltext <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;groups/entry_&#39;</span><span style="color:#f92672">+</span> str(<span style="color:#ae81ff">43</span>)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.txt&#39;</span>, <span style="color:#e6db74">&#39;w&#39;</span>)
+</span></span><span style="display:flex;"><span>finaltext<span style="color:#f92672">.</span>write(finalstring)
+</span></span><span style="display:flex;"><span>finaltext<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><p>Obatin the batch-download script <strong>batch_download.sh</strong> from 
+  <a href="https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script">Batch Downloads with Shell Script</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cd /<span style="color:#f92672">(</span>your path<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> line in <span style="color:#66d9ef">$(</span>cat ./../groups/entry_list.txt<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>   ./../batch_download.sh -f ./../groups/<span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span> -p &amp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># while IFS= read -r line; do</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    ./../batch_download.sh -f ./../groups/${line} -p &amp;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># done &lt; &lt;(grep &#34;&#34; ./../groups/entry_list.txt)</span>
+</span></span></code></pre></div><p>where <em>entry_list.txt</em> has <em>entry_i.txt</em> line by line.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ bash parallel_download.sh &gt; download.log 
+</span></span></code></pre></div><blockquote class="book-hint danger">
+  <em>Failed download</em> is common when Shell script downloads large files simutaneously. Therefore, it is important to check whether the script has downloaded the complete and correct <em>ent.gz</em> files. For example, by <code>gunzip *gz</code>, the wrong <em>.gz</em> files will output <code>unzip error</code>. And then, this wrong <em>.gz</em> file should be removed and we need to download it again.
+</blockquote>
+
+<h3 id="desciption">
+  desciption
+  <a class="anchor" href="#desciption">#</a>
+</h3>
+<p>At this moment, I download 218,546 PDB entries from PDB database.</p>
+<h2 id="swiss-prot-databasehttpswwwuniprotorguniprotkbqueryfacetsreviewed3atrue">
+  
+  <a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">Swiss-Prot database</a>
+  <a class="anchor" href="#swiss-prot-databasehttpswwwuniprotorguniprotkbqueryfacetsreviewed3atrue">#</a>
+</h2>
+<h3 id="download-1">
+  download
+  <a class="anchor" href="#download-1">#</a>
+</h3>
+<p>
+  <a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">UniProt</a> provides the reviewed Swiss-Prot database.
+<figure >
+    
+      <img src="../img/uniprot.png" 
+       />
+      
+      
+        <figcaption class="text-center">
+          
+          <h5>Fig.1 the Entry from UniProt</h5>
+          
+        </figcaption>
+    
+  </figure></p>
+<p>With the help of 
+  <a href="https://github.com/multimeric/Unipressed">unipressed</a>, I can quickly analyze the reviewed Swiss-Prot database. There are 22,140 enries whose 3D structure information are not stored. In the remaining 549,724 entries who have 3D structures, 33,725 entries have 3D structure from both 
+  <a href="https://alphafold.ebi.ac.uk/download#swissprot-section">Alphafold Protein Structure Database</a> and 
+  <a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a>; 2,194 entries only have 3D structure from 
+  <a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a>; 513,805 entries only have 3D structure from 
+  <a href="https://alphafold.ebi.ac.uk/download#swissprot-section">Alphafold Protein Structure Database</a>.</p>
+<p>I compared the dataset that is already compressed in 
+  <a href="https://alphafold.ebi.ac.uk/download#swissprot-section">Alphafold Protein Structure Database</a> (Fig.2) and the 513,805 entries who only have 
+  <a href="https://alphafold.ebi.ac.uk/download#swissprot-section">Alphafold Protein Structure Database</a> 3D structure as recorded in 
+  <a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">UniProt</a> (Fig.1). 4,274 entries&rsquo; structures in (Fig.1) have not been stored in (Fig.2).</p>
+<blockquote class="book-hint warning">
+  To minimize duplications between the UniProt Swiss-Prot database and the PDB database, I focused on downloading the structures of 513,805 entries from UniProt (Swiss-Prot) that are only available in the Alphafold Protein Structure Database. Therefore, I only need to download 4,274 entries&rsquo; structures, because the remaining 509,531 entries&rsquo; structures can be directly extracted from (Fig.2).
+</blockquote>
+
+<figure >
+    
+      <img src="../img/afdb_sprot.png" 
+       />
+      
+      
+        <figcaption class="text-center">
+          
+          <h5>Fig.2 compressed prediction files for Swiss-Prot from Alphafold Protein Structure Database</h5>
+          
+        </figcaption>
+    
+  </figure>
+<h3 id="description">
+  description
+  <a class="anchor" href="#description">#</a>
+</h3>
+<p>In <em>UniProt</em>,  Swiss-Prot has 571,864 entries with its corresponding fasta file. 549,724 entries have 3D struture. And most (513,805) of these structure are from AlphaFold prediction.
+<figure >
+    
+      <img src="../img/plot.svg" 
+      
+      alt=" 
+      " />
+      
+      
+  </figure></p>
+<p>wget 
+  <a href="https://alphafold.ebi.ac.uk/files/AF-A0A8I6A2H6-F1-model_v4.pdb">https://alphafold.ebi.ac.uk/files/AF-A0A8I6A2H6-F1-model_v4.pdb</a></p>
+<p>
+  <a href="https://alphafold.ebi.ac.uk/files/AF-Q4U4S6-F1-model_v4.pdb">https://alphafold.ebi.ac.uk/files/AF-Q4U4S6-F1-model_v4.pdb</a></p>
+<p>
+  <a href="https://alphafold.ebi.ac.uk/files/AF-A0A6N3IN21-F1-model_v4.pdb">https://alphafold.ebi.ac.uk/files/AF-A0A6N3IN21-F1-model_v4.pdb</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="Huilin-Li/site-comment"
+        data-repo-id="R_kgDOL3ovHA"
+        data-category="General"
+        data-category-id="DIC_kwDOL3ovHM4CfKps"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script></div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services"><a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a></a>
+      <ul>
+        <li><a href="#download">download</a></li>
+        <li><a href="#desciption">desciption</a></li>
+      </ul>
+    </li>
+    <li><a href="#swiss-prot-databasehttpswwwuniprotorguniprotkbqueryfacetsreviewed3atrue"><a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">Swiss-Prot database</a></a>
+      <ul>
+        <li><a href="#download-1">download</a></li>
+        <li><a href="#description">description</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52652&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="from Bio import PDB class rm_dna_rna_O(PDB.Select): def accept_residue(self, res): if (len(res.get_resname()) &lt;3) or (res.id[0] != &#34; &#34;): return False else: return True if __name__==&#34;__main__&#34;: for pdbfile_path in glob.glob(&#34;/path/PDBDB/*.pdb&#34;): print(pdbfile_path, end=&#34; &#34;) name = pdbfile_path.split(&#34;/&#34;)[-1] pdb = PDB.PDBParser().get_structure(name, pdbfile_path) pdb_io = PDB.PDBIO() pdb_io.set_structure(pdb) pdb_io.save(&#34;/path/PDBDB_no_drna/&#34;&#43;name, rm_dna_rna_O()) print(&#39;-- Done&#39;) ">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="remove DNA/RNA and O from pdb format" />
+<meta property="og:description" content="from Bio import PDB class rm_dna_rna_O(PDB.Select): def accept_residue(self, res): if (len(res.get_resname()) &lt;3) or (res.id[0] != &#34; &#34;): return False else: return True if __name__==&#34;__main__&#34;: for pdbfile_path in glob.glob(&#34;/path/PDBDB/*.pdb&#34;): print(pdbfile_path, end=&#34; &#34;) name = pdbfile_path.split(&#34;/&#34;)[-1] pdb = PDB.PDBParser().get_structure(name, pdbfile_path) pdb_io = PDB.PDBIO() pdb_io.set_structure(pdb) pdb_io.save(&#34;/path/PDBDB_no_drna/&#34;&#43;name, rm_dna_rna_O()) print(&#39;-- Done&#39;) " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:52652/posts/proteomics/removedrna/" /><meta property="article:section" content="posts" />
+
+
+
+<title>remove DNA/RNA and O from pdb format | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:52652/posts/proteomics/removedrna/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.92712093cf2376c8b422f0a9c3de296db6ecc43e27add7a5223e55d3db10556e.js" integrity="sha256-knEgk88jdsi0IvCpw94pbbbsxD4nrdelIj5V09sQVW4=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
+    <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
+      <a role="button" class="">project</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6b2297e97d707e7ee14411430da62d58" class="toggle"  />
+    <label for="section-6b2297e97d707e7ee14411430da62d58" class="flex justify-between">
+      <a role="button" class="">Binder Design</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/truncation/" class="">truncation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/design/" class="">design binders via RFdiffusion and ProteinMPNN-FastRelax</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/pae_score/" class="">pae_interaction score</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/filtering/" class="">backbones filtering</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/notes/" class="">notes</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/ml/"  >
+        ML algorithm
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/proteomics/"  >
+        proteomics
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/blog/"  >
+        blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://huilin-li.github.io/mybook/"  target="_blank" rel="noopener">
+        random notes
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="/links/"  >
+        world
+      </a>
+  </li>
+  
+  <li>
+    <a href="/tools/"  >
+        contact
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>remove DNA/RNA and O from pdb format</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/proteomics/removedrna/">remove DNA/RNA and O from pdb format</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Bio <span style="color:#f92672">import</span> PDB
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">rm_dna_rna_O</span>(PDB<span style="color:#f92672">.</span>Select):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accept_residue</span>(self, res):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (len(res<span style="color:#f92672">.</span>get_resname()) <span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>) <span style="color:#f92672">or</span> (res<span style="color:#f92672">.</span>id[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34; &#34;</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> pdbfile_path <span style="color:#f92672">in</span> glob<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#34;/path/PDBDB/*.pdb&#34;</span>):
+</span></span><span style="display:flex;"><span>        print(pdbfile_path, end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span>)
+</span></span><span style="display:flex;"><span>        name <span style="color:#f92672">=</span> pdbfile_path<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        pdb <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBParser()<span style="color:#f92672">.</span>get_structure(name, pdbfile_path)
+</span></span><span style="display:flex;"><span>        pdb_io <span style="color:#f92672">=</span> PDB<span style="color:#f92672">.</span>PDBIO()
+</span></span><span style="display:flex;"><span>        pdb_io<span style="color:#f92672">.</span>set_structure(pdb)
+</span></span><span style="display:flex;"><span>        pdb_io<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#34;/path/PDBDB_no_drna/&#34;</span><span style="color:#f92672">+</span>name, rm_dna_rna_O())
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;-- Done&#39;</span>) 
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="Huilin-Li/site-comment"
+        data-repo-id="R_kgDOL3ovHA"
+        data-category="General"
+        data-category-id="DIC_kwDOL3ovHM4CfKps"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script></div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

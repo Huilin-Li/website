@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52652&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="In Windows10, build personal website via Hugo-book and Github Actions#This blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.
@@ -11,17 +11,17 @@ Prerequisites#Git Windows 10 VScode Github account Install Hugo#In Windows10
 <meta property="og:description" content="In Windows10, build personal website via Hugo-book and Github Actions#This blog is about how to use Hugo to create the local website, and then deploy it on GitHub via Github Action. Everything is step by step.
 Prerequisites#Git Windows 10 VScode Github account Install Hugo#In Windows10, right click Windows Powershell and click run as administrator. Refer to How to install chocolatey in Windows to install chocolatey." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/blog/hugobookgithubaction/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:52652/posts/blog/hugobookgithubaction/" /><meta property="article:section" content="posts" />
 
 
 
 <title>Website via Hugo Book and deployed by Github Action | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:1313/posts/blog/hugobookgithubaction/">
+<link rel="canonical" href="http://localhost:52652/posts/blog/hugobookgithubaction/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.fa2d1bbd5a2465592517d366333df9fa86a12a79a567594f95db1f22ab3de518.js" integrity="sha256-&#43;i0bvVokZVklF9NmMz35&#43;oahKnmlZ1lPldsfIqs95Rg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.92712093cf2376c8b422f0a9c3de296db6ecc43e27add7a5223e55d3db10556e.js" integrity="sha256-knEgk88jdsi0IvCpw94pbbbsxD4nrdelIj5V09sQVW4=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -197,8 +197,8 @@ https://github.com/alex-shpak/hugo-book
   </li>
   
   <li>
-    <a href="/posts/omics/"  >
-        omics
+    <a href="/posts/proteomics/"  >
+        proteomics
       </a>
   </li>
   
@@ -217,12 +217,6 @@ https://github.com/alex-shpak/hugo-book
   <li>
     <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
         Github
-      </a>
-  </li>
-  
-  <li>
-    <a href="https://gist.github.com/Huilin-Li"  target="_blank" rel="noopener">
-        GitHub Gist
       </a>
   </li>
   
@@ -405,18 +399,28 @@ git push -u origin main
 </code></pre><ol start="3">
 <li>Visit your GitHub repository. From the main menu choose <strong>Settings</strong> &gt; <strong>Pages</strong>. In the center of your screen you will see this:</li>
 </ol>
-<figure><img src="../images/deploy1.png"
-         alt="deploy1" width="400"/>
-</figure>
-
+<figure >
+    
+      <img src="../images/deploy1.png" 
+      
+      alt="deploy1
+      " />
+      
+      
+  </figure>
 <ol start="4">
 <li>Change the Source to <code>GitHub Actions</code>.</li>
 <li>Click <code>Configure</code> as the highlight in this picture:</li>
 </ol>
-<figure><img src="../images/deploy2.png"
-         alt="deploy2" width="400"/>
-</figure>
-
+<figure >
+    
+      <img src="../images/deploy2.png" 
+      
+      alt="deploy2
+      " />
+      
+      
+  </figure>
 <ol start="6">
 <li>Go to 
   <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">Host on GitHub Pages</a>, copy the <code>yaml</code> file in <code>step 6</code> to <code>Blogs/.github/workflows/hugo.yaml</code>, and commit changes.</li>

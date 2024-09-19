@@ -47,7 +47,7 @@
       <link>http://localhost:1313/docs/project/binderdesign/pae_score/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/project/binderdesign/pae_score/</guid>
-      <description>As RFdiffusion states, we expect a binder whose pae_interaction score is lower than 10. However, we should also have a look at other scores, such as pLDDT, rmsd.&#xA;check_n = 6 folder_nam = [&amp;#34;folder&amp;#34;+str(i) for i in range(check_n)] score_paths = [&amp;#34;../MyBinderWork/ThreeThoudand_mpnn_af/&amp;#34;+nam+&amp;#34;/score.sc&amp;#34; for nam in folder_nam] ALL_DF = [] for p in score_paths: df = pd.read_csv(p, delim_whitespace=True) ALL_DF.append(df) SCORE_df = pd.concat(ALL_DF)[[&amp;#34;binder_aligned_rmsd&amp;#34;, &amp;#34;pae_binder&amp;#34;, &amp;#34;pae_interaction&amp;#34;, &amp;#34;plddt_binder&amp;#34;, &amp;#34;description&amp;#34;]] An example of one of my experiments</description>
+      <description>As RFdiffusion states, we expect a binder whose pae_interaction score is lower than 10. However, we should also have a look at other scores, such as pLDDT, rmsd.&#xA;check_n = 6 folder_nam = [&amp;#34;folder&amp;#34;+str(i) for i in range(check_n)] score_paths = [&amp;#34;../MyBinderWork/ThreeThoudand_mpnn_af/&amp;#34;+nam+&amp;#34;/score.sc&amp;#34; for nam in folder_nam] ALL_DF = [] for p in score_paths: df = pd.read_csv(p, delim_whitespace=True) ALL_DF.append(df) SCORE_df = pd.concat(ALL_DF)[[&amp;#34;binder_aligned_rmsd&amp;#34;, &amp;#34;pae_binder&amp;#34;, &amp;#34;pae_interaction&amp;#34;, &amp;#34;plddt_binder&amp;#34;, &amp;#34;description&amp;#34;]] An example of one of my experiments&#xD;</description>
     </item>
     <item>
       <title>backbones filtering</title>
@@ -62,6 +62,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/docs/project/binderdesign/notes/</guid>
       <description> RFdiffusion is better at designing binders for target proteins that are already existing or have been verified by experiments. If the target protein is predcited by AI models, and has not been verified by experiments, the probability of designing a potential binder for this target will be reduced. The number of designed binders should be huge, in order to pick potential candidates as many as possible. </description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/proteomics/removedrna/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/removedrna/</guid>
+      <description></description>
     </item>
     <item>
       <title>4 levels of protein structure</title>
@@ -85,17 +92,24 @@
       <description>Bash Scripts&#xD;#&#xD;How to discard changes in VScode?&#xD;#&#xD;Navigate to reporsitory (has .github folder) with changes. Then, git restore &amp;lt;file&amp;gt; Activate conda environment in bash script&#xD;#&#xD;source ~/miniconda3/etc/profile.d/conda.sh conda activate ENV SBATCH Array jobs&#xD;#&#xD;#SBATCH -J array-job&#x9;#SBATCH -a 1-3 #SBATCH -o array-job.%A.%a.log id_list=&amp;#34;./id_list.txt&amp;#34; id=`head -n $SLURM_ARRAY_TASK_ID $id_list | tail -n 1` python3 script.py -in $id srun gpu&#xD;#&#xD;srun -N 1 --ntasks-per-node 2 -p v100 -q gpu --gres=gpu:1 --mem=50G --pty /bin/bash run scripts&#xD;#&#xD;sbatch test.</description>
     </item>
     <item>
-      <title>commonly used Shell script and Command line, when working on large dataset in HPC</title>
-      <link>http://localhost:1313/posts/omics/command/</link>
+      <title>commonly used python codes</title>
+      <link>http://localhost:1313/posts/proteomics/pythonblocks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/omics/command/</guid>
-      <description>ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf myfolder.tar.gz myfolder cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &amp;#34;$f&amp;#34;; done for f in *.gz; do if [[ $(file --mime-type -b &amp;#34;$f&amp;#34;) == &amp;#34;application/gzip&amp;#34; ]]; then gunzip &amp;#34;$f&amp;#34; else echo &amp;#34;$f is not a valid gzip&amp;#34; fi done </description>
+      <guid>http://localhost:1313/posts/proteomics/pythonblocks/</guid>
+      <description>&#xD;unzip compressed files into a new directory&#xD;#&#xD;gz_file = os.path.join(root, file) out_file = &amp;#34;new_path/&amp;#34; + file with gzip.open(gz_file,&amp;#34;rb&amp;#34;) as f_in, open(out_file,&amp;#34;wb&amp;#34;) as f_out: shutil.copyfileobj(f_in, f_out) </description>
+    </item>
+    <item>
+      <title>commonly used Shell script and Command line, when working on large dataset in HPC</title>
+      <link>http://localhost:1313/posts/proteomics/command/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/command/</guid>
+      <description>ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf myfolder.tar.gz myfolder cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &amp;#34;$f&amp;#34;; done cat *.fa &amp;gt; all_data.fa # concatenate multiple fasta files into one fasta file in command line for f in *.</description>
     </item>
     <item>
       <title>databases: PDB, Swiss-Prot</title>
-      <link>http://localhost:1313/posts/omics/database/</link>
+      <link>http://localhost:1313/posts/proteomics/database/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/omics/database/</guid>
+      <guid>http://localhost:1313/posts/proteomics/database/</guid>
       <description>PDB database&#xD;#&#xD;download&#xD;#&#xD;https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&amp;#39;PDB - FTP Archive over HTTP.html&amp;#39;, &amp;#39;r&amp;#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &amp;#39;lxml&amp;#39;) text = soup.get_text(&amp;#39;\n&amp;#39;, &amp;#39;\n\n&amp;#39;) lines = text.split(&amp;#39;\n&amp;#39;) PDB_id_list = [] for line in lines: if &amp;#39;ent.gz&amp;#39; in line: PDB_id_list.append(line.split(&amp;#34;.&amp;#34;)[0][4:] #.split(&amp;#34;pdb&amp;#34;)[1]) # PDB_id_list[:5] # [&amp;#39;100d&amp;#39;, &amp;#39;101d&amp;#39;, &amp;#39;101m&amp;#39;, &amp;#39;102d&amp;#39;, &amp;#39;102l&amp;#39;] Is&amp;rsquo;s not okay to extract id by .</description>
     </item>
     <item>
@@ -106,17 +120,24 @@
       <description> In one row, concat each cell into one cell as string =CONCAT(A1:D1) </description>
     </item>
     <item>
-      <title>fasta similarity</title>
-      <link>http://localhost:1313/posts/omics/fasimilarity/</link>
+      <title>fasta 2 mutated fasta (python code)</title>
+      <link>http://localhost:1313/posts/proteomics/fa2mutatedfa/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/omics/fasimilarity/</guid>
+      <guid>http://localhost:1313/posts/proteomics/fa2mutatedfa/</guid>
+      <description>import copy mutations = [&amp;#34;K114Q&amp;#34;, &amp;#34;R196I&amp;#34;, &amp;#34;Y20F&amp;#34;, &amp;#34;K8Q&amp;#34;] fa_header = open(&amp;#34;./xxxx.fasta&amp;#34;, &amp;#34;r&amp;#34;).read().split(&amp;#34;\n&amp;#34;)[0] fa_seq = open(&amp;#34;./xxxx.fasta&amp;#34;, &amp;#34;r&amp;#34;).read().split(&amp;#34;\n&amp;#34;)[1] new_seq = copy.copy(fa_seq) for mutation in mutations: orig = mutation[0] idx = int(mutation[1:-1]) mut = mutation[-1] seq_list = list(new_seq) if seq_list[idx-1] == orig: seq_list[idx-1] = mut else: print(&amp;#34;Check!&amp;#34;) new_seq = &amp;#39;&amp;#39;.join(seq_list) with open(&amp;#39;mutatedfa.fa&amp;#39;, &amp;#39;w&amp;#39;) as f: f.write(fa_header) f.write(&amp;#34;\n&amp;#34;) f.write(new_seq) </description>
+    </item>
+    <item>
+      <title>fasta similarity</title>
+      <link>http://localhost:1313/posts/proteomics/fasimilarity/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/fasimilarity/</guid>
       <description>&#xD;import parasail&#xD;#&#xD;result = parasail.sw_trace_scan_16(&amp;#34;asdf&amp;#34;, &amp;#34;asdf&amp;#34;, 11, 1, parasail.blosum62) </description>
     </item>
     <item>
       <title>files list</title>
-      <link>http://localhost:1313/posts/omics/files/</link>
+      <link>http://localhost:1313/posts/proteomics/files/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/omics/files/</guid>
+      <guid>http://localhost:1313/posts/proteomics/files/</guid>
       <description>&#xD;list files in a folder&#xD;#&#xD;import glob files = glob.glob(&amp;#39;CSV/*.csv&amp;#39;) # [&amp;#39;CSV\\x_109.csv&amp;#39;, &amp;#39;CSV\\x_116.csv&amp;#39;, &amp;#39;CSV\\x_121.csv&amp;#39;, ... ] #&#xD;</description>
     </item>
     <item>
@@ -128,9 +149,9 @@
     </item>
     <item>
       <title>pdb 2 fasta</title>
-      <link>http://localhost:1313/posts/omics/pdb2fasta/</link>
+      <link>http://localhost:1313/posts/proteomics/pdb2fasta/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/omics/pdb2fasta/</guid>
+      <guid>http://localhost:1313/posts/proteomics/pdb2fasta/</guid>
       <description>from Bio import SeqIO def pdb2fasta(pdb_file, fasta_file, HEADER=None): with open(pdb_file, &amp;#39;r&amp;#39;) as pdb_file: for record in SeqIO.parse(pdb_file, &amp;#39;pdb-atom&amp;#39;): if &amp;#39;?&amp;#39; in record.id: header = HEADER else: header = record.id with open(fasta_file, &amp;#39;w&amp;#39;) as fasta_file: fasta_file.write(&amp;#39;&amp;gt;&amp;#39; + header+&amp;#39;\n&amp;#39;) fasta_file.write(str(record.seq)) return record.seq </description>
     </item>
     <item>
@@ -156,17 +177,24 @@
     </item>
     <item>
       <title>read data</title>
-      <link>http://localhost:1313/posts/omics/readdata/</link>
+      <link>http://localhost:1313/posts/proteomics/readdata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/omics/readdata/</guid>
+      <guid>http://localhost:1313/posts/proteomics/readdata/</guid>
       <description>&#xD;read id and seq from .fasta&#xD;#&#xD;from Bio import SeqIO with open(&amp;#39;fa.fasta&amp;#39;) as fasta_file: identifiers, seq = [], [] for seq_record in SeqIO.parse(fasta_file, &amp;#39;fasta&amp;#39;): identifiers.append(seq_record.id) seq.append(&amp;#34;&amp;#34;.join(seq_record.seq)) fa_df = pd.DataFrame() fa_df[&amp;#34;seq&amp;#34;] = seq fa_df[&amp;#34;id&amp;#34;] = identifiers pandas read&#xD;#&#xD;pd.read_csv(&amp;#39;result.csv&amp;#39;, header=None, index_col=0) # index_col=False </description>
     </item>
     <item>
       <title>remove HETATOM from pdb format</title>
-      <link>http://localhost:1313/posts/omics/removehetatom/</link>
+      <link>http://localhost:1313/posts/proteomics/removehetatom/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/omics/removehetatom/</guid>
+      <guid>http://localhost:1313/posts/proteomics/removehetatom/</guid>
       <description>from Bio import PDB pdb = PDB.PDBParser().get_structure(&amp;#34;2gq1&amp;#34;, &amp;#34;FBP/2gq1.pdb&amp;#34;) class ResSelect(PDB.Select): def accept_residue(self, res): if res.id[0] != &amp;#34; &amp;#34;: #&amp;gt;= start_res and res.id[1] &amp;lt;= end_res and res.parent.id == chain_id: return False else: return True pdb_io = PDB.PDBIO() pdb_io.set_structure(pdb) pdb_io.save(&amp;#34;FBP/2gq1_no_HETATOM.pdb&amp;#34;, ResSelect()) </description>
+    </item>
+    <item>
+      <title>some criteria</title>
+      <link>http://localhost:1313/posts/proteomics/criteria/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/criteria/</guid>
+      <description></description>
     </item>
     <item>
       <title>Website via Hugo Book and deployed by Github Action</title>

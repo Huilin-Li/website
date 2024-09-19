@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52652&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="In my use case, firstly, I tried to de novo design binders. However, I found that designed binders are limited to proteins with only one helix. Then, I changed to design binders based on scaffolds. The design process and scripts I used a lot are as follows.
@@ -11,17 +11,17 @@ Three needed designing environments#Thanks a lot to the great work, RFdiffusio
 <meta property="og:description" content="In my use case, firstly, I tried to de novo design binders. However, I found that designed binders are limited to proteins with only one helix. Then, I changed to design binders based on scaffolds. The design process and scripts I used a lot are as follows.
 Three needed designing environments#Thanks a lot to the great work, RFdiffusion and ProteinMPNN-FastRelax, as well as AlphaFold2, who give us great ways to design proteins." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/docs/project/binderdesign/design/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:52652/docs/project/binderdesign/design/" /><meta property="article:section" content="docs" />
 
 
 
 <title>design binders via RFdiffusion and ProteinMPNN-FastRelax | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:1313/docs/project/binderdesign/design/">
+<link rel="canonical" href="http://localhost:52652/docs/project/binderdesign/design/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.fa2d1bbd5a2465592517d366333df9fa86a12a79a567594f95db1f22ab3de518.js" integrity="sha256-&#43;i0bvVokZVklF9NmMz35&#43;oahKnmlZ1lPldsfIqs95Rg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.92712093cf2376c8b422f0a9c3de296db6ecc43e27add7a5223e55d3db10556e.js" integrity="sha256-knEgk88jdsi0IvCpw94pbbbsxD4nrdelIj5V09sQVW4=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -197,8 +197,8 @@ https://github.com/alex-shpak/hugo-book
   </li>
   
   <li>
-    <a href="/posts/omics/"  >
-        omics
+    <a href="/posts/proteomics/"  >
+        proteomics
       </a>
   </li>
   
@@ -217,12 +217,6 @@ https://github.com/alex-shpak/hugo-book
   <li>
     <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
         Github
-      </a>
-  </li>
-  
-  <li>
-    <a href="https://gist.github.com/Huilin-Li"  target="_blank" rel="noopener">
-        GitHub Gist
       </a>
   </li>
   
@@ -387,12 +381,27 @@ Make sure you have high performance computating envrionment with CUDA, and you c
   <a class="anchor" href="#2-backbones-design-script-bbslm">#</a>
 </h3>
 <p>I use <em>array-job</em> to parallelly execute different <code>ppi.hotspot_res</code> arguments simultaneously. For example, I have 10 <code>ppi.hotspot_res</code> arguments to test, so my <code>paraID.txt</code> is like:</p>
-<center><figure><img src="../bioIMG/PARAid.PNG"
-         alt="my paraID.txt file" width="400"/><figcaption>
-            <p>my <code>paraID.txt</code> file</p>
+<center><figure >
+    
+      <img src="../bioIMG/PARAid.PNG" 
+      
+      alt="
+          my `paraID.txt` file
+      " />
+      
+      
+        <figcaption class="text-center">
+          
+          
+          <p class="mt-0">
+          my `paraID.txt` file
+          
+            
+          
+          </p> 
         </figcaption>
-</figure>
-</center>
+    
+  </figure></center>
 and I setup 10 jobs (<code>#SBATCH -a 1-10</code>) for each `ppi.hotspot_res`. Each `ppi.hotspot_res` will design <code>inference.num_designs=10000</code> binder backbones.
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-t" data-lang="t"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#SBATCH -q gpu-huge</span>
@@ -463,12 +472,16 @@ Now, our directories tree becomes:</p>
   <details>
 <summary><b>Add <code>ppi_scaffolds</code> argument in backbone name</b></summary>
 In <code>RFdiffusion/scripts/run_inference.py</code>, I modify some codes a little bit, so that, the backbone pdb file name will contain the `ppi_scaffolds` argument.
-<center><figure><img src="../bioIMG/mdf1.PNG" width="600"/>
-</figure>
-</center>
-<center><figure><img src="../bioIMG/mdf2.PNG" width="600"/>
-</figure>
-</center>
+<center><figure >
+<pre><code>  &lt;img src=&quot;../bioIMG/mdf1.PNG&quot; 
+   /&gt;
+</code></pre>
+  </figure></center>
+<center><figure >
+<pre><code>  &lt;img src=&quot;../bioIMG/mdf2.PNG&quot; 
+   /&gt;
+</code></pre>
+  </figure></center>
 Therefore, one of <code>inference.num_designs=10000</code> binder backbones for <code>ppi.hotspot_res=[A28-A25-A29-A26-A63]</code> argument is <code>A28-A25-A29-A26-A63_0.pdb</code>.
 </details>
 
@@ -482,9 +495,11 @@ Therefore, one of <code>inference.num_designs=10000</code> binder backbones for 
   <details>
 <summary><b>Perform a filtering step</b></summary>
 At this moment, we could perform a filtering step after we get all potential binder backbones. For example, I only want backbones (orange cross) in one side (green circle). We could remove other useless backbones, which can help a lot in reducing the computation stress.
-<center><figure><img src="../bioIMG/eg.png" width="400"/>
-</figure>
-</center>
+<center><figure >
+<pre><code>  &lt;img src=&quot;../bioIMG/eg.png&quot; 
+   /&gt;
+</code></pre>
+  </figure></center>
 </details>
 
 </blockquote>

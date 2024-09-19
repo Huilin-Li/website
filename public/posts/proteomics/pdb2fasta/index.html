@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52652&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="from Bio import SeqIO def pdb2fasta(pdb_file, fasta_file, HEADER=None): with open(pdb_file, &#39;r&#39;) as pdb_file: for record in SeqIO.parse(pdb_file, &#39;pdb-atom&#39;): if &#39;?&#39; in record.id: header = HEADER else: header = record.id with open(fasta_file, &#39;w&#39;) as fasta_file: fasta_file.write(&#39;&gt;&#39; &#43; header&#43;&#39;\n&#39;) fasta_file.write(str(record.seq)) return record.seq ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
-<meta property="og:description" content="" />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="pdb 2 fasta" />
+<meta property="og:description" content="from Bio import SeqIO def pdb2fasta(pdb_file, fasta_file, HEADER=None): with open(pdb_file, &#39;r&#39;) as pdb_file: for record in SeqIO.parse(pdb_file, &#39;pdb-atom&#39;): if &#39;?&#39; in record.id: header = HEADER else: header = record.id with open(fasta_file, &#39;w&#39;) as fasta_file: fasta_file.write(&#39;&gt;&#39; &#43; header&#43;&#39;\n&#39;) fasta_file.write(str(record.seq)) return record.seq " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/proteomics/pdb2fasta/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:52652/posts/proteomics/pdb2fasta/" /><meta property="article:section" content="posts" />
 
 
 
-<title>Pdb2fasta | Huilin Li</title>
+<title>pdb 2 fasta | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:1313/posts/proteomics/pdb2fasta/">
+<link rel="canonical" href="http://localhost:52652/posts/proteomics/pdb2fasta/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.627effcd1d3b0286af36ff75998a51f99b66d7aecf4a304c3f9f697283d865a8.js" integrity="sha256-Yn7/zR07AoavNv91mYpR&#43;Ztm167PSjBMP59pcoPYZag=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.92712093cf2376c8b422f0a9c3de296db6ecc43e27add7a5223e55d3db10556e.js" integrity="sha256-knEgk88jdsi0IvCpw94pbbbsxD4nrdelIj5V09sQVW4=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -219,12 +219,6 @@ https://github.com/alex-shpak/hugo-book
   </li>
   
   <li>
-    <a href="https://gist.github.com/Huilin-Li"  target="_blank" rel="noopener">
-        GitHub Gist
-      </a>
-  </li>
-  
-  <li>
     <a href="/links/"  >
         world
       </a>
@@ -263,7 +257,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Pdb2fasta</strong>
+  <strong>pdb 2 fasta</strong>
 
   <label for="toc-control">
     
@@ -290,7 +284,7 @@ https://github.com/alex-shpak/hugo-book
       
 <article class="markdown book-post">
   <h1>
-    <a href="/posts/proteomics/pdb2fasta/">Pdb2fasta</a>
+    <a href="/posts/proteomics/pdb2fasta/">pdb 2 fasta</a>
   </h1>
   
 
@@ -301,7 +295,20 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-</article>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> Bio <span style="color:#f92672">import</span> SeqIO
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pdb2fasta</span>(pdb_file, fasta_file, HEADER<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(pdb_file, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> pdb_file:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> record <span style="color:#f92672">in</span> SeqIO<span style="color:#f92672">.</span>parse(pdb_file, <span style="color:#e6db74">&#39;pdb-atom&#39;</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;?&#39;</span> <span style="color:#f92672">in</span> record<span style="color:#f92672">.</span>id:
+</span></span><span style="display:flex;"><span>                header <span style="color:#f92672">=</span> HEADER
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                header <span style="color:#f92672">=</span> record<span style="color:#f92672">.</span>id
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">with</span> open(fasta_file, <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> fasta_file:
+</span></span><span style="display:flex;"><span>                fasta_file<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;&gt;&#39;</span> <span style="color:#f92672">+</span> header<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>                fasta_file<span style="color:#f92672">.</span>write(str(record<span style="color:#f92672">.</span>seq))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> record<span style="color:#f92672">.</span>seq
+</span></span></code></pre></div></article>
  
       
 
@@ -325,6 +332,22 @@ https://github.com/alex-shpak/hugo-book
       </footer>
 
       
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="Huilin-Li/site-comment"
+        data-repo-id="R_kgDOL3ovHA"
+        data-category="General"
+        data-category-id="DIC_kwDOL3ovHM4CfKps"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script></div>
   
  
 

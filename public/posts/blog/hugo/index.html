@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52652&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.
@@ -11,17 +11,17 @@ SUMMARY#use themes as your own repositories insert and resize images center im
 <meta property="og:description" content="Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.
 SUMMARY#use themes as your own repositories insert and resize images center images add emoji add travel map Why my local website doesn&rsquo;t update after I update my markdown files? link pages and tiles Add Giscus comment in Hugo-book theme Remove git in themes, and use themes as your own repositories." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/blog/hugo/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:52652/posts/blog/hugo/" /><meta property="article:section" content="posts" />
 
 
 
 <title>Hugo commands | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:1313/posts/blog/hugo/">
+<link rel="canonical" href="http://localhost:52652/posts/blog/hugo/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.fa2d1bbd5a2465592517d366333df9fa86a12a79a567594f95db1f22ab3de518.js" integrity="sha256-&#43;i0bvVokZVklF9NmMz35&#43;oahKnmlZ1lPldsfIqs95Rg=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.92712093cf2376c8b422f0a9c3de296db6ecc43e27add7a5223e55d3db10556e.js" integrity="sha256-knEgk88jdsi0IvCpw94pbbbsxD4nrdelIj5V09sQVW4=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -197,8 +197,8 @@ https://github.com/alex-shpak/hugo-book
   </li>
   
   <li>
-    <a href="/posts/omics/"  >
-        omics
+    <a href="/posts/proteomics/"  >
+        proteomics
       </a>
   </li>
   
@@ -217,12 +217,6 @@ https://github.com/alex-shpak/hugo-book
   <li>
     <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
         Github
-      </a>
-  </li>
-  
-  <li>
-    <a href="https://gist.github.com/Huilin-Li"  target="_blank" rel="noopener">
-        GitHub Gist
       </a>
   </li>
   
@@ -338,10 +332,15 @@ https://github.com/alex-shpak/hugo-book
 <li>
   <a href="#Giscus">Add Giscus comment in Hugo-book theme</a></li>
 </ul>
-<center><figure><img src="../images/mona.png"
-         alt=" "/>
-</figure>
-</center>
+<center><figure >
+    
+      <img src="../images/mona.png" 
+      
+      alt=" 
+      " />
+      
+      
+  </figure></center>
 <h2 id="git">
   Remove git in themes, and use themes as your own repositories.
   <a class="anchor" href="#git">#</a>
@@ -362,10 +361,15 @@ https://github.com/alex-shpak/hugo-book
     │           Nice.png
 </code></pre><p>In <code>hugo.md</code> file, we add Nice.png and scale it by</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span><span style="color:#75715e">{{</span><span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">figure</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../images/Nice.png&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;400&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34; &#34;</span>  <span style="color:#f92672">&gt;</span><span style="color:#75715e">}}</span>
-</span></span></code></pre></div><figure><img src="../images/Nice.png"
-         alt=" " width="400"/>
-</figure>
-
+</span></span></code></pre></div><figure >
+    
+      <img src="../images/Nice.png" 
+      
+      alt=" 
+      " />
+      
+      
+  </figure>
 <blockquote class="book-hint info">
   <p><strong>Why we need to add <code>../</code> in front of <code>images</code> folder, altough <code>hugo.md</code> file and <code>images</code> folder are at the same level?</strong></p>
 <p>Because Hugo system sees <code>hugo.md</code> as a foler too. However, Hugo system sees <code>_index.md</code> as a file! Therefore, If we want to insert iamges in <code>_index.md</code> file, the command will be like:</p>
@@ -402,9 +406,13 @@ https://github.com/alex-shpak/hugo-book
 <blockquote class="book-hint info">
   <p><strong>NOTE:</strong></p>
 <p>In <code>{ {&lt; openstreetmap mapName=&quot;&lt;your map name&gt;&quot; &gt;} }</code>, the <code>&lt;your map name&gt;</code> is not the name you give to your map, but the name in the website link of your map. For example, I created a map whose name is <strong>Travel</strong>, I need to use <strong>travel_1036974</strong> in the hugo shortcode.</p>
-<figure><img src="../images/map.jpeg"
-         alt="umap" width="400"/>
-</figure>
+<figure >
+<pre><code>  &lt;img src=&quot;../images/map.jpeg&quot; 
+  
+  alt=&quot;umap
+  &quot; /&gt;
+</code></pre>
+  </figure>
 
 </blockquote>
 </p>
@@ -435,27 +443,47 @@ In <code>page.md</code> file, add an anchor:</p>
   <a href="https://github.com/apps/giscus">Install the giscus app</a></li>
 </ol>
 <p>For example,</p>
-<center><figure><img src="../images/giscus1.PNG"
-         alt=" " width="400"/>
-</figure>
-</center>
+<center><figure >
+    
+      <img src="../images/giscus1.PNG" 
+      
+      alt=" 
+      " />
+      
+      
+  </figure></center>
 <ol start="4">
 <li>Configure giscus codeblock. Go to 
   <a href="https://giscus.app/">Giscus App</a>, and get the anable Giscus.</li>
 </ol>
-<center><figure><img src="../images/giscus2.png"
-         alt=" " width="500"/>
-</figure>
-</center>
-<center><figure><img src="../images/giscus3.png"
-         alt=" " width="600"/>
-</figure>
-</center>
+<center><figure >
+    
+      <img src="../images/giscus2.png" 
+      
+      alt=" 
+      " />
+      
+      
+  </figure></center>
+<center><figure >
+    
+      <img src="../images/giscus3.png" 
+      
+      alt=" 
+      " />
+      
+      
+  </figure></center>
 5. Add the <code>script</code> to <code>themes\hugo-book\layouts\partials\docs\comments.html</code>, like this
-<center><figure><img src="../images/giscus4.png"
-         alt=" " width="600"/>
-</figure>
-</center>
+<center><figure >
+    
+      <img src="../images/giscus4.png" 
+      
+      alt=" 
+      " />
+      
+      
+  </figure></center>
 <ol start="6">
 <li><code>bookComments: false</code> controls whether you want to display comment in this page.</li>
 </ol>
