@@ -1,9 +1,9 @@
 ---
-title: contact
+title: Contact
 type: docs
 menu:
   after:
-    name: contact
+    name: Contact
     weight: 30
 bookToc: false
 bookComments: false

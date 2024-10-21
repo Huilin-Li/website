@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ML algorithm on Huilin Li</title>
-    <link>http://localhost:52652/posts/ml/</link>
-    <description>Recent content in ML algorithm on Huilin Li</description>
+    <title>Algorithms on Huilin Li</title>
+    <link>http://localhost:1313/posts/ml/</link>
+    <description>Recent content in Algorithms on Huilin Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:52652/posts/ml/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/posts/ml/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

@@ -1,5 +1,5 @@
 ---
-title: world
+title: World
 type: docs
 menu:
   after:

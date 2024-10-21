@@ -25,7 +25,7 @@ paginate = 100000
 
 [menu]
   [[menu.after]]
-    name= "random notes"
+    name= "Notes"
     url= "https://huilin-li.github.io/mybook/"
     weight=6
   [[menu.after]]

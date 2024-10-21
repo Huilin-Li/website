@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52652&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="unzip compressed files into a new directory#gz_file = os.path.join(root, file) out_file = &#34;new_path/&#34; &#43; file with gzip.open(gz_file,&#34;rb&#34;) as f_in, open(out_file,&#34;wb&#34;) as f_out: shutil.copyfileobj(f_in, f_out) ">
+<meta name="description" content="unzip compressed files into a new directory#gz_file = os.path.join(root, file) out_file = &#34;new_path/&#34; &#43; file with gzip.open(gz_file,&#34;rb&#34;) as f_in, open(out_file,&#34;wb&#34;) as f_out: shutil.copyfileobj(f_in, f_out) copy and move#import shutil shutil.copyfile(&#34;old_path/file.txt&#34;, &#34;new_path/file.txt&#34;) ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="commonly used python codes" />
-<meta property="og:description" content="unzip compressed files into a new directory#gz_file = os.path.join(root, file) out_file = &#34;new_path/&#34; &#43; file with gzip.open(gz_file,&#34;rb&#34;) as f_in, open(out_file,&#34;wb&#34;) as f_out: shutil.copyfileobj(f_in, f_out) " />
+<meta property="og:description" content="unzip compressed files into a new directory#gz_file = os.path.join(root, file) out_file = &#34;new_path/&#34; &#43; file with gzip.open(gz_file,&#34;rb&#34;) as f_in, open(out_file,&#34;wb&#34;) as f_out: shutil.copyfileobj(f_in, f_out) copy and move#import shutil shutil.copyfile(&#34;old_path/file.txt&#34;, &#34;new_path/file.txt&#34;) " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:52652/posts/proteomics/pythonblocks/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:1313/posts/proteomics/pythonblocks/" /><meta property="article:section" content="posts" />
 
 
 
 <title>commonly used python codes | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:52652/posts/proteomics/pythonblocks/">
+<link rel="canonical" href="http://localhost:1313/posts/proteomics/pythonblocks/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.92712093cf2376c8b422f0a9c3de296db6ecc43e27add7a5223e55d3db10556e.js" integrity="sha256-knEgk88jdsi0IvCpw94pbbbsxD4nrdelIj5V09sQVW4=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.1abda060eb6834e7b67530e78e9652973fa5bbb0402ba0c8e3d0361a467fa360.js" integrity="sha256-Gr2gYOtoNOe2dTDnjpZSlz&#43;lu7BAK6DI49A2GkZ/o2A=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -75,7 +75,7 @@ https://github.com/alex-shpak/hugo-book
   
     <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
     <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
-      <a role="button" class="">project</a>
+      <a role="button" class="">Project</a>
     </label>
   
 
@@ -190,25 +190,25 @@ https://github.com/alex-shpak/hugo-book
   
   <li>
     <a href="/posts/ml/"  >
-        ML algorithm
+        Algorithms
       </a>
   </li>
   
   <li>
     <a href="/posts/proteomics/"  >
-        proteomics
+        Proteomics
       </a>
   </li>
   
   <li>
     <a href="/posts/blog/"  >
-        blog
+        Blog
       </a>
   </li>
   
   <li>
     <a href="https://huilin-li.github.io/mybook/"  target="_blank" rel="noopener">
-        random notes
+        Notes
       </a>
   </li>
   
@@ -220,13 +220,13 @@ https://github.com/alex-shpak/hugo-book
   
   <li>
     <a href="/links/"  >
-        world
+        World
       </a>
   </li>
   
   <li>
     <a href="/tools/"  >
-        contact
+        Contact
       </a>
   </li>
   
@@ -276,6 +276,7 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#unzip-compressed-files-into-a-new-directory">unzip compressed files into a new directory</a></li>
+        <li><a href="#copy-and-move">copy and move</a></li>
       </ul>
     </li>
   </ul>
@@ -311,6 +312,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>out_file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;new_path/&#34;</span> <span style="color:#f92672">+</span> file
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> gzip<span style="color:#f92672">.</span>open(gz_file,<span style="color:#e6db74">&#34;rb&#34;</span>) <span style="color:#66d9ef">as</span> f_in, open(out_file,<span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> f_out:
 </span></span><span style="display:flex;"><span>    shutil<span style="color:#f92672">.</span>copyfileobj(f_in, f_out)
+</span></span></code></pre></div><h3 id="copy-and-move">
+  copy and move
+  <a class="anchor" href="#copy-and-move">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> shutil
+</span></span><span style="display:flex;"><span>shutil<span style="color:#f92672">.</span>copyfile(<span style="color:#e6db74">&#34;old_path/file.txt&#34;</span>, <span style="color:#e6db74">&#34;new_path/file.txt&#34;</span>)
 </span></span></code></pre></div></article>
  
       
@@ -367,6 +374,7 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#unzip-compressed-files-into-a-new-directory">unzip compressed files into a new directory</a></li>
+        <li><a href="#copy-and-move">copy and move</a></li>
       </ul>
     </li>
   </ul>

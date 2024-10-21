@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=52652&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="from Bio import PDB class rm_dna_rna_O(PDB.Select): def accept_residue(self, res): if (len(res.get_resname()) &lt;3) or (res.id[0] != &#34; &#34;): return False else: return True if __name__==&#34;__main__&#34;: for pdbfile_path in glob.glob(&#34;/path/PDBDB/*.pdb&#34;): print(pdbfile_path, end=&#34; &#34;) name = pdbfile_path.split(&#34;/&#34;)[-1] pdb = PDB.PDBParser().get_structure(name, pdbfile_path) pdb_io = PDB.PDBIO() pdb_io.set_structure(pdb) pdb_io.save(&#34;/path/PDBDB_no_drna/&#34;&#43;name, rm_dna_rna_O()) print(&#39;-- Done&#39;) ">
@@ -9,17 +9,17 @@
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="remove DNA/RNA and O from pdb format" />
 <meta property="og:description" content="from Bio import PDB class rm_dna_rna_O(PDB.Select): def accept_residue(self, res): if (len(res.get_resname()) &lt;3) or (res.id[0] != &#34; &#34;): return False else: return True if __name__==&#34;__main__&#34;: for pdbfile_path in glob.glob(&#34;/path/PDBDB/*.pdb&#34;): print(pdbfile_path, end=&#34; &#34;) name = pdbfile_path.split(&#34;/&#34;)[-1] pdb = PDB.PDBParser().get_structure(name, pdbfile_path) pdb_io = PDB.PDBIO() pdb_io.set_structure(pdb) pdb_io.save(&#34;/path/PDBDB_no_drna/&#34;&#43;name, rm_dna_rna_O()) print(&#39;-- Done&#39;) " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:52652/posts/proteomics/removedrna/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:1313/posts/proteomics/removedrna/" /><meta property="article:section" content="posts" />
 
 
 
 <title>remove DNA/RNA and O from pdb format | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:52652/posts/proteomics/removedrna/">
+<link rel="canonical" href="http://localhost:1313/posts/proteomics/removedrna/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.92712093cf2376c8b422f0a9c3de296db6ecc43e27add7a5223e55d3db10556e.js" integrity="sha256-knEgk88jdsi0IvCpw94pbbbsxD4nrdelIj5V09sQVW4=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.1abda060eb6834e7b67530e78e9652973fa5bbb0402ba0c8e3d0361a467fa360.js" integrity="sha256-Gr2gYOtoNOe2dTDnjpZSlz&#43;lu7BAK6DI49A2GkZ/o2A=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -75,7 +75,7 @@ https://github.com/alex-shpak/hugo-book
   
     <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
     <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
-      <a role="button" class="">project</a>
+      <a role="button" class="">Project</a>
     </label>
   
 
@@ -190,25 +190,25 @@ https://github.com/alex-shpak/hugo-book
   
   <li>
     <a href="/posts/ml/"  >
-        ML algorithm
+        Algorithms
       </a>
   </li>
   
   <li>
     <a href="/posts/proteomics/"  >
-        proteomics
+        Proteomics
       </a>
   </li>
   
   <li>
     <a href="/posts/blog/"  >
-        blog
+        Blog
       </a>
   </li>
   
   <li>
     <a href="https://huilin-li.github.io/mybook/"  target="_blank" rel="noopener">
-        random notes
+        Notes
       </a>
   </li>
   
@@ -220,13 +220,13 @@ https://github.com/alex-shpak/hugo-book
   
   <li>
     <a href="/links/"  >
-        world
+        World
       </a>
   </li>
   
   <li>
     <a href="/tools/"  >
-        contact
+        Contact
       </a>
   </li>
   

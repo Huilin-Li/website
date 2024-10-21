@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="I want to use its Tracebacks functions, however, this function has not been involved in Python version. Therefore, I am exploring its C usage.
+installation (&ldquo;building from a git clone&rdquo;)#Installation instructions on the parasail Githubstraightforward steps:
+cd /storage/lihuilin/ git clone https://github.com/jeffdaily/parasail cd parasail autoreconf -fi outputlibtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, &#39;build-aux&#39;.libtoolize: copying file &#39;build-aux/ltmain.sh&#39;libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, &#39;m4&#39;.libtoolize: copying file &#39;m4/libtool.m4&#39;libtoolize: copying file &#39;m4/ltoptions.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="parasail in C usage (straightforward)" />
+<meta property="og:description" content="I want to use its Tracebacks functions, however, this function has not been involved in Python version. Therefore, I am exploring its C usage.
+installation (&ldquo;building from a git clone&rdquo;)#Installation instructions on the parasail Githubstraightforward steps:
+cd /storage/lihuilin/ git clone https://github.com/jeffdaily/parasail cd parasail autoreconf -fi outputlibtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, &#39;build-aux&#39;.libtoolize: copying file &#39;build-aux/ltmain.sh&#39;libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, &#39;m4&#39;.libtoolize: copying file &#39;m4/libtool.m4&#39;libtoolize: copying file &#39;m4/ltoptions." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/proteomics/parasailc/" /><meta property="article:section" content="posts" />
+
+
+
+<title>parasail in C usage (straightforward) | Huilin Li</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/logo.png" >
+<link rel="canonical" href="http://localhost:1313/posts/proteomics/parasailc/">
+<link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.1abda060eb6834e7b67530e78e9652973fa5bbb0402ba0c8e3d0361a467fa360.js" integrity="sha256-Gr2gYOtoNOe2dTDnjpZSlz&#43;lu7BAK6DI49A2GkZ/o2A=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Huilin Li</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bc4d9392f5af16481cccf0c311076888" class="toggle"  />
+    <label for="section-bc4d9392f5af16481cccf0c311076888" class="flex justify-between">
+      <a role="button" class="">Project</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6b2297e97d707e7ee14411430da62d58" class="toggle"  />
+    <label for="section-6b2297e97d707e7ee14411430da62d58" class="flex justify-between">
+      <a role="button" class="">Binder Design</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/truncation/" class="">truncation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/design/" class="">design binders via RFdiffusion and ProteinMPNN-FastRelax</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/pae_score/" class="">pae_interaction score</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/filtering/" class="">backbones filtering</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/project/binderdesign/notes/" class="">notes</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/ml/"  >
+        Algorithms
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/proteomics/"  >
+        Proteomics
+      </a>
+  </li>
+  
+  <li>
+    <a href="/posts/blog/"  >
+        Blog
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://huilin-li.github.io/mybook/"  target="_blank" rel="noopener">
+        Notes
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="/links/"  >
+        World
+      </a>
+  </li>
+  
+  <li>
+    <a href="/tools/"  >
+        Contact
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>parasail in C usage (straightforward)</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#installation-building-from-a-git-clone">installation (&ldquo;building from a git clone&rdquo;)</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/proteomics/parasailc/">parasail in C usage (straightforward)</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<p>I want to use its <strong>Tracebacks</strong> functions, however, this function has not been involved in Python version. Therefore, I am exploring its C usage.</p>
+<h2 id="installation-building-from-a-git-clone">
+  installation (&ldquo;building from a git clone&rdquo;)
+  <a class="anchor" href="#installation-building-from-a-git-clone">#</a>
+</h2>
+<figure >
+    
+      <img src="../img/parasailC.png" 
+       />
+      
+      
+        <figcaption class="text-center">
+          
+          <h5>Installation instructions on the parasail Github</h5>
+          
+        </figcaption>
+    
+  </figure>
+<p><strong>straightforward steps:</strong></p>
+<ol>
+<li><code>cd /storage/lihuilin/</code></li>
+<li><code>git clone https://github.com/jeffdaily/parasail</code></li>
+<li><code>cd parasail</code></li>
+<li><code>autoreconf -fi</code></li>
+</ol>
+<details>
+  <summary><i>output</i></summary>
+<pre tabindex="0"><code>libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, &#39;build-aux&#39;.
+libtoolize: copying file &#39;build-aux/ltmain.sh&#39;
+libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, &#39;m4&#39;.
+libtoolize: copying file &#39;m4/libtool.m4&#39;
+libtoolize: copying file &#39;m4/ltoptions.m4&#39;
+libtoolize: copying file &#39;m4/ltsugar.m4&#39;
+libtoolize: copying file &#39;m4/ltversion.m4&#39;
+libtoolize: copying file &#39;m4/lt~obsolete.m4&#39;
+configure.ac:109: installing &#39;build-aux/compile&#39;
+configure.ac:78: installing &#39;build-aux/config.guess&#39;
+configure.ac:78: installing &#39;build-aux/config.sub&#39;
+configure.ac:70: installing &#39;build-aux/install-sh&#39;
+configure.ac:70: installing &#39;build-aux/missing&#39;
+Makefile.am: installing &#39;build-aux/depcomp&#39;
+parallel-tests: installing &#39;build-aux/test-driver&#39;
+</code></pre></details>
+<ol start="5">
+<li><code>mkdir -p /storage/lihuilin/parasail/local</code></li>
+<li><code>./configure --prefix=/storage/lihuilin/parasail/local/parasail</code></li>
+</ol>
+<details>
+  <summary><i>output</i></summary>
+<pre tabindex="0"><code>... ...
+-=-=-=-=-=-=-=-=-=-= Configuration Complete =-=-=-=-=-=-=-=-=-=-=-
+
+  Configuration summary :
+
+    parasail version : .................... 2.6.2
+
+    Host CPU : ............................ x86_64
+    Host Vendor : ......................... pc
+    Host OS : ............................. linux-gnu
+
+  Toolchain :
+
+    CC : .................................. gcc (gnu, 8.3.1)
+    CXX : ................................. g++ (gnu, 8.3.1)
+
+  Flags :
+
+    CFLAGS : .............................. -g -O2
+    CXXFLAGS : ............................ -g -O2
+    CPPFLAGS : ............................
+    LDFLAGS : .............................
+    LIBS : ................................
+
+  Intrinsics :
+
+    SSE2 : ................................ auto (yes)
+    SSE2_CFLAGS : .........................
+
+    SSE4.1 : .............................. auto (yes)
+    SSE41_CFLAGS : ........................ -msse4.1
+
+    AVX2 : ................................ auto (yes)
+    AVX2_CFLAGS : ......................... -mavx2
+
+    AVX512 : .............................. auto (yes)
+    AVX512F_CFLAGS : ...................... -mavx512f
+    AVX512BW_CFLAGS : ..................... -mavx512bw
+    AVX512VBMI_CFLAGS : ................... -mavx512vbmi
+
+    Altivec : ............................. auto (no)
+    ALTIVEC_CFLAGS : ...................... not supported
+
+    ARM NEON : ............................ auto (no)
+    NEON_CFLAGS : ......................... not supported
+    EXTRA_NEON_CFLAGS : ................... -fopenmp-simd -DSIMDE_ENABLE_OPENMP
+
+  Dependencies :
+
+    OPENMP_CFLAGS : ....................... -fopenmp
+    OPENMP_CXXFLAGS : ..................... -fopenmp
+
+    CLOCK_LIBS : ..........................
+    MATH_LIBS : ........................... -lm
+    Z_CFLAGS : ............................
+    Z_LIBS : .............................. -lz
+
+  Installation directories :
+
+    Program directory : ................... /storage/lihuilin/parasail/local/parasail/bin
+    Library directory : ................... /storage/lihuilin/parasail/local/parasail/lib
+    Include directory : ................... /storage/lihuilin/parasail/local/parasail/include
+    Pkgconfig directory : ................. /storage/lihuilin/parasail/local/parasail/lib/pkgconfig
+
+Compiling some other packages against parasail may require
+the addition of &#39;/storage/lihuilin/parasail/local/parasail/lib/pkgconfig&#39; to the
+PKG_CONFIG_PATH environment variable.
+</code></pre></details>
+<ol start="7">
+<li><code>make</code></li>
+</ol>
+<details>
+  <summary><i>output</i></summary>
+<pre tabindex="0"><code>make  all-am
+make[1]: Entering directory &#39;/storage/lihuilin/parasail&#39;
+... ...
+make[1]: Leaving directory &#39;/storage/lihuilin/parasail&#39;
+</code></pre></details>
+<ol start="8">
+<li><code>make install</code></li>
+</ol>
+<details>
+  <summary><i>output</i></summary>
+<pre tabindex="0"><code>make[1]: Entering directory &#39;/storage/lihuilin/parasail&#39;
+ /usr/bin/mkdir -p &#39;/storage/lihuilin/parasail/local/parasail/lib&#39;
+ /bin/sh ./libtool   --mode=install /usr/bin/install -c   libparasail.la &#39;/storage/lihuilin/parasail/local/parasail/lib&#39;
+libtool: install: /usr/bin/install -c .libs/libparasail.so.8.1.2 /storage/lihuilin/parasail/local/parasail/lib/libparasail.so.8.1.2
+libtool: install: (cd /storage/lihuilin/parasail/local/parasail/lib &amp;&amp; { ln -s -f libparasail.so.8.1.2 libparasail.so.8 || { rm -f libparasail.so.8 &amp;&amp; ln -s libparasail.so.8.1.2 libparasail.so.8; }; })
+libtool: install: (cd /storage/lihuilin/parasail/local/parasail/lib &amp;&amp; { ln -s -f libparasail.so.8.1.2 libparasail.so || { rm -f libparasail.so &amp;&amp; ln -s libparasail.so.8.1.2 libparasail.so; }; })
+libtool: install: /usr/bin/install -c .libs/libparasail.lai /storage/lihuilin/parasail/local/parasail/lib/libparasail.la
+libtool: install: /usr/bin/install -c .libs/libparasail.a /storage/lihuilin/parasail/local/parasail/lib/libparasail.a
+libtool: install: chmod 644 /storage/lihuilin/parasail/local/parasail/lib/libparasail.a
+libtool: install: ranlib /storage/lihuilin/parasail/local/parasail/lib/libparasail.a
+libtool: finish: PATH=&#34;/home/lihuilin/miniconda3/condabin:/home/lihuilin/.local/bin:/home/lihuilin/bin:/opt/slurm/sbin:/opt/slurm/bin:/soft/modules/modules-4.7.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/lihuilin/software/silent_tools:/sbin&#34; ldconfig -n /storage/lihuilin/parasail/local/parasail/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /storage/lihuilin/parasail/local/parasail/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the &#39;-LLIBDIR&#39;
+flag during linking and do at least one of the following:
+   - add LIBDIR to the &#39;LD_LIBRARY_PATH&#39; environment variable
+     during execution
+   - add LIBDIR to the &#39;LD_RUN_PATH&#39; environment variable
+     during linking
+   - use the &#39;-Wl,-rpath -Wl,LIBDIR&#39; linker flag
+   - have your system administrator add LIBDIR to &#39;/etc/ld.so.conf&#39;
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+ /usr/bin/mkdir -p &#39;/storage/lihuilin/parasail/local/parasail/bin&#39;
+  /bin/sh ./libtool   --mode=install /usr/bin/install -c apps/parasail_aligner apps/parasail_stats &#39;/storage/lihuilin/parasail/local/parasail/bin&#39;
+libtool: install: /usr/bin/install -c apps/.libs/parasail_aligner /storage/lihuilin/parasail/local/parasail/bin/parasail_aligner
+libtool: install: /usr/bin/install -c apps/.libs/parasail_stats /storage/lihuilin/parasail/local/parasail/bin/parasail_stats
+ /usr/bin/mkdir -p &#39;/storage/lihuilin/parasail/local/parasail/include&#39;
+ /usr/bin/install -c -m 644 parasail.h &#39;/storage/lihuilin/parasail/local/parasail/include&#39;
+ /usr/bin/mkdir -p &#39;/storage/lihuilin/parasail/local/parasail/include&#39;
+ /usr/bin/mkdir -p &#39;/storage/lihuilin/parasail/local/parasail/include/parasail/matrices&#39;
+ /usr/bin/install -c -m 644  parasail/matrices/blosum100.h parasail/matrices/blosum30.h parasail/matrices/blosum35.h parasail/matrices/blosum40.h parasail/matrices/blosum45.h parasail/matrices/blosum50.h parasail/matrices/blosum55.h parasail/matrices/blosum60.h parasail/matrices/blosum62.h parasail/matrices/blosum65.h parasail/matrices/blosum70.h parasail/matrices/blosum75.h parasail/matrices/blosum80.h parasail/matrices/blosum85.h parasail/matrices/blosum90.h parasail/matrices/blosum_map.h parasail/matrices/blosumn.h parasail/matrices/dnafull.h parasail/matrices/nuc44.h parasail/matrices/pam10.h parasail/matrices/pam100.h parasail/matrices/pam110.h parasail/matrices/pam120.h parasail/matrices/pam130.h parasail/matrices/pam140.h parasail/matrices/pam150.h parasail/matrices/pam160.h parasail/matrices/pam170.h parasail/matrices/pam180.h parasail/matrices/pam190.h parasail/matrices/pam20.h parasail/matrices/pam200.h parasail/matrices/pam210.h parasail/matrices/pam220.h parasail/matrices/pam230.h parasail/matrices/pam240.h parasail/matrices/pam250.h parasail/matrices/pam260.h parasail/matrices/pam270.h parasail/matrices/pam280.h &#39;/storage/lihuilin/parasail/local/parasail/include/parasail/matrices&#39;
+ /usr/bin/mkdir -p &#39;/storage/lihuilin/parasail/local/parasail/include/parasail/matrices&#39;
+ /usr/bin/install -c -m 644  parasail/matrices/pam290.h parasail/matrices/pam30.h parasail/matrices/pam300.h parasail/matrices/pam310.h parasail/matrices/pam320.h parasail/matrices/pam330.h parasail/matrices/pam340.h parasail/matrices/pam350.h parasail/matrices/pam360.h parasail/matrices/pam370.h parasail/matrices/pam380.h parasail/matrices/pam390.h parasail/matrices/pam40.h parasail/matrices/pam400.h parasail/matrices/pam410.h parasail/matrices/pam420.h parasail/matrices/pam430.h parasail/matrices/pam440.h parasail/matrices/pam450.h parasail/matrices/pam460.h parasail/matrices/pam470.h parasail/matrices/pam480.h parasail/matrices/pam490.h parasail/matrices/pam50.h parasail/matrices/pam500.h parasail/matrices/pam60.h parasail/matrices/pam70.h parasail/matrices/pam80.h parasail/matrices/pam90.h parasail/matrices/pam_map.h &#39;/storage/lihuilin/parasail/local/parasail/include/parasail/matrices&#39;
+ /usr/bin/mkdir -p &#39;/storage/lihuilin/parasail/local/parasail/include/parasail&#39;
+ /usr/bin/install -c -m 644  parasail/cpuid.h parasail/io.h parasail/function_lookup.h parasail/matrix_lookup.h &#39;/storage/lihuilin/parasail/local/parasail/include/parasail&#39;
+ /usr/bin/mkdir -p &#39;/storage/lihuilin/parasail/local/parasail/lib/pkgconfig&#39;
+ /usr/bin/install -c -m 644 parasail-1.pc &#39;/storage/lihuilin/parasail/local/parasail/lib/pkgconfig&#39;
+make[1]: Leaving directory &#39;/storage/lihuilin/parasail&#39;
+</code></pre></details>
+<p>./parasail_aligner -f myseqs.fasta -O EMBOSS -a sw_trace_scan_16</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><script src="https://giscus.app/client.js"
+        data-repo="Huilin-Li/site-comment"
+        data-repo-id="R_kgDOL3ovHA"
+        data-category="General"
+        data-category-id="DIC_kwDOL3ovHM4CfKps"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script></div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#installation-building-from-a-git-clone">installation (&ldquo;building from a git clone&rdquo;)</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

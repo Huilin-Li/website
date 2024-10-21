@@ -64,13 +64,6 @@
       <description> RFdiffusion is better at designing binders for target proteins that are already existing or have been verified by experiments. If the target protein is predcited by AI models, and has not been verified by experiments, the probability of designing a potential binder for this target will be reduced. The number of designed binders should be huge, in order to pick potential candidates as many as possible. </description>
     </item>
     <item>
-      <title></title>
-      <link>http://localhost:1313/posts/proteomics/removedrna/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/proteomics/removedrna/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>4 levels of protein structure</title>
       <link>http://localhost:1313/posts/blog/proteinstruture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -96,14 +89,14 @@
       <link>http://localhost:1313/posts/proteomics/pythonblocks/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/pythonblocks/</guid>
-      <description>&#xD;unzip compressed files into a new directory&#xD;#&#xD;gz_file = os.path.join(root, file) out_file = &amp;#34;new_path/&amp;#34; + file with gzip.open(gz_file,&amp;#34;rb&amp;#34;) as f_in, open(out_file,&amp;#34;wb&amp;#34;) as f_out: shutil.copyfileobj(f_in, f_out) </description>
+      <description>&#xD;unzip compressed files into a new directory&#xD;#&#xD;gz_file = os.path.join(root, file) out_file = &amp;#34;new_path/&amp;#34; + file with gzip.open(gz_file,&amp;#34;rb&amp;#34;) as f_in, open(out_file,&amp;#34;wb&amp;#34;) as f_out: shutil.copyfileobj(f_in, f_out) copy and move&#xD;#&#xD;import shutil shutil.copyfile(&amp;#34;old_path/file.txt&amp;#34;, &amp;#34;new_path/file.txt&amp;#34;) </description>
     </item>
     <item>
       <title>commonly used Shell script and Command line, when working on large dataset in HPC</title>
       <link>http://localhost:1313/posts/proteomics/command/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/command/</guid>
-      <description>ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf myfolder.tar.gz myfolder cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &amp;#34;$f&amp;#34;; done cat *.fa &amp;gt; all_data.fa # concatenate multiple fasta files into one fasta file in command line for f in *.</description>
+      <description>ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf myfolder.tar.gz myfolder cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &amp;#34;$f&amp;#34;; done cat *.fa &amp;gt; all_data.fa # concatenate multiple fasta files into one fasta file in command line source ~/miniconda3/etc/profile.</description>
     </item>
     <item>
       <title>databases: PDB, Swiss-Prot</title>
@@ -141,6 +134,13 @@
       <description>&#xD;list files in a folder&#xD;#&#xD;import glob files = glob.glob(&amp;#39;CSV/*.csv&amp;#39;) # [&amp;#39;CSV\\x_109.csv&amp;#39;, &amp;#39;CSV\\x_116.csv&amp;#39;, &amp;#39;CSV\\x_121.csv&amp;#39;, ... ] #&#xD;</description>
     </item>
     <item>
+      <title>foldseek usage (straightforward)</title>
+      <link>http://localhost:1313/posts/proteomics/foldseek/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/foldseek/</guid>
+      <description>foldseek github Foldseek User Guide Installation: Conda installer (Linux and macOS)&#xD;#&#xD;conda install -c conda-forge -c bioconda foldseek Customize Database&#xD;#&#xD;folsseek createdb myDB_dir/ myDB&#xD;# myDB_dir has lots of pdb files foldseek easy-search&#xD;#&#xD;usage: foldseek easy-search &amp;lt;i:PDB|mmCIF[.gz]&amp;gt; ... &amp;lt;i:PDB|mmCIF[.gz]&amp;gt;|&amp;lt;i:stdin&amp;gt; &amp;lt;i:targetFastaFile[.gz]&amp;gt;|&amp;lt;i:targetDB&amp;gt; &amp;lt;o:alignmentFile&amp;gt; &amp;lt;tmpDir&amp;gt; [options]&#xD;By Martin Steinegger &amp;lt;martin.steinegger@snu.ac.kr&amp;gt;&#xD;options: prefilter:&#xD;--comp-bias-corr INT Correct for locally biased amino acid composition (range 0-1) [1]&#xD;--comp-bias-corr-scale FLOAT Correct for locally biased amino acid composition (range 0-1) [1.</description>
+    </item>
+    <item>
       <title>Hugo commands</title>
       <link>http://localhost:1313/posts/blog/hugo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -148,11 +148,25 @@
       <description>Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.&#xA;SUMMARY&#xD;#&#xD;use themes as your own repositories insert and resize images center images add emoji add travel map Why my local website doesn&amp;rsquo;t update after I update my markdown files? link pages and tiles Add Giscus comment in Hugo-book theme Remove git in themes, and use themes as your own repositories.</description>
     </item>
     <item>
+      <title>parasail in C usage (straightforward)</title>
+      <link>http://localhost:1313/posts/proteomics/parasailc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/parasailc/</guid>
+      <description>I want to use its Tracebacks functions, however, this function has not been involved in Python version. Therefore, I am exploring its C usage.&#xA;installation (&amp;ldquo;building from a git clone&amp;rdquo;)&#xD;#&#xD;Installation instructions on the parasail Github&#xD;straightforward steps:&#xA;cd /storage/lihuilin/ git clone https://github.com/jeffdaily/parasail cd parasail autoreconf -fi output&#xD;libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, &amp;#39;build-aux&amp;#39;.&#xD;libtoolize: copying file &amp;#39;build-aux/ltmain.sh&amp;#39;&#xD;libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, &amp;#39;m4&amp;#39;.&#xD;libtoolize: copying file &amp;#39;m4/libtool.m4&amp;#39;&#xD;libtoolize: copying file &amp;#39;m4/ltoptions.</description>
+    </item>
+    <item>
       <title>pdb 2 fasta</title>
       <link>http://localhost:1313/posts/proteomics/pdb2fasta/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/pdb2fasta/</guid>
       <description>from Bio import SeqIO def pdb2fasta(pdb_file, fasta_file, HEADER=None): with open(pdb_file, &amp;#39;r&amp;#39;) as pdb_file: for record in SeqIO.parse(pdb_file, &amp;#39;pdb-atom&amp;#39;): if &amp;#39;?&amp;#39; in record.id: header = HEADER else: header = record.id with open(fasta_file, &amp;#39;w&amp;#39;) as fasta_file: fasta_file.write(&amp;#39;&amp;gt;&amp;#39; + header+&amp;#39;\n&amp;#39;) fasta_file.write(str(record.seq)) return record.seq </description>
+    </item>
+    <item>
+      <title>pdb 2 pdbs of chains</title>
+      <link>http://localhost:1313/posts/proteomics/pdb2chains/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/pdb2chains/</guid>
+      <description>from Bio import PDB if __name__==&amp;#34;__main__&amp;#34;: for pdbfile_path in glob.glob(&amp;#34;/path/DB/pure_PDB/*.pdb&amp;#34;): name = pdbfile_path.split(&amp;#34;\\&amp;#34;)[-1].split(&amp;#34;.&amp;#34;)[0] print(name, end=&amp;#34; &amp;#34;) pdb = PDB.PDBParser().get_structure(name, pdbfile_path) pdb_io = PDB.PDBIO() pdb_chains = pdb.get_chains() for chain in pdb_chains: pdb_io.set_structure(chain) pdb_io.save(&amp;#34;/path/DB/pure_PDB_DB_by_Chain/&amp;#34; + pdb.get_id() + &amp;#34;_&amp;#34; + chain.get_id() + &amp;#34;.pdb&amp;#34;) print(&amp;#39;-- Done&amp;#39;) </description>
     </item>
     <item>
       <title>Plotly: Copy&amp;Paste Continuous and Discrete colors</title>
@@ -183,6 +197,13 @@
       <description>&#xD;read id and seq from .fasta&#xD;#&#xD;from Bio import SeqIO with open(&amp;#39;fa.fasta&amp;#39;) as fasta_file: identifiers, seq = [], [] for seq_record in SeqIO.parse(fasta_file, &amp;#39;fasta&amp;#39;): identifiers.append(seq_record.id) seq.append(&amp;#34;&amp;#34;.join(seq_record.seq)) fa_df = pd.DataFrame() fa_df[&amp;#34;seq&amp;#34;] = seq fa_df[&amp;#34;id&amp;#34;] = identifiers pandas read&#xD;#&#xD;pd.read_csv(&amp;#39;result.csv&amp;#39;, header=None, index_col=0) # index_col=False </description>
     </item>
     <item>
+      <title>remove DNA/RNA and O from pdb format</title>
+      <link>http://localhost:1313/posts/proteomics/removedrna/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/removedrna/</guid>
+      <description>from Bio import PDB class rm_dna_rna_O(PDB.Select): def accept_residue(self, res): if (len(res.get_resname()) &amp;lt;3) or (res.id[0] != &amp;#34; &amp;#34;): return False else: return True if __name__==&amp;#34;__main__&amp;#34;: for pdbfile_path in glob.glob(&amp;#34;/path/PDBDB/*.pdb&amp;#34;): print(pdbfile_path, end=&amp;#34; &amp;#34;) name = pdbfile_path.split(&amp;#34;/&amp;#34;)[-1] pdb = PDB.PDBParser().get_structure(name, pdbfile_path) pdb_io = PDB.PDBIO() pdb_io.set_structure(pdb) pdb_io.save(&amp;#34;/path/PDBDB_no_drna/&amp;#34;+name, rm_dna_rna_O()) print(&amp;#39;-- Done&amp;#39;) </description>
+    </item>
+    <item>
       <title>remove HETATOM from pdb format</title>
       <link>http://localhost:1313/posts/proteomics/removehetatom/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -190,11 +211,25 @@
       <description>from Bio import PDB pdb = PDB.PDBParser().get_structure(&amp;#34;2gq1&amp;#34;, &amp;#34;FBP/2gq1.pdb&amp;#34;) class ResSelect(PDB.Select): def accept_residue(self, res): if res.id[0] != &amp;#34; &amp;#34;: #&amp;gt;= start_res and res.id[1] &amp;lt;= end_res and res.parent.id == chain_id: return False else: return True pdb_io = PDB.PDBIO() pdb_io.set_structure(pdb) pdb_io.save(&amp;#34;FBP/2gq1_no_HETATOM.pdb&amp;#34;, ResSelect()) </description>
     </item>
     <item>
-      <title>some criteria</title>
-      <link>http://localhost:1313/posts/proteomics/criteria/</link>
+      <title>SeqIO.parse()</title>
+      <link>http://localhost:1313/posts/proteomics/seqio/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/proteomics/criteria/</guid>
+      <guid>http://localhost:1313/posts/proteomics/seqio/</guid>
+      <description>from Bio import SeqIO with open(&amp;#34;fa.fasta&amp;#34;) as fa: for record in SeqIO.parse(fa, &amp;#34;fasta&amp;#34;): ID = record.id seq = record.seq description = recrod.description </description>
+    </item>
+    <item>
+      <title>some criteria</title>
+      <link>http://localhost:1313/posts/proteomics/measure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/measure/</guid>
       <description></description>
+    </item>
+    <item>
+      <title>use unipressed.UniprotkbClient analysis UniProt(Swiss-Prot) DB</title>
+      <link>http://localhost:1313/posts/proteomics/uniprotana/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/uniprotana/</guid>
+      <description>We can reveal these information.&#xA;To minimize duplications between the UniProt Swiss-Prot database and the PDB database, I focused on downloading the structures of 513,805 entries from UniProt (Swiss-Prot) that are only available in the Alphafold Protein Structure Database. Therefore, I only need to download 4,274 entries&amp;rsquo; structures, because the remaining 509,531 entries&amp;rsquo; structures can be directly extracted from (Fig.2).&#xD;{&amp;#39;AFDB&amp;#39;: &amp;#39;hasAFDB&amp;#39;,&#xD;&amp;#39;PDB&amp;#39;: &amp;#39;no&amp;#39;,&#xD;&amp;#39;annotationScore&amp;#39;: 1.0,&#xD;&amp;#39;comments&amp;#39;: nan,&#xD;&amp;#39;entryAudit&amp;#39;: &amp;#34;{&amp;#39;firstPublicDate&amp;#39;: &amp;#39;1988-08-01&amp;#39;, &amp;#39;lastAnnotationUpdateDate&amp;#39;: &amp;#34;&#xD;&amp;#34;&amp;#39;2022-05-25&amp;#39;, &amp;#39;lastSequenceUpdateDate&amp;#39;: &amp;#39;1988-08-01&amp;#39;, &amp;#34;&#xD;&amp;#34;&amp;#39;entryVersion&amp;#39;: 36, &amp;#39;sequenceVersion&amp;#39;: 1}&amp;#34;,&#xD;&amp;#39;entryType&amp;#39;: &amp;#39;UniProtKB reviewed (Swiss-Prot)&amp;#39;,&#xD;&amp;#39;extraAttributes&amp;#39;: &amp;#34;{&amp;#39;countByFeatureType&amp;#39;: {&amp;#39;Chain&amp;#39;: 1}, &amp;#39;uniParcId&amp;#39;: &amp;#34;&#xD;&amp;#34;&amp;#39;UPI000013C2E9&amp;#39;}&amp;#34;,&#xD;&amp;#39;features&amp;#39;: &amp;#34;[{&amp;#39;type&amp;#39;: &amp;#39;Chain&amp;#39;, &amp;#39;location&amp;#39;: {&amp;#39;start&amp;#39;: {&amp;#39;value&amp;#39;: 1, &amp;#34;&#xD;&amp;#34;&amp;#39;modifier&amp;#39;: &amp;#39;EXACT&amp;#39;}, &amp;#39;end&amp;#39;: {&amp;#39;value&amp;#39;: 79, &amp;#39;modifier&amp;#39;: &amp;#34;&#xD;&amp;#34;&amp;#39;EXACT&amp;#39;}}, &amp;#39;description&amp;#39;: &amp;#39;Putative uncharacterized protein Z&amp;#39;, &amp;#34;&#xD;&amp;#34;&amp;#39;featureId&amp;#39;: &amp;#39;PRO_0000066556&amp;#39;}]&amp;#34;,&#xD;&amp;#39;geneLocations&amp;#39;: nan,&#xD;&amp;#39;genes&amp;#39;: nan,&#xD;&amp;#39;index&amp;#39;: 860,&#xD;&amp;#39;keywords&amp;#39;: &amp;#34;[{&amp;#39;id&amp;#39;: &amp;#39;KW-1185&amp;#39;, &amp;#39;category&amp;#39;: &amp;#39;Technical term&amp;#39;, &amp;#39;name&amp;#39;: &amp;#34;&#xD;&amp;#34;&amp;#39;Reference proteome&amp;#39;}]&amp;#34;,&#xD;&amp;#39;organism&amp;#39;: &amp;#34;{&amp;#39;scientificName&amp;#39;: &amp;#39;Ovis aries&amp;#39;, &amp;#39;commonName&amp;#39;: &amp;#39;Sheep&amp;#39;, &amp;#34;&#xD;&amp;#34;&amp;#39;taxonId&amp;#39;: 9940, &amp;#39;lineage&amp;#39;: [&amp;#39;Eukaryota&amp;#39;, &amp;#39;Metazoa&amp;#39;, &amp;#39;Chordata&amp;#39;, &amp;#34;&#xD;&amp;#34;&amp;#39;Craniata&amp;#39;, &amp;#39;Vertebrata&amp;#39;, &amp;#39;Euteleostomi&amp;#39;, &amp;#39;Mammalia&amp;#39;, &amp;#34;&#xD;&amp;#34;&amp;#39;Eutheria&amp;#39;, &amp;#39;Laurasiatheria&amp;#39;, &amp;#39;Artiodactyla&amp;#39;, &amp;#39;Ruminantia&amp;#39;, &amp;#34;&#xD;&amp;#34;&amp;#39;Pecora&amp;#39;, &amp;#39;Bovidae&amp;#39;, &amp;#39;Caprinae&amp;#39;, &amp;#39;Ovis&amp;#39;]}&amp;#34;,&#xD;&amp;#39;organismHosts&amp;#39;: nan,&#xD;&amp;#39;primaryAccession&amp;#39;: &amp;#39;P08105&amp;#39;,&#xD;&amp;#39;proteinDescription&amp;#39;: &amp;#34;{&amp;#39;recommendedName&amp;#39;: {&amp;#39;fullName&amp;#39;: {&amp;#39;value&amp;#39;: &amp;#39;Putative &amp;#34;&#xD;&amp;#34;uncharacterized protein Z&amp;#39;}}}&amp;#34;,&#xD;&amp;#39;proteinExistence&amp;#39;: &amp;#39;4: Predicted&amp;#39;,&#xD;&amp;#39;references&amp;#39;: &amp;#34;[{&amp;#39;referenceNumber&amp;#39;: 1, &amp;#39;citation&amp;#39;: {&amp;#39;id&amp;#39;: &amp;#39;6193483&amp;#39;, &amp;#34;&#xD;&amp;#34;&amp;#39;citationType&amp;#39;: &amp;#39;journal article&amp;#39;, &amp;#39;authors&amp;#39;: [&amp;#39;Powell B.</description>
     </item>
     <item>
       <title>Website via Hugo Book and deployed by Github Action</title>

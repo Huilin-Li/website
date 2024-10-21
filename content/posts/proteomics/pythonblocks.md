@@ -12,3 +12,8 @@ with gzip.open(gz_file,"rb") as f_in, open(out_file,"wb") as f_out:
     shutil.copyfileobj(f_in, f_out)
 ```
 
+### copy and move 
+```python
+import shutil
+shutil.copyfile("old_path/file.txt", "new_path/file.txt")
+```
