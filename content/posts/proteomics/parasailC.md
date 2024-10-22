@@ -177,5 +177,68 @@ make[1]: Leaving directory '/storage/lihuilin/parasail'
 ```
 </details>
 
+## usage
+1. `cd /storage/lihuilin/parasail/local/parasail/bin`
+```
+.
+├── myseqs.fasta
+├── parasail_aligner
+└── parasail_stats
+```
+`myseqs.fasta` is 
+```
+>sequence1
+CYAMYGSSTHLVLTLGDGVDGFTLDTNLGEFILTHPNLRIPPQKAIYSINEGPCDKKSPNGKLRLLYEAFPMAFLMEQAGGKAVNDRGERILDLVPSHIHDKSSIWLGSSGEIDKFLDHIGKSQ
+>sequence2
+IKFPNGVQKYIKFCQEEDKSTNRPYTSRYIGSLVADFHRNLLKGGIYLYPSTASHPDGKLRLLYECNPMAFLAEQAGGKASDGKERILDIIPETLHQRRSFFVGNDHMVEDVERFIREFPDA
+```
+2. In terminal, `./parasail_aligner -f myseqs.fasta -O EMBOSS -a sw_trace_scan_16`
+```
+sequence2           50 PSTASHPDGKLRLLYECNPMAFLAEQAGGKA-SDGKERILDIIPETLHQR      98
+                       |.....|:||||||||..|||||.||||||| :|..|||||::|..:|.:
+sequence1           53 PCDKKSPNGKLRLLYEAFPMAFLMEQAGGKAVNDRGERILDLVPSHIHDK     102
 
-./parasail_aligner -f myseqs.fasta -O EMBOSS -a sw_trace_scan_16
+sequence2           99 RSFFVGNDHMVEDVERFI     116
+                       .|.::|:.   .::::|:
+sequence1          103 SSIWLGSS---GEIDKFL     117
+
+Length: 68
+Identity:        33/68 (48.5%)
+Similarity:      47/68 (69.1%)
+Gaps:             4/68 ( 5.9%)
+Score: 162
+
+```
+## `./parasail_aligner -h`
+```
+
+usage: parasail_aligner [-a funcname] [-c cutoff] [-x] [-e gap_extend] [-o gap_open] [-m matrix] [-t threads] [-d] [-M match] [-X mismatch] [-k band size (for nw_banded)] [-l AOL] [-s SIM] [-i OS] [-v] [-V] -f file [-q query_file] [-g output_file] [-O output_format {EMBOSS,SAM,SAMH,SSW}] [-b batch_size] [-r memory_budget] [-C] [-A alphabet_aliases]
+
+Defaults:
+        funcname: sw_stats_striped_16
+          cutoff: 7, must be >= 1, exact match length cutoff
+              -x: if present, don't use suffix array filter
+      gap_extend: 1, must be >= 0
+        gap_open: 10, must be >= 0
+          matrix: blosum62
+              -d: if present, assume DNA alphabet ACGT
+           match: 1, must be >= 0
+        mismatch: 0, must be >= 0
+      threads: system-specific default, must be >= 1
+             AOL: 80, must be 0 <= AOL <= 100, percent alignment length
+             SIM: 40, must be 0 <= SIM <= 100, percent exact matches
+              OS: 30, must be 0 <= OS <= 100, percent optimal score
+                                              over self score
+              -v: verbose output, report input parameters and timing
+              -V: verbose memory output, report memory use
+            file: no default, must be in FASTA format
+      query_file: no default, must be in FASTA format
+     output_file: parasail.csv
+   output_format: no default, must be one of {EMBOSS,SAM,SAMH,SSW}
+      batch_size: 0 (calculate based on memory budget),
+                  how many alignments before writing output
+   memory_budget: 2GB or half available from system query (100.970 GB)
+              -C: if present, use case sensitive alignments, matrices, etc.
+alphabet_aliases: traceback will treat these pairs of characters as matches,
+                  for example, 'TU' for one pair, or multiple pairs as 'XYab'
+```
