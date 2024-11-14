@@ -3,8 +3,8 @@ title = "databases: PDB, Swiss-Prot, OMG_Prot50"
 bookToc=true
 +++
 - PDB database
-- Swiss-Prot database (AI-predicted structure)
-- OMG_Prot50 (Open MetaGenomic )
+- Swiss-Prot database (AI-predicted structures)
+- OMG_Prot50 (Proteins are transcribed from the Open MetaGenomic.)
 
 
 ## PDB database
@@ -130,3 +130,7 @@ In *UniProt*,  Swiss-Prot has 571,864 entries with its corresponding fasta file.
   width="100%"
   height="560px"
 ></iframe>
+
+### description
+> The `OMG_prot50` dataset is a protein-only dataset, created by clustering the Open MetaGenomic dataset (OMG) at 50% sequence identity.
+> MMseqs2 linclust (Steinegger and Söding 2018) was used to cluster all 4.2B protein sequences from the OMG dataset, resulting in 207M protein sequences. Sequences were clustered at 50% sequence id and 90% sequence coverage, and singleton clusters were removed.

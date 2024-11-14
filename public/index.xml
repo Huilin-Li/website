@@ -103,7 +103,7 @@
       <link>http://localhost:1313/posts/proteomics/database/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/database/</guid>
-      <description>PDB database Swiss-Prot database (AI-predicted structure) OMG_Prot50 (Open MetaGenomic ) PDB database&#xD;#&#xD;download&#xD;#&#xD;https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&amp;#39;PDB - FTP Archive over HTTP.html&amp;#39;, &amp;#39;r&amp;#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &amp;#39;lxml&amp;#39;) text = soup.get_text(&amp;#39;\n&amp;#39;, &amp;#39;\n\n&amp;#39;) lines = text.split(&amp;#39;\n&amp;#39;) PDB_id_list = [] for line in lines: if &amp;#39;ent.</description>
+      <description>PDB database Swiss-Prot database (AI-predicted structures) OMG_Prot50 (Proteins are transcribed from the Open MetaGenomic.) PDB database&#xD;#&#xD;download&#xD;#&#xD;https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&amp;#39;PDB - FTP Archive over HTTP.html&amp;#39;, &amp;#39;r&amp;#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &amp;#39;lxml&amp;#39;) text = soup.get_text(&amp;#39;\n&amp;#39;, &amp;#39;\n\n&amp;#39;) lines = text.split(&amp;#39;\n&amp;#39;) PDB_id_list = [] for line in lines: if &amp;#39;ent.</description>
     </item>
     <item>
       <title>Excel commands</title>
