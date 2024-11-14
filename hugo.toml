@@ -24,10 +24,10 @@ paginate = 100000
 
 
 [menu]
-  [[menu.after]]
-    name= "Notes"
-    url= "https://huilin-li.github.io/mybook/"
-    weight=6
+  #[[menu.after]]
+  #  name= "Notes"
+  #  url= "https://huilin-li.github.io/mybook/"
+  #  weight=6
   [[menu.after]]
     name = "Github"
     url = "https://github.com/Huilin-Li"

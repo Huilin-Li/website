@@ -22,7 +22,7 @@
       <description>ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf myfolder.tar.gz myfolder cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &amp;#34;$f&amp;#34;; done cat *.fa &amp;gt; all_data.fa # concatenate multiple fasta files into one fasta file in command line source ~/miniconda3/etc/profile.</description>
     </item>
     <item>
-      <title>databases: PDB, Swiss-Prot</title>
+      <title>databases: PDB, Swiss-Prot, OMG_Prot50</title>
       <link>http://localhost:1313/posts/proteomics/database/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/database/</guid>
@@ -104,6 +104,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/seqio/</guid>
       <description>from Bio import SeqIO with open(&amp;#34;fa.fasta&amp;#34;) as fa: for record in SeqIO.parse(fa, &amp;#34;fasta&amp;#34;): ID = record.id seq = record.seq description = recrod.description </description>
+    </item>
+    <item>
+      <title>Sequence Alignment</title>
+      <link>http://localhost:1313/posts/proteomics/seqalign/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/seqalign/</guid>
+      <description></description>
     </item>
     <item>
       <title>some criteria</title>

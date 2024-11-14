@@ -1,5 +1,5 @@
 +++
-title = "databases: PDB, Swiss-Prot"
+title = "databases: PDB, Swiss-Prot, OMG_Prot50"
 bookToc=true
 +++
 
@@ -120,3 +120,5 @@ wget https://alphafold.ebi.ac.uk/files/AF-A0A8I6A2H6-F1-model_v4.pdb
 https://alphafold.ebi.ac.uk/files/AF-Q4U4S6-F1-model_v4.pdb
 
 https://alphafold.ebi.ac.uk/files/AF-A0A6N3IN21-F1-model_v4.pdb
+
+

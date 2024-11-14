@@ -6,14 +6,14 @@
 <meta name="description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0][4:] #.split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] Is&rsquo;s not okay to extract id by .">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="databases: PDB, Swiss-Prot" />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="databases: PDB, Swiss-Prot, OMG_Prot50" />
 <meta property="og:description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0][4:] #.split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] Is&rsquo;s not okay to extract id by ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/posts/proteomics/database/" /><meta property="article:section" content="posts" />
 
 
 
-<title>databases: PDB, Swiss-Prot | Huilin Li</title>
+<title>databases: PDB, Swiss-Prot, OMG_Prot50 | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
 <link rel="canonical" href="http://localhost:1313/posts/proteomics/database/">
@@ -207,12 +207,6 @@ https://github.com/alex-shpak/hugo-book
   </li>
   
   <li>
-    <a href="https://huilin-li.github.io/mybook/"  target="_blank" rel="noopener">
-        Notes
-      </a>
-  </li>
-  
-  <li>
     <a href="https://github.com/Huilin-Li"  target="_blank" rel="noopener">
         Github
       </a>
@@ -257,7 +251,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>databases: PDB, Swiss-Prot</strong>
+  <strong>databases: PDB, Swiss-Prot, OMG_Prot50</strong>
 
   <label for="toc-control">
     
@@ -299,7 +293,7 @@ https://github.com/alex-shpak/hugo-book
       
 <article class="markdown book-post">
   <h1>
-    <a href="/posts/proteomics/database/">databases: PDB, Swiss-Prot</a>
+    <a href="/posts/proteomics/database/">databases: PDB, Swiss-Prot, OMG_Prot50</a>
   </h1>
   
 
