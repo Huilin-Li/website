@@ -2,9 +2,9 @@
 title = "databases: PDB, Swiss-Prot, OMG_Prot50"
 bookToc=true
 +++
-- [PDB database](#pdb-database)
-- [Swiss-Prot database (AI-predicted structure)](#swiss-prot-database)
-- [OMG_Prot50 (Open MetaGenomic )]()
+- PDB database
+- Swiss-Prot database (AI-predicted structure)
+- OMG_Prot50 (Open MetaGenomic )
 
 
 ## PDB database
@@ -122,7 +122,7 @@ In *UniProt*,  Swiss-Prot has 571,864 entries with its corresponding fasta file.
 
 ## OMG_Prot50 database
 ### download
-1. https://huggingface.co/datasets/tattabio/OMG_prot50?sql=--+The+SQL+console+is+powered+by+DuckDB+WASM+and+runs+entirely+in+the+browser.%0A--+Get+started+by+typing+a+query+or+selecting+a+view+from+the+options+below.%0ASELECT+*+FROM+train+LIMIT+10%3B
+1.[huggingface.co/datasets/tattabio/OMG_prot50](https://huggingface.co/datasets/tattabio/OMG_prot50?sql=--+The+SQL+console+is+powered+by+DuckDB+WASM+and+runs+entirely+in+the+browser.%0A--+Get+started+by+typing+a+query+or+selecting+a+view+from+the+options+below.%0ASELECT+*+FROM+train+LIMIT+10%3B)
 
 <iframe
   src="https://huggingface.co/datasets/tattabio/OMG_prot50/embed/viewer/default/train"
