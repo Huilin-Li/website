@@ -3,11 +3,11 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0][4:] #.split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] Is&rsquo;s not okay to extract id by .">
+<meta name="description" content="PDB database Swiss-Prot database (AI-predicted structure) OMG_Prot50 (Open MetaGenomic ) PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="databases: PDB, Swiss-Prot, OMG_Prot50" />
-<meta property="og:description" content="PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent.gz&#39; in line: PDB_id_list.append(line.split(&#34;.&#34;)[0][4:] #.split(&#34;pdb&#34;)[1]) # PDB_id_list[:5] # [&#39;100d&#39;, &#39;101d&#39;, &#39;101m&#39;, &#39;102d&#39;, &#39;102l&#39;] Is&rsquo;s not okay to extract id by ." />
+<meta property="og:description" content="PDB database Swiss-Prot database (AI-predicted structure) OMG_Prot50 (Open MetaGenomic ) PDB database#download#https://files.rcsb.org/pub/pdb/data/structures/all/pdb/ save this website as PDB - FTP Archive over HTTP.html extract pdbXXXX.ent.gz list from bs4 import BeautifulSoup # how many ent.gz file with open(&#39;PDB - FTP Archive over HTTP.html&#39;, &#39;r&#39;) as file: html_content = file.read() soup = BeautifulSoup(html_content, &#39;lxml&#39;) text = soup.get_text(&#39;\n&#39;, &#39;\n\n&#39;) lines = text.split(&#39;\n&#39;) PDB_id_list = [] for line in lines: if &#39;ent." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/posts/proteomics/database/" /><meta property="article:section" content="posts" />
 
@@ -19,7 +19,7 @@
 <link rel="canonical" href="http://localhost:1313/posts/proteomics/database/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.10b733cd88734478d4ff227cd0911dfe93c5b366f2be4e508d614bb666f83536.js" integrity="sha256-ELczzYhzRHjU/yJ80JEd/pPFs2byvk5QjWFLtmb4NTY=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.5b52b6eb6f61a724ac69c15b883864af2d930cf4c99eb8c92f0b1349a8daeda6.js" integrity="sha256-W1K2629hpySsacFbiDhkry2TDPTJnrjJLwsTSaja7aY=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -267,16 +267,21 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services"><a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a></a>
+    <li><a href="#pdb-database">PDB database</a>
       <ul>
         <li><a href="#download">download</a></li>
         <li><a href="#desciption">desciption</a></li>
       </ul>
     </li>
-    <li><a href="#swiss-prot-databasehttpswwwuniprotorguniprotkbqueryfacetsreviewed3atrue"><a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">Swiss-Prot database</a></a>
+    <li><a href="#swiss-prot-database">Swiss-Prot database</a>
       <ul>
         <li><a href="#download-1">download</a></li>
         <li><a href="#description">description</a></li>
+      </ul>
+    </li>
+    <li><a href="#omg_prot50-database">OMG_Prot50 database</a>
+      <ul>
+        <li><a href="#download-2">download</a></li>
       </ul>
     </li>
   </ul>
@@ -304,10 +309,17 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-<h2 id="pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services">
-  
-  <a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a>
-  <a class="anchor" href="#pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services">#</a>
+<ul>
+<li>
+  <a href="/#pdb-database">PDB database</a></li>
+<li>
+  <a href="/#swiss-prot-database">Swiss-Prot database (AI-predicted structure)</a></li>
+<li>
+  <a href="/">OMG_Prot50 (Open MetaGenomic )</a></li>
+</ul>
+<h2 id="pdb-database">
+  PDB database
+  <a class="anchor" href="#pdb-database">#</a>
 </h2>
 <h3 id="download">
   download
@@ -392,10 +404,9 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#desciption">#</a>
 </h3>
 <p>At this moment, I download 218,546 PDB entries from PDB database.</p>
-<h2 id="swiss-prot-databasehttpswwwuniprotorguniprotkbqueryfacetsreviewed3atrue">
-  
-  <a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">Swiss-Prot database</a>
-  <a class="anchor" href="#swiss-prot-databasehttpswwwuniprotorguniprotkbqueryfacetsreviewed3atrue">#</a>
+<h2 id="swiss-prot-database">
+  Swiss-Prot database
+  <a class="anchor" href="#swiss-prot-database">#</a>
 </h2>
 <h3 id="download-1">
   download
@@ -457,13 +468,24 @@ https://github.com/alex-shpak/hugo-book
       
       
   </figure></p>
-<p>wget 
-  <a href="https://alphafold.ebi.ac.uk/files/AF-A0A8I6A2H6-F1-model_v4.pdb">https://alphafold.ebi.ac.uk/files/AF-A0A8I6A2H6-F1-model_v4.pdb</a></p>
-<p>
-  <a href="https://alphafold.ebi.ac.uk/files/AF-Q4U4S6-F1-model_v4.pdb">https://alphafold.ebi.ac.uk/files/AF-Q4U4S6-F1-model_v4.pdb</a></p>
-<p>
-  <a href="https://alphafold.ebi.ac.uk/files/AF-A0A6N3IN21-F1-model_v4.pdb">https://alphafold.ebi.ac.uk/files/AF-A0A6N3IN21-F1-model_v4.pdb</a></p>
-</article>
+<h2 id="omg_prot50-database">
+  OMG_Prot50 database
+  <a class="anchor" href="#omg_prot50-database">#</a>
+</h2>
+<h3 id="download-2">
+  download
+  <a class="anchor" href="#download-2">#</a>
+</h3>
+<ol>
+<li>
+  <a href="https://huggingface.co/datasets/tattabio/OMG_prot50?sql=--&#43;The&#43;SQL&#43;console&#43;is&#43;powered&#43;by&#43;DuckDB&#43;WASM&#43;and&#43;runs&#43;entirely&#43;in&#43;the&#43;browser.%0A--&#43;Get&#43;started&#43;by&#43;typing&#43;a&#43;query&#43;or&#43;selecting&#43;a&#43;view&#43;from&#43;the&#43;options&#43;below.%0ASELECT&#43;">https://huggingface.co/datasets/tattabio/OMG_prot50?sql=--+The+SQL+console+is+powered+by+DuckDB+WASM+and+runs+entirely+in+the+browser.%0A--+Get+started+by+typing+a+query+or+selecting+a+view+from+the+options+below.%0ASELECT+</a>*+FROM+train+LIMIT+10%3B</li>
+</ol>
+<iframe
+  src="https://huggingface.co/datasets/tattabio/OMG_prot50/embed/viewer/default/train"
+  frameborder="0"
+  width="100%"
+  height="560px"
+></iframe></article>
  
       
 
@@ -516,16 +538,21 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#pdb-databasehttpswwwrcsborgdocsprogrammatic-accessfile-download-services"><a href="https://www.rcsb.org/docs/programmatic-access/file-download-services">PDB database</a></a>
+    <li><a href="#pdb-database">PDB database</a>
       <ul>
         <li><a href="#download">download</a></li>
         <li><a href="#desciption">desciption</a></li>
       </ul>
     </li>
-    <li><a href="#swiss-prot-databasehttpswwwuniprotorguniprotkbqueryfacetsreviewed3atrue"><a href="https://www.uniprot.org/uniprotkb?query=*&amp;facets=reviewed%3Atrue">Swiss-Prot database</a></a>
+    <li><a href="#swiss-prot-database">Swiss-Prot database</a>
       <ul>
         <li><a href="#download-1">download</a></li>
         <li><a href="#description">description</a></li>
+      </ul>
+    </li>
+    <li><a href="#omg_prot50-database">OMG_Prot50 database</a>
+      <ul>
+        <li><a href="#download-2">download</a></li>
       </ul>
     </li>
   </ul>

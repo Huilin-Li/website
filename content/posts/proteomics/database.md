@@ -2,8 +2,12 @@
 title = "databases: PDB, Swiss-Prot, OMG_Prot50"
 bookToc=true
 +++
+- [PDB database](#pdb-database)
+- [Swiss-Prot database (AI-predicted structure)](#swiss-prot-database)
+- [OMG_Prot50 (Open MetaGenomic )]()
 
-## [PDB database](https://www.rcsb.org/docs/programmatic-access/file-download-services)
+
+## PDB database
 ### download
 1. https://files.rcsb.org/pub/pdb/data/structures/all/pdb/
 
@@ -86,7 +90,7 @@ At this moment, I download 218,546 PDB entries from PDB database.
 
 
 
-## [Swiss-Prot database](https://www.uniprot.org/uniprotkb?query=*&facets=reviewed%3Atrue)
+## Swiss-Prot database
 ### download
 [UniProt](https://www.uniprot.org/uniprotkb?query=*&facets=reviewed%3Atrue) provides the reviewed Swiss-Prot database.
 {{< figure src="../img/uniprot.png" title="Fig.1 the Entry from UniProt">}}
@@ -115,10 +119,14 @@ In *UniProt*,  Swiss-Prot has 571,864 entries with its corresponding fasta file.
 {{< figure src="../img/plot.svg" alt=" ">}}
 
 
-wget https://alphafold.ebi.ac.uk/files/AF-A0A8I6A2H6-F1-model_v4.pdb
 
-https://alphafold.ebi.ac.uk/files/AF-Q4U4S6-F1-model_v4.pdb
+## OMG_Prot50 database
+### download
+1. https://huggingface.co/datasets/tattabio/OMG_prot50?sql=--+The+SQL+console+is+powered+by+DuckDB+WASM+and+runs+entirely+in+the+browser.%0A--+Get+started+by+typing+a+query+or+selecting+a+view+from+the+options+below.%0ASELECT+*+FROM+train+LIMIT+10%3B
 
-https://alphafold.ebi.ac.uk/files/AF-A0A6N3IN21-F1-model_v4.pdb
-
-
+<iframe
+  src="https://huggingface.co/datasets/tattabio/OMG_prot50/embed/viewer/default/train"
+  frameborder="0"
+  width="100%"
+  height="560px"
+></iframe>
