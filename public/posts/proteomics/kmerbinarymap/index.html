@@ -3,20 +3,28 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf myfolder.tar.gz myfolder cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &#34;$f&#34;; done cat *.fa &gt; all_data.fa # concatenate multiple fasta files into one fasta file in command line source ~/miniconda3/etc/profile.">
+<meta name="description" content="seq=&quot;MKTLGEFIVEKQH&quot;, k=4.
+Kmers: [&#39;MKTL&#39;, &#39;KTLG&#39;, &#39;TLGE&#39;, &#39;LGEF&#39;, &#39;GEFI&#39;, &#39;EFIV&#39;, &#39;FIVE&#39;, &#39;IVEK&#39;, &#39;VEKQ&#39;, &#39;EKQH&#39;]
+Encodings: [5057, 15385, 49556, 6470, 37986, 17954, 25124, 8771, 9268, 17226]
+Check:
+Kmer K-mer Binary Mapping Encoding Check &ldquo;MKTL&rdquo; 0001 0011 1100 0001 5057 ✔️ &ldquo;KTLG&rdquo; 0011 1100 0001 1001 15385 ✔️ &ldquo;TLGE&rdquo; 1100 0001 1001 0100 49556 ✔️ &ldquo;LGEF&rdquo; 0001 1001 0100 0110 6470 ✔️ &ldquo;GEFI&rdquo; 1001 0100 0110 0010 37986 ✔️ &ldquo;EFIV&rdquo; 0100 0110 0010 0010 17954 ✔️ &ldquo;FIVE&rdquo; 0110 0010 0010 0100 25124 ✔️ &ldquo;IVEK&rdquo; 0010 0010 0100 0011 8771 ✔️ &ldquo;VEKQ&rdquo; 0010 0100 0011 0100 9268 ✔️ &ldquo;EKQH&rdquo; 0100 0011 0100 1010 17226 ✔️ Code:">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="commonly used Shell script and Command line, when working on large dataset in HPC" />
-<meta property="og:description" content="ls -l | wc -l wget -i links.txt -o wget.log tar -tzf file.tar.gz | wc -l # count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line tar -zcvf myfolder.tar.gz myfolder cp ./folder/*.txt ./newfolder gunzip *.gz # for f in *.gz; do gunzip &#34;$f&#34;; done cat *.fa &gt; all_data.fa # concatenate multiple fasta files into one fasta file in command line source ~/miniconda3/etc/profile." />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Encoding Protein Sequences into Integer Representations Using K-mer Binary Mapping" />
+<meta property="og:description" content="seq=&quot;MKTLGEFIVEKQH&quot;, k=4.
+Kmers: [&#39;MKTL&#39;, &#39;KTLG&#39;, &#39;TLGE&#39;, &#39;LGEF&#39;, &#39;GEFI&#39;, &#39;EFIV&#39;, &#39;FIVE&#39;, &#39;IVEK&#39;, &#39;VEKQ&#39;, &#39;EKQH&#39;]
+Encodings: [5057, 15385, 49556, 6470, 37986, 17954, 25124, 8771, 9268, 17226]
+Check:
+Kmer K-mer Binary Mapping Encoding Check &ldquo;MKTL&rdquo; 0001 0011 1100 0001 5057 ✔️ &ldquo;KTLG&rdquo; 0011 1100 0001 1001 15385 ✔️ &ldquo;TLGE&rdquo; 1100 0001 1001 0100 49556 ✔️ &ldquo;LGEF&rdquo; 0001 1001 0100 0110 6470 ✔️ &ldquo;GEFI&rdquo; 1001 0100 0110 0010 37986 ✔️ &ldquo;EFIV&rdquo; 0100 0110 0010 0010 17954 ✔️ &ldquo;FIVE&rdquo; 0110 0010 0010 0100 25124 ✔️ &ldquo;IVEK&rdquo; 0010 0010 0100 0011 8771 ✔️ &ldquo;VEKQ&rdquo; 0010 0100 0011 0100 9268 ✔️ &ldquo;EKQH&rdquo; 0100 0011 0100 1010 17226 ✔️ Code:" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/proteomics/command/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:1313/posts/proteomics/kmerbinarymap/" /><meta property="article:section" content="posts" />
 
 
 
-<title>commonly used Shell script and Command line, when working on large dataset in HPC | Huilin Li</title>
+<title>Encoding Protein Sequences into Integer Representations Using K-mer Binary Mapping | Huilin Li</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/logo.png" >
-<link rel="canonical" href="http://localhost:1313/posts/proteomics/command/">
+<link rel="canonical" href="http://localhost:1313/posts/proteomics/kmerbinarymap/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
   <script defer src="/en.search.min.85efc22da7c107883b19025d62e8617046eecc76c9351ddd058874b9264ca2dd.js" integrity="sha256-he/CLafBB4g7GQJdYuhhcEbuzHbJNR3dBYh0uSZMot0=" crossorigin="anonymous"></script>
@@ -251,7 +259,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>commonly used Shell script and Command line, when working on large dataset in HPC</strong>
+  <strong>Encoding Protein Sequences into Integer Representations Using K-mer Binary Mapping</strong>
 
   <label for="toc-control">
     
@@ -278,7 +286,7 @@ https://github.com/alex-shpak/hugo-book
       
 <article class="markdown book-post">
   <h1>
-    <a href="/posts/proteomics/command/">commonly used Shell script and Command line, when working on large dataset in HPC</a>
+    <a href="/posts/proteomics/kmerbinarymap/">Encoding Protein Sequences into Integer Representations Using K-mer Binary Mapping</a>
   </h1>
   
 
@@ -289,36 +297,96 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls -l | wc -l
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>wget -i links.txt -o wget.log
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>tar -tzf file.tar.gz | wc -l <span style="color:#75715e"># count files in tar.gz without unzip # it actually counts lines, and it will cause counting \n as a line</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>tar -zcvf  myfolder.tar.gz myfolder
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cp ./folder/*.txt ./newfolder
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>gunzip *.gz <span style="color:#75715e"># for f in *.gz; do gunzip &#34;$f&#34;; done</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cat *.fa &gt; all_data.fa <span style="color:#75715e"># concatenate multiple fasta files into one fasta file in command line</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>source ~/miniconda3/etc/profile.d/conda.sh
-</span></span><span style="display:flex;"><span>conda activate SE3nv
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>PDBdb_dir_has<span style="color:#f92672">=()</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> pdb_fp in $PDBdb_dir*pdb; <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>    pdb<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>basename $pdb_fp .pdb<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>    PDBdb_dir_has<span style="color:#f92672">+=(</span>$pdb<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>A<span style="color:#f92672">=()</span>
-</span></span><span style="display:flex;"><span>lines<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>cat $AFDB_pLDDT_70_log<span style="color:#e6db74">`</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> line in $lines; <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $line  <span style="color:#f92672">==</span> *<span style="color:#e6db74">&#34;.pdb&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>        entry<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">&#34;</span>$line<span style="color:#e6db74">&#34;</span> | cut -d <span style="color:#e6db74">&#34;.&#34;</span> -f 1<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span>        A<span style="color:#f92672">+=(</span>$entry<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fi</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
-</span></span></code></pre></div></article>
+<ul>
+<li>
+<p><code>seq=&quot;MKTLGEFIVEKQH&quot;</code>, <code>k=4</code>.</p>
+</li>
+<li>
+<p>Kmers: <code>['MKTL', 'KTLG', 'TLGE', 'LGEF', 'GEFI', 'EFIV', 'FIVE', 'IVEK', 'VEKQ', 'EKQH']</code></p>
+</li>
+<li>
+<p>Encodings: <code>[5057, 15385, 49556, 6470, 37986, 17954, 25124, 8771, 9268, 17226]</code></p>
+</li>
+<li>
+<p>Check:</p>
+<table>
+<thead>
+<tr>
+<th>Kmer</th>
+<th>K-mer Binary Mapping</th>
+<th>Encoding</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&ldquo;MKTL&rdquo;</td>
+<td>0001 0011 1100 0001</td>
+<td>5057</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>&ldquo;KTLG&rdquo;</td>
+<td>0011 1100 0001 1001</td>
+<td>15385</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>&ldquo;TLGE&rdquo;</td>
+<td>1100 0001 1001 0100</td>
+<td>49556</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>&ldquo;LGEF&rdquo;</td>
+<td>0001 1001 0100 0110</td>
+<td>6470</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>&ldquo;GEFI&rdquo;</td>
+<td>1001 0100 0110 0010</td>
+<td>37986</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>&ldquo;EFIV&rdquo;</td>
+<td>0100 0110 0010 0010</td>
+<td>17954</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>&ldquo;FIVE&rdquo;</td>
+<td>0110 0010 0010 0100</td>
+<td>25124</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>&ldquo;IVEK&rdquo;</td>
+<td>0010 0010 0100 0011</td>
+<td>8771</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>&ldquo;VEKQ&rdquo;</td>
+<td>0010 0100 0011 0100</td>
+<td>9268</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>&ldquo;EKQH&rdquo;</td>
+<td>0100 0011 0100 1010</td>
+<td>17226</td>
+<td>✔️</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Code:</p>
+</li>
+</ul>
+<script src="https://gist.github.com/Huilin-Li/da371c7da55c1d504fddf854c116887b.js"></script></article>
  
       
 
