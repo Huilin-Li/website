@@ -71,6 +71,13 @@
       <description>There are four levels of protein structure: primary, secondary, tertiary and quaternary.&#xA;Primary Structure.&#xD;#&#xD;A protein’s primary structure is the unique sequence of amino acids in each polypeptide chain that makes up the protein.&#xA;fasta file sequence of 20 amino acids Secondary Structure&#xD;#&#xD;Reference:&#xD;#&#xD;3.9: Proteins - Protein Structure </description>
     </item>
     <item>
+      <title>A simple Bayesian inference example with Grid approximate, from scratch</title>
+      <link>http://localhost:1313/posts/ml/bayes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ml/bayes/</guid>
+      <description>why Bayesian?&#xD;#&#xD;Using probability methods to solve statistical problems.&#xA;For many problems in real life, we normally have an educated guess (prior), and this prior is helpful to our final guess/prediction. Through observing new data/evidence, we are upating our guess(prior), and the updated guess is posterior.&#xA;In the Bayesian inference workflow, we treat problems interatively, that is, we can get a new posterior through new observations, and then use it as the (new) prior.</description>
+    </item>
+    <item>
       <title>All about Latex and Overleaf</title>
       <link>http://localhost:1313/posts/blog/overleaf/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -110,7 +117,7 @@
       <link>http://localhost:1313/posts/proteomics/kmerbinarymap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/kmerbinarymap/</guid>
-      <description></description>
+      <description>seq=&amp;quot;MKTLGEFIVEKQH&amp;quot;, k=4.&#xA;Kmers: [&#39;MKTL&#39;, &#39;KTLG&#39;, &#39;TLGE&#39;, &#39;LGEF&#39;, &#39;GEFI&#39;, &#39;EFIV&#39;, &#39;FIVE&#39;, &#39;IVEK&#39;, &#39;VEKQ&#39;, &#39;EKQH&#39;]&#xA;Encodings: [5057, 15385, 49556, 6470, 37986, 17954, 25124, 8771, 9268, 17226]&#xA;Check:&#xA;Kmer K-mer Binary Mapping Encoding Check &amp;ldquo;MKTL&amp;rdquo; 0001 0011 1100 0001 5057 ✔️ &amp;ldquo;KTLG&amp;rdquo; 0011 1100 0001 1001 15385 ✔️ &amp;ldquo;TLGE&amp;rdquo; 1100 0001 1001 0100 49556 ✔️ &amp;ldquo;LGEF&amp;rdquo; 0001 1001 0100 0110 6470 ✔️ &amp;ldquo;GEFI&amp;rdquo; 1001 0100 0110 0010 37986 ✔️ &amp;ldquo;EFIV&amp;rdquo; 0100 0110 0010 0010 17954 ✔️ &amp;ldquo;FIVE&amp;rdquo; 0110 0010 0010 0100 25124 ✔️ &amp;ldquo;IVEK&amp;rdquo; 0010 0010 0100 0011 8771 ✔️ &amp;ldquo;VEKQ&amp;rdquo; 0010 0100 0011 0100 9268 ✔️ &amp;ldquo;EKQH&amp;rdquo; 0100 0011 0100 1010 17226 ✔️ Code:</description>
     </item>
     <item>
       <title>Excel commands</title>
@@ -155,6 +162,13 @@
       <description>Some commands and issues you might want to know when building the website using Hugo, including inserting images and resize and center images,adding emoji, travel map, linking to pages and titles, and so on.&#xA;SUMMARY&#xD;#&#xD;use themes as your own repositories insert and resize images center images add emoji add travel map Why my local website doesn&amp;rsquo;t update after I update my markdown files? link pages and tiles Add Giscus comment in Hugo-book theme Remove git in themes, and use themes as your own repositories.</description>
     </item>
     <item>
+      <title>K-means, Gaussian mixture model, Fuzzy clustering, Spectral Clustering cluster protein based on distance</title>
+      <link>http://localhost:1313/posts/proteomics/clustering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/clustering/</guid>
+      <description>&#xD;Spectral Clustering&#xD;#&#xD;</description>
+    </item>
+    <item>
       <title>parasail in C usage (straightforward)</title>
       <link>http://localhost:1313/posts/proteomics/parasailc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -188,6 +202,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/blog/plane/</guid>
       <description>When I am working on my binder design task, I need to select suitable hotspot residues that can lead to design better binders. In addition to hydrophobic amino acids, I also want to focus on the amino acids whose positions are close to the outside edge, and far away from the center of the protein. Therefore, I expect a plane that can approximately cut the protein layer by layer with my expected distance to the outside edge.</description>
+    </item>
+    <item>
+      <title>processing its output of blastp</title>
+      <link>http://localhost:1313/posts/proteomics/outofblast/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/outofblast/</guid>
+      <description>&#xD;E-value&#xD;#&#xD;</description>
     </item>
     <item>
       <title>Protein structure measurement</title>
@@ -230,6 +251,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/seqalign/</guid>
       <description></description>
+    </item>
+    <item>
+      <title>sequence alignment via BLASTp with using makeblastdb for custom database</title>
+      <link>http://localhost:1313/posts/proteomics/blast/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/blast/</guid>
+      <description>cd root/OMGstudy/&#xD;tree&#xD;.&#xD;├── query.fasta&#xD;├── OMGDB_blast&#xD;├── OMGDB_fasta&#xD;└── OMGDB.fasta&#xD;makeblastdb -in ./OMGDB_fasta/OMGDB.fasta -input_type fasta -dbtype prot -out ./OMGDB_blast/OMGDB.blast&#xD;tree&#xD;.&#xD;├── query.fasta&#xD;├── OMGDB_blast&#xD;│ ├── OMGDB.blast.00.phr&#xD;│ ├── OMGDB.blast.00.pin&#xD;│ ├── OMGDB.blast.00.psq&#xD;│ ├── OMGDB.blast.01.phr&#xD;│ ├── OMGDB.blast.01.pin&#xD;... ...&#xD;│ ├── OMGDB.blast.30.psq&#xD;│ ├── OMGDB.blast.31.phr&#xD;│ ├── OMGDB.blast.31.pin&#xD;... ...&#xD;│ ├── OMGDB.blast.43.phr&#xD;│ ├── OMGDB.blast.43.pin&#xD;│ ├── OMGDB.blast.43.psq&#xD;│ ├── OMGDB.blast.pal&#xD;│ ├── OMGDB.blast.pdb&#xD;│ ├── OMGDB.</description>
     </item>
     <item>
       <title>some criteria</title>

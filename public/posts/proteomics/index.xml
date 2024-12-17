@@ -64,6 +64,13 @@
       <description>foldseek github Foldseek User Guide Installation: Conda installer (Linux and macOS)&#xD;#&#xD;conda install -c conda-forge -c bioconda foldseek Customize Database&#xD;#&#xD;folsseek createdb myDB_dir/ myDB&#xD;# myDB_dir has lots of pdb files foldseek easy-search&#xD;#&#xD;usage: foldseek easy-search &amp;lt;i:PDB|mmCIF[.gz]&amp;gt; ... &amp;lt;i:PDB|mmCIF[.gz]&amp;gt;|&amp;lt;i:stdin&amp;gt; &amp;lt;i:targetFastaFile[.gz]&amp;gt;|&amp;lt;i:targetDB&amp;gt; &amp;lt;o:alignmentFile&amp;gt; &amp;lt;tmpDir&amp;gt; [options]&#xD;By Martin Steinegger &amp;lt;martin.steinegger@snu.ac.kr&amp;gt;&#xD;options: prefilter:&#xD;--comp-bias-corr INT Correct for locally biased amino acid composition (range 0-1) [1]&#xD;--comp-bias-corr-scale FLOAT Correct for locally biased amino acid composition (range 0-1) [1.</description>
     </item>
     <item>
+      <title>K-means, Gaussian mixture model, Fuzzy clustering, Spectral Clustering cluster protein based on distance</title>
+      <link>http://localhost:1313/posts/proteomics/clustering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/clustering/</guid>
+      <description>&#xD;Spectral Clustering&#xD;#&#xD;</description>
+    </item>
+    <item>
       <title>parasail in C usage (straightforward)</title>
       <link>http://localhost:1313/posts/proteomics/parasailc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -83,6 +90,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/pdb2chains/</guid>
       <description>from Bio import PDB if __name__==&amp;#34;__main__&amp;#34;: for pdbfile_path in glob.glob(&amp;#34;/path/DB/pure_PDB/*.pdb&amp;#34;): name = pdbfile_path.split(&amp;#34;\\&amp;#34;)[-1].split(&amp;#34;.&amp;#34;)[0] print(name, end=&amp;#34; &amp;#34;) pdb = PDB.PDBParser().get_structure(name, pdbfile_path) pdb_io = PDB.PDBIO() pdb_chains = pdb.get_chains() for chain in pdb_chains: pdb_io.set_structure(chain) pdb_io.save(&amp;#34;/path/DB/pure_PDB_DB_by_Chain/&amp;#34; + pdb.get_id() + &amp;#34;_&amp;#34; + chain.get_id() + &amp;#34;.pdb&amp;#34;) print(&amp;#39;-- Done&amp;#39;) </description>
+    </item>
+    <item>
+      <title>processing its output of blastp</title>
+      <link>http://localhost:1313/posts/proteomics/outofblast/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/outofblast/</guid>
+      <description>&#xD;E-value&#xD;#&#xD;</description>
     </item>
     <item>
       <title>read data</title>
@@ -118,6 +132,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/proteomics/seqalign/</guid>
       <description></description>
+    </item>
+    <item>
+      <title>sequence alignment via BLASTp with using makeblastdb for custom database</title>
+      <link>http://localhost:1313/posts/proteomics/blast/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/proteomics/blast/</guid>
+      <description>cd root/OMGstudy/&#xD;tree&#xD;.&#xD;├── query.fasta&#xD;├── OMGDB_blast&#xD;├── OMGDB_fasta&#xD;└── OMGDB.fasta&#xD;makeblastdb -in ./OMGDB_fasta/OMGDB.fasta -input_type fasta -dbtype prot -out ./OMGDB_blast/OMGDB.blast&#xD;tree&#xD;.&#xD;├── query.fasta&#xD;├── OMGDB_blast&#xD;│ ├── OMGDB.blast.00.phr&#xD;│ ├── OMGDB.blast.00.pin&#xD;│ ├── OMGDB.blast.00.psq&#xD;│ ├── OMGDB.blast.01.phr&#xD;│ ├── OMGDB.blast.01.pin&#xD;... ...&#xD;│ ├── OMGDB.blast.30.psq&#xD;│ ├── OMGDB.blast.31.phr&#xD;│ ├── OMGDB.blast.31.pin&#xD;... ...&#xD;│ ├── OMGDB.blast.43.phr&#xD;│ ├── OMGDB.blast.43.pin&#xD;│ ├── OMGDB.blast.43.psq&#xD;│ ├── OMGDB.blast.pal&#xD;│ ├── OMGDB.blast.pdb&#xD;│ ├── OMGDB.</description>
     </item>
     <item>
       <title>some criteria</title>

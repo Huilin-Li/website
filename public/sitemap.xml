@@ -22,6 +22,8 @@
   </url><url>
     <loc>http://localhost:1313/posts/blog/proteinstruture/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/ml/bayes/</loc>
+  </url><url>
     <loc>http://localhost:1313/posts/ml/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/blog/overleaf/</loc>
@@ -60,6 +62,8 @@
   </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/proteomics/clustering/</loc>
+  </url><url>
     <loc>http://localhost:1313/posts/proteomics/parasailc/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/proteomics/pdb2fasta/</loc>
@@ -71,6 +75,8 @@
     <loc>http://localhost:1313/posts/blog/plane/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/proteomics/outofblast/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/blog/assessment/</loc>
   </url><url>
@@ -85,6 +91,8 @@
     <loc>http://localhost:1313/posts/proteomics/seqio/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/proteomics/seqalign/</loc>
+  </url><url>
+    <loc>http://localhost:1313/posts/proteomics/blast/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/proteomics/measure/</loc>
   </url><url>
