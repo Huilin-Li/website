@@ -111,6 +111,67 @@ Pr(p|W,L) =\frac{Pr(W,L|p)Pr(p)}{Pr(W,L)}
 ### 4.GRID APPROXIMATE
 
 #### the grid of \(p\) is \([0, 0.1, 0.3, 0.5, 1]\)
-#### corresponding prior of \(p\) is \([1, 1, 1, 1, 1]\)
+#### corresponding prior \(Pr(p)\) is \([1, 1, 1, 1, 1]\)
 #### corresponding likelihood:
-- \(p=0, Pr(p)=1\)
+- \(p_1=0\)
+\[
+Pr(W,L|p_1)=\frac{(W+L)!}{W!L!}p_1^W(1-p_1)^{L}=0
+\]
+
+- \(p_2=0.1\)
+\[
+Pr(W,L|p_2)=\frac{(W+L)!}{W!L!}p_2^W(1-p_2)^{L}=\frac{9!}{6!3!}0.1^6\times 0.9^{3}=0.00006123600000000004
+\]
+
+- \(p_3=0.3\)
+\[
+Pr(W,L|p_3)=\frac{(W+L)!}{W!L!}p_3^W(1-p_3)^{L}=\frac{9!}{6!3!}0.1^6\times 0.9^{3}=0.02100394799999999
+\]
+
+- \(p_4=0.5\)
+\[
+Pr(W,L|p_4)=\frac{(W+L)!}{W!L!}p_4^W(1-p_4)^{L}=\frac{9!}{6!3!}0.1^6\times 0.9^{3}=0.1640625
+\]
+
+- \(p_5=1\)
+\[
+Pr(W,L|p_5)=\frac{(W+L)!}{W!L!}p_5^W(1-p_5)^{L}=\frac{9!}{6!3!}0.1^6\times 0.9^{3}=0
+\]
+
+#### \(Pr(W,L)\) (as \(Pr(D)\) in the above work):
+\[
+\begin{align*}
+Pr(W,L) &= \displaystyle\sum_{i=1}^{5} Pr(W,L|p_i)\times Pr(p_i) \\
+        &= 0\times 1 +0.00006123600000000004\times 1 + 0.02100394799999999\times 1 + 0.1640625\times 1 + 0\times 1\\
+        &=  0.185127684
+\end{align*}    
+\]
+
+#### Pr(p|W,L)
+- \(p_1=0\)
+\[
+Pr(p_1|W,L)=\frac{Pr(W,L|p_1)Pr(p_1)}{Pr(W,L)}=\frac{0\times 1}{ 0.185127684}=0
+\]
+
+- \(p_2=0.1\)
+\[
+Pr(p_2|W,L)=\frac{Pr(W,L|p_2)Pr(p_2)}{Pr(W,L)}=\frac{0.00006123600000000004\times 1}{ 0.185127684}=0.00033077710840913473
+\]
+
+- \(p_3=0.3\)
+\[
+Pr(p_3|W,L)=\frac{Pr(W,L|p_3)Pr(p_3)}{Pr(W,L)}=\frac{0.02100394799999999\times 1}{ 0.185127684}=0.11345654818433311
+\]
+
+- \(p_4=0.5\)
+\[
+Pr(p_4|W,L)=\frac{Pr(W,L|p_4)Pr(p_4)}{Pr(W,L)}=\frac{0.1640625\times 1}{ 0.185127684}=0.8862126747072577
+\]
+
+- \(p_5=1\)
+\[
+Pr(p_5|W,L)=\frac{Pr(W,L|p_5)Pr(p_5)}{Pr(W,L)}=\frac{0\times 1}{ 0.185127684}=0
+\]
+
+#### visualization
+{{< figure src="../baye.png" width="400" alt=" ">}}

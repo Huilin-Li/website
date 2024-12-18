@@ -23,7 +23,7 @@ In the Bayesian inference workflow, we treat problems interatively, that is, we 
 <link rel="canonical" href="http://localhost:1313/posts/ml/bayes/">
 <link rel="stylesheet" href="/book.min.f3de075a26891530cb4ae6aeb9b647bcc541281bbd3ec57e8bf60cb157bc209f.css" integrity="sha256-894HWiaJFTDLSuauubZHvMVBKBu9PsV&#43;i/YMsVe8IJ8=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.d246af5ba5a3f990ffe17e9f82af24210d2b52a5422de0f210b543882a27bbbb.js" integrity="sha256-0kavW6Wj&#43;ZD/4X6fgq8kIQ0rUqVCLeDyELVDiConu7s=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.4862d5e686682e3523926db4128228a650ef323cb2815a34f2e54891491a281a.js" integrity="sha256-SGLV5oZoLjUjkm20EoIoplDvMjyygVo08uVIkUkaKBo=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -461,17 +461,116 @@ Pr(p|W,L) =\frac{Pr(W,L|p)Pr(p)}{Pr(W,L)}
   the grid of \(p\) is \([0, 0.1, 0.3, 0.5, 1]\)
   <a class="anchor" href="#the-grid-of-p-is-0-01-03-05-1">#</a>
 </h4>
-<h4 id="corresponding-prior-of-p-is-1-1-1-1-1">
-  corresponding prior of \(p\) is \([1, 1, 1, 1, 1]\)
-  <a class="anchor" href="#corresponding-prior-of-p-is-1-1-1-1-1">#</a>
+<h4 id="corresponding-prior-prp-is-1-1-1-1-1">
+  corresponding prior \(Pr(p)\) is \([1, 1, 1, 1, 1]\)
+  <a class="anchor" href="#corresponding-prior-prp-is-1-1-1-1-1">#</a>
 </h4>
 <h4 id="corresponding-likelihood">
   corresponding likelihood:
   <a class="anchor" href="#corresponding-likelihood">#</a>
 </h4>
 <ul>
-<li>\(p=0, Pr(p)=1\)</li>
+<li>
+<p>\(p_1=0\)
+</p>
+\[
+Pr(W,L|p_1)=\frac{(W+L)!}{W!L!}p_1^W(1-p_1)^{L}=0
+\]
+</li>
+<li>
+<p>\(p_2=0.1\)
+</p>
+\[
+Pr(W,L|p_2)=\frac{(W+L)!}{W!L!}p_2^W(1-p_2)^{L}=\frac{9!}{6!3!}0.1^6\times 0.9^{3}=0.00006123600000000004
+\]
+</li>
+<li>
+<p>\(p_3=0.3\)
+</p>
+\[
+Pr(W,L|p_3)=\frac{(W+L)!}{W!L!}p_3^W(1-p_3)^{L}=\frac{9!}{6!3!}0.1^6\times 0.9^{3}=0.02100394799999999
+\]
+</li>
+<li>
+<p>\(p_4=0.5\)
+</p>
+\[
+Pr(W,L|p_4)=\frac{(W+L)!}{W!L!}p_4^W(1-p_4)^{L}=\frac{9!}{6!3!}0.1^6\times 0.9^{3}=0.1640625
+\]
+</li>
+<li>
+<p>\(p_5=1\)
+</p>
+\[
+Pr(W,L|p_5)=\frac{(W+L)!}{W!L!}p_5^W(1-p_5)^{L}=\frac{9!}{6!3!}0.1^6\times 0.9^{3}=0
+\]
+</li>
 </ul>
+<h4 id="prwl-as-prd-in-the-above-work">
+  \(Pr(W,L)\) (as \(Pr(D)\) in the above work):
+  <a class="anchor" href="#prwl-as-prd-in-the-above-work">#</a>
+</h4>
+\[
+\begin{align*}
+Pr(W,L) &= \displaystyle\sum_{i=1}^{5} Pr(W,L|p_i)\times Pr(p_i) \\
+        &= 0\times 1 +0.00006123600000000004\times 1 + 0.02100394799999999\times 1 + 0.1640625\times 1 + 0\times 1\\
+        &=  0.185127684
+\end{align*}    
+\]
+<h4 id="prpwl">
+  Pr(p|W,L)
+  <a class="anchor" href="#prpwl">#</a>
+</h4>
+<ul>
+<li>
+<p>\(p_1=0\)
+</p>
+\[
+Pr(p_1|W,L)=\frac{Pr(W,L|p_1)Pr(p_1)}{Pr(W,L)}=\frac{0\times 1}{ 0.185127684}=0
+\]
+</li>
+<li>
+<p>\(p_2=0.1\)
+</p>
+\[
+Pr(p_2|W,L)=\frac{Pr(W,L|p_2)Pr(p_2)}{Pr(W,L)}=\frac{0.00006123600000000004\times 1}{ 0.185127684}=0.00033077710840913473
+\]
+</li>
+<li>
+<p>\(p_3=0.3\)
+</p>
+\[
+Pr(p_3|W,L)=\frac{Pr(W,L|p_3)Pr(p_3)}{Pr(W,L)}=\frac{0.02100394799999999\times 1}{ 0.185127684}=0.11345654818433311
+\]
+</li>
+<li>
+<p>\(p_4=0.5\)
+</p>
+\[
+Pr(p_4|W,L)=\frac{Pr(W,L|p_4)Pr(p_4)}{Pr(W,L)}=\frac{0.1640625\times 1}{ 0.185127684}=0.8862126747072577
+\]
+</li>
+<li>
+<p>\(p_5=1\)
+</p>
+\[
+Pr(p_5|W,L)=\frac{Pr(W,L|p_5)Pr(p_5)}{Pr(W,L)}=\frac{0\times 1}{ 0.185127684}=0
+\]
+</li>
+</ul>
+<h4 id="visualization">
+  visualization
+  <a class="anchor" href="#visualization">#</a>
+</h4>
+<figure >
+    
+      <img src="../baye.png" 
+      
+      alt=" 
+      " />
+      
+      
+  </figure>
 </article>
  
       
