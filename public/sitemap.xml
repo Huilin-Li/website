@@ -32,6 +32,8 @@
   </url><url>
     <loc>http://localhost:1313/docs/project/binderdesign/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/proteomics/biomacromolecules/</loc>
+  </url><url>
     <loc>http://localhost:1313/posts/blog/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
@@ -64,6 +66,8 @@
   </url><url>
     <loc>http://localhost:1313/posts/proteomics/clustering/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/proteomics/kd/</loc>
+  </url><url>
     <loc>http://localhost:1313/posts/proteomics/parasailc/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/proteomics/pdb2fasta/</loc>
@@ -93,8 +97,6 @@
     <loc>http://localhost:1313/posts/proteomics/seqalign/</loc>
   </url><url>
     <loc>http://localhost:1313/posts/proteomics/blast/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/proteomics/measure/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
   </url><url>

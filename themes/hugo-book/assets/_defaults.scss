@@ -1,8 +1,8 @@
 // Used in layout
-$padding-1: 1px !default;
-$padding-4: 0.25rem !default;
-$padding-8: 0.5rem !default;
-$padding-16: 1rem !default;
+$padding-1: 0px !default;
+$padding-4: 0rem !default;
+$padding-8: 0rem !default;
+$padding-16: 0rem !default;
 
 $font-size-base: 16px !default;
 $font-size-12: 0.75rem !default;
@@ -14,11 +14,11 @@ $border-radius: $padding-4 !default;
 $body-font-weight: normal !default;
 
 $body-min-width: 20rem !default;
-$container-max-width: 80rem !default;
+$container-max-width: 360rem !default;
 
 $header-height: 3.5rem !default;
-$menu-width: 16rem !default;
-$toc-width: 16rem !default;
+$menu-width: 0rem !default;
+$toc-width: 0rem !default;
 
 $mobile-breakpoint: $menu-width + $body-min-width * 1.2 + $toc-width !default;
 
